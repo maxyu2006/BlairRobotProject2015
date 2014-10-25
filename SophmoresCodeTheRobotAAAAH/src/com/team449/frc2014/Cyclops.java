@@ -15,11 +15,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import com.team449.frc2014.commands.CommandBase;
 
 /**
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to each mode, as described in the IterativeRobot
- * documentation. If you change the name of this class or the package after
- * creating this project, you must also update the manifest file in the resource
- * directory.
+ * Code for tiny test rig (pre-season 2015)
+ * as of 10/4/2014 practice PID code
  */
 public class Cyclops extends IterativeRobot {
 
@@ -40,7 +37,7 @@ public class Cyclops extends IterativeRobot {
     public void autonomousInit() {
         // schedule the autonomous command (example)
         System.out.println("auto init");
-        //autonomousCommand.start();
+        autonomousCommand.start();
     }
 
     /**
@@ -53,7 +50,7 @@ public class Cyclops extends IterativeRobot {
 
     public void teleopInit() {
         System.out.println("teleop init");
-        //autonomousCommand.cancel();
+        autonomousCommand.cancel();
     }
 
     /**

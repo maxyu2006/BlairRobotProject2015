@@ -12,6 +12,7 @@ package com.team449.frc2014.commands;
 public class ToggleReverseCommand extends CommandBase {
     
     public ToggleReverseCommand() {
+        requires(motor);
     }
 
     protected void initialize() {

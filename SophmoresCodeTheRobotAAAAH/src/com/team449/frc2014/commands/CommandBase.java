@@ -2,7 +2,6 @@ package com.team449.frc2014.commands;
 
 import com.team449.frc2014.subsystems.Motor;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.team449.frc2014.OI;
 
 /**
@@ -22,9 +21,9 @@ public abstract class CommandBase extends Command {
         // which commands extend), subsystems are not guaranteed to be
         // yet. Thus, their requires() statements may grab null pointers. Bad
         // news. Don't move it.
-        oi = new OI();
         motor = new Motor();
-
+        oi = new OI();
+        
         // Show what command your subsystem is running on the SmartDashboard
         //SmartDashboard.putData(exampleSubsystem);
     }

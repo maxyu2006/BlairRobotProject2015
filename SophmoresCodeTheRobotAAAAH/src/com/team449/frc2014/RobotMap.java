@@ -7,6 +7,18 @@ package com.team449.frc2014;
  * floating around.
  */
 public abstract class RobotMap {
-    public static double deadband= .1;
-    public static int reverseButtonPos = 1;
+    public static final double deadband = .1;
+    public static final int reverseButtonPos = 1;
+    public static final int talonPort = 3;
+    public static final int enAChnl = 1;
+    public static final int enBChnl = 2;
+    public static final int enDIOMod = 1;
+    public static final double enDPP = 0.0020453;
+    public static final int enMinRt = 0;
+    public static final int enNumSamp = 1;
+    public static final double multiplier = 1;
+    public static final double setValue = 10.5;
+    
+    public static final double kP = 0.5;
+    public static final double kD = 0.5;
 }
