@@ -17,5 +17,5 @@ public class RobotMap {
     public static final int j1port = 1;
     public static final int j2port = 2;
     
-    public static final double deadBandCap = 0.01;
+    public static final double deadBandCap = 0.1;
 }

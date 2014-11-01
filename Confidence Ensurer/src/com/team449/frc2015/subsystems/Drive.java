@@ -6,7 +6,7 @@
 package com.team449.frc2015.subsystems;
 
 import com.team449.frc2015.RobotMap;
-import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -15,20 +15,20 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Drive extends Subsystem {
     
-    private final Talon left1;
-    private final Talon left2;
-    private final Talon left3;
-    private final Talon right1;
-    private final Talon right2;
-    private final Talon right3;
+    private final Jaguar left1;
+    private final Jaguar left2;
+    private final Jaguar left3;
+    private final Jaguar right1;
+    private final Jaguar right2;
+    private final Jaguar right3;
     
     public Drive(){
-        left1 = new Talon(RobotMap.left1motor);
-        left2 = new Talon(RobotMap.left2motor);
-        left3 = new Talon(RobotMap.left3motor);
-        right1 = new Talon(RobotMap.right1motor);
-        right2 = new Talon(RobotMap.right2motor);
-        right3 = new Talon(RobotMap.right3motor);
+        left1 = new Jaguar(RobotMap.left1motor);
+        left2 = new Jaguar(RobotMap.left2motor);
+        left3 = new Jaguar(RobotMap.left3motor);
+        right1 = new Jaguar(RobotMap.right1motor);
+        right2 = new Jaguar(RobotMap.right2motor);
+        right3 = new Jaguar(RobotMap.right3motor);
     }
     
     public void setLeft(double volt){
