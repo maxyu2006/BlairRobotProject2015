@@ -23,8 +23,12 @@ public class RobotMap {
     public static final int roller_sol_2 = 3;
     public static final int roller_motor = 7; //roller motor PWM port
     
+    //OI constants (Joystick USB constants)
     public static final int j1port = 1;
     public static final int j2port = 2;
+    public static final int j3port = 3;
+    public static final int j4port = 4;
+    
     
     public static final double deadBandCap = 0.1;
 }
