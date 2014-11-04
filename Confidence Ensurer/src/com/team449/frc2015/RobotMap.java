@@ -29,6 +29,8 @@ public class RobotMap {
     public static final int j3port = 3;
     public static final int j4port = 4;
     
-    
+    //constants for the compressor
+    public static final int c_spike = 1; //relay port 
+    public static final int p_switch =1; // DIO port for the pressure switch
     public static final double deadBandCap = 0.1;
 }
