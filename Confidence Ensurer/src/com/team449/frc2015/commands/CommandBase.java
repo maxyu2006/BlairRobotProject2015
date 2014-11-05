@@ -15,6 +15,7 @@ public abstract class CommandBase extends Command {
     public static OI oi;
     public static Drive drive = new Drive();
     public static Roller roller = new Roller();
+    public static Flinger flinger= new Flinger();
 
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely

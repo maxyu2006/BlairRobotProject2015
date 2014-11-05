@@ -17,6 +17,7 @@ public class RobotMap {
     
     //Constants for the flinger
     public static final int flinger_sol = 1; //flinger solenoid port
+    public static final double fire_time = 500; //time in miliseconds
     
     //constants for the roller
     public static final int roller_sol_1 = 2; //roller solenoid ports (double stage solenoid)
