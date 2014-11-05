@@ -1,46 +1,50 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package com.team449.frc2015.commands;
 
 import com.team449.frc2015.RobotMap;
-import com.team449.lib.util.Util;
+import edu.wpi.first.wpilibj.Timer;
 
 /**
  *
- * @author Eyob
+ * @author Harrison
  */
-public class TeleopDriveCommand extends CommandBase {
+public class FireFlinger extends CommandBase {
     
-    public static boolean teleopEnabled = false;
-    
-    public TeleopDriveCommand() {
-        requires(drive);
+    private Timer t;
+    public FireFlinger() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+        requires(flinger);
+        requires(roller);
+        t = new Timer();
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        teleopEnabled = true;
-        drive.setAll(0);
+        t.start();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        drive.setLeft(Util.deadBand(oi.getJ1Axis()));
-        drive.setRight(Util.deadBand(oi.getJ2Axis()));
+        if(roller.check_arm())
+            flinger.set_flinger_solenoid(true);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        // The main class will kill this command manually when it needs to
+        if(t.get()>RobotMap.fire_time||!roller.check_arm())
+            return true;
         return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        drive.setAll(0);
+        flinger.set_flinger_solenoid(false);
+        t.stop();
+        t.reset();
     }
 
     // Called when another command which requires one or more of the same
