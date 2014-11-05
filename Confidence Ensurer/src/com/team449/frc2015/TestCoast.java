@@ -12,8 +12,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import com.team449.frc2015.commands.CommandBase;
-import com.team449.frc2015.commands.TeleopDriveCommand;
+import com.team449.frc2015.commands.*;
 import edu.wpi.first.wpilibj.Compressor;
 
 /**
@@ -27,6 +26,7 @@ public class TestCoast extends IterativeRobot {
 
     Command autonomousCommand;
     Command driveCommand;
+    Command rollerCommand;
     Compressor compressor;
 
     /**
@@ -39,6 +39,7 @@ public class TestCoast extends IterativeRobot {
         // instantiate the command used for the autonomous period
         //autonomousCommand = new ExampleCommand();
         driveCommand = new TeleopDriveCommand();
+        rollerCommand = new runRoller();
 
         // Initialize all subsystems
         CommandBase.init();
@@ -67,6 +68,7 @@ public class TestCoast extends IterativeRobot {
         //autonomousCommand.cancel();
         System.out.println("TELEOP INIT");
         driveCommand.start();
+        rollerCommand.start();
     }
 
     /**
