@@ -12,8 +12,8 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import com.team449.frc2015.commands.CommandBase;
-import com.team449.frc2015.commands.TeleopDriveCommand;
+import com.team449.frc2015.commands.*;
+import edu.wpi.first.wpilibj.Compressor;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,6 +26,8 @@ public class TestCoast extends IterativeRobot {
 
     Command autonomousCommand;
     Command driveCommand;
+    Command rollerCommand;
+    Compressor compressor;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -33,12 +35,16 @@ public class TestCoast extends IterativeRobot {
      */
     public void robotInit() {
         System.out.println("ROBOT INIT");
+        
         // instantiate the command used for the autonomous period
         //autonomousCommand = new ExampleCommand();
         driveCommand = new TeleopDriveCommand();
+        rollerCommand = new runRoller();
 
         // Initialize all subsystems
         CommandBase.init();
+        compressor = new Compressor(RobotMap.p_switch, RobotMap.c_spike);
+        compressor.start();//starts the compressor
     }
 
     public void autonomousInit() {
@@ -62,6 +68,7 @@ public class TestCoast extends IterativeRobot {
         //autonomousCommand.cancel();
         System.out.println("TELEOP INIT");
         driveCommand.start();
+        rollerCommand.start();
     }
 
     /**

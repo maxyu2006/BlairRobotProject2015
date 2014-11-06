@@ -2,7 +2,7 @@ package com.team449.frc2015.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import com.team449.frc2015.OI;
-import com.team449.frc2015.subsystems.Drive;
+import com.team449.frc2015.subsystems.*;
 
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
@@ -14,6 +14,8 @@ public abstract class CommandBase extends Command {
 
     public static OI oi;
     public static Drive drive = new Drive();
+    public static Roller roller = new Roller();
+    public static Flinger flinger= new Flinger();
 
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely
