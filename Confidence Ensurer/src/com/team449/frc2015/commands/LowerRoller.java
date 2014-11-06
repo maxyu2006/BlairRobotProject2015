@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.Timer;
 public class LowerRoller extends CommandBase {
     private Timer t;
     private static final double motor_speed = .4;
-    private final double roll_time = 500; //time in miliseconds
+    private final double roll_time = 1; //time in miliseconds
     
     public LowerRoller() {
         // Use requires() here to declare subsystem dependencies
@@ -31,6 +31,7 @@ public class LowerRoller extends CommandBase {
     protected void execute() {
         roller.extend_pistons();
         roller.setRollerMotor(this.motor_speed);
+        System.out.println(t.get());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -44,6 +45,7 @@ public class LowerRoller extends CommandBase {
     // Called once after isFinished returns true
     //stop the roller from continuing to roll
     protected void end() {
+        System.out.println("Done");
         roller.setRollerMotor(0);
         t.stop();
         t.reset();

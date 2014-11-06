@@ -32,10 +32,13 @@ public class runRoller extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
+        System.out.println("Main roller ending");
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+        roller.setRollerMotor(oi.getRollerSpeed());
+        System.out.println("Main roller interrupted");
     }
 }

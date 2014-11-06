@@ -28,8 +28,8 @@ public class TeleopDriveCommand extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        drive.setLeft(Util.deadBand(oi.getJ1Axis()));
-        drive.setRight(Util.deadBand(oi.getJ2Axis()));
+        drive.setLeft(Util.deadBand(oi.getJ2Axis()));
+        drive.setRight(Util.deadBand(oi.getJ1Axis()));
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -22,7 +22,7 @@ public class Roller extends Subsystem {
     // here. Call these from Commands.
     public Roller(){
         roller_motor = new Jaguar(RobotMap.roller_motor);
-        roller_sol  = new DoubleSolenoid(RobotMap.roller_sol_1, RobotMap.roller_sol_2);
+        roller_sol  = new DoubleSolenoid(RobotMap.module,RobotMap.roller_sol_1, RobotMap.roller_sol_2);
         roller_sol.set(DoubleSolenoid.Value.kReverse);
     }
     

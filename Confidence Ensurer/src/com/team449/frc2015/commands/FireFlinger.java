@@ -29,6 +29,7 @@ public class FireFlinger extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        System.out.println(roller.check_arm());
         if(roller.check_arm())
             flinger.set_flinger_solenoid(true);
     }

@@ -32,9 +32,9 @@ public class Drive extends Subsystem {
     }
     
     public void setLeft(double volt){
-        left1.set(volt);
-        left2.set(volt);
-        left3.set(volt);
+        left1.set(-volt);
+        left2.set(-volt);
+        left3.set(-volt);
     }
     
     public void setRight(double volt){

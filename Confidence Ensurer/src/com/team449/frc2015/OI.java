@@ -21,18 +21,13 @@ public class OI {
             roller_down = new JoystickButton(j1,2),
             roller_up = new JoystickButton(j1,3);
     Button fire1 = new JoystickButton(j1,1),
-            fire2 = new JoystickButton(j2,1);
+            fire2 = new JoystickButton(j2,9);
   
     
     public OI(){
-        roller_down.whenPressed(new LowerRoller());
-        roller_up.whenPressed(new RaiseRoller());
-        if(fire1.get()){
+        roller_down.whenPressed(new RollerGroup());
+        roller_up.whenPressed(new RaiseRollerGroup());
             fire2.whenPressed(new FireFlinger());
-        }
-        else if(fire2.get()){
-            fire1.whenPressed(new FireFlinger());
-        }
             
     }
     public double getJ1Axis(){

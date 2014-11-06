@@ -76,8 +76,8 @@ public class TestCoast extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        System.out.println("joystick positions: "+
-                CommandBase.oi.getJ1Axis()+" "+CommandBase.oi.getJ2Axis());
+//        System.out.println("joystick positions: "+
+//                CommandBase.oi.getJ1Axis()+" "+CommandBase.oi.getJ2Axis());
     }
     
     public void disabledInit() {

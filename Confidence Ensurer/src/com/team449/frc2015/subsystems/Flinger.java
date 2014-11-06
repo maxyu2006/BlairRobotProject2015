@@ -16,7 +16,7 @@ public class Flinger extends Subsystem {
     private Solenoid flinger_sol;
     
     public Flinger(){
-        flinger_sol = new Solenoid(RobotMap.flinger_sol);
+        flinger_sol = new Solenoid(RobotMap.module,RobotMap.flinger_sol);
         flinger_sol.set(false);
     }
     // Put methods for controlling this subsystem
