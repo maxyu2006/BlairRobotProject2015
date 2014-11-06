@@ -3,33 +3,44 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.team449.frc2014.commands;
+package com.team449.frc2015.commands;
+
+import com.team449.frc2015.RobotMap;
+import com.team449.lib.util.Util;
 
 /**
  *
- * @author Blair Robot Project
+ * @author Eyob
  */
-public class ToggleReverseCommand extends CommandBase {
+public class TeleopDriveCommand extends CommandBase {
     
-    public ToggleReverseCommand() {
-        requires(motor);
+    public static boolean teleopEnabled = false;
+    
+    public TeleopDriveCommand() {
+        requires(drive);
     }
 
+    // Called just before this Command runs the first time
     protected void initialize() {
-        oi.isNotToggled = !oi.isNotToggled;
+        teleopEnabled = true;
+        drive.setAll(0);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        drive.setLeft(Util.deadBand(oi.getJ1Axis())*12);
+        drive.setRight(Util.deadBand(oi.getJ2Axis())*12);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        // The main class will kill this command manually when it needs to
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+        drive.setAll(0);
     }
 
     // Called when another command which requires one or more of the same

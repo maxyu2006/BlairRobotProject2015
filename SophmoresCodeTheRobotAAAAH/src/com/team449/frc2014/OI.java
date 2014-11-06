@@ -25,7 +25,7 @@ public class OI {
     
     public double getSpeed(){
         int reverseInt = isNotToggled?1:-1;
-        return deadband(j1.getRawAxis(2))*12*reverseInt;
+        return deadband(j1.getRawAxis(2))*RobotMap.multiplier*reverseInt;
     }
     
     public double deadband(double in){
