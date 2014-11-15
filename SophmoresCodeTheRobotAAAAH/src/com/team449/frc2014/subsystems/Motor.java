@@ -8,8 +8,8 @@ package com.team449.frc2014.subsystems;
 import com.team449.frc2014.RobotMap;
 import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.Talon;
 
 /**
  *
@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.Talon;
  */
 public class Motor extends Subsystem {
     
-    private final Talon motor = new Talon(RobotMap.talonPort);
+    private final Jaguar motor = new Jaguar(RobotMap.talonPort);
     private final Encoder encoder = new Encoder(1,2,1,3,true, CounterBase.EncodingType.k4X);
     
     public Motor(){

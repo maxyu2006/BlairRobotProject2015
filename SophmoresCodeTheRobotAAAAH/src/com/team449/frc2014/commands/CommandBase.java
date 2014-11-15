@@ -3,6 +3,7 @@ package com.team449.frc2014.commands;
 import com.team449.frc2014.subsystems.Motor;
 import edu.wpi.first.wpilibj.command.Command;
 import com.team449.frc2014.OI;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
@@ -25,7 +26,6 @@ public abstract class CommandBase extends Command {
         oi = new OI();
         
         // Show what command your subsystem is running on the SmartDashboard
-        //SmartDashboard.putData(exampleSubsystem);
     }
 
     public CommandBase(String name) {
