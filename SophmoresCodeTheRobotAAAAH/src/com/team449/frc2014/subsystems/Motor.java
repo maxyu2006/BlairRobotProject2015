@@ -19,17 +19,19 @@ public class Motor extends Subsystem {
     
     private final Jaguar motor = new Jaguar(RobotMap.talonPort);
     private final Encoder encoder = new Encoder(1,2,1,3,true, CounterBase.EncodingType.k4X);
+    private double motorVolt;
     
     public Motor(){
         encoder.setMaxPeriod(.1);
         encoder.setDistancePerPulse(RobotMap.enDPP);
         encoder.setMinRate(RobotMap.enMinRt);
         encoder.setSamplesToAverage(RobotMap.enNumSamp);
-        encoder.start();
+        startEncoder();
     }
     
     public void setMotor(double volt){
         motor.set(volt);
+        motorVolt = volt;
         System.out.println("encoder: "+encoder.getStopped()+" "+encoder.get()+" "+encoder.getRate()+" "+encoder.getRaw());
         System.out.println("voltage: "+volt);
     }
@@ -44,6 +46,19 @@ public class Motor extends Subsystem {
     
     public double getVelocity(){
         return encoder.getRate();
+    }
+    
+    public double getVoltage() {
+        return motorVolt;
+    }
+    
+    public void startEncoder(){
+        encoder.reset();
+        encoder.start();
+    }
+    
+    public void stopEncoder(){
+        encoder.stop();
     }
     
     public void initDefaultCommand() {

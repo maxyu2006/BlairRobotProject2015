@@ -29,6 +29,7 @@ public class AdjustPositionCommand extends CommandBase {
         lastVelocity = 0;
         t = new Timer();
         t.start();
+        motor.startEncoder();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -41,12 +42,13 @@ public class AdjustPositionCommand extends CommandBase {
         SmartDashboard.putNumber("proportional", getProportional());
         SmartDashboard.putNumber("derivative", getDerivative());
         SmartDashboard.putNumber("velocity", motor.getVelocity());
+        SmartDashboard.putNumber("voltage", motor.getVoltage());
         motor.setMotor(getProportional()+getDerivative());
         t.reset();
     }
     
     private double getProportional(){
-        return RobotMap.kP * error;
+        return  RobotMap.kP * error;
     }
     
     private double getDerivative(){
@@ -55,12 +57,14 @@ public class AdjustPositionCommand extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return error == 0;
+        return Math.abs(error) <= 0.2;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+        System.out.println("---------------------\nadjust ended\n---------------------");
         t.stop();
+        motor.stopEncoder();
     }
 
     // Called when another command which requires one or more of the same
