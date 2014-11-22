@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class AdjustPositionCommand extends CommandBase {
     
-    private double lastVelocity;
+    private double lastError;
     private double error;
     private Timer t;
     
@@ -26,7 +26,7 @@ public class AdjustPositionCommand extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        lastVelocity = 0;
+        lastError = RobotMap.setValue;
         t = new Timer();
         t.start();
         motor.startEncoder();
@@ -44,6 +44,7 @@ public class AdjustPositionCommand extends CommandBase {
         SmartDashboard.putNumber("velocity", motor.getVelocity());
         SmartDashboard.putNumber("voltage", motor.getVoltage());
         motor.setMotor(getProportional()+getDerivative());
+        lastError = error;
         t.reset();
     }
     
@@ -52,12 +53,13 @@ public class AdjustPositionCommand extends CommandBase {
     }
     
     private double getDerivative(){
-        return RobotMap.kD * ((motor.getVelocity()-lastVelocity)/t.get());
+        return RobotMap.kD * (error+lastError)/t.get();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Math.abs(error) <= 0.2;
+        double okRange = SmartDashboard.getNumber("ok range");
+        return Math.abs(error) <= okRange;
     }
 
     // Called once after isFinished returns true

@@ -36,6 +36,8 @@ public class Cyclops extends IterativeRobot {
         // instantiate the command used for the autonomous period
         autonomousCommand = new AdjustPositionCommand();
         SmartDashboard.putNumber("kP", RobotMap.kP);
+        SmartDashboard.putNumber("kD", RobotMap.kD);
+        SmartDashboard.putNumber("ok range", 0.2);
     }
 
     public void autonomousInit() {
@@ -69,6 +71,7 @@ public class Cyclops extends IterativeRobot {
         //SendableChooser sc = new SendableChooser();
         CommandBase.motor.setMotor(CommandBase.oi.getSpeed());
         RobotMap.kP = SmartDashboard.getNumber("kP");
+        RobotMap.kD = SmartDashboard.getNumber("kD");
     }
     
     /**
