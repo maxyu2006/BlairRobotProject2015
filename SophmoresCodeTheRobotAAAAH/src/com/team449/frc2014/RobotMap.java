@@ -9,7 +9,10 @@ package com.team449.frc2014;
 public abstract class RobotMap {
     public static final double deadband = .15;
     public static final int reverseButtonPos = 1;
+    
     public static final int talonPort = 1;
+    public static final int joyPort = 2;
+    
     public static final int enAChnl = 2;
     public static final int enBChnl = 3;
     public static final int enDIOMod = 1;

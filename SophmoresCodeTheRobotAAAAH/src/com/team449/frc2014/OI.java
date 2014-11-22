@@ -17,7 +17,7 @@ public class OI {
     public boolean isNotToggled=true;
     
     public OI(){
-        j1 = new Joystick(1);
+        j1 = new Joystick(RobotMap.joyPort);
         reverse = new JoystickButton(j1, RobotMap.reverseButtonPos);
         
         reverse.whenPressed(new ToggleReverseCommand());
