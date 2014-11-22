@@ -24,4 +24,6 @@ public abstract class RobotMap {
     
     public static final double kP = 0.5;
     public static final double kD = 0;
+    
+    public static final int encoderPPR = 512;
 }
