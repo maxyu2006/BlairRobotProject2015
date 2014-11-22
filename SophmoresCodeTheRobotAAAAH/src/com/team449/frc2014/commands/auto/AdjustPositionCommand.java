@@ -27,6 +27,7 @@ public class AdjustPositionCommand extends CommandBase {
     // Called just before this Command runs the first time
     protected void initialize() {
         lastVelocity = 0;
+        t = new Timer();
         t.start();
     }
 
@@ -39,6 +40,7 @@ public class AdjustPositionCommand extends CommandBase {
         SmartDashboard.putNumber("distance", motor.getDistanceTraveled());
         SmartDashboard.putNumber("proportional", getProportional());
         SmartDashboard.putNumber("derivative", getDerivative());
+        SmartDashboard.putNumber("velocity", motor.getVelocity());
         motor.setMotor(getProportional()+getDerivative());
         t.reset();
     }

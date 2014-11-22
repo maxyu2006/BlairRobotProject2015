@@ -52,8 +52,7 @@ public class Cyclops extends IterativeRobot {
 
     public void teleopInit() {
         System.out.println("teleop init");
-        //autonomousCommand.cancel();
-        autonomousCommand.start();
+        autonomousCommand.cancel();
     }
 
     /**
@@ -62,10 +61,10 @@ public class Cyclops extends IterativeRobot {
     public void teleopPeriodic() {
         System.out.println("teleop periodic");
         Scheduler.getInstance().run();
-        /*SmartDashboard.putNumber("joystick y",CommandBase.oi.j1.getY());
+        SmartDashboard.putNumber("joystick y",CommandBase.oi.j1.getY());
         SmartDashboard.putNumber("speed?", CommandBase.motor.getVelocity());
         SmartDashboard.putNumber("distance?", CommandBase.motor.getDistanceTraveled());
-        CommandBase.motor.setMotor(CommandBase.oi.getSpeed());*/
+        CommandBase.motor.setMotor(CommandBase.oi.getSpeed());
     }
     
     /**

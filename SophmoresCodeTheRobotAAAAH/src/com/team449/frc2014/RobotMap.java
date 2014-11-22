@@ -20,8 +20,8 @@ public abstract class RobotMap {
     public static final int enMinRt = 0;
     public static final int enNumSamp = 1;
     public static final double multiplier = 1;
-    public static final double setValue = 10.5;
+    public static final double setValue = 15;
     
     public static final double kP = 0.5;
-    public static final double kD = 0.5;
+    public static final double kD = 0;
 }
