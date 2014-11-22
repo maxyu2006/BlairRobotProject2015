@@ -8,6 +8,7 @@ package com.team449.frc2014.commands.auto;
 import com.team449.frc2014.commands.CommandBase;
 import com.team449.frc2014.RobotMap;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -34,6 +35,10 @@ public class AdjustPositionCommand extends CommandBase {
         
         //distance = motor.getDistanceTraveled();
         error = RobotMap.setValue - motor.getDistanceTraveled();
+        SmartDashboard.putNumber("error", error);
+        SmartDashboard.putNumber("distance", motor.getDistanceTraveled());
+        SmartDashboard.putNumber("proportional", getProportional());
+        SmartDashboard.putNumber("derivative", getDerivative());
         motor.setMotor(getProportional()+getDerivative());
         t.reset();
     }
