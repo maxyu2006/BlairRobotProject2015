@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import com.team449.frc2014.commands.CommandBase;
 import com.team449.frc2014.commands.auto.AdjustPositionCommand;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -34,6 +35,7 @@ public class Cyclops extends IterativeRobot {
         CommandBase.init();
         // instantiate the command used for the autonomous period
         autonomousCommand = new AdjustPositionCommand();
+        SmartDashboard.putNumber("kP", RobotMap.kP);
     }
 
     public void autonomousInit() {
@@ -61,10 +63,12 @@ public class Cyclops extends IterativeRobot {
     public void teleopPeriodic() {
         System.out.println("teleop periodic");
         Scheduler.getInstance().run();
-        SmartDashboard.putNumber("joystick y",CommandBase.oi.j1.getY());
+        /*SmartDashboard.putNumber("joystick y",CommandBase.oi.j1.getY());
         SmartDashboard.putNumber("speed?", CommandBase.motor.getVelocity());
-        SmartDashboard.putNumber("distance?", CommandBase.motor.getDistanceTraveled());
+        SmartDashboard.putNumber("distance?", CommandBase.motor.getDistanceTraveled());*/
+        //SendableChooser sc = new SendableChooser();
         CommandBase.motor.setMotor(CommandBase.oi.getSpeed());
+        RobotMap.kP = SmartDashboard.getNumber("kP");
     }
     
     /**
