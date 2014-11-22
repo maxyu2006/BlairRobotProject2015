@@ -25,14 +25,10 @@ public abstract class RobotMap {
     public static final double multiplier = 1;
     public static final double setValue = 15;
     
-<<<<<<< HEAD
-    public static final double kP = 0.5;
-    public static final double kD = 0;
-    
-    public static final int encoderPPR = 512;
-=======
     public static double kP = 0.5;
     public static double kD = 0;
+    
+    public static final int encoderPPR = 512;
+    
     public static final int resetButtonPos = 3;
->>>>>>> origin/master
 }

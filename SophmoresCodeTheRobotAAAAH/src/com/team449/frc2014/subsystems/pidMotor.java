@@ -17,9 +17,9 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
  */
 public class pidMotor extends PIDSubsystem {
 
-    private static final double Kp = 0.0;
-    private static final double Ki = 0.0;
-    private static final double Kd = 0.0;
+    private double Kp = 0.0;
+    private double Ki = 0.0;
+    private double Kd = 0.0;
 
     private final Jaguar motor = new Jaguar(RobotMap.talonPort);
     private final Encoder encoder = new Encoder(1,2,1,3,true, CounterBase.EncodingType.k4X);
@@ -27,11 +27,17 @@ public class pidMotor extends PIDSubsystem {
     private double targetRPM;
     
     // Initialize your subsystem here
-    public pidMotor(double initRPM, boolean isManual) {
-        super("pidMotor", Kp, Ki, Kd);
+    public pidMotor(double initRPM, boolean isManual, double p, double i, double d, double tolerance) {
+        super("pidMotor", p, i, d);
+        
+        this.Kp = p;
+        this.Ki = i;
+        this.Kd = d;
         
         //set targetRPM
         this.targetRPM = initRPM;
+        
+        this.setAbsoluteTolerance(tolerance);
         
         //set the encoder DPP and reset the encoder
         encoder.setDistancePerPulse(1/RobotMap.encoderPPR);
@@ -89,6 +95,54 @@ public class pidMotor extends PIDSubsystem {
             return false;
         
         motor.set(volt);
+        
+        return true;
+    }
+    
+    /**
+     * Sets the p element if the subsystem is not in PID controlled mode.
+     * @param newP the new P value
+     * @return true if successfully set the new value. False if failed and value did not change
+     */
+    public boolean setKp(double newP)
+    {
+        if(!this.isManual())
+            return false;
+        
+        this.Kp = newP;
+        super.getPIDController().setPID(this.Kp, this.Ki, this.Kd);
+        
+        return true;
+    }
+   
+     /**
+     * Sets the i element if the subsystem is not in PID controlled mode.
+     * @param newI the new I value
+     * @return true if successfully set the new value. False if failed and value did not change
+     */
+    public boolean setKi(double newI)
+    {
+        if(!this.isManual())
+            return false;
+        
+        this.Ki = newI;
+        super.getPIDController().setPID(this.Kp, this.Ki, this.Kd);
+        
+        return true;
+    }
+    
+     /**
+     * Sets the d element if the subsystem is not in PID controlled mode.
+     * @param newD the new D value
+     * @return true if successfully set the new value. False if failed and value did not change
+     */
+    public boolean setKd(double newD)
+    {
+        if(!this.isManual())
+            return false;
+        
+        this.Kd = newD;
+        super.getPIDController().setPID(this.Kp, this.Ki, this.Kd);
         
         return true;
     }

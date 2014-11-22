@@ -28,12 +28,21 @@ public class OI {
     }
     
     public double getSpeed(){
-        int reverseInt = isNotToggled?1:-1;
+        int reverseInt;
+        
+        if(isNotToggled)
+            reverseInt = 1;
+        else
+            reverseInt = -1;
+        
         return deadband(j1.getRawAxis(2))*RobotMap.multiplier*reverseInt;
     }
     
     public double deadband(double in){
-        return Math.abs(in) > RobotMap.deadband ? in : 0;
+        if(Math.abs(in) > RobotMap.deadband)
+            return in;
+        else
+            return 0;
     }
 }
 
