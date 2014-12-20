@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
  *
  * @author Max Yu
  */
-public class pidMotor extends PIDSubsystem {
+public class PIDMotor extends PIDSubsystem {
 
     private double Kp = 0.0;
     private double Ki = 0.0;
@@ -27,32 +27,7 @@ public class pidMotor extends PIDSubsystem {
     private double targetRPM;
     
     // Initialize your subsystem here
-    public pidMotor(double initRPM, boolean isManual, double p, double i, double d, double tolerance) {
-        super("pidMotor", p, i, d);
-        
-        this.Kp = p;
-        this.Ki = i;
-        this.Kd = d;
-        
-        //set targetRPM
-        this.targetRPM = initRPM;
-        
-        this.setAbsoluteTolerance(tolerance);
- * @author Max Yu
- */
-public class pidMotor extends PIDSubsystem {
-
-    private double Kp = 0.0;
-    private double Ki = 0.0;
-    private double Kd = 0.0;
-
-    private final Jaguar motor = new Jaguar(RobotMap.talonPort);
-    private final Encoder encoder = new Encoder(1,2,1,3,true, CounterBase.EncodingType.k4X);
-    
-    private double targetRPM;
-    
-    // Initialize your subsystem here
-    public pidMotor(double initRPM, boolean isManual, double p, double i, double d, double tolerance) {
+    public PIDMotor(double initRPM, boolean isManual, double p, double i, double d, double tolerance) {
         super("pidMotor", p, i, d);
         
         this.Kp = p;
