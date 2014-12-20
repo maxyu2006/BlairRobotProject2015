@@ -17,16 +17,23 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Motor extends Subsystem {
     
-    private final Jaguar motor = new Jaguar(RobotMap.talonPort);
+    private final Jaguar motor;
     private final Encoder encoder = new Encoder(1,2,1,3,true, CounterBase.EncodingType.k4X);
     private double motorVolt;
     
     public Motor(){
+        motor = new Jaguar(RobotMap.talonPort);
+        
         encoder.setMaxPeriod(.1);
         encoder.setDistancePerPulse(RobotMap.enDPP);
         encoder.setMinRate(RobotMap.enMinRt);
         encoder.setSamplesToAverage(RobotMap.enNumSamp);
         startEncoder();
+    }
+    
+    public Motor(int pwmPort)
+    {
+        motor = new Jaguar(pwmPort);
     }
     
     public void setMotor(double volt){
