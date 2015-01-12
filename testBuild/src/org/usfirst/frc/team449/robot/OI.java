@@ -1,6 +1,10 @@
 package org.usfirst.frc.team449.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+
 import org.usfirst.frc.team449.robot.commands.ExampleCommand;
 
 /**
@@ -30,6 +34,10 @@ public class OI {
     // Run the command while the button is being held down and interrupt it once
     // the button is released.
     // button.whileHeld(new ExampleCommand());
+	
+	public static void print(String data) {
+		DriverStation.reportError("Hello", false);
+	}
     
     // Start the command when the button is released  and let it run the command
     // until it is finished as determined by it's isFinished method.
