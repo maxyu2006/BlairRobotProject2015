@@ -15,4 +15,7 @@ public class RobotMap {
     public static final int elevEncA = 0;
     public static final int elevEncB = 0;
     public static final int elevVict = 0;
+    
+    public static final int joyPort = 2;
+    
 }
