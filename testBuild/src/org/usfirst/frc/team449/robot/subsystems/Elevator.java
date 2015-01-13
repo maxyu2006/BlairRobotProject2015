@@ -13,26 +13,30 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Elevator extends Subsystem {
     
-	private final DigitalInput limit1;
-	private final DigitalInput limit2;
-    private final Encoder encoder;
+	private final DigitalInput limitTop;
+	private final DigitalInput limitBottom;
+    private final Encoder enProgrammer;
     private final Victor winner;
     
     public Elevator() {
-    	limit1 = new DigitalInput(RobotMap.elevlim1Chnl);
-    	limit2 = new DigitalInput(RobotMap.elevlim2Chnl);
-    	encoder = new Encoder(RobotMap.elevEncA, RobotMap.elevEncB,
+    	limitTop = new DigitalInput(RobotMap.elevlim1Chnl);
+    	limitBottom = new DigitalInput(RobotMap.elevlim2Chnl);
+    	enProgrammer = new Encoder(RobotMap.elevEncA, RobotMap.elevEncB,
         		true, CounterBase.EncodingType.k4X);
     	winner = new Victor(RobotMap.elevVict);
-    	encoder.reset();
+    	enProgrammer.reset();
+    	
     }
-    
+    /**
+     * Returns whether the top tote is touching the top of the elavator
+     * @return
+     */
     public boolean touchingTop() {
-    	return limit1.get();
+    	return limitTop.get();
     }
     
     public boolean touchingBottom() {
-    	return limit2.get();
+    	return limitBottom.get();
     }
     
     public void setMotor(double speed) {
@@ -40,7 +44,7 @@ public class Elevator extends Subsystem {
     }
     
     public double getPosition(){
-    	return encoder.getDistance();
+    	return enProgrammer.getDistance();
     }
 
     public void initDefaultCommand() {
