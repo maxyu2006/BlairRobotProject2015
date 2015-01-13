@@ -9,4 +9,10 @@ public class RobotMap {
     public static final int limitChnl = 0;
     public static final int potChnl = 0;
     public static final int accelChnl = 1;
+    
+    public static final int elevlim1Chnl = 0;
+    public static final int elevlim2Chnl = 0;
+    public static final int elevEncA = 0;
+    public static final int elevEncB = 0;
+    public static final int elevVict = 0;
 }

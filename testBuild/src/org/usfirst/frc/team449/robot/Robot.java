@@ -71,11 +71,11 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
        // if (t.get() >= 1) {
-        	SmartDashboard.putBoolean("limit switch ", sensorBoard.getDigital());
+      /*  	SmartDashboard.putBoolean("limit switch ", sensorBoard.getDigital());
         	SmartDashboard.putNumber("pot ", sensorBoard.getPotValue());
         	SmartDashboard.putNumber("accel x ", sensorBoard.getAccelX());
         	SmartDashboard.putNumber("accel y ", sensorBoard.getAccelY());
-        	SmartDashboard.putNumber("accel z ", sensorBoard.getAccelZ());
+        	SmartDashboard.putNumber("accel z ", sensorBoard.getAccelZ());*/
        // 	t.reset();
        // }
     }
