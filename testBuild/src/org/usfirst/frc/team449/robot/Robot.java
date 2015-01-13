@@ -1,12 +1,15 @@
 
 package org.usfirst.frc.team449.robot;
 
+import org.usfirst.frc.team449.robot.subsystems.SensorBoard;
+
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import org.usfirst.frc.team449.robot.commands.ExampleCommand;
-import org.usfirst.frc.team449.robot.subsystems.ExampleSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -17,8 +20,9 @@ import org.usfirst.frc.team449.robot.subsystems.ExampleSubsystem;
  */
 public class Robot extends IterativeRobot {
 
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
+	public static final SensorBoard sensorBoard = new SensorBoard();
 	public static OI oi;
+	public static Timer t;
 
     Command autonomousCommand;
 
@@ -28,8 +32,8 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
-        // instantiate the command used for the autonomous period
-        autonomousCommand = new ExampleCommand();
+		t = new Timer();
+		System.out.println("robot init");
     }
 	
 	public void disabledPeriodic() {
@@ -49,11 +53,8 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-        // teleop starts running. If you want the autonomous to 
-        // continue until interrupted by another command, remove
-        // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        //t.start();
     }
 
     /**
@@ -69,6 +70,14 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+       // if (t.get() >= 1) {
+        	SmartDashboard.putBoolean("limit switch ", sensorBoard.getDigital());
+        	SmartDashboard.putNumber("pot ", sensorBoard.getPotValue());
+        	SmartDashboard.putNumber("accel x ", sensorBoard.getAccelX());
+        	SmartDashboard.putNumber("accel y ", sensorBoard.getAccelY());
+        	SmartDashboard.putNumber("accel z ", sensorBoard.getAccelZ());
+       // 	t.reset();
+       // }
     }
     
     /**
