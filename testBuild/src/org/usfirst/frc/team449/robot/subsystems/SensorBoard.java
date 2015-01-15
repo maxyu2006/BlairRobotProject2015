@@ -20,8 +20,8 @@ public class SensorBoard extends Subsystem {
 	private ADXL345_I2C a;
 	
 	public SensorBoard() {
-		di = new DigitalInput(RobotMap.limitChnl);
-		ai = new AnalogPotentiometer(RobotMap.potChnl);
+		//di = new DigitalInput(RobotMap.limitChnl);
+		//ai = new AnalogPotentiometer(RobotMap.potChnl);
 		a = new ADXL345_I2C(Port.kOnboard, Range.k2G);
 	}
 	public boolean getDigital() {

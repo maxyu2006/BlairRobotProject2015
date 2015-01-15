@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class MoveElevatorCommand extends Command {
 
     public MoveElevatorCommand() {
-        requires(Robot.elevator);
+        //requires(Robot.elevator);
     }
 
     // Called just before this Command runs the first time
@@ -20,7 +20,7 @@ public class MoveElevatorCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.elevator.setMotor(Robot.oi.getElevJoyY());
+    	//Robot.elevator.setMotor(Robot.oi.getElevJoyY());
     }
 
     // Make this return true when this Command no longer needs to run execute()

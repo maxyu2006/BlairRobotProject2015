@@ -23,7 +23,7 @@ public class PIDMotor extends PIDSubsystem {
     private double Kd = 0.0;
 
     private final Jaguar motor = new Jaguar(RobotMap.talonPort);
-    private final Encoder encoder
+    private final Encoder encoder = new Encoder(1,2);
     
     private double targetRPM;
     
@@ -39,7 +39,6 @@ public class PIDMotor extends PIDSubsystem {
         
         //set the encoder DPP and reset the encoder
         encoder.setDistancePerPulse(1/RobotMap.encoderPPR);
-        encoder.start();
         encoder.reset();
         
         //set PIDController constraints

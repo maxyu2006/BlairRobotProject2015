@@ -13,34 +13,41 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Elevator extends Subsystem {
     
+	/*
+	 * 
+	 
 	private final DigitalInput limitTop;
 	private final DigitalInput limitBottom;
     private final Encoder enProgrammer;
     private final Victor winner;
     
+    */
     public Elevator() {
-    	limitTop = new DigitalInput(RobotMap.elevlim1Chnl);
-    	limitBottom = new DigitalInput(RobotMap.elevlim2Chnl);
-    	enProgrammer = new Encoder(RobotMap.elevEncA, RobotMap.elevEncB,
-        		true, CounterBase.EncodingType.k4X);
-    	winner = new Victor(RobotMap.elevVict);
-    	enProgrammer.reset();
+    //	limitTop = new DigitalInput(RobotMap.elevlim1Chnl);
+    //	limitBottom = new DigitalInput(RobotMap.elevlim2Chnl);
+    //	enProgrammer = new Encoder(RobotMap.elevEncA, RobotMap.elevEncB,
+    //    		true, CounterBase.EncodingType.k4X);
+    //	winner = new Victor(RobotMap.elevVict);
+    //	enProgrammer.reset();
     }
     
     public boolean touchingTop() {
-    	return limitTop.get();
+    	//return limitTop.get();
+    	return false;
     }
     
     public boolean touchingBottom() {
-    	return limitBottom.get();
+    	//return limitBottom.get();
+    	return false;
     }
     
     public void setMotor(double speed) {
-    	winner.set(speed);
+    	//winner.set(speed);
     }
     
     public double getPosition(){
-    	return enProgrammer.getDistance();
+    	//return enProgrammer.getDistance();
+    	return 0;
     }
 
     public void initDefaultCommand() {
