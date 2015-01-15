@@ -10,16 +10,17 @@ public class AnalogUltrasonic extends Subsystem {
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
+	// difference b/w halfs of a foot: .136 V
 
 	private AnalogInput sensorReading;
 	
 	private double lastReading;
 	private double lastDistance;
 	
-	private static double scaleFactor = 9.8;	//the conversion factor for volts to inches. Units are millivolts/inch
+	private static double scaleFactor = 136;	//the conversion factor for volts to inches. Units are millivolts/inch
 	
 	/**
-	 * Creates a new AnalogUltransonic sensor with a default scaleFactor of 9.8 millivolts/inch
+	 * Creates a new AnalogUltransonic sensor with a default scaleFactor of 9.8 volts/inch
 	 * @param channel
 	 */
 	public AnalogUltrasonic(int channel)
@@ -39,7 +40,7 @@ public class AnalogUltrasonic extends Subsystem {
 	{
 		this(channel);
 		
-		this.scaleFactor = scaleFactor;
+		AnalogUltrasonic.scaleFactor = scaleFactor;
 	}
 	
 	public void initDefaultCommand() {
@@ -70,7 +71,7 @@ public class AnalogUltrasonic extends Subsystem {
 	public double readDistance()
 	{
 		this.lastReading 	= sensorReading.getVoltage();
-		this.lastDistance	= lastReading * (1000.0/AnalogUltrasonic.scaleFactor) - 24.0;
+		this.lastDistance	= lastReading * scaleFactor;
 		
 		return this.lastDistance;
 	}

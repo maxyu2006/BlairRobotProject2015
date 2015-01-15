@@ -2,8 +2,6 @@
 package org.usfirst.frc.team449.robot;
 
 import org.usfirst.frc.team449.robot.subsystems.AnalogUltrasonic;
-import org.usfirst.frc.team449.robot.subsystems.Elevator;
-import org.usfirst.frc.team449.robot.subsystems.SensorBoard;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
