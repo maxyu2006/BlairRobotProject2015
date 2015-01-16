@@ -1,4 +1,3 @@
-
 package org.usfirst.frc.team449.robot;
 
 import org.usfirst.frc.team449.robot.subsystems.AnalogUltrasonic;
@@ -84,7 +83,7 @@ public class Robot extends IterativeRobot {
        // 	t.reset();
        // }
         
-        SmartDashboard.putNumber("Ultrasonic Voltage", ultrasonicSensor.readSensor());
+        SmartDashboard.putNumber("Ultrasonic Voltage", ultrasonicSensor.readAverage());
         SmartDashboard.putNumber("Ultrasonic Distance", ultrasonicSensor.readDistance());
         
     }
@@ -96,3 +95,4 @@ public class Robot extends IterativeRobot {
         LiveWindow.run();
     }
 }
+
