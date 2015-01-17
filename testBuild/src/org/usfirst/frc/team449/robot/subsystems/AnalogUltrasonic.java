@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ * class represents the ultrasonic sensor
  */
 public class AnalogUltrasonic extends Subsystem {
     
@@ -12,7 +12,7 @@ public class AnalogUltrasonic extends Subsystem {
     // here. Call these from Commands.
 	// difference b/w halfs of a foot: .136 V
 
-	private AnalogInput sensorReading;
+	private final AnalogInput sensorReading;
 	
 	private double lastReading;
 	private double lastDistance;
@@ -49,8 +49,8 @@ public class AnalogUltrasonic extends Subsystem {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * returns the last voltage read from the sensor.
+	 * @return the voltage measured the last time readSensor() was called.
 	 */
 	public double getLastReading()
 	{
@@ -68,11 +68,20 @@ public class AnalogUltrasonic extends Subsystem {
 		return this.lastReading;
 	}
 	
+	/**
+	 * read the average voltage from analog.getAverageVoltage()
+	 * @return the average voltage
+	 */
 	public double readAverage()
 	{
 		return this.sensorReading.getAverageVoltage();
 	}
 	
+	/**
+	 * reads the voltage of the sensor and uses it to calculate the distance of an object to the sensor.
+	 * stores the value in lastDistance.
+	 * @return the distance in inches
+	 */
 	public double readDistance()
 	{
 		this.lastReading 	= sensorReading.getVoltage();

@@ -12,23 +12,21 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Elevator extends Subsystem {
-    
-	/*
-	 * 
 	 
-	private final DigitalInput limitTop;
-	private final DigitalInput limitBottom;
-    private final Encoder enProgrammer;
-    private final Victor winner;
+	private final DigitalInput 	limitTop;
+	private final DigitalInput 	limitBottom;
+    private final Encoder 		encoder;    
     
-    */
+    /**
+     * initialize the elevator 
+     */
     public Elevator() {
-    //	limitTop = new DigitalInput(RobotMap.elevlim1Chnl);
-    //	limitBottom = new DigitalInput(RobotMap.elevlim2Chnl);
-    //	enProgrammer = new Encoder(RobotMap.elevEncA, RobotMap.elevEncB,
-    //    		true, CounterBase.EncodingType.k4X);
-    //	winner = new Victor(RobotMap.elevVict);
-    //	enProgrammer.reset();
+    	limitTop 	= new DigitalInput(RobotMap.elevlim1Chnl);
+    	limitBottom = new DigitalInput(RobotMap.elevlim2Chnl);
+    	encoder 	= new Encoder(RobotMap.elevEncA, RobotMap.elevEncB, true, CounterBase.EncodingType.k4X);
+    	motor 		= new Victor(RobotMap.elevVict);
+    	
+    	enProgrammer.reset();
     }
     
     public boolean touchingTop() {

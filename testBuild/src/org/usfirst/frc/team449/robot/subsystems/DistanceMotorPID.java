@@ -3,13 +3,22 @@ package org.usfirst.frc.team449.robot.subsystems;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
 /**
+ * A class that represents a PID system for distance-based motor control.
+ * requires a motor controller, and a quad encoder
+ * @author Max Yu
  *
+ * @param <T> the type of motor controller used
  */
-public class DistanceMotorPID extends PIDSubsystem {
+public class DistanceMotorPID<T> extends PIDSubsystem {
 
+	private final T 		motorController;
+	private final Encoder 	encoder;
+	
     // Initialize your subsystem here
-    public DistanceMotorPID() {
+    public DistanceMotorPID(T motorController) {
     	super(0, 0, 0);
+    	
+    	this.motorController = motorController;
         // Use these to get going:
         // setSetpoint() -  Sets where the PID controller should move the system
         //                  to

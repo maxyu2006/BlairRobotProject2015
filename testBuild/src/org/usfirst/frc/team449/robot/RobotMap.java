@@ -43,4 +43,6 @@ public class RobotMap {
     public static final int resetButtonPos = 3;
 	public static final int limitChnl = 0;
 	public static final int potChnl = 0;
+	
+	
 }
