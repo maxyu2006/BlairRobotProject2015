@@ -24,7 +24,7 @@ public class Elevator extends Subsystem {
 		limitTop    = new DigitalInput(RobotMap.elevLimitTop);
 		limitBottom = new DigitalInput(RobotMap.elevLimitBottom);
 		this.elevMotorController = new Talon(RobotMap.talonPort);
-		this.elevEncoder = new Encoder(RobotMap.enAChnl,RobotMap.enBChnl,true,CounterBase.EncodingType.k4X);
+		this.elevEncoder = new Encoder(RobotMap.enAChnl,RobotMap.enBChnl,false,CounterBase.EncodingType.k4X);
 		elevMotor   = new DistanceMotorPID(elevMotorController, elevEncoder, RobotMap.minInput, RobotMap.maxInput);
 	}
 
@@ -56,5 +56,10 @@ public class Elevator extends Subsystem {
     public double getSetpoint() {
     	return elevMotor.getSetpoint();
     }
+    
+    public void enable() {
+    	elevMotor.enable();
+    }
+    
 }
 

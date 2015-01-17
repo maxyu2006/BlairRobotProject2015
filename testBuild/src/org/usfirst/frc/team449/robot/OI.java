@@ -1,7 +1,11 @@
 package org.usfirst.frc.team449.robot;
 
+import org.usfirst.frc.team449.robot.commands.MoveElevatorCommand;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Joystick.AxisType;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 
 /**
@@ -11,13 +15,14 @@ import edu.wpi.first.wpilibj.Joystick.AxisType;
 public class OI {
 	
 	private Joystick elevJoy = new Joystick(RobotMap.joyPort);
+	private Button elevJoyTrigger = new JoystickButton(elevJoy, 1);
 	
 	public OI() {
-		
+		elevJoyTrigger.whenPressed(new MoveElevatorCommand());
 	}
 	
 	public double getElevJoyY() {
-		return deadBand(elevJoy.getAxis(AxisType.kY));
+		return -deadBand(elevJoy.getAxis(AxisType.kY));
 	}
 	
 	private static double deadBand(double val) {

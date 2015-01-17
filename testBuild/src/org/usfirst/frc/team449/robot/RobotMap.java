@@ -42,8 +42,8 @@ public class RobotMap {
     public static final int resetButtonPos = 3;
 	public static final int limitChnl = 0;
 	public static final int potChnl = 0;
-	public static final int elevLimitTop = 0;
-	public static final int elevLimitBottom = 1;
+	public static final int elevLimitTop = 1;
+	public static final int elevLimitBottom = 0;
 	public static final double maxInput = 1000;
 	public static final double minInput = 0;
 }

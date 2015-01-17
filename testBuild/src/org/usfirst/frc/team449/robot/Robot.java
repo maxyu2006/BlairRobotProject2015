@@ -35,9 +35,9 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+    	elevator = new Elevator();
 		oi = new OI();
 		t = new Timer();
-		elevator = new Elevator();
 		
 		this.ultrasonicSensor = new AnalogUltrasonic(1);
 		System.out.println("robot init");
