@@ -7,13 +7,12 @@ package org.usfirst.frc.team449.robot.subsystems;
 
 import org.usfirst.frc.team449.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Jaguar;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
 /**
- *
+ * motor subsystem with an embedded pid controller based on an encoder
  * @author Max Yu
  */
 public class PIDMotor extends PIDSubsystem {
@@ -22,20 +21,36 @@ public class PIDMotor extends PIDSubsystem {
     private double Ki = 0.0;
     private double Kd = 0.0;
 
-    private final Jaguar motor = new Jaguar(RobotMap.talonPort);
-    private final Encoder encoder = new Encoder(1,2);
+    private final Talon 	motor;
+    private final Encoder 	encoder;
+    private final int		mode;
     
-    private double targetRPM;
+    public static final int DISTANCE_BASE 	= 0;
+    public static final int SPEED_BASE		= 1;
     
     // Initialize your subsystem here
-    public PIDMotor(double initRPM, boolean isManual, double p, double i, double d, double tolerance) {
-        super("pidMotor", p, i, d);
+    /**
+     * initialize the PIDMotor
+     * @param name 	the name of the system
+     * @param p		the proportional term
+     * @param i		the integral term
+     * @param d		the derivative term
+     * @param initSet 	the initial setpoint
+     * @param Motor		the motor to control
+     * @param encoder	the encoder that is providing feedback 
+     * @param mode		the mode at which the encoder will operate
+     */
+    public PIDMotor(String name, double p, double i, double d, double initSet, Talon motor, Encoder encoder, int mode) {
+        super(name, p, i, d);
         
+        //initialize the variables
         this.Kp = p;
         this.Ki = i;
         this.Kd = d;
         
-        //
+        this.motor 		= motor;
+        this.encoder 	= encoder;
+        this.mode		= mode;
         
         //set the encoder DPP and reset the encoder
         encoder.setDistancePerPulse(1/RobotMap.encoderPPR);
@@ -44,16 +59,14 @@ public class PIDMotor extends PIDSubsystem {
         //set PIDController constraints
         super.getPIDController().setOutputRange(-1, 1); //min max set to that for Jaguar.set
         
-        //if is running on manual mode disable the
-        //pid controller and return; no need for anything else
-        if(isManual)
-        {
-            this.disable();
-            return;
-        }//end if
+        this.setSetpoint(initSet);
         
-        this.setSetpoint(initRPM);
-        this.enable();
+        //check validity of mode, enable only if mode is valid
+        if(mode < 0 || mode > 1)
+        	System.err.println("you fucked up in setting mode for PIDMotor " + name);
+        else
+        	this.enable();
+        
         // Use these to get going:
         // setSetpoint() -  Sets where the PID controller should move the system
         //                  to
@@ -69,9 +82,17 @@ public class PIDMotor extends PIDSubsystem {
         // Return your input value for the PID loop
         // e.g. a sensor, like a potentiometer:
         // yourPot.getAverageVoltage() / kYourMaxVoltage;
-        
-        return encoder.getRate();
-    }
+        switch(this.mode)
+        {
+        case DISTANCE_BASE:
+        	return encoder.getDistance();
+		case SPEED_BASE:
+        	return encoder.getRate();
+		default:
+        	System.err.println("you fucked up again. I warned that you didn't set mode correctly.");
+        	return 0;
+        }//end switch
+    }//
     
     protected void usePIDOutput(double output) {
         // Use output to drive your system, like a motor
@@ -88,7 +109,7 @@ public class PIDMotor extends PIDSubsystem {
      */
     public boolean setMotorVoltage(double volt)
     {
-        if(!this.isManual() || volt > 1 || volt < -1)
+        if(this.isEnabled() || volt > 1 || volt < -1)
             return false;
         
         motor.set(volt);
@@ -97,78 +118,41 @@ public class PIDMotor extends PIDSubsystem {
     }
     
     /**
-     * Sets the p element if the subsystem is not in PID controlled mode.
+     * Sets the proportional term
      * @param newP the new P value
-     * @return true if successfully set the new value. False if failed and value did not change
      */
-    public boolean setKp(double newP)
-    {
-        if(!this.isManual())
-            return false;
-        
+    public void setKp(double newP)
+    {  
         this.Kp = newP;
         super.getPIDController().setPID(this.Kp, this.Ki, this.Kd);
-        
-        return true;
     }
    
      /**
-     * Sets the i element if the subsystem is not in PID controlled mode.
+     * Sets the integral term
      * @param newI the new I value
-     * @return true if successfully set the new value. False if failed and value did not change
      */
-    public boolean setKi(double newI)
-    {
-        if(!this.isManual())
-            return false;
-        
+    public void setKi(double newI)
+    {   
         this.Ki = newI;
         super.getPIDController().setPID(this.Kp, this.Ki, this.Kd);
-        
-        return true;
     }
     
      /**
-     * Sets the d element if the subsystem is not in PID controlled mode.
-     * @param newD the new D value
-     * @return true if successfully set the new value. False if failed and value did not change
+      * Sets the derivative term 
+      * @param newD the new D value
      */
-    public boolean setKd(double newD)
-    {
-        if(!this.isManual())
-            return false;
-        
+    public void setKd(double newD)
+    {    
         this.Kd = newD;
         super.getPIDController().setPID(this.Kp, this.Ki, this.Kd);
-        
-        return true;
     }
-    
+        
     /**
      * 
-     * @param RPM 
+     * @return
      */
-    public void setRPM(double RPM)
+    public boolean isEnabled()
     {
-        this.setSetpoint(RPM);
-    }
-    
-    public double getRPM()
-    {
-        return this.getSetpoint();
-    }
-    
-    /**
-     * returns if this subsystem is running in manual mode or PID controlled mode
-     * @return true if in manual mode, false if in PID controlled mode
-     */
-    public boolean isManual()
-    {
-        return this.getPIDController().isEnable();
-    }
-    
-    public double getRealRate()
-    {
-        return encoder.getRate();
+    	return this.getPIDController().isEnable();
     }
 }//end class
