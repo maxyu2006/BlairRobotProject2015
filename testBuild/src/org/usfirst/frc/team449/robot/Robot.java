@@ -26,6 +26,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static Timer t;
 	private AnalogUltrasonic ultrasonicSensor;
+	public static Elevator elevator;
 
     Command autonomousCommand;
 
@@ -36,6 +37,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
 		t = new Timer();
+		elevator = new Elevator();
 		
 		this.ultrasonicSensor = new AnalogUltrasonic(1);
 		System.out.println("robot init");

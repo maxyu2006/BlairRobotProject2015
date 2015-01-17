@@ -35,7 +35,6 @@ public class RobotMap {
     public static final int enMinRt = 0;
     public static final int enNumSamp = 1;
     public static final double multiplier = 1;
-    public static final double setValue = 15;
     
     public static final int encoderPPR = 512;
     public static double kP = 0.5;
@@ -43,6 +42,8 @@ public class RobotMap {
     public static final int resetButtonPos = 3;
 	public static final int limitChnl = 0;
 	public static final int potChnl = 0;
-	
-	
+	public static final int elevLimitTop = 0;
+	public static final int elevLimitBottom = 1;
+	public static final double maxInput = 1000;
+	public static final double minInput = 0;
 }
