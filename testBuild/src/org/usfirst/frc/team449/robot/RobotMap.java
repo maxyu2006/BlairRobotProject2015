@@ -44,7 +44,7 @@ public class RobotMap {
 	public static final int elevLimitTop    = 1;
 	public static final int elevLimitBottom = 0;
 
-	// Maximum and minimum Talon inputs
-	public static final double maxInput = 1000;
+	// Maximum and minimum possible setpoints for the PID loop
+	public static double maxInput = 1000;
 	public static final double minInput = 0;
 }

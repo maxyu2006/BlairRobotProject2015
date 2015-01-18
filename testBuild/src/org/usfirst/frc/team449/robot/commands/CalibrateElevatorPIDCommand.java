@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class CalibrateElevatorPIDCommand extends Command {
 
-	private double maxVal;
+	private double maxPosition;
 	
 	private int state;
 	
@@ -20,7 +20,7 @@ public class CalibrateElevatorPIDCommand extends Command {
 	public static final int GOING_TO_HALF = 2;
 	public static final int FINISHED = 3;
 	
-	public static final double speed = 0.2;
+	public static final double throttle = 0.2;
 	
     public CalibrateElevatorPIDCommand() {
         requires(Robot.elevator);
@@ -39,28 +39,28 @@ public class CalibrateElevatorPIDCommand extends Command {
     			Robot.elevator.getPIDMotor().getEncoder().reset();
     			return;
     		}
-    		else Robot.elevator.setMotor(speed);
+    		else Robot.elevator.getPIDMotor().setMotor(throttle);
     	}
     	if (state == GOING_TO_TOP) {
     		if (Robot.elevator.isTouchingTop()) {
     			state = GOING_TO_HALF;
-    			maxVal = Robot.elevator.getPIDMotor().getEncoder().getDistance();
+    			maxPosition = Robot.elevator.getPIDMotor().getEncoder().getDistance();
     			return;
     		}
-    		Robot.elevator.setMotor(-speed);
+    		Robot.elevator.getPIDMotor().setMotor(-throttle);
     	}
     	if (state == GOING_TO_HALF) {
-    		if (Robot.elevator.getPIDMotor().getEncoder().getDistance() <= maxVal/2) {
+    		if (Robot.elevator.getPIDMotor().getEncoder().getDistance() <= maxPosition/2) {
     			state = FINISHED;
-    			Robot.elevator.setMotor(-speed);
+    			Robot.elevator.getPIDMotor().setMotor(0);
     			System.out.println("finished");
-    			//Robot.elevator.setMotor(0);
+    			//Robot.elevator.getPIDMotor().setMotor(0);
     			return;
     		}
-    		SmartDashboard.putNumber("maxVal", maxVal);
-        	Robot.elevator.setMotor(speed);
+    		SmartDashboard.putNumber("maxVal", maxPosition);
+        	Robot.elevator.getPIDMotor().setMotor(throttle);
     	}
-    	System.out.println("in execute, state: "+state+", motor: "+Robot.elevator.getMotorVal());
+    	System.out.println("in execute, state: "+state+", motor: "+Robot.elevator.getPIDMotor().getMotorVal());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -70,7 +70,8 @@ public class CalibrateElevatorPIDCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	RobotMap.maxInput = maxVal;
+    	// NOTE: extremely bad practice to modify RobotMap values - mayu & hazheng
+    	RobotMap.maxInput = maxPosition;
     }
 
     // Called when another command which requires one or more of the same

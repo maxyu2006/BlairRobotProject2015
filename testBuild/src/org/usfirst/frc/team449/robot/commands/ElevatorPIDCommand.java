@@ -9,6 +9,6 @@ public class ElevatorPIDCommand extends CommandGroup {
     
     public  ElevatorPIDCommand() {
         addSequential(new CalibrateElevatorPIDCommand());
-        //addSequential(new MoveElevatorCommand());
+        addSequential(new MoveElevatorCommand());
     }
 }

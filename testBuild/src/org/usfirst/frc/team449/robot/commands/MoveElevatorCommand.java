@@ -12,43 +12,46 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class MoveElevatorCommand extends Command {
 	
-	private static final double joyToTalonFactor = RobotMap.maxInput/2;
+	/**
+	 * scales the joystick range to the appropriate range for the PID setpoint
+	 */
 	private double setpoint;
 
     public MoveElevatorCommand() {
         requires(Robot.elevator);
     }
 
-    // Called just before this Command runs the first time
     protected void initialize() {
-    	setpoint = 0;
+    	setpoint = .5;
     	Robot.elevator.enable();
     }
 
-    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	String debug = "debug: ";
-    	double val = (Robot.oi.getElevJoyY() + 1) * joyToTalonFactor;
-    	if (Robot.elevator.isTouchingTop() && Robot.elevator.getPosition() <= val) {
+    	// ideal setpoint, ignoring elevator limits
+    	setpoint = (Robot.oi.getElevJoyY() + 1)/2 * RobotMap.maxInput;
+    	
+    	// if touching top and still wanting to go up
+    	if (Robot.elevator.isTouchingTop() && Robot.elevator.getPosition() <= setpoint) {
     		setpoint = Robot.elevator.getPosition();
     		debug += "topstop";
     	}
-    	else if (Robot.elevator.isTouchingBottom() && Robot.elevator.getPosition() >= val)
+    	else if (Robot.elevator.isTouchingBottom() && Robot.elevator.getPosition() >= setpoint)
     	{
     		setpoint = Robot.elevator.getPosition();
     		debug += "bottomstop";
     	}
     	else {
-    		setpoint = val;
     		debug += "normal";
     	}
-    	if (Robot.elevator.isTouchingTop())
-    		Robot.elevator.getPIDMotor().getEncoder();
+    	
     	Robot.elevator.setSetPoint(setpoint);
+    	
     	SmartDashboard.putBoolean("top limit ", Robot.elevator.isTouchingTop());
     	SmartDashboard.putBoolean("bottom limit ", Robot.elevator.isTouchingBottom());
     	SmartDashboard.putString("debugging data ", debug);
     	SmartDashboard.putNumber("setpoint ", setpoint);
+    	SmartDashboard.putNumber("motor output", Robot.elevator.getPIDMotor().getMotorVal());
     }
 
     // Make this return true when this Command no longer needs to run execute()

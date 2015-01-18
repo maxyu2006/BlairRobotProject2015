@@ -1,9 +1,11 @@
 package org.usfirst.frc.team449.robot.subsystems;
 
+import org.usfirst.frc.team449.robot.RobotMap;
+
+import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * A class that represents a PID system for distance-based motor control.
@@ -29,18 +31,14 @@ public class DistanceMotorPID extends PIDSubsystem {
      * @param minimumInput 	  The minimum expected input value from the encoder.
      * @param maximumInput    The maximum expected input value from the encoder.
      */
-    public DistanceMotorPID(Talon motorController, Encoder elevatorencoder, double minimumInput, double maximumInput) {
-    	super(0.005, 0, 0);
+    public DistanceMotorPID(double minimumInput, double maximumInput) {
+    	super(0.005, 0, 0); // super(Kp, Ki, Kd)
     	
-    	this.motorController = motorController;
-    	this.encoder 		 = elevatorencoder;
+    	this.motorController = new Talon(RobotMap.talonPort);
+    	this.encoder 		 = new Encoder(RobotMap.enAChnl,RobotMap.enBChnl,false,CounterBase.EncodingType.k4X);
     	this.setInputRange(minimumInput, maximumInput);
     	this.setSetpoint((minimumInput+maximumInput) / 2);
-    	this.setOutputRange(-0.1, 0.1);
-        // Use these to get going:
-        // setSetpoint() -  Sets where the PID controller should move the system
-        //                  to
-        // enable() - Enables the PID controller.
+    	this.setOutputRange(-0.2, 0.2);
     }
     
     public Encoder getEncoder() {
@@ -56,7 +54,7 @@ public class DistanceMotorPID extends PIDSubsystem {
         // Return your input value for the PID loop
         // e.g. a sensor, like a potentiometer:
         // yourPot.getAverageVoltage() / kYourMaxVoltage;
-    	return encoder.getDistance();
+    	return encoder.get();
     }
     
     protected void usePIDOutput(double output) {
@@ -119,6 +117,23 @@ public class DistanceMotorPID extends PIDSubsystem {
      */
     public boolean isManual()
     {
-        return this.getPIDController().isEnable();
+        return !this.getPIDController().isEnable();
+    }
+    
+    /**
+     * DONT USE THIS METHOD. ONLY SUPPOSED TO BE USED IN "CalibrateElevatorPIDCommand.java"
+     * @param speed -1 to 1
+     */
+    public void setMotor(double throttle) {
+    	if (this.isManual())
+    		motorController.set(throttle);
+    }
+    
+    /**
+     * Get last throttle set to the elevator motor
+     * @return throttle setting
+     */
+    public double getMotorVal() {
+    	return motorController.get();
     }
 }

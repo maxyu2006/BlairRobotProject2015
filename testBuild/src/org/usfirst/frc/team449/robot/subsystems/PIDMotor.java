@@ -155,4 +155,34 @@ public class PIDMotor extends PIDSubsystem {
     {
     	return this.getPIDController().isEnable();
     }
+    
+    /**
+     * returns if this subsystem is running in manual mode or PID controlled mode
+     * @return true if in manual mode, false if in PID controlled mode
+     */
+    public boolean isManual()
+    {
+        return !this.getPIDController().isEnable();
+    }
+
+    /**
+     * DONT USE THIS METHOD. ONLY SUPPOSED TO BE USED IN "CalibrateElevatorPIDCommand.java"
+     * @param speed -1 to 1
+     */
+    public void setMotor(double throttle) {
+    	if (this.isManual())
+    		motor.set(throttle);
+    }
+    
+    /**
+     * Get last throttle set to the elevator motor
+     * @return throttle setting
+     */
+    public double getMotorVal() {
+    	return motor.get();
+    }
+
+	public Encoder getEncoder() {
+		return encoder;
+	}
 }//end class

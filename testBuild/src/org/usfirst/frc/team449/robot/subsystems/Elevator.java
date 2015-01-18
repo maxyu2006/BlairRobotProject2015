@@ -16,16 +16,15 @@ public class Elevator extends Subsystem {
 	 
 	private final DigitalInput 		limitTop;
 	private final DigitalInput 		limitBottom;
-	private final DistanceMotorPID 	elevMotor;
-	private final Talon 			elevMotorController;
-	private final Encoder 			elevEncoder;
+	private final PIDMotor 	elevMotor;
     
 	public Elevator(){
 		limitTop    			 = new DigitalInput(RobotMap.elevLimitTop);
 		limitBottom 			 = new DigitalInput(RobotMap.elevLimitBottom);
-		this.elevMotorController = new Talon(RobotMap.talonPort);
-		this.elevEncoder 		 = new Encoder(RobotMap.enAChnl,RobotMap.enBChnl,false,CounterBase.EncodingType.k4X);
-		elevMotor   			 = new DistanceMotorPID(elevMotorController, elevEncoder, RobotMap.minInput, RobotMap.maxInput);
+		elevMotor   			 = new PIDMotor(getName(), 0.005, 0, 0, RobotMap.maxInput/2,
+				new Talon(RobotMap.talonPort), 
+				new Encoder(RobotMap.enAChnl,RobotMap.enBChnl,false,CounterBase.EncodingType.k4X),
+				PIDMotor.DISTANCE_BASE);
 	}
 
     public void initDefaultCommand() {
@@ -42,40 +41,35 @@ public class Elevator extends Subsystem {
     	return limitBottom.get();
     }
     
-    // Sets elevator setpoint.
+    /**
+     * Sets the setpoint of the PID motor on the elevator
+     * TODO units of measure (e.g. feet/inches/etc.)
+     * @param setpoint setpoint of the motor
+     */
     public void setSetPoint(double setpoint){
     	elevMotor.setSetpoint(setpoint);
     }
     
-    // Gets elevator position.
+    /**
+     * copy above javadoc
+     * @return
+     */
     public double getPosition() {
     	return elevMotor.getPosition();
     }
     
-    // Gets elevator setpoint.
+    // Gets elevator setpoint. TODO
     public double getSetpoint() {
     	return elevMotor.getSetpoint();
     }
     
-    public DistanceMotorPID getPIDMotor()
+    public PIDMotor getPIDMotor()
     {
     	return this.elevMotor;
     }
     
     public void enable() {
     	elevMotor.enable();
-    }
-    
-    /**
-     * DONT USE THIS METHOD. ONLY SUPPOSED TO BE USED IN "CalibrateElevatorPIDCommand.java"
-     * @param speed -1 to 1
-     */
-    public void setMotor(double speed) {
-    	elevMotorController.set(speed);
-    }
-    
-    public double getMotorVal() {
-    	return elevMotorController.get();
     }
     
 }
