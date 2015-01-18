@@ -21,11 +21,11 @@ public class Elevator extends Subsystem {
 	private final Encoder 			elevEncoder;
     
 	public Elevator(){
-		limitTop    = new DigitalInput(RobotMap.elevLimitTop);
-		limitBottom = new DigitalInput(RobotMap.elevLimitBottom);
+		limitTop    			 = new DigitalInput(RobotMap.elevLimitTop);
+		limitBottom 			 = new DigitalInput(RobotMap.elevLimitBottom);
 		this.elevMotorController = new Talon(RobotMap.talonPort);
-		this.elevEncoder = new Encoder(RobotMap.enAChnl,RobotMap.enBChnl,false,CounterBase.EncodingType.k4X);
-		elevMotor   = new DistanceMotorPID(elevMotorController, elevEncoder, RobotMap.minInput, RobotMap.maxInput);
+		this.elevEncoder 		 = new Encoder(RobotMap.enAChnl,RobotMap.enBChnl,false,CounterBase.EncodingType.k4X);
+		elevMotor   			 = new DistanceMotorPID(elevMotorController, elevEncoder, RobotMap.minInput, RobotMap.maxInput);
 	}
 
     public void initDefaultCommand() {

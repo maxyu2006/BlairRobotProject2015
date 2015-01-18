@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Accelerometer.Range;
 
 /**
- *
+ * 
  */
 public class SensorBoard extends Subsystem {
     
@@ -22,7 +22,7 @@ public class SensorBoard extends Subsystem {
 	public SensorBoard() {
 		di = new DigitalInput(RobotMap.limitChnl);
 		ai = new AnalogPotentiometer(RobotMap.potChnl);
-		a = new ADXL345_I2C(Port.kOnboard, Range.k2G);
+		a  = new ADXL345_I2C(Port.kOnboard, Range.k2G);
 	}
 	public boolean getDigital() {
 		return di.get();
