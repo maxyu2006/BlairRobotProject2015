@@ -19,31 +19,32 @@ public class RobotMap {
     // public static int rangefinderPort = 1;
     // public static int rangefinderModule = 1;
 	
-	public static final double deadband = .15;
+	public static final double deadband      = .15;
     public static final int reverseButtonPos = 1;
     
     public static final int talonPort = 1;
-    public static final int joyPort = 2;
+    public static final int joyPort   = 2;
     
-    /**
-     * 512 pulses per rotation, so one distance per rotation
-     */
-    public static final double enDPP = 1.0/512;
-    public static final int enAChnl = 2;
-    public static final int enBChnl = 3;
-    public static final int enDIOMod = 1;
-    public static final int enMinRt = 0;
-    public static final int enNumSamp = 1;
+    // 512 pulses per rotation, so one distance per rotation
+    public static final double enDPP 	  = 1.0/512;
+    public static final int enAChnl 	  = 2;
+    public static final int enBChnl 	  = 3;
+    public static final int enDIOMod 	  = 1;
+    public static final int enMinRt 	  = 0;
+    public static final int enNumSamp 	  = 1;
     public static final double multiplier = 1;
     
-    public static final int encoderPPR = 512;
-    public static double kP = 0.5;
-    public static double kD = 0.2;
+    public static final int encoderPPR     = 512;
+    public static double kP 		       = 0.5;
+    public static double kD                = 0.2;
     public static final int resetButtonPos = 3;
-	public static final int limitChnl = 0;
-	public static final int potChnl = 0;
-	public static final int elevLimitTop = 1;
+	public static final int limitChnl      = 0;
+	public static final int potChnl        = 0;
+	
+	public static final int elevLimitTop    = 1;
 	public static final int elevLimitBottom = 0;
+	
+	// Maximum and minimum Talon inputs
 	public static final double maxInput = 1000;
 	public static final double minInput = 0;
 }
