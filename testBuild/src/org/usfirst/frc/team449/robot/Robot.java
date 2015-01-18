@@ -5,6 +5,7 @@ import org.usfirst.frc.team449.robot.subsystems.Elevator;
 import org.usfirst.frc.team449.robot.subsystems.SensorBoard;
 
 
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -41,6 +42,11 @@ public class Robot extends IterativeRobot {
 		
 		this.ultrasonicSensor = new AnalogUltrasonic(1);
 		System.out.println("robot init");
+		
+		SmartDashboard.putNumber("kp", elevator.getPIDMotor().getPIDController().getP());
+		SmartDashboard.putNumber("ki", elevator.getPIDMotor().getPIDController().getI());
+		SmartDashboard.putNumber("kd", elevator.getPIDMotor().getPIDController().getD());
+		
     }
 	
 	public void disabledPeriodic() {
@@ -89,6 +95,11 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Ultrasonic Voltage", ultrasonicSensor.readAverage());
 
         SmartDashboard.putNumber("Ultrasonic Distance", ultrasonicSensor.readDistance());
+        elevator.getPIDMotor().setKp(SmartDashboard.getNumber("kp"));
+        elevator.getPIDMotor().setKi(SmartDashboard.getNumber("ki"));
+        elevator.getPIDMotor().setKd(SmartDashboard.getNumber("kd"));
+        
+    	SmartDashboard.putNumber("en \"position\" ", Robot.elevator.getPosition());
         
     }
     

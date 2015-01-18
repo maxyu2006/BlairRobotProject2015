@@ -57,8 +57,25 @@ public class Elevator extends Subsystem {
     	return elevMotor.getSetpoint();
     }
     
+    public DistanceMotorPID getPIDMotor()
+    {
+    	return this.elevMotor;
+    }
+    
     public void enable() {
     	elevMotor.enable();
+    }
+    
+    /**
+     * DONT USE THIS METHOD. ONLY SUPPOSED TO BE USED IN "CalibrateElevatorPIDCommand.java"
+     * @param speed -1 to 1
+     */
+    public void setMotor(double speed) {
+    	elevMotorController.set(speed);
+    }
+    
+    public double getMotorVal() {
+    	return elevMotorController.get();
     }
     
 }

@@ -3,6 +3,7 @@ package org.usfirst.frc.team449.robot.subsystems;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * A class that represents a PID system for distance-based motor control.
@@ -13,9 +14,9 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
  */
 public class DistanceMotorPID extends PIDSubsystem {
 
-	private static double Kp = 0.1;
-    private static double Ki = 0.0;
-    private static double Kd = 0.0;
+	private double Kp;
+    private double Ki;
+    private double Kd;
 	
 	private final Talon 	motorController;
 	private final Encoder 	encoder;
@@ -29,17 +30,21 @@ public class DistanceMotorPID extends PIDSubsystem {
      * @param maximumInput    The maximum expected input value from the encoder.
      */
     public DistanceMotorPID(Talon motorController, Encoder elevatorencoder, double minimumInput, double maximumInput) {
-    	super(Kp, Ki, Kd);
+    	super(0.005, 0, 0);
     	
     	this.motorController = motorController;
     	this.encoder 		 = elevatorencoder;
     	this.setInputRange(minimumInput, maximumInput);
     	this.setSetpoint((minimumInput+maximumInput) / 2);
-    	this.setOutputRange(-1, 1);
+    	this.setOutputRange(-0.1, 0.1);
         // Use these to get going:
         // setSetpoint() -  Sets where the PID controller should move the system
         //                  to
         // enable() - Enables the PID controller.
+    }
+    
+    public Encoder getEncoder() {
+    	return this.encoder;
     }
     
     public void initDefaultCommand() {
@@ -65,7 +70,7 @@ public class DistanceMotorPID extends PIDSubsystem {
      * @param newP the new P value
      * @return true if successfully set the new value. False if failed and value did not change
      */
-    /*public boolean setKp(double newP)
+    public boolean setKp(double newP)
     {
         if(!this.isManual())
             return false;
@@ -74,14 +79,14 @@ public class DistanceMotorPID extends PIDSubsystem {
         super.getPIDController().setPID(this.Kp, this.Ki, this.Kd);
         
         return true;
-    }*/
+    }
    
      /**
      * Sets the i element if the subsystem is not in PID controlled mode.
      * @param newI the new I value
      * @return true if successfully set the new value. False if failed and value did not change
      */
-    /*public boolean setKi(double newI)
+    public boolean setKi(double newI)
     {
         if(!this.isManual())
             return false;
@@ -90,14 +95,14 @@ public class DistanceMotorPID extends PIDSubsystem {
         super.getPIDController().setPID(this.Kp, this.Ki, this.Kd);
         
         return true;
-    }*/
+    }
     
      /**
      * Sets the d element if the subsystem is not in PID controlled mode.
      * @param newD the new D value
      * @return true if successfully set the new value. False if failed and value did not change
      */
-    /*public boolean setKd(double newD)
+    public boolean setKd(double newD)
     {
         if(!this.isManual())
             return false;
@@ -106,7 +111,7 @@ public class DistanceMotorPID extends PIDSubsystem {
         super.getPIDController().setPID(this.Kp, this.Ki, this.Kd);
         
         return true;
-    }*/
+    }
     
     /**
      * returns if this subsystem is running in manual mode or PID controlled mode

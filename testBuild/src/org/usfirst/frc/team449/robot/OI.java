@@ -1,6 +1,6 @@
 package org.usfirst.frc.team449.robot;
 
-import org.usfirst.frc.team449.robot.commands.MoveElevatorCommand;
+import org.usfirst.frc.team449.robot.commands.ElevatorPIDCommand;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Joystick.AxisType;
@@ -18,7 +18,7 @@ public class OI {
 	private Button elevJoyTrigger = new JoystickButton(elevJoy, 1);
 	
 	public OI() {
-		elevJoyTrigger.whenPressed(new MoveElevatorCommand());
+		elevJoyTrigger.whenPressed(new ElevatorPIDCommand());
 	}
 	
 	public double getElevJoyY() {
