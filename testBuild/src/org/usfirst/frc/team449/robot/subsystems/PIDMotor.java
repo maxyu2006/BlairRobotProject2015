@@ -5,10 +5,12 @@
  */
 package org.usfirst.frc.team449.robot.subsystems;
 
+import java.util.ArrayList;
+
 import org.usfirst.frc.team449.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
 /**
@@ -17,16 +19,19 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
  */
 public class PIDMotor extends PIDSubsystem {
 
-    private double Kp = 0.0;
-    private double Ki = 0.0;
-    private double Kd = 0.0;
-
-    private final Talon 	motor;
-    private final Encoder 	encoder;
-    private final int		mode;
+    private double 	Kp 		= 0.0;
+    private double 	Ki 		= 0.0;
+    private double 	Kd 		= 0.0;
+    private int		mode;
+    
+    
+    private final SpeedController 	motor;
+    private final Encoder 			encoder;
+    private final ArrayList<SpeedController> slaves;	//additional motor controllers slaved to this PID controller
     
     public static final int DISTANCE_BASE 	= 0;
     public static final int SPEED_BASE		= 1;
+    public static final int POSITION_BASE	= 2;
     
     // Initialize your subsystem here
     /**
@@ -40,8 +45,8 @@ public class PIDMotor extends PIDSubsystem {
      * @param encoder	the encoder that is providing feedback 
      * @param mode		the mode at which the encoder will operate
      */
-    public PIDMotor(String name, double p, double i, double d, double initSet, Talon motor, Encoder encoder, int mode) {
-        super(name, p, i, d);
+    public PIDMotor(double p, double i, double d, double initSet, SpeedController motor, Encoder encoder, int mode) {
+        super(p, i, d);
         
         //initialize the variables
         this.Kp = p;
@@ -62,11 +67,12 @@ public class PIDMotor extends PIDSubsystem {
         this.setSetpoint(initSet);
         
         //check validity of mode, enable only if mode is valid
-        if(mode < 0 || mode > 1)
-        	System.err.println("you fucked up in setting mode for PIDMotor " + name);
+        if(mode < 0 || mode > 2)
+        	System.err.println("you fucked up in setting mode for PIDMotor");
         else
-        	this.enable();
+        	this.mode = mode;
         
+        slaves = new ArrayList<SpeedController>();
         // Use these to get going:
         // setSetpoint() -  Sets where the PID controller should move the system
         //                  to
@@ -98,6 +104,9 @@ public class PIDMotor extends PIDSubsystem {
         // Use output to drive your system, like a motor
         // e.g. yourMotor.set(output);
         motor.set(output);
+        
+        for(int i=0; i < slaves.size(); i++)
+        	slaves.get(i).set(output);
     }
     
     /**
@@ -113,6 +122,8 @@ public class PIDMotor extends PIDSubsystem {
             return false;
         
         motor.set(volt);
+        for(int i=0; i < slaves.size(); i++)
+        	slaves.get(i).set(volt);
         
         return true;
     }
@@ -156,6 +167,24 @@ public class PIDMotor extends PIDSubsystem {
     	return this.getPIDController().isEnable();
     }
     
+    /**
+     * 
+     * @param controller
+     */
+    public void addSlave(SpeedController controller)
+    {
+    	slaves.add(controller);
+    }
+    
+    /**
+     * measures the rate of the encoder
+     * @return the rate of the encoder as rpms
+     */
+    public double measureSpeed()
+    {
+    	return this.encoder.getRate();
+    }
+
     /**
      * returns if this subsystem is running in manual mode or PID controlled mode
      * @return true if in manual mode, false if in PID controlled mode

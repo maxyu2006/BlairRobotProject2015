@@ -25,6 +25,11 @@ public class OI {
 		return -deadBand(elevJoy.getAxis(AxisType.kY));
 	}
 	
+	public double getElevJoyThrottle()
+	{
+		return deadBand(elevJoy.getAxis(AxisType.kThrottle));
+	}
+	
 	private static double deadBand(double val) {
 		if (Math.abs(val) < 0.05) return 0;
 		return val;

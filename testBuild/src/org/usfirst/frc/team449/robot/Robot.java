@@ -3,6 +3,7 @@ package org.usfirst.frc.team449.robot;
 import org.usfirst.frc.team449.robot.subsystems.AnalogUltrasonic;
 import org.usfirst.frc.team449.robot.subsystems.Elevator;
 import org.usfirst.frc.team449.robot.subsystems.SensorBoard;
+import org.usfirst.frc.team449.robot.subsystems.SpeedBaseDrive;
 
 
 
@@ -39,7 +40,10 @@ public class Robot extends IterativeRobot {
     	elevator = new Elevator();
 		oi = new OI();
 		t = new Timer();
-		
+
+		elevator = new Elevator();
+		RobotMap.drive = new SpeedBaseDrive();
+
 		this.ultrasonicSensor = new AnalogUltrasonic(1);
 		System.out.println("robot init");
 		
@@ -93,7 +97,7 @@ public class Robot extends IterativeRobot {
        // }
         
         SmartDashboard.putNumber("Ultrasonic Voltage", ultrasonicSensor.readAverage());
-
+        SmartDashboard.putNumber("Encoder speed", RobotMap.drive.measureSpeed());
         SmartDashboard.putNumber("Ultrasonic Distance", ultrasonicSensor.readDistance());
         elevator.getPIDMotor().setKp(SmartDashboard.getNumber("kp"));
         elevator.getPIDMotor().setKi(SmartDashboard.getNumber("ki"));

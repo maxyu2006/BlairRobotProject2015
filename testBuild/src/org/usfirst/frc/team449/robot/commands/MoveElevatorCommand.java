@@ -3,7 +3,7 @@ package org.usfirst.frc.team449.robot.commands;
 
 import org.usfirst.frc.team449.robot.Robot;
 import org.usfirst.frc.team449.robot.RobotMap;
-
+import org.usfirst.frc.team449.robot.subsystems.DistanceMotorPID;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -11,10 +11,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * Moves the elevator based on the position of the joystick
  */
 public class MoveElevatorCommand extends Command {
-	
 	/**
 	 * scales the joystick range to the appropriate range for the PID setpoint
 	 */
+	private static final double joyToTalonFactor = RobotMap.maxInput/2;
+	
 	private double setpoint;
 
     public MoveElevatorCommand() {

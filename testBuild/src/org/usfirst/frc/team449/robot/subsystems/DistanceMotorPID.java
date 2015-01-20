@@ -1,8 +1,17 @@
 package org.usfirst.frc.team449.robot.subsystems;
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 import org.usfirst.frc.team449.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.CounterBase;
+>>>>>>> origin/master
+=======
+import org.usfirst.frc.team449.robot.RobotMap;
+
+import edu.wpi.first.wpilibj.CounterBase;
+>>>>>>> origin/master
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
@@ -16,9 +25,9 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
  */
 public class DistanceMotorPID extends PIDSubsystem {
 
-	private double Kp;
-    private double Ki;
-    private double Kd;
+	private double Kp = 0.0;
+    private double Ki = 0.0;
+    private double Kd = 0.0;
 	
 	private final Talon 	motorController;
 	private final Encoder 	encoder;

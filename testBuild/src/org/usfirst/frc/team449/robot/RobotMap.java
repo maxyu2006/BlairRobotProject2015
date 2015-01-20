@@ -1,5 +1,8 @@
 package org.usfirst.frc.team449.robot;
 
+import org.usfirst.frc.team449.robot.subsystems.AnalogUltrasonic;
+import org.usfirst.frc.team449.robot.subsystems.SpeedBaseDrive;
+
 import edu.wpi.first.wpilibj.AnalogInput;
 
 /**
@@ -47,4 +50,6 @@ public class RobotMap {
 	// Maximum and minimum possible setpoints for the PID loop
 	public static double maxInput = 1000;
 	public static final double minInput = 0;
+
+	public static SpeedBaseDrive drive;
 }
