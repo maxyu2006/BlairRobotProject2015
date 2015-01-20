@@ -2,3 +2,5 @@
 /Confidence Ensurer/build/
 /Confidence Ensurer/nbproject/private/
 *.class
+*.jar
+testBuild/dist/FRCUserProgram.jar

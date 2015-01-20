@@ -1,7 +1,6 @@
 package org.usfirst.frc.team449.robot.commands;
 
 import org.usfirst.frc.team449.robot.Robot;
-import org.usfirst.frc.team449.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -15,17 +14,20 @@ public class DriveRobot extends Command {
     public DriveRobot() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	this.requires(RobotMap.drive);
+    	requires(Robot.drive);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	RobotMap.drive.setSpeed(0);
+    	Robot.drive.setSpeed(0);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	RobotMap.drive.setSpeed(Robot.oi.getElevJoyThrottle()* maxRPM);
+    	
+    	double rpm = Robot.oi.getElevJoyY()* maxRPM;
+    	Robot.drive.setSpeed(rpm);
+    	System.out.println("I set the fucking setpoint" + rpm);
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -29,6 +29,7 @@ public class Robot extends IterativeRobot {
 	public static Timer t;
 	private AnalogUltrasonic ultrasonicSensor;
 	public static Elevator elevator;
+	public static SpeedBaseDrive drive;
 
     Command autonomousCommand;
 
@@ -37,19 +38,19 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-    	elevator = new Elevator();
-		oi = new OI();
-		t = new Timer();
+    	//elevator = new Elevator();
+		drive = new SpeedBaseDrive();
 
-		elevator = new Elevator();
-		RobotMap.drive = new SpeedBaseDrive();
+    	
+    	oi = new OI();
+		t = new Timer();
 
 		this.ultrasonicSensor = new AnalogUltrasonic(1);
 		System.out.println("robot init");
 		
-		SmartDashboard.putNumber("kp", elevator.getPIDMotor().getPIDController().getP());
-		SmartDashboard.putNumber("ki", elevator.getPIDMotor().getPIDController().getI());
-		SmartDashboard.putNumber("kd", elevator.getPIDMotor().getPIDController().getD());
+		SmartDashboard.putNumber("kp", drive.getPIDMotor().getPIDController().getP());
+		SmartDashboard.putNumber("ki", drive.getPIDMotor().getPIDController().getI());
+		SmartDashboard.putNumber("kd", drive.getPIDMotor().getPIDController().getD());
 		
     }
 	
@@ -97,13 +98,16 @@ public class Robot extends IterativeRobot {
        // }
         
         SmartDashboard.putNumber("Ultrasonic Voltage", ultrasonicSensor.readAverage());
-        SmartDashboard.putNumber("Encoder speed", RobotMap.drive.measureSpeed());
         SmartDashboard.putNumber("Ultrasonic Distance", ultrasonicSensor.readDistance());
-        elevator.getPIDMotor().setKp(SmartDashboard.getNumber("kp"));
-        elevator.getPIDMotor().setKi(SmartDashboard.getNumber("ki"));
-        elevator.getPIDMotor().setKd(SmartDashboard.getNumber("kd"));
         
-    	SmartDashboard.putNumber("en \"position\" ", Robot.elevator.getPosition());
+        SmartDashboard.putNumber("Encoder speed", drive.measureSpeed());
+        SmartDashboard.putNumber("SetPoint speed", drive.getPIDMotor().getSetpoint());
+        
+        drive.getPIDMotor().setKp(SmartDashboard.getNumber("kp"));
+        drive.getPIDMotor().setKi(SmartDashboard.getNumber("ki"));
+        drive.getPIDMotor().setKd(SmartDashboard.getNumber("kd"));
+        
+    	//SmartDashboard.putNumber("en \"position\" ", Robot.elevator.getPosition());
         
     }
     

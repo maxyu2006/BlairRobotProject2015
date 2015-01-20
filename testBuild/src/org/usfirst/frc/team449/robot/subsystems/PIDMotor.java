@@ -58,7 +58,7 @@ public class PIDMotor extends PIDSubsystem {
         this.mode		= mode;
         
         //set the encoder DPP and reset the encoder
-        encoder.setDistancePerPulse(1/RobotMap.encoderPPR);
+        encoder.setDistancePerPulse(1.0/RobotMap.encoderPPR);
         encoder.reset();
         
         //set PIDController constraints
@@ -85,6 +85,7 @@ public class PIDMotor extends PIDSubsystem {
     }
     
     protected double returnPIDInput() {
+        System.out.println("Trying to return pidInput");
         // Return your input value for the PID loop
         // e.g. a sensor, like a potentiometer:
         // yourPot.getAverageVoltage() / kYourMaxVoltage;
@@ -106,7 +107,10 @@ public class PIDMotor extends PIDSubsystem {
         motor.set(output);
         
         for(int i=0; i < slaves.size(); i++)
+        {
         	slaves.get(i).set(output);
+        	System.out.println("setting throttle " + output);
+        }
     }
     
     /**
@@ -123,8 +127,10 @@ public class PIDMotor extends PIDSubsystem {
         
         motor.set(volt);
         for(int i=0; i < slaves.size(); i++)
+        {
+        	System.out.println("setting throttle " + volt);
         	slaves.get(i).set(volt);
-        
+        }
         return true;
     }
     

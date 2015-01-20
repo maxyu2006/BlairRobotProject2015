@@ -51,5 +51,4 @@ public class RobotMap {
 	public static double maxInput = 1000;
 	public static final double minInput = 0;
 
-	public static SpeedBaseDrive drive;
 }

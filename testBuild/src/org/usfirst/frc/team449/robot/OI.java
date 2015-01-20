@@ -1,6 +1,6 @@
 package org.usfirst.frc.team449.robot;
 
-import org.usfirst.frc.team449.robot.commands.ElevatorPIDCommand;
+import org.usfirst.frc.team449.robot.commands.DriveRobot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Joystick.AxisType;
@@ -18,15 +18,16 @@ public class OI {
 	private Button elevJoyTrigger = new JoystickButton(elevJoy, 1);
 	
 	public OI() {
-		elevJoyTrigger.whenPressed(new ElevatorPIDCommand());
+		elevJoyTrigger.whenPressed(new DriveRobot());
 	}
 	
 	public double getElevJoyY() {
-		return -deadBand(elevJoy.getAxis(AxisType.kY));
+		return deadBand(elevJoy.getAxis(AxisType.kY));
 	}
 	
 	public double getElevJoyThrottle()
 	{
+		System.out.println("I got the axis value now " + elevJoy.getAxis(AxisType.kThrottle));
 		return deadBand(elevJoy.getAxis(AxisType.kThrottle));
 	}
 	

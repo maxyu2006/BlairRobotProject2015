@@ -1,6 +1,8 @@
 package org.usfirst.frc.team449.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Jaguar;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -16,10 +18,11 @@ public class SpeedBaseDrive extends Subsystem {
 	
 	public SpeedBaseDrive()
 	{
-		leftMain = new PIDMotor("left", 0.05, 0, 0, 0, new Jaguar(channel), new Encoder(), PIDMotor.SPEED_BASE);
+		leftMain = new PIDMotor(0.05, 0, 0, 0, new Talon(2), new Encoder(0, 1), PIDMotor.SPEED_BASE);
+		leftMain.addSlave(new Victor(0));
+		leftMain.addSlave(new Victor(3));
+		
 		leftMain.enable();
-		leftMain.addSlave(new Jaguar(0));
-		leftMain.addSlave(new Jaguar(channel));
 	}
 	
 	/**
@@ -28,6 +31,7 @@ public class SpeedBaseDrive extends Subsystem {
 	 */
 	public void setSpeed(double rpm)
 	{
+		System.out.println("Setting setpoint " + rpm);
 		leftMain.setSetpoint(rpm);
 		
 	}
@@ -54,5 +58,10 @@ public class SpeedBaseDrive extends Subsystem {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
+
+	public PIDMotor getPIDMotor() {
+		// TODO Auto-generated method stub
+		return this.leftMain;
+	}
 }
 
