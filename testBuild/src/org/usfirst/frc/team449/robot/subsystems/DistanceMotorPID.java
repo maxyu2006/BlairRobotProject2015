@@ -1,17 +1,8 @@
 package org.usfirst.frc.team449.robot.subsystems;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 import org.usfirst.frc.team449.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.CounterBase;
->>>>>>> origin/master
-=======
-import org.usfirst.frc.team449.robot.RobotMap;
-
-import edu.wpi.first.wpilibj.CounterBase;
->>>>>>> origin/master
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
