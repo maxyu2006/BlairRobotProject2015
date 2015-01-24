@@ -1,12 +1,10 @@
 package org.usfirst.frc.team449.robot.subsystems;
 
-import org.usfirst.frc.team449.robot.RobotMap;
-
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * The Drive subsystem.
+ *
  */
 public class Drive extends Subsystem {
     
@@ -16,9 +14,7 @@ public class Drive extends Subsystem {
 	private Victor[] motorsRight = new Victor[3];
 	
 	public Drive(){
-		motorsLeft = new Victor[]{new Victor(RobotMap.leftMotorChannels[0]),
-				new Victor(RobotMap.leftMotorChannels[1]),
-				new Victor(RobotMap.leftMotorChannels[2])};
+		for(int i =0; )
 	}
 	public void  move(double leftVolts, double rightVolts){
 		

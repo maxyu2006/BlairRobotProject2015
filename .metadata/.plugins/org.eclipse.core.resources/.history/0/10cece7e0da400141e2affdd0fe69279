@@ -6,11 +6,7 @@ package org.usfirst.frc.team449.robot;
  * floating around.
  */
 public class RobotMap {
-
-	public static final int[] leftMotorChannels = {0,0,0};//somebody should give this real values
-	public static final int[] rightMotorChannels = {0,0,0};//somebody should give this real values
-
-	// For example to map the left and right motors, you could define the
+    // For example to map the left and right motors, you could define the
     // following variables to use with your drivetrain subsystem.
     // public static int leftMotor = 1;
     // public static int rightMotor = 2;
