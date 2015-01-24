@@ -3,7 +3,7 @@ package org.usfirst.frc.team449.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ * The Intake subsystem.
  */
 public class Intake extends Subsystem {
     
