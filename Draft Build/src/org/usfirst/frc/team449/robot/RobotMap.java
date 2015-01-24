@@ -17,5 +17,8 @@ public class RobotMap {
 	public static final int elevRightLmChnl = 0;
 	public static final int[] elevMotorChnls = {0,0};
 	
-	
+	// Intake Constants
+	public static final int intakeLeftLmChnl = 0;
+	public static final int intakeRightLmChnl = 0;
+	public static final int[] intakeMotorChnls = {0,0};
 }
