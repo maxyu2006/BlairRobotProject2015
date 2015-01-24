@@ -3,7 +3,7 @@ package org.usfirst.frc.team449.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * A class representing the elevator subsystem.
+ *
  */
 public class Elevator extends Subsystem {
     
