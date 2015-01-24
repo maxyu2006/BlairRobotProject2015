@@ -10,13 +10,12 @@ public class RobotMap {
 	public static final int[] leftMotorChannels = {0,0,0};//somebody should give this real values
 	public static final int[] rightMotorChannels = {0,0,0};//somebody should give this real values
 
-	// For example to map the left and right motors, you could define the
-    // following variables to use with your drivetrain subsystem.
-    // public static int leftMotor = 1;
-    // public static int rightMotor = 2;
-    
-    // If you are using multiple modules, make sure to define both the port
-    // number and the module. For example you with a rangefinder:
-    // public static int rangefinderPort = 1;
-    // public static int rangefinderModule = 1;
+	// Elevator Constants
+	public static final int elevTopLmChnl = 0;
+	public static final int elevBotLmChnl = 0;
+	public static final int elevLeftLmChnl = 0;
+	public static final int elevRightLmChnl = 0;
+	public static final int[] elevMotorChnls = {0,0};
+	
+	
 }

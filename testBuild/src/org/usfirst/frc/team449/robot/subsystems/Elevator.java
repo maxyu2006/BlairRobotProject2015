@@ -22,7 +22,7 @@ public class Elevator extends Subsystem {
 		limitTop    			 = new DigitalInput(RobotMap.elevLimitTop);
 		limitBottom 			 = new DigitalInput(RobotMap.elevLimitBottom);
 		elevMotor   			 = new PIDMotor(0.005, 0, 0, RobotMap.maxInput/2,
-				new Talon(RobotMap.talonPort), 
+				new Victor(RobotMap.elevMotorPort), 
 				new Encoder(RobotMap.enAChnl,RobotMap.enBChnl,false,CounterBase.EncodingType.k4X),
 				PIDMotor.DISTANCE_BASE);
 	}

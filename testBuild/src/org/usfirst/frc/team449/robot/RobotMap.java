@@ -25,7 +25,7 @@ public class RobotMap {
 	public static final double deadband      = .15;
     public static final int reverseButtonPos = 1;
     
-    public static final int talonPort = 1;
+    public static final int elevMotorPort = 9;
     public static final int joyPort   = 2;
     
     // 512 pulses per rotation, so one distance per rotation
@@ -44,8 +44,8 @@ public class RobotMap {
 	public static final int limitChnl      = 0;
 	public static final int potChnl        = 0;
 	
-	public static final int elevLimitTop    = 1;
-	public static final int elevLimitBottom = 0;
+	public static final int elevLimitTop    = 9;
+	public static final int elevLimitBottom = 8;
 
 	// Maximum and minimum possible setpoints for the PID loop
 	public static double maxInput = 1000;

@@ -38,7 +38,7 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-    	//elevator = new Elevator();
+    	elevator = new Elevator();
 		drive = new SpeedBaseDrive();
 
     	

@@ -34,7 +34,7 @@ public class DistanceMotorPID extends PIDSubsystem {
     public DistanceMotorPID(double minimumInput, double maximumInput) {
     	super(0.005, 0, 0); // super(Kp, Ki, Kd)
     	
-    	this.motorController = new Talon(RobotMap.talonPort);
+    	this.motorController = new Talon(RobotMap.elevMotorPort);
     	this.encoder 		 = new Encoder(RobotMap.enAChnl,RobotMap.enBChnl,false,CounterBase.EncodingType.k4X);
     	this.setInputRange(minimumInput, maximumInput);
     	this.setSetpoint((minimumInput+maximumInput) / 2);
