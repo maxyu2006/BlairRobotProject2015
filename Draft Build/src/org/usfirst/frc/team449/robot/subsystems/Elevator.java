@@ -35,18 +35,18 @@ public class Elevator extends Subsystem {
 	 * Elevator constructor
 	 */
 	public Elevator(RobotMap config) {
-		topLimit 		= new DigitalInput(config.elevTopLmChnl);
-		bottomLimit 	= new DigitalInput(config.elevBotLmChnl);
-		leftArmLimit 	= new DigitalInput(config.elevLeftLmChnl);
-		rightArmLimit 	= new DigitalInput(config.elevRightLmChnl);
+		topLimit 		= new DigitalInput(config.ELEVATOR_TOP_LIMIT);
+		bottomLimit 	= new DigitalInput(config.ELEVATOR_BOTTOM_LIMIT);
+		leftArmLimit 	= new DigitalInput(config.ELEVATOR_LEFT_LIMIT);
+		rightArmLimit 	= new DigitalInput(config.ELEVATOR_RIGHT_LIMIT);
 		
-		leftSol  = new DoubleSolenoid(config.elevLeftSolChnls[0],config.elevLeftSolChnls[1]);
+		leftSol  = new DoubleSolenoid(config.ELEVATOR_LEFT_SOLENOIDS[0],config.ELEVATOR_LEFT_SOLENOIDS[1]);
 		rightSol = new DoubleSolenoid(config.ELEVATOR_RIGHT_SOLENOIDS[0],config.ELEVATOR_RIGHT_SOLENOIDS[1]);
 		
 		brakeSol = new DoubleSolenoid(config.ELEVATOR_BRAKE_SOLENOIDS[0], config.ELEVATOR_BRAKE_SOLENOIDS[1]);
 		
 		leftMotor   = new Victor(config.INTAKE_LEFT_MOTOR);
-		rightMotor  = new Victor(config.elevRightMotorChnl);
+		rightMotor  = new Victor(config.INTAKE_RIGHT_MOTOR);
 		
 		encoder = new Encoder(config.ELEVATOR_ENCODER_CHANNEL_A, config.ELEVATOR_ENCODER_CHANNEL_B, false, EncodingType.k4X);
 		
