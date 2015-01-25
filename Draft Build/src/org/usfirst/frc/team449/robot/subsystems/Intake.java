@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Intake extends Subsystem {
     
-<<<<<<< HEAD
 	// Intake member variables
 	private final DigitalInput leftLimSwitch;
 	private final DigitalInput rightLimSwitch;
@@ -37,25 +36,7 @@ public class Intake extends Subsystem {
     	leftArmMotor 	= new Victor(config.intakeMotorChnls[0]);
     	rightArmMotor 	= new Victor(config.intakeMotorChnls[1]);
     	armState = ARM_CLOSED;
-=======
-	// Intake hardware fields
-	private DigitalInput leftLimSwitch, rightLimSwitch;
-    private Solenoid intakeLeftSol, intakeRightSol;
-    private Victor leftArmMotor, rightArmMotor;
-    
-    // Intake conceptual fields 
-    private boolean isArmOpen;
-    
-	// Intake constructor 
-	public Intake(RobotMap config){
-    	leftLimSwitch  = new DigitalInput(config.intakeLeftLmChnl);
-    	rightLimSwitch = new DigitalInput(config.intakeRightLmChnl);
-    	
-    	leftArmMotor  = new Victor(config.intakeLeftMotor);
-    	rightArmMotor = new Victor(config.intakeRightMotor);
-    	
-    	isArmOpen = true;
->>>>>>> origin/master
+
 	}
 	
     public void initDefaultCommand() {
