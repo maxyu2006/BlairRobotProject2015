@@ -23,7 +23,7 @@ public class DriveRobot extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drive.setThrottle(OI.joystick1.getAxis(Joystick.AxisType.kY), OI.joystick2.getAxis(Joystick.AxisType.kY));
+    	Robot.drive.setThrottle(Robot.OI.joystick1.getAxis(Joystick.AxisType.kY), Robot.OI.joystick2.getAxis(Joystick.AxisType.kY));
     }
 
     // Make this return true when this Command no longer needs to run execute()

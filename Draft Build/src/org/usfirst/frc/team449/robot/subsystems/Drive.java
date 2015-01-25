@@ -10,17 +10,28 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Drive extends Subsystem {
     
-    // Drive hardware fields
-	private Victor[] motorsLeft = new Victor[3];
-	private Victor[] motorsRight = new Victor[3];
+	//left drive motors
+	private final Victor leftMotor1;
+	private final Victor leftMotor2;
+	private final Victor leftMotor3;
 	
+	//right drive motors
+	private final Victor rightMotor1;
+	private final Victor rightMotor2;
+	private final Victor rightMotor3;
+	
+	/**
+	 * 
+	 * @param config
+	 */
 	public Drive(RobotMap config){
-		motorsLeft = new Victor[]{new Victor(config.leftMotorChannels[0]),
-				new Victor(config.leftMotorChannels[1]),
-				new Victor(config.leftMotorChannels[2])};
-		motorsRight = new Victor[]{new Victor(config.rightMotorChannels[0]),
-				new Victor(config.rightMotorChannels[1]),
-				new Victor(config.rightMotorChannels[2])};
+		leftMotor1 = new Victor(config.DRIVE_L1);
+		leftMotor2 = new Victor(config.DRIVE_L2);
+		leftMotor3 = new Victor(config.DRIVE_L3);
+		
+		rightMotor1 = new Victor(config.DRIVE_R1);
+		rightMotor2 = new Victor(config.DRIVE_R2);
+		rightMotor3 = new Victor(config.DRIVE_R3);
 	}
 	
 	/**
@@ -28,13 +39,18 @@ public class Drive extends Subsystem {
 	 * @param leftVolts - The amount of volts to supply to the three left motors.
 	 * @param rightVolts - The amount of volts to supply to the three right motors.
 	 */
-	public void  move(double leftVolts, double rightVolts){
-		for(Victor i:motorsLeft){
-			i.set(leftVolts);
-		}
+	public void setThrottle(double leftVolts, double rightVolts){
+	
+		//set voltage
+		rightMotor1.set(rightVolts);
+		rightMotor2.set(rightVolts);
+		rightMotor3.set(rightVolts);
 		
-	}
-
+		leftMotor1.set(rightVolts);
+		leftMotor2.set(rightVolts);
+		leftMotor3.set(rightVolts);
+		
+	}//end move()
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

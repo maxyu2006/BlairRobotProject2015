@@ -5,6 +5,8 @@ import org.usfirst.frc.team449.robot.RobotMap;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -18,6 +20,7 @@ public class Elevator extends Subsystem {
 	private DigitalInput topLimit, bottomLimit;
 	private DigitalInput leftArmLimit, rightArmLimit;
 	private DoubleSolenoid leftSol, rightSol;
+	private DoubleSolenoid brakeSol;
 	private Victor leftMotor, rightMotor;
 	private Encoder encoder;
 	
@@ -25,7 +28,6 @@ public class Elevator extends Subsystem {
 	private double setPoint;
 	private double actualPosition;
 	private boolean isArmOpen;
-	private boolean[] limitSwitchStates = new boolean[4];
 	private boolean isBrakeActivated;
 	private boolean isManual;
 	
@@ -41,6 +43,8 @@ public class Elevator extends Subsystem {
 		leftSol  = new DoubleSolenoid(config.elevLeftSolChnls[0],config.elevLeftSolChnls[1]);
 		rightSol = new DoubleSolenoid(config.elevRightSolChnls[0],config.elevRightSolChnls[1]);
 		
+		brakeSol = new DoubleSolenoid(config.elevBrakeSolChnls[0], config.elevBrakeSolChnls[1]);
+		
 		leftMotor   = new Victor(config.elevLeftMotorChnl);
 		rightMotor  = new Victor(config.elevRightMotorChnl);
 		
@@ -53,11 +57,6 @@ public class Elevator extends Subsystem {
 		setPoint = 0;
 		actualPosition = encoder.get();
 		isArmOpen = true; 
-	
-		limitSwitchStates[0] = topLimit.get();
-		limitSwitchStates[1] = bottomLimit.get();
-		limitSwitchStates[2] = leftArmLimit.get();
-		limitSwitchStates[3] = rightArmLimit.get();
 		
 		isBrakeActivated = false;
 		isManual = false;
@@ -77,7 +76,14 @@ public class Elevator extends Subsystem {
      * Toggles the open/closed state of the arms.
      */
     public void toggleArms(){
-    	
+    	if(isArmOpen){
+    		leftSol.set(Value.kReverse);
+    		rightSol.set(Value.kReverse);
+    	}
+    	else{
+    		leftSol.set(Value.kForward);
+    		rightSol.set(Value.kForward);
+    	}
     }
     
     /**
@@ -145,8 +151,38 @@ public class Elevator extends Subsystem {
     	return isArmOpen;
     }
     
-    //TODO getLimitSwitchStates()
-	}
+    /**
+     * Returns whether the limit switch at the top of the elevator is being pressed
+     * @return see description
+     */
+    public boolean isTouchingTop() {
+    	return topLimit.get();
+    }
+    
+    /**
+     * Returns whether the limit switch at the bottom of the elevator is being pressed
+     * @return see description
+     */
+    public boolean isTouchingBottom() {
+    	return bottomLimit.get();
+    }
+    
+    /**
+     * Returns whether the limit switch on the left arm is being pressed
+     * @return see description
+     */
+    public boolean isTouchingLeftArm() {
+    	return leftArmLimit.get();
+    }
+    
+    /**
+     * Returns whether the limit switch on the right arm is being pressed
+     * @return see description
+     */
+    public boolean isTouchingRightArm() {
+    	return rightArmLimit.get();
+    }
+}
     
     
     
