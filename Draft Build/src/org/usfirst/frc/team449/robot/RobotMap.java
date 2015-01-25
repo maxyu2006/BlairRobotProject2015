@@ -7,18 +7,26 @@ package org.usfirst.frc.team449.robot;
  */
 public class RobotMap {
 
-	public static final int[] leftMotorChannels = {0,0,0};//somebody should give this real values
-	public static final int[] rightMotorChannels = {0,0,0};//somebody should give this real values
+	public final int[] leftMotorChannels = {0,0,0};//somebody should give this real values
+	public final int[] rightMotorChannels = {0,0,0};//somebody should give this real values
 
 	// Elevator Constants
-	public static final int elevTopLmChnl = 0;
-	public static final int elevBotLmChnl = 0;
-	public static final int elevLeftLmChnl = 0;
-	public static final int elevRightLmChnl = 0;
-	public static final int[] elevMotorChnls = {0,0};
+	public final int elevTopLmChnl = 0;
+	public final int elevBotLmChnl = 0;
+	public final int elevLeftLmChnl = 0;
+	public final int elevRightLmChnl = 0;
+	public final int elevLeftMotorChnl = 0;
+	public final int elevRightMotorChnl = 0;
+	public final int[] elevLeftSolChnls = {0,0};
+	public final int[] elevRightSolChnls = {0,0};
+	public final int elevEncoderAChnl = 0;
+	public final int elevEncoderBChnl = 0;
+	
+	
 	
 	// Intake Constants
-	public static final int intakeLeftLmChnl = 0;
-	public static final int intakeRightLmChnl = 0;
-	public static final int[] intakeMotorChnls = {0,0};
+	public final int intakeLeftLmChnl = 0;
+	public final int intakeRightLmChnl = 0;
+	public final int intakeLeftMotor = 0;
+	public final int intakeRightMotor = 0;
 }
