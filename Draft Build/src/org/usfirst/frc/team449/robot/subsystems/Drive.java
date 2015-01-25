@@ -32,7 +32,8 @@ public class Drive extends Subsystem {
 		rightMotor1 = new Victor(config.DRIVE_R1);
 		rightMotor2 = new Victor(config.DRIVE_R2);
 		
-		leftEncoder = new Encoder
+		leftEncoder = new Encoder(config.DRIVE_LEFT_ENCODER_A,config.DRIVE_LEFT_ENCODER_B);
+		rightEncoder = new Encoder(config.DRIVE_RIGHT_ENCODER_A,config.DRIVE_RIGHT_ENCODER_B);
 	}
 	
 	/**
@@ -55,14 +56,14 @@ public class Drive extends Subsystem {
 	 * @return the amount of volts going to the left motors
 	 */
 	public double getLeftVel(){
-		return encoder.getRate();
+		return leftEncoder.getRate();
 	}
 	
 	/**
 	 * @return the amount of volts going to the right motors
 	 */
 	public double getRightVel(){
-		return rightMotor1.get();
+		return rightEncoder.getRate();
 	}
 	
     public void initDefaultCommand() {
