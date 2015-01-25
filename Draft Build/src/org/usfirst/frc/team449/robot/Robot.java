@@ -1,11 +1,13 @@
 
 package org.usfirst.frc.team449.robot;
 
+import org.usfirst.frc.team449.robot.commands.DriveRobot;
 import org.usfirst.frc.team449.robot.subsystems.Drive;
 import org.usfirst.frc.team449.robot.subsystems.Elevator;
 import org.usfirst.frc.team449.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -21,10 +23,12 @@ public class Robot extends IterativeRobot {
 
 	public static final Elevator elevator = new Elevator();
 	public static final Intake intake = new Intake();
-	public static final Drive drive = new Drive();
 	public static OI oi;
 
-    Command autonomousCommand;
+	public static final Drive drive = new Drive(new Victor[]{new Victor(0), new Victor(1), new Victor(2)}, new Victor[]{new Victor(3), new Victor(4), new Victor(5)});
+	
+	Command autonomousCommand;
+	private DriveRobot driver;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -32,7 +36,7 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
-        // instantiate the command used for the autonomous period
+		// instantiate the command used for the autonomous period
         autonomousCommand = null;
     }
 	
@@ -73,6 +77,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        driver = new DriveRobot();
     }
     
     /**

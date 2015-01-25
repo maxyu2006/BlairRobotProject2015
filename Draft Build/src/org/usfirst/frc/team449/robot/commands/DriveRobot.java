@@ -1,16 +1,15 @@
 package org.usfirst.frc.team449.robot.commands;
 
+import org.usfirst.frc.team449.robot.OI;
 import org.usfirst.frc.team449.robot.Robot;
-import org.usfirst.frc.team449.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class DriveRobot extends Command {
-	
-	private double maxRPM = 1;
 
     public DriveRobot() {
         // Use requires() here to declare subsystem dependencies
@@ -20,15 +19,11 @@ public class DriveRobot extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.drive.setSpeed(0);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
-    	double rpm = Robot.oi.getElevJoyY()* maxRPM * RobotMap.encoderPPR;
-    	Robot.drive.setSpeed(rpm);
-    	System.out.println("I set the fucking setpoint" + rpm);
+    	Robot.drive.setThrottle(OI.joystick1.getAxis(Joystick.AxisType.kY), OI.joystick2.getAxis(Joystick.AxisType.kY));
     }
 
     // Make this return true when this Command no longer needs to run execute()

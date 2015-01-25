@@ -184,7 +184,7 @@ public class PIDMotor extends PIDSubsystem {
     
     /**
      * measures the rate of the encoder
-     * @return the rate of the encoder as rpms
+     * @return the rate of the encoder as ticks per second
      */
     public double measureSpeed()
     {
