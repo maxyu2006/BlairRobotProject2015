@@ -30,10 +30,10 @@ public class Intake extends Subsystem {
     
 	// Intake constructor 
 	public Intake(RobotMap config){
-    	leftLimSwitch 	= new DigitalInput(config.intakeLeftLmChnl);
-    	rightLimSwitch 	= new DigitalInput(config.intakeRightLmChnl);
+    	leftLimSwitch 	= new DigitalInput(config.INTAKE_LEFT_LIMIT);
+    	rightLimSwitch 	= new DigitalInput(config.INTAKE_RIGHT_LIMIT);
     	
-    	leftArmMotor 	= new Victor(config.intakeMotorChnls[0]);
+    	leftArmMotor 	= new Victor(config.intakeLeft);
     	rightArmMotor 	= new Victor(config.intakeMotorChnls[1]);
     	armState = ARM_CLOSED;
 

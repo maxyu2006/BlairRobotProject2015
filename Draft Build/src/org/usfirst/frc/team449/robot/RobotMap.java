@@ -7,27 +7,45 @@ package org.usfirst.frc.team449.robot;
  */
 public final class RobotMap {
 
-	// Elevator Constants
-	public final int elevTopLmChnl;
-	public final int elevBotLmChnl;
-	public final int elevLeftLmChnl;
-	public final int elevRightLmChnl;
-	public final int elevLeftMotorChnl;
-	public final int elevRightMotorChnl;
-	public final int[] elevLeftSolChnls;
-	public final int[] elevRightSolChnls;
-	public final int elevEncoderAChnl;
-	public final int elevEncoderBChnl;
+	/**
+	 * ELEVATOR CONSTANTS
+	 */
 	
-	// Drive Constants
-	public final int[] leftMotorChannels = {0,0,0};//somebody should give this real values
-	public final int[] rightMotorChannels = {0,0,0};//somebody should give this real values
+	public final int ELEVATOR_TOP_LIMIT;
 	
-	// Intake Constants
-	public final int intakeLeftLmChnl;
-	public final int intakeRightLmChnl;
-	public final int intakeLeftMotor;
-	public final int intakeRightMotor;
+	public final int ELEVATOR_BOTTOM_LIMIT;
+	
+	public final int ELEVATOR_LEFT_LIMIT;
+	
+	public final int ELEVATOR_RIGHT_LIMIT;
+	
+	public final int[] ELEVATOR_RIGHT_SOLENOIDS;
+	
+	public final int[] ELEVATOR_BRAKE_SOLENOIDS;
+	
+	public final int ELEVATOR_ENCODER_CHANNEL_A;
+	
+	public final int ELEVATOR_ENCODER_CHANNEL_B;
+	
+	/**
+	 * DRIVE CONSTANTS
+	 */
+	
+	public final int[] DRIVE_LEFT_MOTORS = {0,0,0};//somebody should give this real values
+	
+	public final int[] DRIVE_RIGHT_MOTORS = {0,0,0};//somebody should give this real values
+	
+	/**
+	 * INTAKE CONSTANTS
+	 */
+	
+	public final int INTAKE_LEFT_LIMIT;
+	
+	public final int INTAKE_RIGHT_LIMIT;
+	
+	public final int INTAKE_LEFT_MOTOR;
+	
+	public final int INTAKE_RIGHT_MOTOR;
 	
 	/**
 	 * Joystick port for Joystick 1
