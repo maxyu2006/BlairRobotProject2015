@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Drive extends Subsystem {
     
     // Drive hardware fields
-	private Victor[] motorsLeft = new Victor[3];//
+	private Victor[] motorsLeft = new Victor[3];
 	private Victor[] motorsRight = new Victor[3];
 	
 	public Drive(RobotMap config){
@@ -22,6 +22,12 @@ public class Drive extends Subsystem {
 				new Victor(config.rightMotorChannels[1]),
 				new Victor(config.rightMotorChannels[2])};
 	}
+	
+	/**
+	 * Sends power to the three left and right three motors on the drive frame.
+	 * @param leftVolts - The amount of volts to supply to the three left motors.
+	 * @param rightVolts - The amount of volts to supply to the three right motors.
+	 */
 	public void  move(double leftVolts, double rightVolts){
 		for(Victor i:motorsLeft){
 			i.set(leftVolts);

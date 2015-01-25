@@ -18,8 +18,7 @@ public class Elevator extends Subsystem {
 	private DigitalInput topLimit, bottomLimit;
 	private DigitalInput leftArmLimit, rightArmLimit;
 	private DoubleSolenoid leftSol, rightSol;
-	private Victor leftMotor;
-	private Victor rightMotor;
+	private Victor leftMotor, rightMotor;
 	private Encoder encoder;
 	
 	// Elevator conceptual fields

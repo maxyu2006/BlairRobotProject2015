@@ -17,15 +17,17 @@ public class Intake extends Subsystem {
     private Solenoid intakeLeftSol, intakeRightSol;
     private Victor leftArmMotor, rightArmMotor;
     
-    // Intake conceptual fields
+    // Intake conceptual fields 
     private boolean isArmOpen;
     
 	// Intake constructor 
 	public Intake(RobotMap config){
-    	leftLimSwitch = new DigitalInput(config.intakeLeftLmChnl);
+    	leftLimSwitch  = new DigitalInput(config.intakeLeftLmChnl);
     	rightLimSwitch = new DigitalInput(config.intakeRightLmChnl);
-    	leftArmMotor = new Victor(config.intakeLeftMotor);
+    	
+    	leftArmMotor  = new Victor(config.intakeLeftMotor);
     	rightArmMotor = new Victor(config.intakeRightMotor);
+    	
     	isArmOpen = true;
 	}
 	
@@ -40,18 +42,31 @@ public class Intake extends Subsystem {
 		return false;
 	}
 	
+	/**
+	 * Toggles the on/off state of the motors.
+	 */
 	public void toggleMotor(){
 		
 	}
 	
+	/**
+	 * Toggles the direction of the motors.
+	 */
 	public void toggleMotorDir(){
 		
 	}
 	
+	/**
+	 * Toggles the open/closed state of the arms.
+	 */
 	public void toggleArms(){
 
 	}
 	
+	/**
+	 * Returns true if the arms are open, false otherwise.
+	 * @return isArmOpen - A boolean that is true if the arms are open, false otherwise.
+	 */
 	public boolean isArmOpen(){
 		
 		return isArmOpen;
