@@ -66,10 +66,16 @@ public class Drive extends Subsystem {
 		return rightEncoder.getRate();
 	}
 	
+	/**
+	 * @return direction robot is going in. True for one direction, false for the other
+	 */
+	public boolean getDirection(){
+		return leftEncoder.getDirection();//i think this works.
+	}
+	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
-    
 }
 

@@ -3,7 +3,8 @@ package org.usfirst.frc.team449.robot.subsystems;
 import org.usfirst.frc.team449.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -16,8 +17,8 @@ public class Intake extends Subsystem {
 	private final DigitalInput leftLimSwitch;
 	private final DigitalInput rightLimSwitch;
 	
-    private final Solenoid intakeLeftSol;
-    private final Solenoid intakeRightSol;
+    private final DoubleSolenoid intakeLeftSol;
+    private final DoubleSolenoid intakeRightSol;
     
     private final Victor leftArmMotor;
     private final Victor rightArmMotor;
@@ -33,8 +34,9 @@ public class Intake extends Subsystem {
     	leftArmMotor 	= new Victor(config.INTAKE_LEFT_MOTOR);
     	rightArmMotor 	= new Victor(config.INTAKE_RIGHT_MOTOR);
     	
-    	intakeLeftSol   = new Solenoid(config.ELEVATOR_LEFT_SOLENOIDS[0], config.ELEVATOR_LEFT_SOLENOIDS[1]);
-    	intakeRightSol  = new Solenoid(config.ELEVATOR_RIGHT_SOLENOIDS[0], config.ELEVATOR_RIGHT_SOLENOIDS[1]);
+
+    	intakeLeftSol  = new DoubleSolenoid(config.ELEVATOR_LEFT_SOLENOIDS[0], config.ELEVATOR_LEFT_SOLENOIDS[1]);
+    	intakeRightSol = new DoubleSolenoid(config.ELEVATOR_RIGHT_SOLENOIDS[0], config.ELEVATOR_RIGHT_SOLENOIDS[1]);
     	
     	isArmOpen = true;
     	isMotorOn = false;
@@ -65,7 +67,15 @@ public class Intake extends Subsystem {
 	/**
 	 * Toggles the open/closed state of the arms.
 	 */
-	public void toggleArms() {
+	public void toggleArms(){
+		if(isArmOpen){
+    		intakeLeftSol.set(Value.kReverse);
+    		intakeRightSol.set(Value.kReverse);
+    	}
+    	else{
+    		intakeLeftSol.set(Value.kForward);
+    		intakeRightSol.set(Value.kForward);
+    	}
 		isArmOpen = !isArmOpen;
 	}
 	
