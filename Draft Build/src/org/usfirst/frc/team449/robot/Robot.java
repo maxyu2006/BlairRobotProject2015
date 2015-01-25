@@ -21,10 +21,14 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class Robot extends IterativeRobot {
 
-	public static final Elevator elevator = new Elevator();
-	public static final Intake intake = new Intake();
-	public static OI oi;
+	//sometime should check if these could be made private
+	public static final RobotMap robotMap = new RobotMap("config.txt");
 
+	public static final OI 			OI 			= new OI(Robot.robotMap);
+	public static final Intake		intake		= new Intake(Robot.robotMap);
+	public static final Elevator	elevator	= new Elevator(Robot.robotMap);
+	
+	
 	public static final Drive drive = new Drive(new Victor[]{new Victor(0), new Victor(1), new Victor(2)}, new Victor[]{new Victor(3), new Victor(4), new Victor(5)});
 	
 	Command autonomousCommand;

@@ -10,19 +10,28 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Drive extends Subsystem {
     
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-	private final Victor[] motorsLeft;
-	private final Victor[] motorsRight;
+	//left drive motors
+	private final Victor leftMotor1;
+	private final Victor leftMotor2;
+	private final Victor leftMotor3;
+	
+	//right drive motors
+	private final Victor rightMotor1;
+	private final Victor rightMotor2;
+	private final Victor rightMotor3;
 	
 	/**
 	 * 
-	 * @param leftMotors
-	 * @param rightMotors
+	 * @param config
 	 */
-	public Drive(Victor[] leftMotors, Victor[] rightMotors){
-		this.motorsLeft 	= leftMotors;
-		this.motorsRight 	= rightMotors;
+	public Drive(RobotMap config){
+		leftMotor1 = new Victor(config.DRIVE_L1);
+		leftMotor2 = new Victor(config.DRIVE_L2);
+		leftMotor3 = new Victor(config.DRIVE_L3);
+		
+		rightMotor1 = new Victor(config.DRIVE_R1);
+		rightMotor2 = new Victor(config.DRIVE_R2);
+		rightMotor3 = new Victor(config.DRIVE_R3);
 	}
 	
 	/**
@@ -32,11 +41,14 @@ public class Drive extends Subsystem {
 	 */
 	public void setThrottle(double leftVolts, double rightVolts){
 		
-		for(int i = 0; i < this.motorsLeft.length; i++)
-			this.motorsLeft[i].set(leftVolts);
+		//set voltage
+		rightMotor1.set(rightVolts);
+		rightMotor2.set(rightVolts);
+		rightMotor3.set(rightVolts);
 		
-		for(int i = 0; i < this.motorsRight.length; i++)
-			this.motorsRight[i].set(rightVolts);
+		leftMotor1.set(rightVolts);
+		leftMotor2.set(rightVolts);
+		leftMotor3.set(rightVolts);
 		
 	}//end move()
 	

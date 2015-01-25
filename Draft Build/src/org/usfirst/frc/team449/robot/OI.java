@@ -35,9 +35,18 @@ public class OI {
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
 	
-	public static final Joystick joystick1 = new Joystick(1);
-	public static final Joystick joystick2 = new Joystick(2);
+	public final Joystick joystick1;
+	public final Joystick joystick2;
+	public final Joystick joystick3;
+	public final Joystick joystick4;
 	
+	public OI(RobotMap config)
+	{
+		joystick1 = new Joystick(config.JOYSTICK_1);
+		joystick2 = new Joystick(config.JOYSTICK_2);
+		joystick3 = new Joystick(config.JOYSTICK_3);
+		joystick4 = new Joystick(config.JOYSTICK_4);
+	}
 	
 }
 

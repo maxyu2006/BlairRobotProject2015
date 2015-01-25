@@ -5,28 +5,99 @@ package org.usfirst.frc.team449.robot;
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
  */
-public class RobotMap {
+public final class RobotMap {
 
-	public final int[] leftMotorChannels = {0,0,0};//somebody should give this real values
-	public final int[] rightMotorChannels = {0,0,0};//somebody should give this real values
+	public final int[] leftMotorChannels;//somebody should give this real values
+	public final int[] rightMotorChannels;//somebody should give this real values
 
 	// Elevator Constants
-	public final int elevTopLmChnl = 0;
-	public final int elevBotLmChnl = 0;
-	public final int elevLeftLmChnl = 0;
-	public final int elevRightLmChnl = 0;
-	public final int elevLeftMotorChnl = 0;
-	public final int elevRightMotorChnl = 0;
-	public final int[] elevLeftSolChnls = {0,0};
-	public final int[] elevRightSolChnls = {0,0};
-	public final int elevEncoderAChnl = 0;
-	public final int elevEncoderBChnl = 0;
+	public final int elevTopLmChnl;
+	public final int elevBotLmChnl;
+	public final int elevLeftLmChnl;
+	public final int elevRightLmChnl;
+	public final int elevLeftMotorChnl;
+	public final int elevRightMotorChnl;
+	public final int[] elevLeftSolChnls;
+	public final int[] elevRightSolChnls;
+	public final int elevEncoderAChnl;
+	public final int elevEncoderBChnl;
 	
 	
 	
 	// Intake Constants
-	public final int intakeLeftLmChnl = 0;
-	public final int intakeRightLmChnl = 0;
-	public final int intakeLeftMotor = 0;
-	public final int intakeRightMotor = 0;
+	public final int intakeLeftLmChnl;
+	public final int intakeRightLmChnl;
+	public final int intakeLeftMotor;
+	public final int intakeRightMotor;
+	
+	/**
+	 * Joystick port for Joystick 1
+	 */
+	public final int JOYSTICK_1;
+	
+	/**
+	 * Joystick port for Joystick 2
+	 */
+	public final int JOYSTICK_2;
+	
+	/**
+	 * Joystick port for Joystick 3
+	 */
+	public final int JOYSTICK_3;
+	
+	/**
+	 * Joystick port for Joystick 4
+	 */
+	public final int JOYSTICK_4;
+	
+	/**
+	 * motor controller channel for the left 1 drive motor
+	 */
+	public final int DRIVE_L1;
+
+	/**
+	 * motor controller channel for the left 1 drive motor
+	 */
+	public final int DRIVE_L2;
+
+	/**
+	 * motor controller channel for the left 1 drive motor
+	 */
+	public final int DRIVE_L3;
+
+	/**
+	 * motor controller channel for the right 1 drive motor
+	 */
+	public final int DRIVE_R1;
+
+	/**
+	 * motor controller channel for the right 1 drive motor
+	 */
+	public final int DRIVE_R2;
+	
+	/**
+	 * motor controller channel for the right 1 drive motor
+	 */
+	public final int DRIVE_R3;
+	
+	
+	/**
+	 * 
+	 * @param configFile
+	 */
+	public RobotMap(String configFile)
+	{
+		this.JOYSTICK_1 = 1;
+		this.JOYSTICK_2 = 2;
+		this.JOYSTICK_3 = 3;
+		this.JOYSTICK_4 = 4;
+		
+		this.DRIVE_L1 = 0;
+		this.DRIVE_L2 = 1;
+		this.DRIVE_L3 = 2;
+		
+		this.DRIVE_R1 = 3;
+		this.DRIVE_R2 = 4;
+		this.DRIVE_R3 = 5;
+	}
 }
