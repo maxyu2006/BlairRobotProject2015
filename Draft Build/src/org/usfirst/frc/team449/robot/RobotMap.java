@@ -7,9 +7,6 @@ package org.usfirst.frc.team449.robot;
  */
 public final class RobotMap {
 
-	public final int[] leftMotorChannels;//somebody should give this real values
-	public final int[] rightMotorChannels;//somebody should give this real values
-
 	// Elevator Constants
 	public final int elevTopLmChnl;
 	public final int elevBotLmChnl;
@@ -22,7 +19,9 @@ public final class RobotMap {
 	public final int elevEncoderAChnl;
 	public final int elevEncoderBChnl;
 	
-	
+	// Drive Constants
+	public final int[] leftMotorChannels = {0,0,0};//somebody should give this real values
+	public final int[] rightMotorChannels = {0,0,0};//somebody should give this real values
 	
 	// Intake Constants
 	public final int intakeLeftLmChnl;

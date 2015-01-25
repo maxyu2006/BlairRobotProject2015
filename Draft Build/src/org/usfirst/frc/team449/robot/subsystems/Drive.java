@@ -35,9 +35,9 @@ public class Drive extends Subsystem {
 	}
 	
 	/**
-	 * 
-	 * @param leftVolts
-	 * @param rightVolts
+	 * Sends power to the three left and right three motors on the drive frame.
+	 * @param leftVolts - The amount of volts to supply to the three left motors.
+	 * @param rightVolts - The amount of volts to supply to the three right motors.
 	 */
 	public void setThrottle(double leftVolts, double rightVolts){
 		

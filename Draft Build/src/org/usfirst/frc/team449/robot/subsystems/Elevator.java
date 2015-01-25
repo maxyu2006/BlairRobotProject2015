@@ -18,7 +18,7 @@ public class Elevator extends Subsystem {
 	private DigitalInput topLimit, bottomLimit;
 	private DigitalInput leftArmLimit, rightArmLimit;
 	private DoubleSolenoid leftSol, rightSol;
-	private Victor[] motors = new Victor[2];
+	private Victor leftMotor, rightMotor;
 	private Encoder encoder;
 	
 	// Elevator conceptual fields
@@ -32,16 +32,19 @@ public class Elevator extends Subsystem {
 	/**
 	 * Elevator constructor
 	 */
-	public Elevator() {
-		topLimit = new DigitalInput(RobotMap.elevTopLmChnl);
-		bottomLimit = new DigitalInput(RobotMap.elevBotLmChnl);
-		leftArmLimit = new DigitalInput(RobotMap.elevLeftLmChnl);
-		rightArmLimit = new DigitalInput(RobotMap.elevRightLmChnl);
-		leftSol = new DoubleSolenoid(RobotMap.elevLeftSolChnls[0],RobotMap.elevLeftSolChnls[1]);
-		rightSol = new DoubleSolenoid(RobotMap.elevRightSolChnls[0],RobotMap.elevRightSolChnls[1]);
-		motors[0] = new Victor(RobotMap.elevMotorChnls[0]);
-		motors[1] = new Victor(RobotMap.elevMotorChnls[1]);
-		encoder = new Encoder(RobotMap.elevEncoderAChnl, RobotMap.elevEncoderBChnl, false, EncodingType.k4X);
+	public Elevator(RobotMap config) {
+		topLimit 		= new DigitalInput(config.elevTopLmChnl);
+		bottomLimit 	= new DigitalInput(config.elevBotLmChnl);
+		leftArmLimit 	= new DigitalInput(config.elevLeftLmChnl);
+		rightArmLimit 	= new DigitalInput(config.elevRightLmChnl);
+		
+		leftSol  = new DoubleSolenoid(config.elevLeftSolChnls[0],config.elevLeftSolChnls[1]);
+		rightSol = new DoubleSolenoid(config.elevRightSolChnls[0],config.elevRightSolChnls[1]);
+		
+		leftMotor   = new Victor(config.elevLeftMotorChnl);
+		rightMotor  = new Victor(config.elevRightMotorChnl);
+		
+		encoder = new Encoder(config.elevEncoderAChnl, config.elevEncoderBChnl, false, EncodingType.k4X);
 		
 		//TODO find actual distancePerPulse
 		encoder.setDistancePerPulse(1);
