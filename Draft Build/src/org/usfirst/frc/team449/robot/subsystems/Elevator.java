@@ -90,14 +90,14 @@ public class Elevator extends Subsystem {
      * Releases the brake.
      */
     public void releaseBrake(){
-    	
+    	brakeSol.set(Value.kReverse);
     }
     
     /**
      * Activates the brake.
      */
     public void activateBrake(){
-    	
+    	brakeSol.set(Value.kForward);
     }
     
     /**
@@ -105,14 +105,15 @@ public class Elevator extends Subsystem {
      * @param speed - The speed the motor is being set at.
      */
     public void setMotorSpeed(double speed){
-    	
+    	leftMotor.set(speed);
+    	rightMotor.set(speed);
     }
     
     /**
      * Resets the encoder value to 0.
      */
     public void resetEncoder(){
-    	
+    	encoder.reset();
     }
     
     /**
