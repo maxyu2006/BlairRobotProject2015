@@ -18,6 +18,7 @@ public class Elevator extends Subsystem {
 	private DigitalInput topLimit, bottomLimit;
 	private DigitalInput leftArmLimit, rightArmLimit;
 	private DoubleSolenoid leftSol, rightSol;
+	private DoubleSolenoid armSol;
 	private Victor leftMotor, rightMotor;
 	private Encoder encoder;
 	
@@ -25,7 +26,6 @@ public class Elevator extends Subsystem {
 	private double setPoint;
 	private double actualPosition;
 	private boolean isArmOpen;
-	private boolean[] limitSwitchStates = new boolean[4];
 	private boolean isBrakeActivated;
 	private boolean isManual;
 	
@@ -41,6 +41,8 @@ public class Elevator extends Subsystem {
 		leftSol  = new DoubleSolenoid(config.elevLeftSolChnls[0],config.elevLeftSolChnls[1]);
 		rightSol = new DoubleSolenoid(config.elevRightSolChnls[0],config.elevRightSolChnls[1]);
 		
+		armSol = new DoubleSolenoid(config.elevArmSolChnl);
+		
 		leftMotor   = new Victor(config.elevLeftMotorChnl);
 		rightMotor  = new Victor(config.elevRightMotorChnl);
 		
@@ -53,11 +55,6 @@ public class Elevator extends Subsystem {
 		setPoint = 0;
 		actualPosition = encoder.get();
 		isArmOpen = true; 
-	
-		limitSwitchStates[0] = topLimit.get();
-		limitSwitchStates[1] = bottomLimit.get();
-		limitSwitchStates[2] = leftArmLimit.get();
-		limitSwitchStates[3] = rightArmLimit.get();
 		
 		isBrakeActivated = false;
 		isManual = false;
@@ -145,8 +142,38 @@ public class Elevator extends Subsystem {
     	return isArmOpen;
     }
     
-    //TODO getLimitSwitchStates()
-	}
+    /**
+     * Returns whether the limit switch at the top of the elevator is being pressed
+     * @return see description
+     */
+    public boolean isTouchingTop() {
+    	return topLimit.get();
+    }
+    
+    /**
+     * Returns whether the limit switch at the bottom of the elevator is being pressed
+     * @return see description
+     */
+    public boolean isTouchingBottom() {
+    	return bottomLimit.get();
+    }
+    
+    /**
+     * Returns whether the limit switch on the left arm is being pressed
+     * @return see description
+     */
+    public boolean isTouchingLeftArm() {
+    	return leftArmLimit.get();
+    }
+    
+    /**
+     * Returns whether the limit switch on the left arm is being pressed
+     * @return see description
+     */
+    public boolean isTouchingRightArm() {
+    	return rightArmLimit.get();
+    }
+}
     
     
     
