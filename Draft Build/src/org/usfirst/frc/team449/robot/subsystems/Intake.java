@@ -25,6 +25,9 @@ public class Intake extends Subsystem {
     
     private boolean isArmOpen;
     private boolean isMotorOn;
+    private boolean isMotorForward;
+    
+    private double motorSpeed;
     
 	// Intake constructor 
 	public Intake(RobotMap config) {
@@ -34,12 +37,14 @@ public class Intake extends Subsystem {
     	leftArmMotor 	= new Victor(config.INTAKE_LEFT_MOTOR);
     	rightArmMotor 	= new Victor(config.INTAKE_RIGHT_MOTOR);
     	
-
     	intakeLeftSol  = new DoubleSolenoid(config.ELEVATOR_LEFT_SOLENOIDS[0], config.ELEVATOR_LEFT_SOLENOIDS[1]);
     	intakeRightSol = new DoubleSolenoid(config.ELEVATOR_RIGHT_SOLENOIDS[0], config.ELEVATOR_RIGHT_SOLENOIDS[1]);
     	
     	isArmOpen = true;
     	isMotorOn = false;
+    	isMotorForward = true;
+    	
+    	motorSpeed = config.INTAKE_MOTOR_SPEED;
 	}
 	
 	/**
@@ -53,6 +58,15 @@ public class Intake extends Subsystem {
 	 * Toggles the on/off state of the motors.
 	 */
 	public void toggleMotor() {
+		if(isMotorOn){
+			leftArmMotor.set(0);
+			rightArmMotor.set(0);
+		}else{
+			int times = 1;
+			if(!isMotorForward) times = -1;
+			leftArmMotor.set(motorSpeed * times);
+			rightArmMotor.set(motorSpeed * times);
+		}
 		isMotorOn = !isMotorOn;
 	}
 	
@@ -62,6 +76,7 @@ public class Intake extends Subsystem {
 	public void toggleMotorDir() {
 		leftArmMotor.set(-leftArmMotor.get());
 		rightArmMotor.set(-rightArmMotor.get());
+		isMotorForward = !isMotorForward;
 	}
 	
 	/**

@@ -135,6 +135,10 @@ public final class RobotMap {
 	public final int INTAKE_RIGHT_MOTOR;
 	
 	/**
+	 * Speed of the intake motors
+	 */
+	public final double INTAKE_MOTOR_SPEED;
+	/**
 	 * CONTROLLER PORTS
 	 */
 
