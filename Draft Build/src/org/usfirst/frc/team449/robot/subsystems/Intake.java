@@ -33,8 +33,8 @@ public class Intake extends Subsystem {
     	leftLimSwitch 	= new DigitalInput(config.INTAKE_LEFT_LIMIT);
     	rightLimSwitch 	= new DigitalInput(config.INTAKE_RIGHT_LIMIT);
     	
-    	leftArmMotor 	= new Victor(config.intakeLeft);
-    	rightArmMotor 	= new Victor(config.intakeMotorChnls[1]);
+    	leftArmMotor 	= new Victor(config.INTAKE_LEFT_MOTOR);
+    	rightArmMotor 	= new Victor(config.INTAKE_RIGHT_MOTOR);
     	armState = ARM_CLOSED;
 
 	}
