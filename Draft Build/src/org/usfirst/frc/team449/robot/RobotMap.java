@@ -7,31 +7,97 @@ package org.usfirst.frc.team449.robot;
  */
 public final class RobotMap {
 
-	// Elevator Constants
-	public final int elevTopLmChnl;
-	public final int elevBotLmChnl;
-	public final int elevLeftLmChnl;
-	public final int elevRightLmChnl;
-	public final int elevLeftMotorChnl;
-	public final int elevRightMotorChnl;
-	public final int[] elevLeftSolChnls;
-	public final int[] elevRightSolChnls;
-	public final int elevEncoderAChnl;
-	public final int elevEncoderBChnl;
+	/**
+	 * ELEVATOR CONSTANTS
+	 */
 	
-	// Drive Constants
-	public final int[] leftMotorChannels = {0,0,0};//somebody should give this real values
-	public final int[] rightMotorChannels = {0,0,0};//somebody should give this real values
-	public final int encoderLA;
-	public final int encoderLB;
-	public final int encoderRA;
-	public final int encoderRB;
+	/**
+	 * Channel for the elevator's top limit switch.
+	 */
+	public final int ELEVATOR_TOP_LIMIT;
 	
-	// Intake Constants
-	public final int intakeLeftLmChnl;
-	public final int intakeRightLmChnl;
-	public final int intakeLeftMotor;
-	public final int intakeRightMotor;
+	/**
+	 * Channel for the elevator's bottom limit switch.
+	 */
+	public final int ELEVATOR_BOTTOM_LIMIT;
+	
+	/**
+	 * Channel for the elevator's left limit switch.
+	 */
+	public final int ELEVATOR_LEFT_LIMIT;
+	
+	/**
+	 * Channel for the elevator's right limit switch.
+	 */
+	public final int ELEVATOR_RIGHT_LIMIT;
+	
+	/**
+	 * Channels for the elevator's left solenoids.
+	 */
+	public final int[] ELEVATOR_LEFT_SOLENOIDS;
+	
+	/**
+	 * Channels for the elevator's right solenoids.
+	 */
+	public final int[] ELEVATOR_RIGHT_SOLENOIDS;
+	
+	/**
+	 * Channels for the elevator's brake solenoids.
+	 */
+	public final int[] ELEVATOR_BRAKE_SOLENOIDS;
+
+	/**
+	 * Channel A for the elevator's encoder.
+	 */
+	public final int ELEVATOR_ENCODER_CHANNEL_A;
+	
+	/**
+	 * Channel B for the elevator's encoder.
+	 */
+	public final int ELEVATOR_ENCODER_CHANNEL_B;
+	
+	/**
+	 * DRIVE CONSTANTS
+	 */
+	
+	/**
+	 * Channels for the drive's left motors.
+	 */
+	public final int[] DRIVE_LEFT_MOTORS = {0,0,0};//somebody should give this real values
+	
+	/**
+	 * Channels for the drive's right motors.
+	 */
+	public final int[] DRIVE_RIGHT_MOTORS = {0,0,0};//somebody should give this real values
+	
+	/**
+	 * INTAKE CONSTANTS
+	 */
+	
+	/**
+	 * Channel for the intake's left limit switch.
+	 */
+	public final int INTAKE_LEFT_LIMIT;
+	
+	/**
+	 * Channel for the intake's right limit switch.
+	 */
+	public final int INTAKE_RIGHT_LIMIT;
+	
+	/**
+	 * Channel for the intake's left motor.
+	 */
+	public final int INTAKE_LEFT_MOTOR;
+	
+	/**
+	 * Channel for the intake's right motor.
+	 */
+	public final int INTAKE_RIGHT_MOTOR;
+	
+	/**
+	 * CONTROLLER PORTS
+	 */
+
 	
 	
 	/**

@@ -41,14 +41,14 @@ public class Elevator extends Subsystem {
 		rightArmLimit 	= new DigitalInput(config.elevRightLmChnl);
 		
 		leftSol  = new DoubleSolenoid(config.elevLeftSolChnls[0],config.elevLeftSolChnls[1]);
-		rightSol = new DoubleSolenoid(config.elevRightSolChnls[0],config.elevRightSolChnls[1]);
+		rightSol = new DoubleSolenoid(config.ELEVATOR_RIGHT_SOLENOIDS[0],config.ELEVATOR_RIGHT_SOLENOIDS[1]);
 		
-		brakeSol = new DoubleSolenoid(config.elevBrakeSolChnls[0], config.elevBrakeSolChnls[1]);
+		brakeSol = new DoubleSolenoid(config.ELEVATOR_BRAKE_SOLENOIDS[0], config.ELEVATOR_BRAKE_SOLENOIDS[1]);
 		
 		leftMotor   = new Victor(config.elevLeftMotorChnl);
 		rightMotor  = new Victor(config.elevRightMotorChnl);
 		
-		encoder = new Encoder(config.elevEncoderAChnl, config.elevEncoderBChnl, false, EncodingType.k4X);
+		encoder = new Encoder(config.ELEVATOR_ENCODER_A, config.elevEncoderBChnl, false, EncodingType.k4X);
 		
 		//TODO find actual distancePerPulse
 		encoder.setDistancePerPulse(1);
