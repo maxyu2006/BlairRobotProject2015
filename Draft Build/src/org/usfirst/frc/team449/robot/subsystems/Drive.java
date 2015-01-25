@@ -10,36 +10,24 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Drive extends Subsystem {
     
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-	private final Victor[] motorsLeft;
-	private final Victor[] motorsRight;
+    // Drive hardware fields
+	private Victor[] motorsLeft = new Victor[3];//
+	private Victor[] motorsRight = new Victor[3];
 	
-	/**
-	 * 
-	 * @param leftMotors
-	 * @param rightMotors
-	 */
-	public Drive(Victor[] leftMotors, Victor[] rightMotors){
-		this.motorsLeft 	= leftMotors;
-		this.motorsRight 	= rightMotors;
+	public Drive(RobotMap config){
+		motorsLeft = new Victor[]{new Victor(config.leftMotorChannels[0]),
+				new Victor(config.leftMotorChannels[1]),
+				new Victor(config.leftMotorChannels[2])};
+		motorsRight = new Victor[]{new Victor(config.rightMotorChannels[0]),
+				new Victor(config.rightMotorChannels[1]),
+				new Victor(config.rightMotorChannels[2])};
 	}
-	
-	/**
-	 * 
-	 * @param leftVolts
-	 * @param rightVolts
-	 */
-	public void setThrottle(double leftVolts, double rightVolts){
+	public void  move(double leftVolts, double rightVolts){
+		for(Victor i:motorsLeft){
+			i.set(leftVolts);
+		}
 		
-		for(int i = 0; i < this.motorsLeft.length; i++)
-			this.motorsLeft[i].set(leftVolts);
-		
-		for(int i = 0; i < this.motorsRight.length; i++)
-			this.motorsRight[i].set(rightVolts);
-		
-	}//end move()
-	
+	}
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
