@@ -101,7 +101,7 @@ public final class RobotMap {
 	public final int DRIVE_LEFT_ENCODER_CHANNEL_B = 0;
 	
 	/**
-	 * Channel A for drive's left encoder.
+	 * Channel A for drive's right encoder.
 	 */
 	public final int DRIVE_RIGHT_ENCODER_CHANNEL_A = 0;
 	
