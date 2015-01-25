@@ -33,8 +33,12 @@ public class Intake extends Subsystem {
     	leftLimSwitch 	= new DigitalInput(config.INTAKE_LEFT_LIMIT);
     	rightLimSwitch 	= new DigitalInput(config.INTAKE_RIGHT_LIMIT);
     	
-    	leftArmMotor 	= new Victor(config.intakeLeft);
-    	rightArmMotor 	= new Victor(config.intakeMotorChnls[1]);
+    	leftArmMotor 	= new Victor(config.INTAKE_LEFT_MOTOR);
+    	rightArmMotor 	= new Victor(config.INTAKE_RIGHT_MOTOR);
+    	
+    	intakeLeftSol  = new Solenoid(config.ELEVATOR_LEFT_SOLENOIDS[0], config.ELEVATOR_LEFT_SOLENOIDS[1]);
+    	intakeRightSol = new Solenoid(config.ELEVATOR_RIGHT_SOLENOIDS[0], config.ELEVATOR_RIGHT_SOLENOIDS[1]);
+    	
     	armState = ARM_CLOSED;
 
 	}
