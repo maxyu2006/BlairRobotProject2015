@@ -63,12 +63,52 @@ public final class RobotMap {
 	/**
 	 * Channels for the drive's left motors.
 	 */
-	public final int[] DRIVE_LEFT_MOTORS = {0,0,0};//somebody should give this real values
+	public final int[] DRIVE_LEFT_MOTORS = {0,0};//somebody should give this real values
 	
 	/**
 	 * Channels for the drive's right motors.
 	 */
-	public final int[] DRIVE_RIGHT_MOTORS = {0,0,0};//somebody should give this real values
+	public final int[] DRIVE_RIGHT_MOTORS = {0,0};//somebody should give this real values
+	
+	/**
+	 * Channel A for right encoder
+	 */
+	public final int DRIVE_RIGHT_ENCODER_A;
+	
+	/**
+	 * channel B for right encoder
+	 */
+	public final int DRIVE_RIGHT_ENCODER_B;
+	
+	/**
+	 * channel A for left encoder
+	 */
+	public final int DRIVE_LEFT_ENCODER_A;
+	
+	/**
+	 * channel B for left encoder
+	 */
+	public final int DRIVE_LEFT_ENCODER_B;
+	
+	/**
+	 * Channel A for drive's left encoder.
+	 */
+	public final int DRIVE_LEFT_ENCODER_CHANNEL_A = 0;
+	
+	/**
+	 * Channel B for drive's left encoder.
+	 */
+	public final int DRIVE_LEFT_ENCODER_CHANNEL_B = 0;
+	
+	/**
+	 * Channel A for drive's left encoder.
+	 */
+	public final int DRIVE_RIGHT_ENCODER_CHANNEL_A = 0;
+	
+	/**
+	 * Channel B for drive's right encoder.
+	 */
+	public final int DRIVE_RIGHT_ENCODER_CHANNEL_B = 0;
 	
 	/**
 	 * INTAKE CONSTANTS
