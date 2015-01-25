@@ -22,12 +22,17 @@ public final class RobotMap {
 	// Drive Constants
 	public final int[] leftMotorChannels = {0,0,0};//somebody should give this real values
 	public final int[] rightMotorChannels = {0,0,0};//somebody should give this real values
+	public final int encoderLA;
+	public final int encoderLB;
+	public final int encoderRA;
+	public final int encoderRB;
 	
 	// Intake Constants
 	public final int intakeLeftLmChnl;
 	public final int intakeRightLmChnl;
 	public final int intakeLeftMotor;
 	public final int intakeRightMotor;
+	
 	
 	/**
 	 * Joystick port for Joystick 1
