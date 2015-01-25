@@ -31,6 +31,8 @@ public class Drive extends Subsystem {
 		
 		rightMotor1 = new Victor(config.DRIVE_R1);
 		rightMotor2 = new Victor(config.DRIVE_R2);
+		
+		leftEncoder = new Encoder
 	}
 	
 	/**

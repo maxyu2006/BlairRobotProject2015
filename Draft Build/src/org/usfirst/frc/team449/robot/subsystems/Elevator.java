@@ -45,10 +45,10 @@ public class Elevator extends Subsystem {
 		
 		brakeSol = new DoubleSolenoid(config.ELEVATOR_BRAKE_SOLENOIDS[0], config.ELEVATOR_BRAKE_SOLENOIDS[1]);
 		
-		leftMotor   = new Victor(config.elevLeftMotorChnl);
+		leftMotor   = new Victor(config.INTAKE_LEFT_MOTOR);
 		rightMotor  = new Victor(config.elevRightMotorChnl);
 		
-		encoder = new Encoder(config.ELEVATOR_ENCODER_A, config.elevEncoderBChnl, false, EncodingType.k4X);
+		encoder = new Encoder(config.ELEVATOR_ENCODER_CHANNEL_A, config.ELEVATOR_ENCODER_CHANNEL_B, false, EncodingType.k4X);
 		
 		//TODO find actual distancePerPulse
 		encoder.setDistancePerPulse(1);

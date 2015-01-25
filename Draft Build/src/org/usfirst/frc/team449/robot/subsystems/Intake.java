@@ -22,11 +22,7 @@ public class Intake extends Subsystem {
     private final Victor leftArmMotor;
     private final Victor rightArmMotor;
     
-    private int armState;
-    
-    // Intake arm states
-    public static final int ARM_OPEN = 0;
-    public static final int ARM_CLOSED = 1;
+    private boolean isArmOpen;
     
 	// Intake constructor 
 	public Intake(RobotMap config){
@@ -39,8 +35,7 @@ public class Intake extends Subsystem {
     	intakeLeftSol  = new Solenoid(config.ELEVATOR_LEFT_SOLENOIDS[0], config.ELEVATOR_LEFT_SOLENOIDS[1]);
     	intakeRightSol = new Solenoid(config.ELEVATOR_RIGHT_SOLENOIDS[0], config.ELEVATOR_RIGHT_SOLENOIDS[1]);
     	
-    	armState = ARM_CLOSED;
-
+    	isArmOpen = true;
 	}
 	
     public void initDefaultCommand() {
