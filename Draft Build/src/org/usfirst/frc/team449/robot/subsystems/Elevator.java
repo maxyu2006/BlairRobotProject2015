@@ -45,10 +45,11 @@ public class Elevator extends Subsystem {
 		leftArmLimit 	= new DigitalInput(config.ELEVATOR_LEFT_LIMIT);
 		rightArmLimit 	= new DigitalInput(config.ELEVATOR_RIGHT_LIMIT);
 		
-		leftArm  = new DoubleSolenoid(config.ELEVATOR_LEFT_ARM_SOLENOIDS[0],config.ELEVATOR_LEFT_ARM_SOLENOIDS[1]);
-		rightArm = new DoubleSolenoid(config.ELEVATOR_RIGHT_ARM_SOLENOIDS[0],config.ELEVATOR_RIGHT_ARM_SOLENOIDS[1]);
+		leftArm  = new DoubleSolenoid(config.ELEVATOR_LEFT_ARM_SOLENOID_FWD,config.ELEVATOR_LEFT_ARM_SOLENOID_REV);
+		rightArm = new DoubleSolenoid(config.ELEVATOR_RIGHT_ARM_SOLENOID_FWD,config.ELEVATOR_RIGHT_ARM_SOLENOID_REV);
 		
-		brakeLeft = new DoubleSolenoid(config.ELEVATOR_BRAKE_SOLENOIDS[0], config.ELEVATOR_BRAKE_SOLENOIDS[1]);
+		brakeLeft = new DoubleSolenoid(config.ELEVATOR_BRAKE_LEFT_SOLENOID_FWD, config.ELEVATOR_BRAKE_LEFT_SOLENOID_REV);
+		brakeRight = new DoubleSolenoid(config.ELEVATOR_BRAKE_RIGHT_SOLENOID_FWD, config.ELEVATOR_BRAKE_RIGHT_SOLENOID_REV);
 		
 		//initialize temporary variables to pass into the PID motor
 		Victor 	leftMotor   = new Victor(config.INTAKE_LEFT_MOTOR);
@@ -82,12 +83,12 @@ public class Elevator extends Subsystem {
      */
     public void toggleArms(){
     	if(isArmOpen){
-    		leftSol.set(Value.kReverse);
-    		rightSol.set(Value.kReverse);
+    		leftArm.set(Value.kReverse);
+    		rightArm.set(Value.kReverse);
     	}
     	else{
-    		leftSol.set(Value.kForward);
-    		rightSol.set(Value.kForward);
+    		leftArm.set(Value.kForward);
+    		rightArm.set(Value.kForward);
     	}
     }
     
@@ -95,14 +96,16 @@ public class Elevator extends Subsystem {
      * Releases the brake.
      */
     public void releaseBrake(){
-    	brakeSol.set(Value.kReverse);
+    	brakeLeft.set(Value.kReverse);
+    	brakeRight.set(Value.kReverse);
     }
     
     /**
      * Activates the brake.
      */
     public void activateBrake(){
-    	brakeSol.set(Value.kForward);
+    	brakeLeft.set(Value.kForward);
+    	brakeRight.set(Value.kForward);
     }
     
     /**
@@ -110,15 +113,14 @@ public class Elevator extends Subsystem {
      * @param speed - The speed the motor is being set at.
      */
     public void setMotorSpeed(double speed){
-    	leftMotor.set(speed);
-    	rightMotor.set(speed);
+    	motors.setSetpoint(speed);
     }
     
     /**
      * Resets the encoder value to 0.
      */
     public void resetEncoder(){
-    	encoder.reset();
+    	motors.getEncoder().reset();
     }
     
     /**

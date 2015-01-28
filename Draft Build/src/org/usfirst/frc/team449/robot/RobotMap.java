@@ -33,19 +33,44 @@ public final class RobotMap {
 	public final int ELEVATOR_RIGHT_LIMIT;
 	
 	/**
-	 * Channels for the elevator's left arm solenoid.
+	 * Channels for the elevator's left arm solenoid forward thing.
 	 */
-	public final int[] ELEVATOR_LEFT_ARM_SOLENOIDS;
+	public final int ELEVATOR_LEFT_ARM_SOLENOID_FWD;
 	
 	/**
-	 * Channels for the elevator's right solenoids.
+	 * Channels for the elevator's left arm solenoid reverse thing.
 	 */
-	public final int[] ELEVATOR_RIGHT_ARM_SOLENOIDS;
+	public final int ELEVATOR_LEFT_ARM_SOLENOID_REV;
 	
 	/**
-	 * Channels for the elevator's brake solenoids.
+	 * Channels for the elevator's right solenoid forward thing.
 	 */
-	public final int[] ELEVATOR_BRAKE_LEFT_SOLENOIDS;
+	public final int ELEVATOR_RIGHT_ARM_SOLENOID_FWD;
+	
+	/**
+	 * Channels for the elevator's right solenoid reverse thing.
+	 */
+	public final int ELEVATOR_RIGHT_ARM_SOLENOID_REV;
+	
+	/**
+	 * Channels for the elevator's brake solenoid forward thing.
+	 */
+	public final int ELEVATOR_BRAKE_LEFT_SOLENOID_FWD;
+	
+	/**
+	 * Channels for the elevator's brake solenoid reverse thing.
+	 */
+	public final int ELEVATOR_BRAKE_LEFT_SOLENOID_REV;
+	
+	/**
+	 * Channels for the elevator's brake solenoid forward thing.
+	 */
+	public final int ELEVATOR_BRAKE_RIGHT_SOLENOID_FWD;
+	
+	/**
+	 * Channels for the elevator's brake solenoid reverse thing.
+	 */
+	public final int ELEVATOR_BRAKE_RIGHT_SOLENOID_REV;
 
 	/**
 	 * Channel A for the elevator's encoder.
@@ -158,6 +183,8 @@ public final class RobotMap {
 	 */
 	public RobotMap(String configFile)
 	{
+		this.ENCODER_PPR = 512;
+		
 		this.JOYSTICK_1 = 1;
 		this.JOYSTICK_2 = 2;
 		this.JOYSTICK_3 = 3;
@@ -168,5 +195,43 @@ public final class RobotMap {
 		
 		this.DRIVE_R1 = 2;
 		this.DRIVE_R2 = 3;
+		
+		this.ELEVATOR_TOP_LIMIT = 0;
+		this.ELEVATOR_BOTTOM_LIMIT = 1;
+		this.ELEVATOR_LEFT_LIMIT = 2;
+		this.ELEVATOR_RIGHT_LIMIT = 3;
+		
+		this.ELEVATOR_LEFT_ARM_SOLENOID_FWD = 0;
+		this.ELEVATOR_LEFT_ARM_SOLENOID_REV = 1;
+		this.ELEVATOR_RIGHT_ARM_SOLENOID_FWD = 2;
+		this.ELEVATOR_RIGHT_ARM_SOLENOID_REV = 3;
+		this.ELEVATOR_BRAKE_LEFT_SOLENOID_FWD = 4;
+		this.ELEVATOR_BRAKE_LEFT_SOLENOID_REV = 5;
+		this.ELEVATOR_BRAKE_RIGHT_SOLENOID_FWD = 6;
+		this.ELEVATOR_BRAKE_RIGHT_SOLENOID_REV = 7;
+		
+		this.ELEVATOR_ENCODER_CHANNEL_A = 0;
+		this.ELEVATOR_ENCODER_CHANNEL_B = 1;
+		
+		this.ELEVATOR_P = 0.05;
+		this.ELEVATOR_I = 0;
+		this.ELEVATOR_D = 0;
+
+		this.ELEVATOR_LEFT_MOTOR = 0;
+		this.ELEVATOR_RIGHT_MOTOR = 1;
+		
+		this.DRIVE_ENCODER_RA = 0;
+		this.DRIVE_ENCODER_RB = 1;
+		this.DRIVE_ENCODER_LA = 2;
+		this.DRIVE_ENCODER_LB = 3;
+		
+		this.DRIVE_P = 0.05;
+		this.DRIVE_I = 0;
+		this.DRIVE_D = 0;
+		
+		this.INTAKE_LEFT_LIMIT = 0;
+		this.INTAKE_RIGHT_LIMIT = 1;
+		this.INTAKE_LEFT_MOTOR = 2;
+		this.INTAKE_RIGHT_MOTOR = 3;
 	}//end RobotMap()
 }//end class
