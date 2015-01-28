@@ -7,10 +7,11 @@ package org.usfirst.frc.team449.robot;
  */
 public final class RobotMap {
 
-	/**
-	 * ELEVATOR CONSTANTS
-	 */
+	//======================Universal constants====================
 	
+	public final int ENCODER_PPR;
+	
+	//======================Elevator Constants=====================
 	/**
 	 * Channel for the elevator's top limit switch.
 	 */
@@ -32,19 +33,19 @@ public final class RobotMap {
 	public final int ELEVATOR_RIGHT_LIMIT;
 	
 	/**
-	 * Channels for the elevator's left solenoids.
+	 * Channels for the elevator's left arm solenoid.
 	 */
-	public final int[] ELEVATOR_LEFT_SOLENOIDS;
+	public final int[] ELEVATOR_LEFT_ARM_SOLENOIDS;
 	
 	/**
 	 * Channels for the elevator's right solenoids.
 	 */
-	public final int[] ELEVATOR_RIGHT_SOLENOIDS;
+	public final int[] ELEVATOR_RIGHT_ARM_SOLENOIDS;
 	
 	/**
 	 * Channels for the elevator's brake solenoids.
 	 */
-	public final int[] ELEVATOR_BRAKE_SOLENOIDS;
+	public final int[] ELEVATOR_BRAKE_LEFT_SOLENOIDS;
 
 	/**
 	 * Channel A for the elevator's encoder.
@@ -56,64 +57,59 @@ public final class RobotMap {
 	 */
 	public final int ELEVATOR_ENCODER_CHANNEL_B;
 	
-	/**
-	 * DRIVE CONSTANTS
-	 */
+	public final double ELEVATOR_P;
+	public final double ELEVATOR_I;
+	public final double ELEVATOR_D;
 	
+	public final int ELEVATOR_LEFT_MOTOR;
+	public final int ELEVATOR_RIGHT_MOTOR;
+	//============================Drive Constants=======================
 	/**
-	 * Channels for the drive's left motors.
+	 * motor controller channel for the left 1 drive motor
 	 */
-	public final int[] DRIVE_LEFT_MOTORS = {0,0};//somebody should give this real values
-	
+	public final int DRIVE_L1;
+
 	/**
-	 * Channels for the drive's right motors.
+	 * motor controller channel for the left 1 drive motor
 	 */
-	public final int[] DRIVE_RIGHT_MOTORS = {0,0};//somebody should give this real values
+	public final int DRIVE_L2;
+
+	/**
+	 * motor controller channel for the right 1 drive motor
+	 */
+	public final int DRIVE_R1;
+
+	/**
+	 * motor controller channel for the right 1 drive motor
+	 */
+	public final int DRIVE_R2;
 	
 	/**
 	 * Channel A for right encoder
 	 */
-	public final int DRIVE_RIGHT_ENCODER_A;
+	public final int DRIVE_ENCODER_RA;
 	
 	/**
 	 * channel B for right encoder
 	 */
-	public final int DRIVE_RIGHT_ENCODER_B;
+	public final int DRIVE_ENCODER_RB;
 	
 	/**
 	 * channel A for left encoder
 	 */
-	public final int DRIVE_LEFT_ENCODER_A;
+	public final int DRIVE_ENCODER_LA;
 	
 	/**
 	 * channel B for left encoder
 	 */
-	public final int DRIVE_LEFT_ENCODER_B;
+	public final int DRIVE_ENCODER_LB;
+
+	public final double DRIVE_P;
 	
-	/**
-	 * Channel A for drive's left encoder.
-	 */
-	public final int DRIVE_LEFT_ENCODER_CHANNEL_A = 0;
+	public final double DRIVE_I;
 	
-	/**
-	 * Channel B for drive's left encoder.
-	 */
-	public final int DRIVE_LEFT_ENCODER_CHANNEL_B = 0;
-	
-	/**
-	 * Channel A for drive's right encoder.
-	 */
-	public final int DRIVE_RIGHT_ENCODER_CHANNEL_A = 0;
-	
-	/**
-	 * Channel B for drive's right encoder.
-	 */
-	public final int DRIVE_RIGHT_ENCODER_CHANNEL_B = 0;
-	
-	/**
-	 * INTAKE CONSTANTS
-	 */
-	
+	public final double DRIVE_D;
+	//===========================Intake constants========================
 	/**
 	 * Channel for the intake's left limit switch.
 	 */
@@ -134,12 +130,7 @@ public final class RobotMap {
 	 */
 	public final int INTAKE_RIGHT_MOTOR;
 	
-	/**
-	 * CONTROLLER PORTS
-	 */
-
-	
-	
+	//===========================Controller Ports======================
 	/**
 	 * Joystick port for Joystick 1
 	 */
@@ -160,36 +151,6 @@ public final class RobotMap {
 	 */
 	public final int JOYSTICK_4;
 	
-	/**
-	 * motor controller channel for the left 1 drive motor
-	 */
-	public final int DRIVE_L1;
-
-	/**
-	 * motor controller channel for the left 1 drive motor
-	 */
-	public final int DRIVE_L2;
-
-	/**
-	 * motor controller channel for the left 1 drive motor
-	 */
-	public final int DRIVE_L3;
-
-	/**
-	 * motor controller channel for the right 1 drive motor
-	 */
-	public final int DRIVE_R1;
-
-	/**
-	 * motor controller channel for the right 1 drive motor
-	 */
-	public final int DRIVE_R2;
-	
-	/**
-	 * motor controller channel for the right 1 drive motor
-	 */
-	public final int DRIVE_R3;
-	
 	
 	/**
 	 * 
@@ -204,10 +165,8 @@ public final class RobotMap {
 		
 		this.DRIVE_L1 = 0;
 		this.DRIVE_L2 = 1;
-		this.DRIVE_L3 = 2;
 		
-		this.DRIVE_R1 = 3;
-		this.DRIVE_R2 = 4;
-		this.DRIVE_R3 = 5;
-	}
-}
+		this.DRIVE_R1 = 2;
+		this.DRIVE_R2 = 3;
+	}//end RobotMap()
+}//end class

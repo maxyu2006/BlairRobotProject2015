@@ -11,30 +11,48 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Drive extends Subsystem {
     
-	//left drive motors
-	private final Victor leftMotor1;
-	private final Victor leftMotor2;
+	//drive PID motor systems
+	private final PIDMotor leftMotors;
+	private final PIDMotor rightMotors;
 	
-	//right drive motors
-	private final Victor rightMotor1;
-	private final Victor rightMotor2;
+	private boolean manual;
 	
-	private final Encoder leftEncoder;
-	private final Encoder rightEncoder;
+	/**
+	 * control mode manual - drivers in direct control
+	 */
+	public static final boolean MANUAL 	= true;
+	
+	/**
+	 * control mode PID - PID system is in control
+	 */
+	public static final boolean PID		= false;
+	
 	/**
 	 * 
 	 * @param config
 	 */
 	public Drive(RobotMap config){
-		leftMotor1 = new Victor(config.DRIVE_L1);
-		leftMotor2 = new Victor(config.DRIVE_L2);
+		//temporary intializations
+		Victor leftMotor1 = new Victor(config.DRIVE_L1);
+		Victor leftMotor2 = new Victor(config.DRIVE_L2);
 		
-		rightMotor1 = new Victor(config.DRIVE_R1);
-		rightMotor2 = new Victor(config.DRIVE_R2);
+		Victor rightMotor1 = new Victor(config.DRIVE_R1);
+		Victor rightMotor2 = new Victor(config.DRIVE_R2);
 		
-		leftEncoder = new Encoder(config.DRIVE_LEFT_ENCODER_A,config.DRIVE_LEFT_ENCODER_B);
-		rightEncoder = new Encoder(config.DRIVE_RIGHT_ENCODER_A,config.DRIVE_RIGHT_ENCODER_B);
-	}
+		Encoder leftEncoder 	= new Encoder(config.DRIVE_ENCODER_LA,config.DRIVE_ENCODER_LB);
+		Encoder rightEncoder	= new Encoder(config.DRIVE_ENCODER_RA,config.DRIVE_ENCODER_RB);
+
+		
+		leftMotors = new PIDMotor(config, config.DRIVE_P, config.DRIVE_I, config.DRIVE_D, 0, leftMotor1, leftEncoder, PIDMotor.SPEED_BASE);
+		leftMotors.addSlave(leftMotor2);
+		
+		rightMotors = new PIDMotor(config, config.DRIVE_P, config.DRIVE_I, config.DRIVE_D, 0, rightMotor1, rightEncoder, PIDMotor.SPEED_BASE);
+		rightMotors.addSlave(rightMotor2);
+		
+		leftMotors.enable();
+		rightMotors.enable();
+		this.manual = false;
+	}//end drive
 	
 	/**
 	 * Sends power to the three left and right three motors on the drive frame.
@@ -44,11 +62,9 @@ public class Drive extends Subsystem {
 	public void setThrottle(double leftVolts, double rightVolts){
 	
 		//set voltage
-		rightMotor1.set(rightVolts);
-		rightMotor2.set(rightVolts);
+		rightMotors.setMotorVoltage(rightVolts);
 		
-		leftMotor1.set(leftVolts);
-		leftMotor2.set(leftVolts);
+		leftMotors.setMotorVoltage(leftVolts);
 		
 	}//end move()
 	
@@ -56,26 +72,50 @@ public class Drive extends Subsystem {
 	 * @return the amount of volts going to the left motors
 	 */
 	public double getLeftVel(){
-		return leftEncoder.getRate();
+		return leftMotors.getRate();
 	}
 	
 	/**
 	 * @return the amount of volts going to the right motors
 	 */
 	public double getRightVel(){
-		return rightEncoder.getRate();
+		return rightMotors.getRate();
 	}
 	
-	/**
-	 * @return direction robot is going in. True for one direction, false for the other
-	 */
-	public boolean getDirection(){
-		return leftEncoder.getDirection();//i think this works.
-	}
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
-}
+    
+    /**
+     * 
+     * @return
+     */
+    public boolean getControlState()
+    {
+    	return this.manual;
+    }
+    
+    /**
+     * set the control state
+     * @param controlState
+     */
+    public void setControlState(boolean controlState)
+    {
+    	if(controlState == Drive.MANUAL)
+    	{
+    		leftMotors.disable();
+    		rightMotors.disable();
+    	}//end if
+    	
+    	if(controlState == Drive.PID)
+    	{
+    		leftMotors.enable();
+    		rightMotors.enable();
+    	}//endif
+    	
+    	this.manual = controlState;
+    }//end setState()
+}//end class
 

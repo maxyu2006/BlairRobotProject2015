@@ -17,12 +17,17 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Elevator extends Subsystem {
 
 	// Elevator hardware fields
-	private DigitalInput topLimit, bottomLimit;
-	private DigitalInput leftArmLimit, rightArmLimit;
-	private DoubleSolenoid leftSol, rightSol;
-	private DoubleSolenoid brakeSol;
-	private Victor leftMotor, rightMotor;
-	private Encoder encoder;
+	private final DigitalInput topLimit;
+	private final DigitalInput bottomLimit;
+	private final DigitalInput leftArmLimit;
+	private final DigitalInput rightArmLimit;
+	
+	private final DoubleSolenoid leftArm;
+	private final DoubleSolenoid rightArm;
+	private final DoubleSolenoid brakeLeft;
+	private final DoubleSolenoid brakeRight;
+	
+	private final PIDMotor motors;
 	
 	// Elevator conceptual fields
 	private double setPoint;
@@ -40,19 +45,20 @@ public class Elevator extends Subsystem {
 		leftArmLimit 	= new DigitalInput(config.ELEVATOR_LEFT_LIMIT);
 		rightArmLimit 	= new DigitalInput(config.ELEVATOR_RIGHT_LIMIT);
 		
-		leftSol  = new DoubleSolenoid(config.ELEVATOR_LEFT_SOLENOIDS[0],config.ELEVATOR_LEFT_SOLENOIDS[1]);
-		rightSol = new DoubleSolenoid(config.ELEVATOR_RIGHT_SOLENOIDS[0],config.ELEVATOR_RIGHT_SOLENOIDS[1]);
+		leftArm  = new DoubleSolenoid(config.ELEVATOR_LEFT_ARM_SOLENOIDS[0],config.ELEVATOR_LEFT_ARM_SOLENOIDS[1]);
+		rightArm = new DoubleSolenoid(config.ELEVATOR_RIGHT_ARM_SOLENOIDS[0],config.ELEVATOR_RIGHT_ARM_SOLENOIDS[1]);
 		
-		brakeSol = new DoubleSolenoid(config.ELEVATOR_BRAKE_SOLENOIDS[0], config.ELEVATOR_BRAKE_SOLENOIDS[1]);
+		brakeLeft = new DoubleSolenoid(config.ELEVATOR_BRAKE_SOLENOIDS[0], config.ELEVATOR_BRAKE_SOLENOIDS[1]);
 		
-		leftMotor   = new Victor(config.INTAKE_LEFT_MOTOR);
-		rightMotor  = new Victor(config.INTAKE_RIGHT_MOTOR);
+		//initialize temporary variables to pass into the PID motor
+		Victor 	leftMotor   = new Victor(config.INTAKE_LEFT_MOTOR);
+		Victor 	rightMotor  = new Victor(config.INTAKE_RIGHT_MOTOR);
+		Encoder encoder 	= new Encoder(config.ELEVATOR_ENCODER_CHANNEL_A, config.ELEVATOR_ENCODER_CHANNEL_B, false, EncodingType.k4X);
 		
-		encoder = new Encoder(config.ELEVATOR_ENCODER_CHANNEL_A, config.ELEVATOR_ENCODER_CHANNEL_B, false, EncodingType.k4X);
+		//this PIDMotor should be operating in Position based control mode for elevator position
+		motors = new PIDMotor(config, config.ELEVATOR_P, config.ELEVATOR_I, config.ELEVATOR_D, 0, leftMotor, encoder, PIDMotor.POSITION_BASE);
+		motors.addSlave(rightMotor);
 		
-		//TODO find actual distancePerPulse
-		encoder.setDistancePerPulse(1);
-		encoder.reset();
 		
 		setPoint = 0;
 		actualPosition = encoder.get();
@@ -60,8 +66,7 @@ public class Elevator extends Subsystem {
 		
 		isBrakeActivated = false;
 		isManual = false;
-
-	}
+	}//end Elevator();
 
 	/**
 	 * Elevator primary methods
