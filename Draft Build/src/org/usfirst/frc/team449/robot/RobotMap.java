@@ -76,7 +76,7 @@ public final class RobotMap {
 	 * Channel A for the elevator's encoder.
 	 */
 	public final int ELEVATOR_ENCODER_CHANNEL_A;
-	
+	   
 	/**
 	 * Channel B for the elevator's encoder.
 	 */
