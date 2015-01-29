@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename resource &apos;Wall-E&apos; to &apos;Draft Build&apos;" description="Rename resource &apos;Wall-E&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/Wall-E" name="Draft Build" stamp="1422130189580" updateReferences="true"/>
-</session>
