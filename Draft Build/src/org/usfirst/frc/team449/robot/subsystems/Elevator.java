@@ -42,6 +42,7 @@ public class Elevator extends Subsystem {
 	public Elevator(RobotMap config) {
 		topLimit 		= new DigitalInput(config.ELEVATOR_TOP_LIMIT);
 		bottomLimit 	= new DigitalInput(config.ELEVATOR_BOTTOM_LIMIT);
+		
 		leftArmLimit 	= new DigitalInput(config.ELEVATOR_LEFT_LIMIT);
 		rightArmLimit 	= new DigitalInput(config.ELEVATOR_RIGHT_LIMIT);
 		

@@ -45,7 +45,7 @@ public class PIDMotor extends PIDSubsystem {
      * @param encoder	the encoder that is providing feedback 
      * @param mode		the mode at which the encoder will operate
      */
-    public PIDMotor(RobotMap config, double p, double i, double d, double initSet, SpeedController motor, Encoder encoder, int mode) {
+    public PIDMotor(double p, double i, double d, double initSet, SpeedController motor, Encoder encoder, int mode) {
         super(p, i, d);
         
         //initialize the variables
@@ -58,11 +58,11 @@ public class PIDMotor extends PIDSubsystem {
         this.mode		= mode;
         
         //set the encoder DPP and reset the encoder
-        encoder.setDistancePerPulse(1.0/config.ENCODER_PPR);
+        encoder.setDistancePerPulse(1.0/RobotMap.encoderPPR);
         encoder.reset();
         
         //set PIDController constraints
-        super.getPIDController().setOutputRange(-1, 1); //min max set to that for Jaguar.set
+        super.getPIDController().setOutputRange(-0.1, 0.1); //min max set to that for Jaguar.set
         
         this.setSetpoint(initSet);
         

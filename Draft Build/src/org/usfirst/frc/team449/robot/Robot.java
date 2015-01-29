@@ -29,8 +29,6 @@ public class Robot extends IterativeRobot {
 	public static final Elevator	elevator	= new Elevator(Robot.robotMap);
 	
 	
-	public static final Drive drive = new Drive(new Victor[]{new Victor(0), new Victor(1), new Victor(2)}, new Victor[]{new Victor(3), new Victor(4), new Victor(5)});
-	
 	Command autonomousCommand;
 	private DriveRobot driver;
 

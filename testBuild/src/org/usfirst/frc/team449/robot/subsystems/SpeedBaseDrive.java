@@ -1,5 +1,7 @@
 package org.usfirst.frc.team449.robot.subsystems;
 
+import org.usfirst.frc.team449.robot.commands.DriveRobot;
+
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Victor;
@@ -18,9 +20,8 @@ public class SpeedBaseDrive extends Subsystem {
 	
 	public SpeedBaseDrive()
 	{
-		leftMain = new PIDMotor(0.05, 0, 0, 0, new Talon(2), new Encoder(0, 1), PIDMotor.SPEED_BASE);
-		leftMain.addSlave(new Victor(0));
-		leftMain.addSlave(new Victor(3));
+		leftMain = new PIDMotor(0.05, 0, 0, 0, new Victor(4), new Encoder(0, 1), PIDMotor.SPEED_BASE);
+		leftMain.addSlave(new Victor(5));
 		
 		leftMain.enable();
 	}
@@ -57,6 +58,7 @@ public class SpeedBaseDrive extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    	setDefaultCommand(new DriveRobot());
     }
 
 	public PIDMotor getPIDMotor() {

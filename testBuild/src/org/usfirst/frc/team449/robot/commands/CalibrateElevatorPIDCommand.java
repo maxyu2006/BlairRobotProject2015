@@ -39,7 +39,7 @@ public class CalibrateElevatorPIDCommand extends Command {
     			Robot.elevator.getPIDMotor().getEncoder().reset();
     			return;
     		}
-    		else Robot.elevator.getPIDMotor().setMotor(throttle);
+    		else Robot.elevator.getPIDMotor().setMotorVoltage(throttle);
     	}
     	if (state == GOING_TO_TOP) {
     		if (Robot.elevator.isTouchingTop()) {
@@ -47,18 +47,18 @@ public class CalibrateElevatorPIDCommand extends Command {
     			maxPosition = Robot.elevator.getPIDMotor().getEncoder().getDistance();
     			return;
     		}
-    		Robot.elevator.getPIDMotor().setMotor(-throttle);
+    		Robot.elevator.getPIDMotor().setMotorVoltage(-throttle);
     	}
     	if (state == GOING_TO_HALF) {
     		if (Robot.elevator.getPIDMotor().getEncoder().getDistance() <= maxPosition/2) {
     			state = FINISHED;
-    			Robot.elevator.getPIDMotor().setMotor(0);
+    			Robot.elevator.getPIDMotor().setMotorVoltage(0);
     			System.out.println("finished");
     			//Robot.elevator.getPIDMotor().setMotor(0);
     			return;
     		}
     		SmartDashboard.putNumber("maxVal", maxPosition);
-        	Robot.elevator.getPIDMotor().setMotor(throttle);
+        	Robot.elevator.getPIDMotor().setMotorVoltage(throttle);
     	}
     	System.out.println("in execute, state: "+state+", motor: "+Robot.elevator.getPIDMotor().getMotorVal());
     }

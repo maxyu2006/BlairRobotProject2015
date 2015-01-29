@@ -18,7 +18,6 @@ public class OI {
 	private Button elevJoyTrigger = new JoystickButton(elevJoy, 1);
 	
 	public OI() {
-		elevJoyTrigger.whenPressed(new DriveRobot());
 	}
 	
 	public double getElevJoyY() {
