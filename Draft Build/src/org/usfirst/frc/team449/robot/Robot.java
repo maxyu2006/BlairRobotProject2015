@@ -27,7 +27,7 @@ public class Robot extends IterativeRobot {
 	public static final OI 			OI 			= new OI(Robot.robotMap);
 	public static final Intake		intake		= new Intake(Robot.robotMap);
 	public static final Elevator	elevator	= new Elevator(Robot.robotMap);
-	
+	public static final Drive		drive		= new Drive(Robot.robotMap);
 	
 	Command autonomousCommand;
 	private DriveRobot driver;
@@ -37,7 +37,6 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-		oi = new OI();
 		// instantiate the command used for the autonomous period
         autonomousCommand = null;
     }

@@ -29,7 +29,10 @@ public class Intake extends Subsystem {
     
     private double motorSpeed;
     
-	// Intake constructor 
+    /**
+     * 
+     * @param config
+     */
 	public Intake(RobotMap config) {
     	leftLimSwitch 	= new DigitalInput(config.INTAKE_LEFT_LIMIT);
     	rightLimSwitch 	= new DigitalInput(config.INTAKE_RIGHT_LIMIT);
@@ -37,14 +40,14 @@ public class Intake extends Subsystem {
     	leftArmMotor 	= new Victor(config.INTAKE_LEFT_MOTOR);
     	rightArmMotor 	= new Victor(config.INTAKE_RIGHT_MOTOR);
     	
-    	intakeLeftSol  = new DoubleSolenoid(config.ELEVATOR_LEFT_SOLENOIDS[0], config.ELEVATOR_LEFT_SOLENOIDS[1]);
-    	intakeRightSol = new DoubleSolenoid(config.ELEVATOR_RIGHT_SOLENOIDS[0], config.ELEVATOR_RIGHT_SOLENOIDS[1]);
+    	intakeLeftSol  = new DoubleSolenoid(config.INTAKE_LSOLENOID_FORWARD, config.INTAKE_LSOLENOID_REVERSE);
+    	intakeRightSol = new DoubleSolenoid(config.INTAKE_RSOLENOID_FORWARD, config.INTAKE_RSOLENOID_REVERSE);
     	
     	isArmOpen = true;
     	isMotorOn = false;
     	isMotorForward = true;
     	
-    	motorSpeed = config.INTAKE_MOTOR_SPEED;
+    	//motorSpeed = config.INTAKE_MOTOR_SPEED;
 	}
 	
 	/**

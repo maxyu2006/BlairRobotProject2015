@@ -1,6 +1,7 @@
 package org.usfirst.frc.team449.robot.subsystems;
 
 import org.usfirst.frc.team449.robot.RobotMap;
+import org.usfirst.frc.team449.robot.commands.DriveRobot;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Victor;
@@ -14,6 +15,8 @@ public class Drive extends Subsystem {
 	//drive PID motor systems
 	private final PIDMotor leftMotors;
 	private final PIDMotor rightMotors;
+	
+	private final int maxRate;
 	
 	private boolean manual;
 	
@@ -42,6 +45,7 @@ public class Drive extends Subsystem {
 		Encoder leftEncoder 	= new Encoder(config.DRIVE_ENCODER_LA,config.DRIVE_ENCODER_LB);
 		Encoder rightEncoder	= new Encoder(config.DRIVE_ENCODER_RA,config.DRIVE_ENCODER_RB);
 
+		this.maxRate = config.DRIVE_MAX_RATE;
 		
 		leftMotors = new PIDMotor(config, config.DRIVE_P, config.DRIVE_I, config.DRIVE_D, 0, leftMotor1, leftEncoder, PIDMotor.SPEED_BASE);
 		leftMotors.addSlave(leftMotor2);
@@ -60,11 +64,18 @@ public class Drive extends Subsystem {
 	 * @param rightVolts - The amount of volts to supply to the three right motors, from -1 to 1
 	 */
 	public void setThrottle(double leftVolts, double rightVolts){
-	
-		//set voltage
-		rightMotors.setMotorVoltage(rightVolts);
+
+		if(getControlState() == MANUAL)
+		{
+			rightMotors.setMotorVoltage(rightVolts);
+			leftMotors.setMotorVoltage(leftVolts);
+		}
 		
-		leftMotors.setMotorVoltage(leftVolts);
+		if(getControlState() == PID)
+		{
+			rightMotors.setSetpoint(rightVolts * this.maxRate);
+			leftMotors.setSetpoint(leftVolts * this.maxRate);
+		}
 		
 	}//end move()
 	
@@ -86,6 +97,7 @@ public class Drive extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    	setDefaultCommand(new DriveRobot());
     }
     
     /**

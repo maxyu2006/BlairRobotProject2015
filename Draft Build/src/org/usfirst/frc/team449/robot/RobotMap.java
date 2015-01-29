@@ -88,6 +88,7 @@ public final class RobotMap {
 	
 	public final int ELEVATOR_LEFT_MOTOR;
 	public final int ELEVATOR_RIGHT_MOTOR;
+	
 	//============================Drive Constants=======================
 	/**
 	 * motor controller channel for the left 1 drive motor
@@ -134,6 +135,8 @@ public final class RobotMap {
 	public final double DRIVE_I;
 	
 	public final double DRIVE_D;
+	
+	public final int DRIVE_MAX_RATE;
 	//===========================Intake constants========================
 	/**
 	 * Channel for the intake's left limit switch.
@@ -154,6 +157,14 @@ public final class RobotMap {
 	 * Channel for the intake's right motor.
 	 */
 	public final int INTAKE_RIGHT_MOTOR;
+	
+	public final int INTAKE_LSOLENOID_FORWARD;
+	
+	public final int INTAKE_LSOLENOID_REVERSE;
+	
+	public final int INTAKE_RSOLENOID_FORWARD;
+	
+	public final int INTAKE_RSOLENOID_REVERSE;
 	
 	//===========================Controller Ports======================
 	/**
@@ -224,6 +235,8 @@ public final class RobotMap {
 		this.DRIVE_ENCODER_RB = 1;
 		this.DRIVE_ENCODER_LA = 2;
 		this.DRIVE_ENCODER_LB = 3;
+		
+		this.DRIVE_MAX_RATE = 512;
 		
 		this.DRIVE_P = 0.05;
 		this.DRIVE_I = 0;

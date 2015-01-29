@@ -48,5 +48,26 @@ public class OI {
 		joystick4 = new Joystick(config.JOYSTICK_4);
 	}
 	
-}
+	/**
+	 * 
+	 * @param joystick
+	 * @return
+	 */
+	public double getJoystickAxisX(Joystick joystick)
+	{
+		return joystick.getAxis(Joystick.AxisType.kX);
+	}
+	
+	public double getJoystickAxisY(Joystick joystick)
+	{
+		return joystick.getAxis(Joystick.AxisType.kY);
+	}
+	
+	public double getJoystickAxisThrottle(Joystick joystick)
+	{
+		return joystick.getAxis(Joystick.AxisType.kThrottle);
+	}
+	
+	
+}//end class
 
