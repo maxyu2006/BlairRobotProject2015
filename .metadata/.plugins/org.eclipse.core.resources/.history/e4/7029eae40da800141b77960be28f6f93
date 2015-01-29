@@ -246,13 +246,5 @@ public final class RobotMap {
 		this.INTAKE_RIGHT_LIMIT = 1;
 		this.INTAKE_LEFT_MOTOR = 2;
 		this.INTAKE_RIGHT_MOTOR = 3;
-		
-		this.INTAKE_LSOLENOID_FORWARD=0;
-		
-		this.INTAKE_LSOLENOID_REVERSE=1;
-		
-		this.INTAKE_RSOLENOID_FORWARD=2;
-		
-		this.INTAKE_RSOLENOID_REVERSE=3;
 	}//end RobotMap()
 }//end class
