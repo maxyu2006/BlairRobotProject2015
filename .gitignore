@@ -4,3 +4,7 @@
 *.class
 *.jar
 testBuild/dist/FRCUserProgram.jar
+.metadata
+*~
+RemoteSystemsTempFiles
+Mockup
