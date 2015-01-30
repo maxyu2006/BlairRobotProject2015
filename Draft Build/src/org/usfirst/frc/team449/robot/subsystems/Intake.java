@@ -100,7 +100,7 @@ public class Intake extends Subsystem {
 	 * set the open/closed state of the arms
 	 */
 	public void setArms(boolean in){
-		isArmOpen = in;
+		if(in != isArmOpen) toggleArms();
 	}
 	
 	/**
@@ -127,7 +127,7 @@ public class Intake extends Subsystem {
 	}
 	
 	/**
-	 * @return whether wheels are going in or out; true for out (i think loolololol idk idc yolo)
+	 * @return direction of wheels, true for forwards
 	 */
 	public boolean getDirection(){
 		return (leftArmMotor.get()>0);
