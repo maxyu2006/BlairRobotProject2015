@@ -20,8 +20,8 @@ public class SpeedBaseDrive extends Subsystem {
 	
 	public SpeedBaseDrive()
 	{
-		leftMain = new PIDMotor(0.05, 0, 0, 0, new Victor(4), new Encoder(0, 1), PIDMotor.SPEED_BASE);
-		leftMain.addSlave(new Victor(5));
+		leftMain = new PIDMotor(0.05, 0, 0, 0, new Victor(6), new Encoder(0, 1), PIDMotor.SPEED_BASE);
+		leftMain.addSlave(new Victor(7));
 		
 		leftMain.enable();
 	}
@@ -35,6 +35,11 @@ public class SpeedBaseDrive extends Subsystem {
 		System.out.println("Setting setpoint " + rpm);
 		leftMain.setSetpoint(rpm);
 		
+	}
+	
+	public boolean isEnabled()
+	{
+		return leftMain.isEnabled();
 	}
 	
 	/**

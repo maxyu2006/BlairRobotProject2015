@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveRobot extends Command {
 	
-	private double maxRPM = 1;
+	private double maxRPM = 7;
 
     public DriveRobot() {
         // Use requires() here to declare subsystem dependencies
@@ -26,8 +26,12 @@ public class DriveRobot extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	double rpm = Robot.oi.getElevJoyY()* maxRPM * RobotMap.encoderPPR;
-    	Robot.drive.setSpeed(rpm);
+    	double rpm = Robot.oi.getElevJoyY()* maxRPM;
+    	if(Robot.drive.isEnabled())
+    		Robot.drive.setSpeed(rpm);
+    	else
+    		Robot.drive.setThrottle(rpm);
+    	
     	System.out.println("I set the fucking setpoint" + rpm);
     }
 

@@ -19,12 +19,12 @@ public class MoveElevatorCommand extends Command {
 	private double setpoint;
 
     public MoveElevatorCommand() {
-        requires(Robot.elevator);
+        //requires(Robot.elevator);
     }
 
     protected void initialize() {
     	setpoint = .5;
-    	Robot.elevator.enable();
+    	//Robot.elevator.enable();
     }
 
     protected void execute() {
@@ -32,6 +32,7 @@ public class MoveElevatorCommand extends Command {
     	// ideal setpoint, ignoring elevator limits
     	setpoint = (Robot.oi.getElevJoyY() + 1)/2 * RobotMap.maxInput;
     	
+    	/*
     	// if touching top and still wanting to go up
     	if (Robot.elevator.isTouchingTop() && Robot.elevator.getPosition() <= setpoint) {
     		setpoint = Robot.elevator.getPosition();
@@ -53,6 +54,7 @@ public class MoveElevatorCommand extends Command {
     	SmartDashboard.putString("debugging data ", debug);
     	SmartDashboard.putNumber("setpoint ", setpoint);
     	SmartDashboard.putNumber("motor output", Robot.elevator.getPIDMotor().getMotorVal());
+    	*/
     }
 
     // Make this return true when this Command no longer needs to run execute()

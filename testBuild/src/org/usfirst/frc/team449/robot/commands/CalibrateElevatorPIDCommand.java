@@ -23,7 +23,7 @@ public class CalibrateElevatorPIDCommand extends Command {
 	public static final double throttle = 0.2;
 	
     public CalibrateElevatorPIDCommand() {
-        requires(Robot.elevator);
+        //requires(Robot.elevator);
     }
 
     // Called just before this Command runs the first time
@@ -33,6 +33,7 @@ public class CalibrateElevatorPIDCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	/*
     	if (state == GOING_TO_BOTTOM) {
     		if (Robot.elevator.isTouchingBottom()) {
     			state = GOING_TO_TOP;
@@ -61,6 +62,7 @@ public class CalibrateElevatorPIDCommand extends Command {
         	Robot.elevator.getPIDMotor().setMotorVoltage(throttle);
     	}
     	System.out.println("in execute, state: "+state+", motor: "+Robot.elevator.getPIDMotor().getMotorVal());
+    	*/
     }
 
     // Make this return true when this Command no longer needs to run execute()

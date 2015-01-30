@@ -12,6 +12,7 @@ import org.usfirst.frc.team449.robot.RobotMap;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * motor subsystem with an embedded pid controller based on an encoder
@@ -62,7 +63,7 @@ public class PIDMotor extends PIDSubsystem {
         encoder.reset();
         
         //set PIDController constraints
-        super.getPIDController().setOutputRange(-0.1, 0.1); //min max set to that for Jaguar.set
+        super.getPIDController().setOutputRange(-1, 1); //min max set to that for Jaguar.set
         
         this.setSetpoint(initSet);
         
@@ -108,11 +109,7 @@ public class PIDMotor extends PIDSubsystem {
         // e.g. yourMotor.set(output);
         motor.set(output);
         
-        for(int i=0; i < slaves.size(); i++)
-        {
-        	slaves.get(i).set(output);
-        	System.out.println("setting throttle " + output);
-        }
+        SmartDashboard.putDouble("MotorOutput", output);
     }
     
     /**

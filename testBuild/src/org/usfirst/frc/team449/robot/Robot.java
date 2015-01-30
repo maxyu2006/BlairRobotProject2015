@@ -28,7 +28,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static Timer t;
 	private AnalogUltrasonic ultrasonicSensor;
-	public static Elevator elevator;
+	//public static Elevator elevator;
 	public static SpeedBaseDrive drive;
 
     Command autonomousCommand;
@@ -38,7 +38,7 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-    	elevator = new Elevator();
+    	//elevator = new Elevator();
 		drive = new SpeedBaseDrive();
 
     	
@@ -51,7 +51,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("kp", drive.getPIDMotor().getPIDController().getP());
 		SmartDashboard.putNumber("ki", drive.getPIDMotor().getPIDController().getI());
 		SmartDashboard.putNumber("kd", drive.getPIDMotor().getPIDController().getD());
-		
+		SmartDashboard.putNumber("DeadBand", 0.0);
     }
 	
 	public void disabledPeriodic() {
@@ -106,6 +106,7 @@ public class Robot extends IterativeRobot {
         drive.getPIDMotor().setKp(SmartDashboard.getNumber("kp"));
         drive.getPIDMotor().setKi(SmartDashboard.getNumber("ki"));
         drive.getPIDMotor().setKd(SmartDashboard.getNumber("kd"));
+        drive.getPIDMotor().setAbsoluteTolerance(SmartDashboard.getNumber("DeadBand"));
         
     	//SmartDashboard.putNumber("en \"position\" ", Robot.elevator.getPosition());
         
