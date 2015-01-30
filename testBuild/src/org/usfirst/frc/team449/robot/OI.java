@@ -15,6 +15,11 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 	
 	private int Annaspowerlevel = Integer.MAX_VALUE;
+	
+	public int coolio(){
+		return 2;
+	}
+	
 	private Joystick elevJoy = new Joystick(RobotMap.joyPort);
 	private Button elevJoyTrigger = new JoystickButton(elevJoy, 1);
 	
