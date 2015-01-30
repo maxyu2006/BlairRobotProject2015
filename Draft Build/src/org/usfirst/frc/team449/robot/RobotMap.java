@@ -47,22 +47,14 @@ public final class RobotMap {
 	/**
 	 * Channels for the elevator's brake solenoid forward thing.
 	 */
-	public final int ELEVATOR_BRAKE_LEFT_SOLENOID_FWD;
+	public final int ELEVATOR_BRAKE_SOLENOID_FWD;
 	
 	/**
 	 * Channels for the elevator's brake solenoid reverse thing.
 	 */
-	public final int ELEVATOR_BRAKE_LEFT_SOLENOID_REV;
+	public final int ELEVATOR_BRAKE_SOLENOID_REV;
 	
-	/**
-	 * Channels for the elevator's brake solenoid forward thing.
-	 */
-	public final int ELEVATOR_BRAKE_RIGHT_SOLENOID_FWD;
 	
-	/**
-	 * Channels for the elevator's brake solenoid reverse thing.
-	 */
-	public final int ELEVATOR_BRAKE_RIGHT_SOLENOID_REV;
 
 	/**
 	 * Channel A for the elevator's encoder.
@@ -218,10 +210,8 @@ public final class RobotMap {
 		
 		this.ELEVATOR_ARM_SOLENOID_FWD = 0;
 		this.ELEVATOR_ARM_SOLENOID_REV = 1;
-		this.ELEVATOR_BRAKE_LEFT_SOLENOID_FWD = 2;
-		this.ELEVATOR_BRAKE_LEFT_SOLENOID_REV = 3;
-		this.ELEVATOR_BRAKE_RIGHT_SOLENOID_FWD = 4;
-		this.ELEVATOR_BRAKE_RIGHT_SOLENOID_REV = 5;
+		this.ELEVATOR_BRAKE_SOLENOID_FWD = 2;
+		this.ELEVATOR_BRAKE_SOLENOID_REV = 3;
 		
 		this.ELEVATOR_ENCODER_CHANNEL_A = 0;
 		this.ELEVATOR_ENCODER_CHANNEL_B = 1;
