@@ -187,6 +187,12 @@ public final class RobotMap {
 	public final int ELEVATOR_UP_BUTTON;
 	
 	/**
+	 * Button for moving elevator down.
+	 */
+	public final int ELEVATOR_DOWN_BUTTON;
+	
+	
+	/**
 	 * 
 	 * @param configFile
 	 */
@@ -226,6 +232,9 @@ public final class RobotMap {
 
 		this.ELEVATOR_LEFT_MOTOR = 0;
 		this.ELEVATOR_RIGHT_MOTOR = 1;
+		
+		this.ELEVATOR_UP_BUTTON = 3;
+		this.ELEVATOR_DOWN_BUTTON = 2;
 		
 		this.DRIVE_ENCODER_RA = 0;
 		this.DRIVE_ENCODER_RB = 1;

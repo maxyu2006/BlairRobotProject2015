@@ -30,10 +30,17 @@ public class Elevator extends Subsystem {
 	
 	// Elevator conceptual fields
 	private double setPoint;
+	private int position;
 	private double actualPosition;
 	private boolean isArmOpen;
 	private boolean isBrakeActivated;
 	private boolean isManual;
+	
+	public static final boolean UP = true;
+	public static final boolean DOWN = false;
+	public static final int ELEVATOR_FIRST_POSITION = 0;
+	public static final int ELEVATOR_SECOND_POSITION = 1;
+	public static final int ELEVATOR_THIRD_POSITION = 2;
 	
 	/**
 	 * Elevator constructor
@@ -61,6 +68,7 @@ public class Elevator extends Subsystem {
 		
 		
 		setPoint = 0;
+		position = 0;
 		actualPosition = encoder.get();
 		isArmOpen = true; 
 		
@@ -68,9 +76,7 @@ public class Elevator extends Subsystem {
 		isManual = false;
 	}//end Elevator();
 
-	/**
-	 * Elevator primary methods
-	 */
+	//============================Elevator Primary Methods=======================
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -120,9 +126,7 @@ public class Elevator extends Subsystem {
     	motors.getEncoder().reset();
     }
     
-    /**
-     * Elevator field getters and setters
-     */
+    //============================Elevator Field Getters and Setters=======================
     
     /**
      * Returns the setPoint.
@@ -146,6 +150,30 @@ public class Elevator extends Subsystem {
      */
     public double getActualPosition(){
     	return actualPosition;
+    }
+    
+    /**
+     * Sets the conceptual position to be the position directly above where it is currently
+     */
+    public void RaisePosition() {
+    	if (position < ELEVATOR_THIRD_POSITION)
+    		position++;
+    }
+    
+    /**
+     * Sets the conceptual position to be the position directly below where it is currently
+     */
+    public void LowerPosition() {
+    	if (position > ELEVATOR_FIRST_POSITION)
+    		position--;
+    }
+    
+    /**
+     * Get the conceptual position of the elevator
+     * @return position - ints from 0-2, where two is the highest position on the elevator
+     */
+    public int getPosition(){
+		return position;
     }
     
     /**
@@ -186,6 +214,14 @@ public class Elevator extends Subsystem {
      */
     public boolean isTouchingRightArm() {
     	return rightArmLimit.get();
+    }
+    
+    public void enablePID() {
+    	motors.enable();
+    }
+    
+    public void disablePID() {
+    	motors.disable();
     }
 }
     

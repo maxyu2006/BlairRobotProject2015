@@ -1,5 +1,8 @@
 package org.usfirst.frc.team449.robot;
 
+import org.usfirst.frc.team449.robot.commands.MoveElevator;
+import org.usfirst.frc.team449.robot.subsystems.Elevator;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -42,6 +45,7 @@ public class OI {
 	public final Joystick joystick3;
 	public final Joystick joystick4;
 	public final Button elevatorUp;
+	public final Button elevatorDown;
 	
 	
 	public OI(RobotMap config)
@@ -50,7 +54,11 @@ public class OI {
 		joystick2 = new Joystick(config.JOYSTICK_2);
 		joystick3 = new Joystick(config.JOYSTICK_3);
 		joystick4 = new Joystick(config.JOYSTICK_4);
-		elevatorUp = new JoystickButton(joystick1, config.ELEVATOR_UP_BUTTON);
+		elevatorUp = new JoystickButton(joystick3, config.ELEVATOR_UP_BUTTON);
+		elevatorDown = new JoystickButton(joystick3, config.ELEVATOR_DOWN_BUTTON);
+		
+		elevatorUp.whenPressed(new MoveElevator(Elevator.UP));
+		elevatorDown.whenPressed(new MoveElevator(Elevator.DOWN));
 	}
 	
 	/**
