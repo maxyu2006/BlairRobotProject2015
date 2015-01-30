@@ -1,6 +1,8 @@
 package org.usfirst.frc.team449.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 
 /**
@@ -39,6 +41,8 @@ public class OI {
 	public final Joystick joystick2;
 	public final Joystick joystick3;
 	public final Joystick joystick4;
+	public final Button elevatorUp;
+	
 	
 	public OI(RobotMap config)
 	{
@@ -46,6 +50,7 @@ public class OI {
 		joystick2 = new Joystick(config.JOYSTICK_2);
 		joystick3 = new Joystick(config.JOYSTICK_3);
 		joystick4 = new Joystick(config.JOYSTICK_4);
+		elevatorUp = new JoystickButton(joystick1, config.ELEVATOR_UP_BUTTON);
 	}
 	
 	/**

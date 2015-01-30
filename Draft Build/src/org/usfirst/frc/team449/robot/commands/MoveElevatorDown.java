@@ -1,23 +1,19 @@
 package org.usfirst.frc.team449.robot.commands;
 
-
-import org.usfirst.frc.team449.robot.Robot;
-import org.usfirst.frc.team449.robot.subsystems.Elevator;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class MoveElevatorUp extends Command {
+public class MoveElevatorDown extends Command {
 
-    public MoveElevatorUp() {
-        requires(Robot.elevator);
+    public MoveElevatorDown() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.elevator.releaseBrake();
     }
 
     // Called repeatedly when this Command is scheduled to run

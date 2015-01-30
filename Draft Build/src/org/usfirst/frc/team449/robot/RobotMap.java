@@ -129,6 +129,8 @@ public final class RobotMap {
 	public final double DRIVE_D;
 	
 	public final int DRIVE_MAX_RATE;
+	
+	
 	//===========================Intake constants========================
 	/**
 	 * Channel for the intake's left limit switch.
@@ -179,6 +181,10 @@ public final class RobotMap {
 	 */
 	public final int JOYSTICK_4;
 	
+	/**
+	 * Button for moving elevator up.
+	 */
+	public final int ELEVATOR_UP_BUTTON;
 	
 	/**
 	 * 
