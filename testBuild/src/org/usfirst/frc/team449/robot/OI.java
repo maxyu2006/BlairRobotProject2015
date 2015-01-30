@@ -23,9 +23,6 @@ public class OI {
 	private Joystick elevJoy = new Joystick(RobotMap.joyPort);
 	private Button elevJoyTrigger = new JoystickButton(elevJoy, 1);
 	
-	public int coolio(){
-		return 5;
-	}
 	
 	public OI() {
 	}

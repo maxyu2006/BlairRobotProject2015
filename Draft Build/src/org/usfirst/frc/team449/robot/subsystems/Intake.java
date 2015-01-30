@@ -96,6 +96,12 @@ public class Intake extends Subsystem {
     	}
 		isArmOpen = !isArmOpen;
 	}
+	/**
+	 * set the open/closed state of the arms
+	 */
+	public void setArms(boolean in){
+		isArmOpen = in;
+	}
 	
 	/**
 	 * Returns true if the arms are open, false otherwise.
@@ -119,7 +125,13 @@ public class Intake extends Subsystem {
 	public boolean getRightSwitchState() {
 		return rightLimSwitch.get();
 	}
-
+	
+	/**
+	 * @return whether wheels are going in or out; true for out (i think loolololol idk idc yolo)
+	 */
+	public boolean getDirection(){
+		return (leftArmMotor.get()>0);
+	}
     public void initDefaultCommand() {	
     }
 }
