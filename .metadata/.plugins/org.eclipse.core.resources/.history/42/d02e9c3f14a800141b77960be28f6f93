@@ -22,7 +22,8 @@ public class Elevator extends Subsystem {
 	private final DigitalInput leftArmLimit;
 	private final DigitalInput rightArmLimit;
 	
-	private final DoubleSolenoid armController;//one solenoidconnected toboth arms
+	private final DoubleSolenoid armController;
+	private final DoubleSolenoid rightArm;
 	private final DoubleSolenoid brakeLeft;
 	private final DoubleSolenoid brakeRight;
 	
@@ -45,7 +46,8 @@ public class Elevator extends Subsystem {
 		leftArmLimit 	= new DigitalInput(config.ELEVATOR_LEFT_LIMIT);
 		rightArmLimit 	= new DigitalInput(config.ELEVATOR_RIGHT_LIMIT);
 		
-		armController  = new DoubleSolenoid(config.ELEVATOR_ARM_SOLENOID_FWD,config.ELEVATOR_ARM_SOLENOID_REV);
+		armController  = new DoubleSolenoid(config.ELEVATOR_LEFT_ARM_SOLENOID_FWD,config.ELEVATOR_LEFT_ARM_SOLENOID_REV);
+		rightArm = new DoubleSolenoid(config.ELEVATOR_RIGHT_ARM_SOLENOID_FWD,config.ELEVATOR_RIGHT_ARM_SOLENOID_REV);
 		
 		brakeLeft = new DoubleSolenoid(config.ELEVATOR_BRAKE_LEFT_SOLENOID_FWD, config.ELEVATOR_BRAKE_LEFT_SOLENOID_REV);
 		brakeRight = new DoubleSolenoid(config.ELEVATOR_BRAKE_RIGHT_SOLENOID_FWD, config.ELEVATOR_BRAKE_RIGHT_SOLENOID_REV);
@@ -83,9 +85,11 @@ public class Elevator extends Subsystem {
     public void toggleArms(){
     	if(isArmOpen){
     		armController.set(Value.kReverse);
+    		rightArm.set(Value.kReverse);
     	}
     	else{
     		armController.set(Value.kForward);
+    		rightArm.set(Value.kForward);
     	}
     }
     

@@ -23,6 +23,7 @@ public class Elevator extends Subsystem {
 	private final DigitalInput rightArmLimit;
 	
 	private final DoubleSolenoid armController;//one solenoidconnected toboth arms
+	private final DoubleSolenoid rightArm;
 	private final DoubleSolenoid brakeLeft;
 	private final DoubleSolenoid brakeRight;
 	
@@ -83,9 +84,11 @@ public class Elevator extends Subsystem {
     public void toggleArms(){
     	if(isArmOpen){
     		armController.set(Value.kReverse);
+    		rightArm.set(Value.kReverse);
     	}
     	else{
     		armController.set(Value.kForward);
+    		rightArm.set(Value.kForward);
     	}
     }
     
