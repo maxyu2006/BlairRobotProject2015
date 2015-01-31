@@ -1,19 +1,22 @@
 package org.usfirst.frc.team449.robot.commands;
+import org.usfirst.frc.team449.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Toggle the elavator arms 
  */
 public class ToggleArms extends Command {
 
     public ToggleArms() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires(Robot.elevator);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.elevator.toggleArms();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -22,7 +25,7 @@ public class ToggleArms extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

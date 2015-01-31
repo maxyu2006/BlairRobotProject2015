@@ -86,8 +86,22 @@ public class Elevator extends Subsystem {
     	else{
     		armController.set(Value.kForward);
     	}
+    	isArmOpen=!isArmOpen;
     }
-    
+    /**
+     * Open the arms
+     */
+    public void openArms(){
+    	armController.set(Value.kForward);
+    	isArmOpen = true;
+    }
+    /**
+     * Close the arms
+     */
+    public void closeArms(){
+		armController.set(Value.kReverse);
+		isArmOpen = false;
+    }
     /**
      * Releases the brake.
      */
