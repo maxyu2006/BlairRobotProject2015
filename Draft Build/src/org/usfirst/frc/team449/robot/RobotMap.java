@@ -183,7 +183,10 @@ public final class RobotMap {
 	 */
 	public final int ELEVATOR_DOWN_BUTTON;
 	
-	
+	/**
+	 * Button to toggle the elevator arms
+	 */
+	public final int ELEVATOR_ARMS_TOGGLE_BUTTON;
 	/**
 	 * 
 	 * @param configFile
@@ -225,6 +228,8 @@ public final class RobotMap {
 		
 		this.ELEVATOR_UP_BUTTON = 3;
 		this.ELEVATOR_DOWN_BUTTON = 2;
+		
+		this.ELEVATOR_ARMS_TOGGLE_BUTTON = 1;
 		
 		this.DRIVE_ENCODER_RA = 0;
 		this.DRIVE_ENCODER_RB = 1;

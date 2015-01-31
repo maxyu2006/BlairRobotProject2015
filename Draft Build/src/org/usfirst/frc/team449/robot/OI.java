@@ -46,7 +46,7 @@ public class OI {
 	public final Joystick joystick4;
 	public final Button elevatorUp;
 	public final Button elevatorDown;
-	
+	public final Button elavatorArmToggle;
 	
 	public OI(RobotMap config)
 	{
@@ -56,6 +56,8 @@ public class OI {
 		joystick4 = new Joystick(config.JOYSTICK_4);
 		elevatorUp = new JoystickButton(joystick3, config.ELEVATOR_UP_BUTTON);
 		elevatorDown = new JoystickButton(joystick3, config.ELEVATOR_DOWN_BUTTON);
+		elavatorArmToggle = new JoystickButton(joystick3, config.ELEVATOR_ARMS_TOGGLE_BUTTON);
+		
 		
 		elevatorUp.whenPressed(new MoveElevator(Elevator.UP));
 		elevatorDown.whenPressed(new MoveElevator(Elevator.DOWN));

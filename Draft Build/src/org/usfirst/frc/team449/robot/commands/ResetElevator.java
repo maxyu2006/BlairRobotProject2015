@@ -3,6 +3,7 @@ package org.usfirst.frc.team449.robot.commands;
 import org.usfirst.frc.team449.robot.Robot;
 import org.usfirst.frc.team449.robot.subsystems.Elevator;
 
+import org.usfirst.frc.team449.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -12,6 +13,7 @@ public class ResetElevator extends Command {
 
     public ResetElevator() {
         requires(Robot.elevator);
+    	requires(Robot.elevator);
     }
 
     // Called just before this Command runs the first time
