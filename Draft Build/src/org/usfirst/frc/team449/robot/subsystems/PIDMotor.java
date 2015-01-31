@@ -142,7 +142,7 @@ public class PIDMotor extends PIDSubsystem {
      */
     public void setKp(double newP)
     {  
-        this.Kp = newP;
+    	this.Kp = newP;
         super.getPIDController().setPID(this.Kp, this.Ki, this.Kd);
     }
    

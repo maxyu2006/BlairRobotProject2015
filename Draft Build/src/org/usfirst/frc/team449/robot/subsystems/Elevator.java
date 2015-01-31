@@ -5,10 +5,9 @@ import org.usfirst.frc.team449.robot.RobotMap;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -30,13 +29,11 @@ public class Elevator extends Subsystem {
 	// Elevator conceptual fields
 	private double setPoint;
 	private int position;
-	private double actualPosition;
 	private boolean isArmOpen;
-	private boolean isBrakeActivated;
-	private boolean isManual;
 	
 	public static final boolean UP = true;
 	public static final boolean DOWN = false;
+	
 	public static final int ELEVATOR_FIRST_POSITION = 0;
 	public static final int ELEVATOR_SECOND_POSITION = 1;
 	public static final int ELEVATOR_THIRD_POSITION = 2;
@@ -57,8 +54,8 @@ public class Elevator extends Subsystem {
 		
 		
 		//initialize temporary variables to pass into the PID motor
-		Victor 	leftMotor   = new Victor(config.INTAKE_LEFT_MOTOR);
-		Victor 	rightMotor  = new Victor(config.INTAKE_RIGHT_MOTOR);
+		TalonSRX 	leftMotor   = new TalonSRX(config.INTAKE_LEFT_MOTOR);
+		TalonSRX 	rightMotor  = new TalonSRX(config.INTAKE_RIGHT_MOTOR);
 		Encoder encoder 	= new Encoder(config.ELEVATOR_ENCODER_CHANNEL_A, config.ELEVATOR_ENCODER_CHANNEL_B, false, EncodingType.k4X);
 		
 		//this PIDMotor should be operating in Position based control mode for elevator position
@@ -68,11 +65,8 @@ public class Elevator extends Subsystem {
 		
 		setPoint = 0;
 		position = 0;
-		actualPosition = encoder.get();
 		isArmOpen = true; 
 		
-		isBrakeActivated = false;
-		isManual = false;
 	}//end Elevator();
 
 	//============================Elevator Primary Methods=======================
@@ -94,6 +88,7 @@ public class Elevator extends Subsystem {
     	}
     	isArmOpen=!isArmOpen;
     }
+    
     /**
      * Open the arms
      */
@@ -101,6 +96,7 @@ public class Elevator extends Subsystem {
     	armController.set(Value.kForward);
     	isArmOpen = true;
     }
+    
     /**
      * Close the arms
      */
@@ -108,6 +104,7 @@ public class Elevator extends Subsystem {
 		armController.set(Value.kReverse);
 		isArmOpen = false;
     }
+    
     /**
      * Releases the brake.
      */
@@ -125,14 +122,6 @@ public class Elevator extends Subsystem {
     }
     
     /**
-     * Sets the speed of the motor.
-     * @param speed - The speed the motor is being set at.
-     */
-    public void setMotorSpeed(double speed){
-    	motors.setSetpoint(speed);
-    }
-    
-    /**
      * Resets the encoder value to 0.
      */
     public void resetEncoder(){
@@ -146,6 +135,7 @@ public class Elevator extends Subsystem {
      * @return setPoint - The setPoint.
      */
     public double getSetPoint(){
+    	setPoint = motors.getSetpoint();
     	return setPoint;
     }
     
@@ -155,14 +145,15 @@ public class Elevator extends Subsystem {
      */
     public void setSetPoint(double setPoint){
     	this.setPoint = setPoint;
+    	motors.setSetpoint(setPoint);
     }
     
     /**
      * Returns the actual position of the elevator.
-     * @return actualPosition - The actual position of the elevator.
+     * @return The actual position of the elevator.
      */
     public double getActualPosition(){
-    	return actualPosition;
+    	return motors.getPosition();
     }
     
     /**
