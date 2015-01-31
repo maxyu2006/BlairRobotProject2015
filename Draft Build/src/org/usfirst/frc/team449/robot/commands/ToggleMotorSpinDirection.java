@@ -7,15 +7,15 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ToggleMotor extends Command {
-	
-    public ToggleMotor() {
+public class ToggleMotorSpinDirection extends Command {
+
+    public ToggleMotorSpinDirection() {
         requires(Robot.intake);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.intake.toggleMotor();
+    	Robot.intake.toggleMotorSpinDirection();
     }
 
     // Called repeatedly when this Command is scheduled to run

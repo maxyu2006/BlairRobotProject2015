@@ -7,15 +7,23 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ToggleMotor extends Command {
+public class ToggleIntakeArms extends Command {
+
+	private boolean openArms;
 	
-    public ToggleMotor() {
-        requires(Robot.intake);
+    public ToggleIntakeArms(boolean openArms) {
+    	requires(Robot.intake);
+    	
+        this.openArms = openArms;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.intake.toggleMotor();
+    	
+    	if(openArms)
+    		Robot.intake.openArms();
+    	else
+    		Robot.intake.closeArms();
     }
 
     // Called repeatedly when this Command is scheduled to run

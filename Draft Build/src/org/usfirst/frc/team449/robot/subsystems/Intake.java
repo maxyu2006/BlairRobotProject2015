@@ -76,7 +76,7 @@ public class Intake extends Subsystem {
 	/**
 	 * Toggles the direction of the motors.
 	 */
-	public void toggleMotorDir() {
+	public void toggleMotorSpinDirection() {
 		leftArmMotor.set(-leftArmMotor.get());
 		rightArmMotor.set(-rightArmMotor.get());
 		isMotorForward = !isMotorForward;
