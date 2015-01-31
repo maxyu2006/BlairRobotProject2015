@@ -1,6 +1,7 @@
 package org.usfirst.frc.team449.robot.subsystems;
 
 import org.usfirst.frc.team449.robot.RobotMap;
+import org.usfirst.frc.team449.robot.commands.ResetElevator;
 
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -28,15 +29,15 @@ public class Elevator extends Subsystem {
 	
 	// Elevator conceptual fields
 	private double setPoint;
-	private int position;
+	private double position;
 	private boolean isArmOpen;
 	
 	public static final boolean UP = true;
 	public static final boolean DOWN = false;
 	
-	public static final int ELEVATOR_FIRST_POSITION = 0;
-	public static final int ELEVATOR_SECOND_POSITION = 1;
-	public static final int ELEVATOR_THIRD_POSITION = 2;
+	public static final double ELEVATOR_FIRST_POSITION = 0;
+	public static final double ELEVATOR_SECOND_POSITION = 0.5;
+	public static final double ELEVATOR_THIRD_POSITION = 1;
 	
 	/**
 	 * Elevator constructor
@@ -64,16 +65,13 @@ public class Elevator extends Subsystem {
 		
 		
 		setPoint = 0;
-		position = 0;
 		isArmOpen = true; 
-		
+		new ResetElevator().start();
 	}//end Elevator();
 
 	//============================Elevator Primary Methods=======================
 
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
     }
     
     /**
@@ -161,29 +159,34 @@ public class Elevator extends Subsystem {
      */
     public void resetPosition() {
     	position = ELEVATOR_FIRST_POSITION;
+    	setSetPoint(position);
     }
     
     /**
      * Sets the conceptual position to be the position directly above where it is currently
      */
     public void raisePosition() {
-    	if (position < ELEVATOR_THIRD_POSITION)
+    	if (position < ELEVATOR_THIRD_POSITION) {
     		position++;
+    		setSetPoint(position);
+    	}
     }
     
     /**
      * Sets the conceptual position to be the position directly below where it is currently
      */
     public void lowerPosition() {
-    	if (position > ELEVATOR_FIRST_POSITION)
+    	if (position > ELEVATOR_FIRST_POSITION) {
     		position--;
+    		setSetPoint(position);
+    	}
     }
     
     /**   
      * Get the conceptual position of the elevator
-     * @return position - ints from 0-2, where two is the highest position on the elevator
+     * @return position - elevator constants ELEVATOR_FIRST/SECOND/THIRD_POSITION, first being bottom
      */
-    public int getPosition(){
+    public double getPosition(){
 		return position;
     }
     

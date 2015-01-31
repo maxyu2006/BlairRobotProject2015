@@ -17,7 +17,7 @@ public class ResetElevator extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.elevator.releaseBrake();
-    	Robot.elevator.setSetPoint(Elevator.ELEVATOR_FIRST_POSITION/2.0);
+    	Robot.elevator.resetPosition();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -31,7 +31,6 @@ public class ResetElevator extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.elevator.resetPosition();
     	Robot.elevator.activateBrake();
     }
 

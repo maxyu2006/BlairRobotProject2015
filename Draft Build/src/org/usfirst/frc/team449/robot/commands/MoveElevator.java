@@ -21,11 +21,9 @@ public class MoveElevator extends Command {
     	Robot.elevator.releaseBrake();
     	if (goingUp) {
     		Robot.elevator.raisePosition();
-    		Robot.elevator.setSetPoint(Robot.elevator.getPosition()/2.0);
     	}
     	else {
     		Robot.elevator.lowerPosition();
-    		Robot.elevator.setSetPoint(Robot.elevator.getPosition()/2.0);
     	}
     }
 
