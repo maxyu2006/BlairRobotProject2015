@@ -3,7 +3,6 @@
 /Confidence Ensurer/nbproject/private/
 *.class
 *.jar
-testBuild/dist/FRCUserProgram.jar
 .metadata
 *~
 RemoteSystemsTempFiles

@@ -14,7 +14,9 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public final class RobotMap {
 
 	//======================Universal constants====================
-	
+	/**
+	 * Encoder Pulses Per Rotation
+	 */
 	public final int ENCODER_PPR;
 
 	//============================Drive Constants=======================
@@ -68,8 +70,14 @@ public final class RobotMap {
 	 */
 	public final double DRIVE_I;
 	
+	/**
+	 * Drive PID D term
+	 */
 	public final double DRIVE_D;
 	
+	/**
+	 * Drive PID F term for speed control
+	 */
 	public final double DRIVE_F;
 	
 	/**
@@ -78,27 +86,27 @@ public final class RobotMap {
 	public final int DRIVE_MAX_RATE;
 	
 	/**
-	 * default mode for drive control true = m
+	 * default mode for drive control true = PID, false = Manual
 	 */
 	public final boolean DRIVE_DEFAULT_MODE;
 	//===========================Controller Ports/Scheme======================
 	/**
-	 * Joystick port for Joystick 0
+	 * Joystick usb port for Joystick 0
 	 */
 	public final int JOYSTICK_0;
 	
 	/**
-	 * Joystick port for Joystick 1
+	 * Joystick usb port for Joystick 1
 	 */
 	public final int JOYSTICK_1;
 	
 	/**
-	 * Joystick port for Joystick 2
+	 * Joystick usb port for Joystick 2
 	 */
 	public final int JOYSTICK_2;
 	
 	/**
-	 * Joystick port for Joystick 3
+	 * Joystick usb port for Joystick 3
 	 */
 	public final int JOYSTICK_3;
 	
