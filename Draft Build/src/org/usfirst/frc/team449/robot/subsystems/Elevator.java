@@ -30,6 +30,7 @@ public class Elevator extends Subsystem {
 	private double setPoint;
 	private double position;
 	private boolean isArmOpen;
+	private boolean controlState;
 	
 	public static final boolean UP = true;
 	public static final boolean DOWN = false;
@@ -37,6 +38,9 @@ public class Elevator extends Subsystem {
 	public static final double ELEVATOR_FIRST_POSITION = 0;
 	public static final double ELEVATOR_SECOND_POSITION = 0.5;
 	public static final double ELEVATOR_THIRD_POSITION = 1;
+	
+	public static final boolean MANUAL = true;
+	public static final boolean AUTONOMOUS = false;
 	
 	/**
 	 * Elevator constructor
@@ -235,5 +239,6 @@ public class Elevator extends Subsystem {
     
     public void disablePID() {
     	motors.disable();
+    	controlState = MANUAL;
     }
 }
