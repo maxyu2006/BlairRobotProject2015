@@ -40,7 +40,7 @@ public class Elevator extends Subsystem {
 	public static final double ELEVATOR_THIRD_POSITION = 1;
 	
 	public static final boolean MANUAL = true;
-	public static final boolean AUTONOMOUS = false;
+	public static final boolean PID = false;
 	
 	/**
 	 * Elevator constructor
