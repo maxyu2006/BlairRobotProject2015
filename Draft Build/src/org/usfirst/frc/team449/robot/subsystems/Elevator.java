@@ -166,9 +166,16 @@ public class Elevator extends Subsystem {
     }
     
     /**
+     * Sets the position back to the bottom
+     */
+    public void resetPosition() {
+    	position = ELEVATOR_FIRST_POSITION;
+    }
+    
+    /**
      * Sets the conceptual position to be the position directly above where it is currently
      */
-    public void RaisePosition() {
+    public void raisePosition() {
     	if (position < ELEVATOR_THIRD_POSITION)
     		position++;
     }
@@ -176,12 +183,12 @@ public class Elevator extends Subsystem {
     /**
      * Sets the conceptual position to be the position directly below where it is currently
      */
-    public void LowerPosition() {
+    public void lowerPosition() {
     	if (position > ELEVATOR_FIRST_POSITION)
     		position--;
     }
     
-    /**
+    /**   
      * Get the conceptual position of the elevator
      * @return position - ints from 0-2, where two is the highest position on the elevator
      */
