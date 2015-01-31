@@ -37,6 +37,7 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
 	
 	public final Joystick[] joysticks = new Joystick[4];
+	
 	/**
 	 * the button
 	 */
