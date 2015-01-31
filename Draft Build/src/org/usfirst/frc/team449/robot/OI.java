@@ -1,6 +1,7 @@
 package org.usfirst.frc.team449.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 
 /**
@@ -35,17 +36,40 @@ public class OI {
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
 	
-	public final Joystick joystick1;
-	public final Joystick joystick2;
-	public final Joystick joystick3;
-	public final Joystick joystick4;
+	public final Joystick[] joysticks = new Joystick[4];
+	/**
+	 * the button
+	 */
+	public final JoystickButton driveManualToggle;
 	
 	public OI(RobotMap config)
 	{
-		joystick1 = new Joystick(config.JOYSTICK_1);
-		joystick2 = new Joystick(config.JOYSTICK_2);
-		joystick3 = new Joystick(config.JOYSTICK_3);
-		joystick4 = new Joystick(config.JOYSTICK_4);
+		joysticks[0] = new Joystick(config.JOYSTICK_0);
+		joysticks[1] = new Joystick(config.JOYSTICK_1);
+		joysticks[2] = new Joystick(config.JOYSTICK_2);
+		joysticks[3] = new Joystick(config.JOYSTICK_3);
+		
+		driveManualToggle = new JoystickButton(joysticks[config.DRIVE_MANUAL_TOGGLE_JOYSTICK], config.DRIVE_MANUAL_TOGGLE_BUTTON);
+		
+			
+	}
+	
+	/**
+	 * get the axis assigned to the left side of the drive
+	 * @return a double between -1 and 1
+	 */
+	public double getDriveAxis1()
+	{
+		return this.joysticks[0].getAxis(Joystick.AxisType.kY);
+	}
+	
+	/**
+	 * get the axis assigned to the right side of the drive
+	 * @return a double between -1 and 1
+	 */
+	public double getDriveAxis2()
+	{
+		return this.joysticks[1].getAxis(Joystick.AxisType.kY);
 	}
 	
 	/**

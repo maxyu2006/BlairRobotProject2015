@@ -1,10 +1,6 @@
 package org.usfirst.frc.team449.robot.commands;
 
-import org.usfirst.frc.team449.robot.OI;
 import org.usfirst.frc.team449.robot.Robot;
-import org.usfirst.frc.team449.robot.subsystems.Drive;
-
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -16,6 +12,7 @@ public class DriveRobot extends Command {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drive);
+    	
     }
 
     // Called just before this Command runs the first time
@@ -24,7 +21,9 @@ public class DriveRobot extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    		Robot.drive.setThrottle(Robot.OI.getJoystickAxisY(Robot.OI.joystick1), Robot.OI.getJoystickAxisY(Robot.OI.joystick2));
+    		Robot.drive.setThrottle(Robot.OI.getDriveAxis1(), Robot.OI.getDriveAxis2());
+    		if(Robot.OI.driveManualToggle.get() == true)
+    			Robot.drive.toggleControlMode();
     		
     }
 
