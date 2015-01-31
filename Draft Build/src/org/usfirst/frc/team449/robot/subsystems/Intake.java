@@ -23,7 +23,7 @@ public class Intake extends Subsystem {
     private final Victor leftArmMotor;
     private final Victor rightArmMotor;
     
-    private boolean isArmOpen;
+    private boolean areArmsOpen;
     private boolean isMotorOn;
     private boolean isMotorForward;
     
@@ -43,7 +43,7 @@ public class Intake extends Subsystem {
     	intakeLeftSol  = new DoubleSolenoid(config.INTAKE_LSOLENOID_FORWARD, config.INTAKE_LSOLENOID_REVERSE);
     	intakeRightSol = new DoubleSolenoid(config.INTAKE_RSOLENOID_FORWARD, config.INTAKE_RSOLENOID_REVERSE);
     	
-    	isArmOpen = true;
+    	areArmsOpen = true;
     	isMotorOn = false;
     	isMotorForward = true;
     	
@@ -86,7 +86,7 @@ public class Intake extends Subsystem {
 	 * Toggles the open/closed state of the arms.
 	 */
 	public void toggleArms(){
-		if(isArmOpen){
+		if(areArmsOpen){
     		intakeLeftSol.set(Value.kReverse);
     		intakeRightSol.set(Value.kReverse);
     	}
@@ -94,22 +94,16 @@ public class Intake extends Subsystem {
     		intakeLeftSol.set(Value.kForward);
     		intakeRightSol.set(Value.kForward);
     	}
-		isArmOpen = !isArmOpen;
-	}
-	/**
-	 * set the open/closed state of the arms
-	 */
-	public void setArms(boolean in){
-		if(in != isArmOpen) toggleArms();
+		areArmsOpen = !areArmsOpen;
 	}
 	
 	/**
 	 * Returns true if the arms are open, false otherwise.
 	 * @return isArmOpen - A boolean that is true if the arms are open, false otherwise.
 	 */
-	public boolean isArmOpen() {
+	public boolean areArmsOpen() {
 		
-		return isArmOpen;
+		return areArmsOpen;
 	}
 
 	/**
@@ -125,13 +119,7 @@ public class Intake extends Subsystem {
 	public boolean getRightSwitchState() {
 		return rightLimSwitch.get();
 	}
-	
-	/**
-	 * @return direction of wheels, true for forwards
-	 */
-	public boolean getDirection(){
-		return (leftArmMotor.get()>0);
-	}
+
     public void initDefaultCommand() {	
     }
 }
