@@ -1,5 +1,5 @@
 package org.usfirst.frc.team449.robot.commands;
-
+import org.usfirst.frc.team449.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -10,6 +10,7 @@ public class ResetElevator extends Command {
     public ResetElevator() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires(Robot.elevator);
     }
 
     // Called just before this Command runs the first time
