@@ -23,8 +23,7 @@ public class Elevator extends Subsystem {
 	private final DigitalInput rightArmLimit;
 	
 	private final DoubleSolenoid armController;//one solenoidconnected toboth arms
-	private final DoubleSolenoid brakeLeft;
-	private final DoubleSolenoid brakeRight;
+	private final DoubleSolenoid brakeController;
 	
 	private final PIDMotor motors;
 	
@@ -47,8 +46,8 @@ public class Elevator extends Subsystem {
 		
 		armController  = new DoubleSolenoid(config.ELEVATOR_ARM_SOLENOID_FWD,config.ELEVATOR_ARM_SOLENOID_REV);
 		
-		brakeLeft = new DoubleSolenoid(config.ELEVATOR_BRAKE_LEFT_SOLENOID_FWD, config.ELEVATOR_BRAKE_LEFT_SOLENOID_REV);
-		brakeRight = new DoubleSolenoid(config.ELEVATOR_BRAKE_RIGHT_SOLENOID_FWD, config.ELEVATOR_BRAKE_RIGHT_SOLENOID_REV);
+		brakeController = new DoubleSolenoid(config.ELEVATOR_BRAKE_SOLENOID_FWD, config.ELEVATOR_BRAKE_SOLENOID_REV);
+		
 		
 		//initialize temporary variables to pass into the PID motor
 		Victor 	leftMotor   = new Victor(config.INTAKE_LEFT_MOTOR);
@@ -93,16 +92,16 @@ public class Elevator extends Subsystem {
      * Releases the brake.
      */
     public void releaseBrake(){
-    	brakeLeft.set(Value.kReverse);
-    	brakeRight.set(Value.kReverse);
+    	brakeController.set(Value.kReverse);
+    	
     }
     
     /**
      * Activates the brake.
      */
     public void activateBrake(){
-    	brakeLeft.set(Value.kForward);
-    	brakeRight.set(Value.kForward);
+    	brakeController.set(Value.kForward);
+    	
     }
     
     /**
