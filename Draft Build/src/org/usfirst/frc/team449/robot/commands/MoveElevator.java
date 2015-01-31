@@ -1,6 +1,7 @@
 package org.usfirst.frc.team449.robot.commands;
 
 import org.usfirst.frc.team449.robot.Robot;
+import org.usfirst.frc.team449.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -10,10 +11,12 @@ import edu.wpi.first.wpilibj.command.Command;
 public class MoveElevator extends Command {
 	
 	private boolean goingUp;
+	private double tolerance;
 
-    public MoveElevator(boolean upOrDown) {	//hehehe
+    public MoveElevator(RobotMap config, boolean upOrDown) {	//hehehe
         requires(Robot.elevator);
         goingUp = upOrDown;
+        tolerance = config.ELEVATOR_PID_ACCEPTABILITY_RANGE;
     }
 
     // Called just before this Command runs the first time
@@ -25,6 +28,7 @@ public class MoveElevator extends Command {
     	else {
     		Robot.elevator.lowerPosition();
     	}
+    	Robot.elevator.enablePID();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -33,12 +37,13 @@ public class MoveElevator extends Command {
 
     protected boolean isFinished() {
     	// this needs an incompetence diminisher
-        return Robot.elevator.getActualPosition() == Robot.elevator.getSetPoint();
+        return Math.abs(Robot.elevator.getActualPosition() - Robot.elevator.getSetPoint()) < tolerance;
     }
 
     // Called once after isFinished returns true
     protected void end() {
     	Robot.elevator.activateBrake();
+    	Robot.elevator.disablePID();
     }
 
     // Called when another command which requires one or more of the same

@@ -65,8 +65,8 @@ public class Elevator extends Subsystem {
 		
 		
 		setPoint = 0;
-		isArmOpen = true; 
-		new ResetElevator().start();
+		isArmOpen = true;
+		position = ELEVATOR_FIRST_POSITION;
 	}//end Elevator();
 
 	//============================Elevator Primary Methods=======================
