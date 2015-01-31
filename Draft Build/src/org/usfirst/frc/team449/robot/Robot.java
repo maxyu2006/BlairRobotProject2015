@@ -29,7 +29,6 @@ public class Robot extends IterativeRobot {
 	public static final Drive		drive		= new Drive(Robot.robotMap);
 	
 	Command autonomousCommand;
-	private DriveRobot driver;
 
     /**
      * This function is run when the robot is first started up and should be

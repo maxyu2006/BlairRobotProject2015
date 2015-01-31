@@ -83,18 +83,23 @@ public class Intake extends Subsystem {
 	}
 	
 	/**
-	 * Toggles the open/closed state of the arms.
+	 * Opens the intake arms.
 	 */
-	public void toggleArms(){
-		if(areArmsOpen){
-    		intakeLeftSol.set(Value.kReverse);
-    		intakeRightSol.set(Value.kReverse);
-    	}
-    	else{
-    		intakeLeftSol.set(Value.kForward);
-    		intakeRightSol.set(Value.kForward);
-    	}
-		areArmsOpen = !areArmsOpen;
+	public void openArms(){
+		intakeLeftSol.set(Value.kReverse);
+		intakeRightSol.set(Value.kReverse);
+		
+		areArmsOpen = true;
+	}
+	
+	/**
+	 * Closes the intake arms.
+	 */
+	public void closeArms(){
+		intakeLeftSol.set(Value.kForward);
+		intakeRightSol.set(Value.kForward);
+		
+		areArmsOpen = false;
 	}
 	
 	/**

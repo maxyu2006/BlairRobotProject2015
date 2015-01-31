@@ -5,41 +5,26 @@ import org.usfirst.frc.team449.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Closes the intake arms.
  */
 public class CloseIntakeArms extends Command {
-
-	private boolean isCommandFinished;
 	
     public CloseIntakeArms() {
         requires(Robot.intake);
-        
-        isCommandFinished = false;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
-    	// If the intake arms are already closed, this command is finished.
-    	if(!Robot.intake.areArmsOpen())
-    		isCommandFinished = true;
-    	
-    	// If the intake arms are open, close them.
-    	else
-    		Robot.intake.toggleArms();
+    	Robot.intake.closeArms();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
-    	// If the intake arms are closed, this command is finished.
-    	if(!Robot.intake.areArmsOpen())
-    		isCommandFinished = true;
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return isCommandFinished;
+        return true;
     }
 
     // Called once after isFinished returns true
