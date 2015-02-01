@@ -80,7 +80,7 @@ public final class RobotMap {
 	 */
 	public final int ELEVATOR_RIGHT_MOTOR;
 	
-	public final double ELEVATOR_PID_ACCEPTABILITY_RANGE;
+	public final double ELEVATOR_PID_TOLERANCE_RANGE;
 	
 	//============================Drive Constants=======================
 	/**
@@ -235,7 +235,7 @@ public final class RobotMap {
 		this.ELEVATOR_LEFT_MOTOR = 0;
 		this.ELEVATOR_RIGHT_MOTOR = 1;
 		
-		this.ELEVATOR_PID_ACCEPTABILITY_RANGE = 0.001;
+		this.ELEVATOR_PID_TOLERANCE_RANGE = 0.001;
 		
 		this.ELEVATOR_UP_BUTTON = 3;
 		this.ELEVATOR_DOWN_BUTTON = 2;

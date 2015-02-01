@@ -5,24 +5,25 @@ import org.usfirst.frc.team449.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Toggles the grabber on the elevator carriage.
- * If the arms are open, they get closed. Otherwise, they are opened.
- * @author Eyob Tsegaye
+ * Sets the grabber to a specified state (either open or closed) based on the parameter fed into the constructor.
+ * Note: assumes that the grabber works. If the Solenoid on the grabber accepts data but doesn't physically do
+ * anything, the command will still exit since isFinished is set to always return true.
+ * @author eyob-- 2/1/15
  */
 public class SetGrabber extends Command {
 
-	private boolean open;
+	private boolean setOpen;
 	
-    public SetGrabber(boolean open) {
+    public SetGrabber(boolean setOpen) {
         requires(Robot.elevator);
-        this.open = open;
+        this.setOpen = setOpen;
     }
 
     protected void initialize() {
-    	if (open)
-    		Robot.elevator.closeArms();
-    	else
+    	if (setOpen)
     		Robot.elevator.openArms();
+    	else
+    		Robot.elevator.closeArms();
     }
 
     protected void execute() {

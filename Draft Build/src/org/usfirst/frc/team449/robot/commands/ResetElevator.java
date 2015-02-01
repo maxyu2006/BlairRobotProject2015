@@ -6,42 +6,42 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * This command acts as a "re-calibrator" for the encoder on the elevator.
+ * It drives the carriage down (in manual mode on 15%) until the bottom limit switch is pressed.
+ * Additionally, it will also end if the command has taken longer than 2 seconds to complete
+ * (in the case that the limit switch isn't working).
+ * When the command finishes, the encoder will be reset back to 0.
+ * @author eyob-- AliAnwar7477 1/31/15
  */
 public class ResetElevator extends Command {
 	
-	private Timer t;
+	private Timer t;	// timer to keep track of how long the command has been running
 
     public ResetElevator() {
         requires(Robot.elevator);
         t = new Timer();
     }
 
-    // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.elevator.disablePID();
-    	Robot.elevator.setMotorManual(-0.15);
-    	t.start();
+    	Robot.elevator.disablePID();			// switch to manual mode (turn PID off)
+    	Robot.elevator.setMotorManual(-0.15);	// drive back at a constant 15%
+    	t.start();								// start the runtime timer
     }
 
-    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     }
 
-    // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	// stop if you hit the limit switch or it has taken longer than 2 seconds
         return Robot.elevator.isTouchingBottom() || t.get() > 2;
     }
 
-    // Called once after isFinished returns true
     protected void end() {
-    	Robot.elevator.disablePID();
+    	Robot.elevator.resetPosition();
+    	Robot.elevator.disablePID();	// just make sure PID is disabled at the end.
     	Robot.elevator.resetEncoder();
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
     protected void interrupted() {
     }
 }

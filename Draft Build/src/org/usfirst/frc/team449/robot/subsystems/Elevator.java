@@ -21,7 +21,7 @@ public class Elevator extends Subsystem {
 	private final DigitalInput leftArmLimit;
 	private final DigitalInput rightArmLimit;
 	
-	private final DoubleSolenoid armController;//one solenoidconnected toboth arms
+	private final DoubleSolenoid armController; //one solenoid connected to both arms
 	private final DoubleSolenoid brakeController;
 	
 	private final PIDMotor motors;
@@ -78,6 +78,7 @@ public class Elevator extends Subsystem {
     }
     
     /**
+     * @deprecated
      * Toggles the open/closed state of the arms.
      */
     public void toggleArms(){
@@ -91,7 +92,7 @@ public class Elevator extends Subsystem {
     }
     
     /**
-     * Open the arms
+     * Opens the arms on the grabber
      */
     public void openArms(){
     	armController.set(Value.kForward);
@@ -99,7 +100,7 @@ public class Elevator extends Subsystem {
     }
     
     /**
-     * Close the arms
+     * Closes the arms on the grabber
      */
     public void closeArms(){
 		armController.set(Value.kReverse);
@@ -107,15 +108,14 @@ public class Elevator extends Subsystem {
     }
     
     /**
-     * Releases the brake.
+     * Releases the brakes on the elevator
      */
     public void releaseBrake(){
     	brakeController.set(Value.kReverse);
-    	
     }
     
     /**
-     * Activates the brake.
+     * Activates the brakes on the elevator
      */
     public void activateBrake(){
     	brakeController.set(Value.kForward);
@@ -132,8 +132,8 @@ public class Elevator extends Subsystem {
     //============================Elevator Field Getters and Setters=======================
     
     /**
-     * Returns the setPoint.
-     * @return setPoint - The setPoint.
+     * Returns the setPoint of the elevator, regardless of whether PID mode is enabled.
+     * @return setPoint - a double ranging from 0 to 1, 0 being the bottom of the elevator.
      */
     public double getSetPoint(){
     	setPoint = motors.getSetpoint();
@@ -141,8 +141,9 @@ public class Elevator extends Subsystem {
     }
     
     /**
-     * Sets position for elevator to move to.
-     * @param setPoint - Intended setPoint.
+     * Sets the position for the elevator to move to via PID. If PID is disabled, this will not physically do
+     * anything, but the set point will be kept for when the PID is re-enabled. 
+     * @param setPoint - a double from 0 to 1, where 0 represents the bottom of the elevator.
      */
     public void setSetPoint(double setPoint){
     	this.setPoint = setPoint;
@@ -150,23 +151,23 @@ public class Elevator extends Subsystem {
     }
     
     /**
-     * Returns the actual position of the elevator.
-     * @return The actual position of the elevator.
+     * Returns the actual position of the elevator as specified by the encoder.
+     * @return the "position" of the elevator as a double from 0 to 1, 0 being the bottom of the elevator.
      */
     public double getActualPosition(){
     	return motors.getPosition();
     }
     
     /**
-     * Sets the position back to the bottom
+     * Sets the conceptual position of the elevator to the bottom. Only to be used in the ResetElevator
+     * command after the carriage is manually driven back to the bottom of the elevator.
      */
     public void resetPosition() {
     	position = ELEVATOR_FIRST_POSITION;
-    	setSetPoint(position);
     }
     
     /**
-     * Sets the conceptual position to be the position directly above where it is currently
+     * Sets the set point of the elevator to be the position directly above where the carriage is currently.
      */
     public void raisePosition() {
     	if (position < ELEVATOR_THIRD_POSITION) {
@@ -176,7 +177,7 @@ public class Elevator extends Subsystem {
     }
     
     /**
-     * Sets the conceptual position to be the position directly below where it is currently
+     * Sets the set point of the elevator to be the position directly below where the carriage is currently.
      */
     public void lowerPosition() {
     	if (position > ELEVATOR_FIRST_POSITION) {
@@ -187,15 +188,16 @@ public class Elevator extends Subsystem {
     
     /**   
      * Get the conceptual position of the elevator
-     * @return position - elevator constants ELEVATOR_FIRST/SECOND/THIRD_POSITION, first being bottom
+     * @return position - one of the elevator constants ELEVATOR_FIRST/SECOND/THIRD_POSITION,
+     *  first being bottom
      */
     public double getPosition(){
 		return position;
     }
     
     /**
-     * Returns true if arm is open, false otherwise.
-     * @return isArmOpen - Is arm open?
+     * Returns true if arms are open, false otherwise.
+     * @return isArmOpen - whether the arms are open
      */
     public boolean getArmState(){
     	return isArmOpen;
@@ -233,10 +235,16 @@ public class Elevator extends Subsystem {
     	return rightArmLimit.get();
     }
     
+    /**
+     * Enables PID mode on the elevator
+     */
     public void enablePID() {
     	motors.enable();
     }
     
+    /**
+     * Disables the PID mode on the elevator and enables manual mode
+     */
     public void disablePID() {
     	motors.disable(); // doesn't actually disable motor, only disables PID control
     	controlState = MANUAL;
