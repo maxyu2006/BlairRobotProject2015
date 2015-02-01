@@ -30,7 +30,7 @@ public class Elevator extends Subsystem {
 	private double setPoint;
 	private double position;
 	private boolean isArmOpen;
-	private boolean controlState;
+	private ControlState controlState;
 	
 	public static final boolean UP = true;
 	public static final boolean DOWN = false;
@@ -39,8 +39,9 @@ public class Elevator extends Subsystem {
 	public static final double ELEVATOR_SECOND_POSITION = 0.5;
 	public static final double ELEVATOR_THIRD_POSITION = 1;
 	
-	public static final boolean MANUAL = true;
-	public static final boolean PID = false;
+	public enum ControlState {
+		MANUAL, PID;
+	}
 	
 	/**
 	 * Elevator constructor
@@ -236,10 +237,19 @@ public class Elevator extends Subsystem {
     }
     
     /**
+     * Returns whether elevator control state is in PID mode
+     * @return true if control state is PID, false otherwise 
+     */
+    public boolean isPIDEnabled() {
+    	return controlState.equals(ControlState.PID);
+    }
+    
+    /**
      * Enables PID mode on the elevator
      */
     public void enablePID() {
     	motors.enable();
+    	controlState = ControlState.PID;
     }
     
     /**
@@ -247,16 +257,16 @@ public class Elevator extends Subsystem {
      */
     public void disablePID() {
     	motors.disable(); // doesn't actually disable motor, only disables PID control
-    	controlState = MANUAL;
+    	controlState = ControlState.MANUAL;
     }
     
     /**
-     * manually sets the motor output
-     * assumes that the PID has already been disabled
+     * Manually sets the motor output provided that the elevator is in manual mode
      * @author hazheng 2/1/15
      * @param throttle
      */
     public void setMotorManual(double throttle){
-    	this.motors.setMotorVoltage(throttle);
+    	if (controlState.equals(ControlState.MANUAL))
+    		this.motors.setMotorVoltage(throttle);
     }
 }
