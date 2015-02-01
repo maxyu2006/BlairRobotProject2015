@@ -27,7 +27,8 @@ public class PIDMotor extends PIDSubsystem {
     
     private final SpeedController 	motor;
     private final Encoder 			encoder;
-    private final ArrayList<SpeedController> slaves;	//additional motor controllers slaved to this PID controller
+    private final ArrayList<SpeedController> slaves; //additional motor controllers slaved to this PID controller
+    private final ArrayList<Boolean> slave_invert_flags; //add option to invert motor input
     
     public static final int DISTANCE_BASE 	= 0;
     public static final int SPEED_BASE		= 1;
@@ -73,6 +74,7 @@ public class PIDMotor extends PIDSubsystem {
         	this.mode = mode;
         
         slaves = new ArrayList<SpeedController>();
+        slave_invert_flags = new ArrayList<Boolean>();
         // Use these to get going:
         // setSetpoint() -  Sets where the PID controller should move the system
         //                  to
@@ -103,15 +105,40 @@ public class PIDMotor extends PIDSubsystem {
         }//end switch
     }//
     
+    /**
+     * Overwritten method used by PIDSubsystem to set motor outputs
+     * added: ability to output slaves and also invert slave outputs
+     */
     protected void usePIDOutput(double output) {
         // Use output to drive your system, like a motor
         // e.g. yourMotor.set(output);
         motor.set(output);
         
-        for(int i=0; i < slaves.size(); i++)
+        if(slaves.size() != slave_invert_flags.size()) // if for some reason the invert flag array got screwed up, ignore it
         {
-        	slaves.get(i).set(output);
-        	System.out.println("setting throttle " + output);
+        	System.err.println("invert flags don't match with slaves");
+        	for(int i=0; i < slaves.size(); i++)
+        	{
+        		System.out.println("PID setting throttle " + output);
+        		slaves.get(i).set(output);
+        	}
+        	
+        	return;
+        }
+        else // invert flags and slave lists all bueno
+        {
+        	for(int i=0; i < slaves.size(); i++)
+        	{
+        		System.out.println("setting throttle " + output);
+        		if(slave_invert_flags.get(i)) // if invert flag, invert slave motor output
+        		{
+        			slaves.get(i).set(-output);
+        		}
+        		else // if slave is not to be inverted
+        		{
+        			slaves.get(i).set(output);
+        		}
+        	}
         }
     }
     
@@ -119,19 +146,41 @@ public class PIDMotor extends PIDSubsystem {
      * sets the motor voltage scale (-1 to 1) depending on whether this subsystem 
      * is on manual or PID controlled mode. If it is on PID controlled mode, 
      * or the exceeds the range it will fail to.
-     * @param volt the voltage the motor will be set to
+     * added ability to invert slave outputs
+     * @param throttle the voltage the motor will be set to
      * @return true if successful, false if on PID controlled mode.
      */
-    public boolean setMotorVoltage(double volt)
+    public boolean setMotorVoltage(double throttle)
     {
-        if(this.isEnabled() || volt > 1 || volt < -1)
+        if(this.isEnabled() || throttle > 1 || throttle < -1)
             return false;
         
-        motor.set(volt);
-        for(int i=0; i < slaves.size(); i++)
+        motor.set(throttle);
+        if(slaves.size() != slave_invert_flags.size()) // if for some reason the invert flag array got screwed up, ignore it
         {
-        	System.out.println("setting throttle " + volt);
-        	slaves.get(i).set(volt);
+        	System.err.println("invert flags don't match with slaves");
+        	for(int i=0; i < slaves.size(); i++)
+        	{
+        		System.out.println("setting throttle " + throttle);
+        		slaves.get(i).set(throttle);
+        	}
+        	
+        	return false;
+        }
+        else // invert flags and slave lists all bueno
+        {
+        	for(int i=0; i < slaves.size(); i++)
+        	{
+        		System.out.println("setting throttle " + throttle);
+        		if(slave_invert_flags.get(i)) // if invert flag, invert slave motor output
+        		{
+        			slaves.get(i).set(-throttle);
+        		}
+        		else // if slave is not to be inverted
+        		{
+        			slaves.get(i).set(throttle);
+        		}
+        	}
         }
         return true;
     }
@@ -176,12 +225,18 @@ public class PIDMotor extends PIDSubsystem {
     }
     
     /**
-     * 
+     * add a slave motor
      * @param controller
      */
     public void addSlave(SpeedController controller)
     {
     	slaves.add(controller);
+    	slave_invert_flags.add(false);// if not specified, motor not inverted
+    }
+    
+    public void addSlave(SpeedController controller, boolean isInverted){
+    	slaves.add(controller);
+    	slave_invert_flags.add(isInverted);
     }
     
     /**
