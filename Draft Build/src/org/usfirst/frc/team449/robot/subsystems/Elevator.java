@@ -93,7 +93,6 @@ public class Elevator extends Subsystem {
      */
     public void releaseBrake(){
     	brakeController.set(Value.kReverse);
-
     }
     
     /**
@@ -101,7 +100,6 @@ public class Elevator extends Subsystem {
      */
     public void activateBrake(){
     	brakeController.set(Value.kForward);
-
     }
     
     /**
