@@ -19,7 +19,6 @@ public class ResetElevator extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.elevator.releaseBrake();
     	Robot.elevator.disablePID();
     	Robot.elevator.setMotorManual(-0.15);
     	t.start();
@@ -37,7 +36,6 @@ public class ResetElevator extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.elevator.activateBrake();
     	Robot.elevator.disablePID();
     	Robot.elevator.resetEncoder();
     }
