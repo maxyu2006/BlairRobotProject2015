@@ -10,18 +10,15 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ResetElevator extends Command {
 
-	private double tolerance;
-	
-    public ResetElevator(RobotMap config) {
+    public ResetElevator() {
         requires(Robot.elevator);
-        tolerance = config.ELEVATOR_PID_ACCEPTABILITY_RANGE;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.elevator.releaseBrake();
-    	Robot.elevator.resetPosition();
-    	Robot.elevator.enablePID();
+    	Robot.elevator.disablePID();
+    	Robot.elevator.setMotorManual(-0.15);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -30,13 +27,14 @@ public class ResetElevator extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Math.abs(Robot.elevator.getActualPosition() - Robot.elevator.getSetPoint()) < tolerance;
+        return Robot.elevator.isTouchingBottom();
     }
 
     // Called once after isFinished returns true
     protected void end() {
     	Robot.elevator.activateBrake();
     	Robot.elevator.disablePID();
+    	Robot.elevator.resetEncoder();
     }
 
     // Called when another command which requires one or more of the same

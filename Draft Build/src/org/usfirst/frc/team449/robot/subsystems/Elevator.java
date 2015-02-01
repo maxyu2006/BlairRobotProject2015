@@ -170,7 +170,7 @@ public class Elevator extends Subsystem {
      */
     public void raisePosition() {
     	if (position < ELEVATOR_THIRD_POSITION) {
-    		position++;
+    		position += 0.5;
     		setSetPoint(position);
     	}
     }
@@ -180,7 +180,7 @@ public class Elevator extends Subsystem {
      */
     public void lowerPosition() {
     	if (position > ELEVATOR_FIRST_POSITION) {
-    		position--;
+    		position -= 0.5;
     		setSetPoint(position);
     	}
     }
@@ -245,7 +245,7 @@ public class Elevator extends Subsystem {
     /**
      * manually sets the motor output
      * assumes that the PID has already been disabled
-     * started: hazheng 2/1/15
+     * @author hazheng 2/1/15
      * @param throttle
      */
     public void setMotorManual(double throttle){
