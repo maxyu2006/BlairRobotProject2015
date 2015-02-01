@@ -238,7 +238,17 @@ public class Elevator extends Subsystem {
     }
     
     public void disablePID() {
-    	motors.disable();
+    	motors.disable(); // doesn't actually disable motor, only disables PID control
     	controlState = MANUAL;
+    }
+    
+    /**
+     * manually sets the motor output
+     * assumes that the PID has already been disabled
+     * started: hazheng 2/1/15
+     * @param throttle
+     */
+    public void setMotorManual(double throttle){
+    	this.motors.setMotorVoltage(throttle);
     }
 }
