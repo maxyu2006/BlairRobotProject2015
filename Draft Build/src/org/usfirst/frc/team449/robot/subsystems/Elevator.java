@@ -187,7 +187,3 @@ public class Elevator extends Subsystem {
     	return rightArmLimit.get();
     }
 }
-    
-    
-    
-
