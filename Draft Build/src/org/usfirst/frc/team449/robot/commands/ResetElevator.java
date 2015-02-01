@@ -1,17 +1,20 @@
 package org.usfirst.frc.team449.robot.commands;
 
 import org.usfirst.frc.team449.robot.Robot;
-import org.usfirst.frc.team449.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class ResetElevator extends Command {
+	
+	private Timer t;
 
     public ResetElevator() {
         requires(Robot.elevator);
+        t = new Timer();
     }
 
     // Called just before this Command runs the first time
@@ -19,6 +22,7 @@ public class ResetElevator extends Command {
     	Robot.elevator.releaseBrake();
     	Robot.elevator.disablePID();
     	Robot.elevator.setMotorManual(-0.15);
+    	t.start();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -27,7 +31,8 @@ public class ResetElevator extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.elevator.isTouchingBottom();
+    	// stop if you hit the limit switch or it has taken longer than 2 seconds
+        return Robot.elevator.isTouchingBottom() || t.get() > 2;
     }
 
     // Called once after isFinished returns true
