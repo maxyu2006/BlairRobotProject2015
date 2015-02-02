@@ -65,7 +65,7 @@ public class Elevator extends Subsystem {
 		
 		//this PIDMotor should be operating in Position based control mode for elevator position
 		motors = new PIDMotor(config, config.ELEVATOR_P, config.ELEVATOR_I, config.ELEVATOR_D, 0, leftMotor, encoder, PIDMotor.POSITION_BASE);
-		motors.addSlave(rightMotor);
+		motors.addSlave(rightMotor,true);
 		
 		
 		setPoint = 0;

@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -17,8 +18,8 @@ public class Intake extends Subsystem {
     private final DoubleSolenoid intakeLeftSol;
     private final DoubleSolenoid intakeRightSol;
     
-    private final Victor leftArmMotor;
-    private final Victor rightArmMotor;
+    private final VictorSP leftArmMotor;
+    private final VictorSP rightArmMotor;
     
     private boolean areArmsOpen;
     private boolean isMotorOn;
@@ -31,8 +32,8 @@ public class Intake extends Subsystem {
      * @param config
      */
 	public Intake(RobotMap config) {    	
-    	leftArmMotor 	= new Victor(config.INTAKE_LEFT_MOTOR);
-    	rightArmMotor 	= new Victor(config.INTAKE_RIGHT_MOTOR);
+    	leftArmMotor 	= new VictorSP(config.INTAKE_LEFT_MOTOR);
+    	rightArmMotor 	= new VictorSP(config.INTAKE_RIGHT_MOTOR);
     	
     	intakeLeftSol  = new DoubleSolenoid(config.INTAKE_LSOLENOID_FORWARD, config.INTAKE_LSOLENOID_REVERSE);
     	intakeRightSol = new DoubleSolenoid(config.INTAKE_RSOLENOID_FORWARD, config.INTAKE_RSOLENOID_REVERSE);

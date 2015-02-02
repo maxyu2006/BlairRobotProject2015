@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSource.PIDSourceParameter;
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -45,11 +46,11 @@ public class Drive extends Subsystem {
 	public Drive(RobotMap config){
 
 		//initialize motor clusters and add slaves
-		this.leftMotors = new MotorCluster(new Victor(config.DRIVE_L1)); 	//first motor
-		this.leftMotors.addSlave(new Victor(config.DRIVE_L2));				//attach second motor
+		this.leftMotors = new MotorCluster(new VictorSP(config.DRIVE_L1)); 	//first motor
+		this.leftMotors.addSlave(new VictorSP(config.DRIVE_L2));				//attach second motor
 		
-		this.rightMotors = new MotorCluster(new Victor(config.DRIVE_R1)); 	//first motor
-		this.rightMotors.addSlave(new Victor(config.DRIVE_R2));				//attach second motor
+		this.rightMotors = new MotorCluster(new VictorSP(config.DRIVE_R1)); 	//first motor
+		this.rightMotors.addSlave(new VictorSP(config.DRIVE_R2));				//attach second motor
 		
 		this.leftEncoder 	= new Encoder(config.DRIVE_ENCODER_LA,config.DRIVE_ENCODER_LB);
 		this.rightEncoder	= new Encoder(config.DRIVE_ENCODER_RA,config.DRIVE_ENCODER_RB);
