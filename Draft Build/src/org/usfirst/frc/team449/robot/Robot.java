@@ -26,9 +26,9 @@ public class Robot extends IterativeRobot {
 	public static final RobotMap robotMap = new RobotMap("config.txt");
 
 	public static final OI 			OI 			= new OI(Robot.robotMap);
-	public static final Intake		intake		= new Intake(Robot.robotMap);
+//	public static final Intake		intake		= new Intake(Robot.robotMap);
 	public static final Elevator	elevator	= new Elevator(Robot.robotMap);
-	public static final Drive		drive		= new Drive(Robot.robotMap);
+//	public static final Drive		drive		= new Drive(Robot.robotMap);
 	
 	public static final Compressor c = new Compressor();
 	
@@ -45,7 +45,7 @@ public class Robot extends IterativeRobot {
         autonomousCommand = null;
         c.start();
         
-        this.driveCommand = new DriveRobot();
+//        this.driveCommand = new DriveRobot();
         this.elevatorCommand = new ElevatorMoveDirect();
     }
 	
@@ -72,7 +72,7 @@ public class Robot extends IterativeRobot {
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
         
-        this.driveCommand.start();
+//        this.driveCommand.start();
         this.elevatorCommand.start();
     }
 
