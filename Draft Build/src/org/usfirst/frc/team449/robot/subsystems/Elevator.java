@@ -70,6 +70,8 @@ public class Elevator extends Subsystem {
 		motors = new PIDMotor(config, config.ELEVATOR_P, config.ELEVATOR_I, config.ELEVATOR_D, 0, leftMotor, encoder, PIDMotor.POSITION_BASE);
 		motors.addSlave(rightMotor,true);
 		
+		motors.setAbsoluteTolerance(config.ELEVATOR_PID_TOLERANCE_RANGE);
+		
 		
 		setPoint = 0;
 		isArmOpen = true;
