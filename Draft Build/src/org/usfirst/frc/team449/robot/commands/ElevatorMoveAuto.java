@@ -12,12 +12,12 @@ import edu.wpi.first.wpilibj.command.Command;
  * Note: PID mode is enabled at the initialization of this command and disabled at once the command is finished.
  * @author eyob-- AliAnwar7477 1/31/15
  */
-public class MoveElevator extends Command {
+public class ElevatorMoveAuto extends Command {
 	
 	private boolean goingUp;
 	private double tolerance;
 
-    public MoveElevator(RobotMap config, boolean upOrDown) {	//hehehe
+    public ElevatorMoveAuto(RobotMap config, boolean upOrDown) {	//hehehe
         requires(Robot.elevator);
         goingUp = upOrDown;
         tolerance = config.ELEVATOR_PID_TOLERANCE_RANGE;

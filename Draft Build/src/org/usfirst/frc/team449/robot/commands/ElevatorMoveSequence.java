@@ -11,11 +11,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  * Read the docs on listed commands for more info.
  * @author eyob-- 2/1/15
  */
-public class MoveElevatorSequence extends CommandGroup {
+public class ElevatorMoveSequence extends CommandGroup {
     
-    public MoveElevatorSequence(RobotMap config, boolean goingUp) {
-        addSequential(new ReleaseBrake());
-        addSequential(new MoveElevator(config, goingUp));
-        addSequential(new ActivateBrake());
+    public ElevatorMoveSequence(RobotMap config, boolean goingUp) {
+        addSequential(new ElevatorReleaseBrake());
+        addSequential(new ElevatorMoveAuto(config, goingUp));
+        addSequential(new ElevatorActivateBrake());
     }
 }

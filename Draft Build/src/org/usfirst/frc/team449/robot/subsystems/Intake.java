@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -14,16 +15,13 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Intake extends Subsystem {
     
 	// Intake member variables
-	private final DigitalInput leftLimSwitch;
-	private final DigitalInput rightLimSwitch;
-	
     private final DoubleSolenoid intakeLeftSol;
     private final DoubleSolenoid intakeRightSol;
     
-    private final Victor leftArmMotor;
-    private final Victor rightArmMotor;
+    private final VictorSP leftArmMotor;
+    private final VictorSP rightArmMotor;
     
-    private boolean isArmOpen;
+    private boolean areArmsOpen;
     private boolean isMotorOn;
     private boolean isMotorForward;
     
@@ -33,17 +31,14 @@ public class Intake extends Subsystem {
      * 
      * @param config
      */
-	public Intake(RobotMap config) {
-    	leftLimSwitch 	= new DigitalInput(config.INTAKE_LEFT_LIMIT);
-    	rightLimSwitch 	= new DigitalInput(config.INTAKE_RIGHT_LIMIT);
-    	
-    	leftArmMotor 	= new Victor(config.INTAKE_LEFT_MOTOR);
-    	rightArmMotor 	= new Victor(config.INTAKE_RIGHT_MOTOR);
+	public Intake(RobotMap config) {    	
+    	leftArmMotor 	= new VictorSP(config.INTAKE_LEFT_MOTOR);
+    	rightArmMotor 	= new VictorSP(config.INTAKE_RIGHT_MOTOR);
     	
     	intakeLeftSol  = new DoubleSolenoid(config.INTAKE_LSOLENOID_FORWARD, config.INTAKE_LSOLENOID_REVERSE);
     	intakeRightSol = new DoubleSolenoid(config.INTAKE_RSOLENOID_FORWARD, config.INTAKE_RSOLENOID_REVERSE);
     	
-    	isArmOpen = true;
+    	areArmsOpen = true;
     	isMotorOn = false;
     	isMotorForward = true;
     	
@@ -76,48 +71,39 @@ public class Intake extends Subsystem {
 	/**
 	 * Toggles the direction of the motors.
 	 */
-	public void toggleMotorDir() {
+	public void toggleMotorSpinDirection() {
 		leftArmMotor.set(-leftArmMotor.get());
 		rightArmMotor.set(-rightArmMotor.get());
 		isMotorForward = !isMotorForward;
 	}
 	
 	/**
-	 * Toggles the open/closed state of the arms.
+	 * Opens the intake arms.
 	 */
-	public void toggleArms(){
-		if(isArmOpen){
-    		intakeLeftSol.set(Value.kReverse);
-    		intakeRightSol.set(Value.kReverse);
-    	}
-    	else{
-    		intakeLeftSol.set(Value.kForward);
-    		intakeRightSol.set(Value.kForward);
-    	}
-		isArmOpen = !isArmOpen;
+	public void openArms(){
+		intakeLeftSol.set(Value.kReverse);
+		intakeRightSol.set(Value.kReverse);
+		
+		areArmsOpen = true;
+	}
+	
+	/**
+	 * Closes the intake arms.
+	 */
+	public void closeArms(){
+		intakeLeftSol.set(Value.kForward);
+		intakeRightSol.set(Value.kForward);
+		
+		areArmsOpen = false;
 	}
 	
 	/**
 	 * Returns true if the arms are open, false otherwise.
 	 * @return isArmOpen - A boolean that is true if the arms are open, false otherwise.
 	 */
-	public boolean isArmOpen() {
+	public boolean areArmsOpen() {
 		
-		return isArmOpen;
-	}
-
-	/**
-	 * @return left limit switch's state
-	 */
-	public boolean getLeftSwitchState() {
-		return leftLimSwitch.get();
-	}
-
-	/**
-	 * @return right limit switch's state
-	 */
-	public boolean getRightSwitchState() {
-		return rightLimSwitch.get();
+		return areArmsOpen;
 	}
 
     public void initDefaultCommand() {	

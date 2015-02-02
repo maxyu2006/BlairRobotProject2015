@@ -31,8 +31,8 @@ public class ElevatorMoveDirect extends Command {
     protected void execute() {
     	//TODO: Write a flag in elevator to determine if PID is enabled
     	Robot.elevator.disablePID();//this is to ensure that some other thread didn't accidentally call PID
-    	joystick_val = joystick_scale*Robot.OI.getJoystickAxisY(Robot.OI.joystick3);// arbitrary assignment
-    	override = Robot.OI.joystick3.getTrigger();
+    	joystick_val = joystick_scale*Robot.OI.getJoystickAxisY(Robot.OI.joysticks[2]);// arbitrary assignment
+    	override = Robot.OI.joysticks[2].getTrigger();
     	if(Math.abs(joystick_val) < deadband && override==false)//if input is under deadband and no override 
     	{
     		Robot.elevator.setMotorManual(0);

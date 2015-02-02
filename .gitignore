@@ -3,11 +3,8 @@
 /Confidence Ensurer/nbproject/private/
 *.class
 *.jar
-testBuild/dist/FRCUserProgram.jar
 .metadata
 *~
 RemoteSystemsTempFiles
 Mockup
 .recommenders
-*.classpath
-Draft Build/.classpath

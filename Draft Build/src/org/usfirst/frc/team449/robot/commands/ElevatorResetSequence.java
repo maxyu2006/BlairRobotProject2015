@@ -8,11 +8,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  * For more info on each of these. Check the JavaDocs for them.
  * @author eyob-- 2/1/15
  */
-public class ResetElevatorSequence extends CommandGroup {
+public class ElevatorResetSequence extends CommandGroup {
     
-    public ResetElevatorSequence() {
-        addSequential(new ReleaseBrake());
-        addSequential(new ResetElevator());
-        addSequential(new ActivateBrake());
+    public ElevatorResetSequence() {
+        addSequential(new ElevatorReleaseBrake());
+        addSequential(new ElevatorReset());
+        addSequential(new ElevatorActivateBrake());
     }
 }
