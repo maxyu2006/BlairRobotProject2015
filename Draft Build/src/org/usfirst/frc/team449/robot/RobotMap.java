@@ -1,4 +1,10 @@
 package org.usfirst.frc.team449.robot;
+
+import org.usfirst.frc.team449.robot.subsystems.Drive;
+
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -122,64 +128,65 @@ public final class RobotMap {
 	 */
 	public final int DRIVE_ENCODER_LB;
 
+	/**
+	 * Drive PID P term
+	 */
 	public final double DRIVE_P;
 	
+	/**
+	 * Drive PID I term
+	 */
 	public final double DRIVE_I;
 	
+	/**
+	 * Drive PID D term
+	 */
 	public final double DRIVE_D;
 	
+	/**
+	 * Drive PID F term for speed control
+	 */
+	public final double DRIVE_F;
+	
+	/**
+	 * Hard limit for Drive speed under PID control in Rotations per second
+	 */
 	public final int DRIVE_MAX_RATE;
 	
-	
-	//===========================Intake constants========================
 	/**
-	 * Channel for the intake's left limit switch.
+	 * default mode for drive control true = PID, false = Manual
 	 */
-	public final int INTAKE_LEFT_LIMIT;
-	
+	public final boolean DRIVE_DEFAULT_MODE;
+	//===========================Controller Ports/Scheme======================
 	/**
-	 * Channel for the intake's right limit switch.
+	 * Joystick usb port for Joystick 0
 	 */
-	public final int INTAKE_RIGHT_LIMIT;
+	public final int JOYSTICK_0;
 	
 	/**
-	 * Channel for the intake's left motor.
-	 */
-	public final int INTAKE_LEFT_MOTOR;
-	
-	/**
-	 * Channel for the intake's right motor.
-	 */
-	public final int INTAKE_RIGHT_MOTOR;
-	
-	public final int INTAKE_LSOLENOID_FORWARD;
-	
-	public final int INTAKE_LSOLENOID_REVERSE;
-	
-	public final int INTAKE_RSOLENOID_FORWARD;
-	
-	public final int INTAKE_RSOLENOID_REVERSE;
-	
-	//===========================Controller Ports======================
-	/**
-	 * Joystick port for Joystick 1
+	 * Joystick usb port for Joystick 1
 	 */
 	public final int JOYSTICK_1;
 	
 	/**
-	 * Joystick port for Joystick 2
+	 * Joystick usb port for Joystick 2
 	 */
 	public final int JOYSTICK_2;
 	
 	/**
-	 * Joystick port for Joystick 3
+	 * Joystick usb port for Joystick 3
 	 */
 	public final int JOYSTICK_3;
 	
 	/**
-	 * Joystick port for Joystick 4
+	 * the joystick with the button to toggle manual mode for the drive system
 	 */
-	public final int JOYSTICK_4;
+	public final int DRIVE_MANUAL_TOGGLE_JOYSTICK;
+	
+	/**
+	 * the button number on DRIVE_MANUAL_TOGGLE_JOYSTICK that toggles manual mode for the drive system
+	 */
+	public final int DRIVE_MANUAL_TOGGLE_BUTTON;
 	
 	/**
 	 * Button for moving elevator up.
@@ -203,10 +210,10 @@ public final class RobotMap {
 	{
 		this.ENCODER_PPR = 512;
 		
-		this.JOYSTICK_1 = 1;
-		this.JOYSTICK_2 = 2;
-		this.JOYSTICK_3 = 3;
-		this.JOYSTICK_4 = 4;
+		this.JOYSTICK_0 = 1;
+		this.JOYSTICK_1 = 2;
+		this.JOYSTICK_2 = 3;
+		this.JOYSTICK_3 = 4;
 		
 		this.DRIVE_L1 = 0;
 		this.DRIVE_L2 = 1;
@@ -251,18 +258,11 @@ public final class RobotMap {
 		this.DRIVE_P = 0.05;
 		this.DRIVE_I = 0;
 		this.DRIVE_D = 0;
+		this.DRIVE_F = 0.05;
+
+		this.DRIVE_MANUAL_TOGGLE_JOYSTICK 	= 1;
+		this.DRIVE_MANUAL_TOGGLE_BUTTON 	= 1;
 		
-		this.INTAKE_LEFT_LIMIT = 0;
-		this.INTAKE_RIGHT_LIMIT = 1;
-		this.INTAKE_LEFT_MOTOR = 2;
-		this.INTAKE_RIGHT_MOTOR = 3;
-		
-		this.INTAKE_LSOLENOID_FORWARD=0;
-		
-		this.INTAKE_LSOLENOID_REVERSE=1;
-		
-		this.INTAKE_RSOLENOID_FORWARD=2;
-		
-		this.INTAKE_RSOLENOID_REVERSE=3;
+		this.DRIVE_DEFAULT_MODE = Drive.MANUAL;
 	}//end RobotMap()
 }//end class

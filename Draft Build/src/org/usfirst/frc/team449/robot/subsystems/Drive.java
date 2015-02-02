@@ -3,6 +3,8 @@ package org.usfirst.frc.team449.robot.subsystems;
 import org.usfirst.frc.team449.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDSource.PIDSourceParameter;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -12,121 +14,137 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Drive extends Subsystem {
     
 	//drive PID motor systems
-	private final PIDMotor leftMotors;
-	private final PIDMotor rightMotors;
+	private final MotorCluster leftMotors;
+	private final MotorCluster rightMotors;
+	
+	private final Encoder leftEncoder;
+	private final Encoder rightEncoder;
+	
+	private final PIDController leftController;
+	private final PIDController rightController;
 	
 	private final int maxRate;
 	
-	private boolean manual;
+	private boolean currentMode;
 	
 	/**
 	 * control mode manual - drivers in direct control
 	 */
-	public static final boolean MANUAL 	= true;
+	public static final boolean MANUAL 	= false;
 	
 	/**
 	 * control mode PID - PID system is in control
 	 */
-	public static final boolean PID		= false;
+	public static final boolean PID		= true;
 	
 	/**
-	 * 
-	 * @param config
+	 * Initialize the Drive subsystem
+	 * @param config the RobotMap containint all constants
 	 */
 	public Drive(RobotMap config){
-		//temporary intializations
-		Victor leftMotor1 = new Victor(config.DRIVE_L1);
-		Victor leftMotor2 = new Victor(config.DRIVE_L2);
-		
-		Victor rightMotor1 = new Victor(config.DRIVE_R1);
-		Victor rightMotor2 = new Victor(config.DRIVE_R2);
-		
-		Encoder leftEncoder 	= new Encoder(config.DRIVE_ENCODER_LA,config.DRIVE_ENCODER_LB);
-		Encoder rightEncoder	= new Encoder(config.DRIVE_ENCODER_RA,config.DRIVE_ENCODER_RB);
 
+		//initialize motor clusters and add slaves
+		this.leftMotors = new MotorCluster(new Victor(config.DRIVE_L1)); 	//first motor
+		this.leftMotors.addSlave(new Victor(config.DRIVE_L2));				//attach second motor
+		
+		this.rightMotors = new MotorCluster(new Victor(config.DRIVE_R1)); 	//first motor
+		this.rightMotors.addSlave(new Victor(config.DRIVE_R2));				//attach second motor
+		
+		this.leftEncoder 	= new Encoder(config.DRIVE_ENCODER_LA,config.DRIVE_ENCODER_LB);
+		this.rightEncoder	= new Encoder(config.DRIVE_ENCODER_RA,config.DRIVE_ENCODER_RB);
+		
+		this.leftEncoder.setPIDSourceParameter(PIDSourceParameter.kRate);
+		this.rightEncoder.setPIDSourceParameter(PIDSourceParameter.kRate);
+
+		this.leftController = new PIDController(config.DRIVE_P, config.DRIVE_I, config.DRIVE_D, config.DRIVE_F, leftEncoder, this.leftMotors);
+		this.rightController = new PIDController(config.DRIVE_P, config.DRIVE_I, config.DRIVE_D, config.DRIVE_F, rightEncoder, this.rightMotors);
+		
+		
 		this.maxRate = config.DRIVE_MAX_RATE;
-		
-		leftMotors = new PIDMotor(config, config.DRIVE_P, config.DRIVE_I, config.DRIVE_D, 0, leftMotor1, leftEncoder, PIDMotor.SPEED_BASE);
-		leftMotors.addSlave(leftMotor2);
-		
-		rightMotors = new PIDMotor(config, config.DRIVE_P, config.DRIVE_I, config.DRIVE_D, 0, rightMotor1, rightEncoder, PIDMotor.SPEED_BASE);
-		rightMotors.addSlave(rightMotor2);
-		
-		leftMotors.enable();
-		rightMotors.enable();
-		this.manual = false;
+
+		this.setControlMode(config.DRIVE_DEFAULT_MODE);
 	}//end drive
 	
 	/**
-	 * Sends power to the three left and right three motors on the drive frame.
-	 * @param leftVolts - The amount of volts to supply to the three left motors, from -1 to 1
-	 * @param rightVolts - The amount of volts to supply to the three right motors, from -1 to 1
+	 * Sends power to the two left and right two motors on the drive frame. If in PID control, it is fraction of max absolute speed set in RobotMap.
+	 * If in Manual, it is fraction of maximum power.
+	 * @param leftVolts - The fraction of power to supply to the two left motors, from -1 to 1
+	 * @param rightVolts - The fraction of power to supply to the two right motors, from -1 to 1
 	 */
-	public void setThrottle(double leftVolts, double rightVolts){
+	public void setThrottle(double leftPower, double rightPower){
 
-		if(getControlState() == MANUAL)
+		if(this.getControlMode() == MANUAL)
 		{
-			rightMotors.setMotorVoltage(rightVolts);
-			leftMotors.setMotorVoltage(leftVolts);
+			this.leftMotors.set(leftPower);
+			this.rightMotors.set(rightPower);
 		}
 		
-		if(getControlState() == PID)
+		if(this.getControlMode() == PID)
 		{
-			rightMotors.setSetpoint(rightVolts * this.maxRate);
-			leftMotors.setSetpoint(leftVolts * this.maxRate);
+			this.leftController.setSetpoint(this.maxRate * leftPower);
+			this.rightController.setSetpoint(this.maxRate * rightPower);
 		}
-		
 	}//end move()
-	
+
 	/**
-	 * @return the amount of volts going to the left motors
+	 * @return the current rate of the left side wheels in RPS
 	 */
 	public double getLeftVel(){
-		return leftMotors.getRate();
+		return this.leftEncoder.getRate();
 	}
-	
+
 	/**
-	 * @return the amount of volts going to the right motors
+	 * @return the current rate of the right side wheels in RPS
 	 */
 	public double getRightVel(){
-		return rightMotors.getRate();
+		return this.rightEncoder.getRate();
 	}
 	
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+
     	setDefaultCommand(new DriveRobot());
     }
     
+
     /**
-     * 
-     * @return
+     * toggle the control mode
      */
-    public boolean getControlState()
+    public void toggleControlMode()
     {
-    	return this.manual;
+    	this.setControlMode(!this.getControlMode());
     }
     
     /**
-     * set the control state
-     * @param controlState
+     * set the control mode of this
+     * @param mode Drive.MANUAL or Drive.PID
      */
-    public void setControlState(boolean controlState)
+    public void setControlMode(boolean mode)
     {
-    	if(controlState == Drive.MANUAL)
+    	if(mode == Drive.MANUAL)
     	{
-    		leftMotors.disable();
-    		rightMotors.disable();
-    	}//end if
+    		this.leftController.disable();
+    		this.rightController.disable();
+    	}
     	
-    	if(controlState == Drive.PID)
+    	if(mode == Drive.PID)
     	{
-    		leftMotors.enable();
-    		rightMotors.enable();
-    	}//endif
+    		this.leftController.enable();
+    		this.rightController.enable();
+    	}
     	
-    	this.manual = controlState;
-    }//end setState()
+    	this.currentMode = mode;
+    }
+    
+    /**
+     * returns the mode the drive is in
+     * @return Drive.MANUAL or Drive.PID
+     */
+    public boolean getControlMode()
+    {
+    	return this.currentMode;
+    }
 }//end class
 
