@@ -1,10 +1,13 @@
 
 package org.usfirst.frc.team449.robot;
 
+import org.usfirst.frc.team449.robot.commands.DriveRobot;
+import org.usfirst.frc.team449.robot.commands.ElevatorMoveDirect;
 import org.usfirst.frc.team449.robot.subsystems.Drive;
 import org.usfirst.frc.team449.robot.subsystems.Elevator;
 import org.usfirst.frc.team449.robot.subsystems.Intake;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -27,8 +30,12 @@ public class Robot extends IterativeRobot {
 	public static final Elevator	elevator	= new Elevator(Robot.robotMap);
 	public static final Drive		drive		= new Drive(Robot.robotMap);
 	
+	public static final Compressor c = new Compressor();
+	
 	Command autonomousCommand;
-
+	//initial teleop commands
+	Command driveCommand;
+	Command elevatorCommand;
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -36,6 +43,10 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		// instantiate the command used for the autonomous period
         autonomousCommand = null;
+        c.start();
+        
+        this.driveCommand = new DriveRobot();
+        this.elevatorCommand = new ElevatorMoveDirect();
     }
 	
 	public void disabledPeriodic() {
@@ -60,6 +71,9 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        
+        this.driveCommand.start();
+        this.elevatorCommand.start();
     }
 
     /**
@@ -67,7 +81,6 @@ public class Robot extends IterativeRobot {
      * You can use it to reset subsystems before shutting down.
      */
     public void disabledInit(){
-
     }
 
     /**
