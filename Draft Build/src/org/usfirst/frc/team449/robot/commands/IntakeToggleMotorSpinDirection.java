@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ToggleMotorSpinDirection extends Command {
+public class IntakeToggleMotorSpinDirection extends Command {
 
-    public ToggleMotorSpinDirection() {
+    public IntakeToggleMotorSpinDirection() {
         requires(Robot.intake);
     }
 

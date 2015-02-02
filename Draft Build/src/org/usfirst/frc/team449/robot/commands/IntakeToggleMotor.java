@@ -7,26 +7,15 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class MoveIntakeArms extends Command {
-
-	private final boolean OPEN = true;
-	private final boolean CLOSED = false;
-
-	private boolean desiredArmState;
+public class IntakeToggleMotor extends Command {
 	
-    public MoveIntakeArms(boolean desiredArmState) {
-    	requires(Robot.intake);
-    	
-        this.desiredArmState = desiredArmState;
+    public IntakeToggleMotor() {
+        requires(Robot.intake);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
-    	if(desiredArmState == OPEN)
-    		Robot.intake.openArms();
-    	else
-    		Robot.intake.closeArms();
+    	Robot.intake.toggleMotor();
     }
 
     // Called repeatedly when this Command is scheduled to run

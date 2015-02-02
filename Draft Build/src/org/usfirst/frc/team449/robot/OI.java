@@ -43,18 +43,20 @@ public class OI {
 	 * the button
 	 */
 	public final JoystickButton driveManualToggle;
+	public final JoystickButton elevatorUp;
+	public final JoystickButton elevatorDown;
+	public final JoystickButton elevatorArmToggle;
 	
 	public OI(RobotMap config)
 	{
-		joysticks[0] = new Joystick(config.JOYSTICK_0);
-		joysticks[1] = new Joystick(config.JOYSTICK_1);
-		joysticks[2] = new Joystick(config.JOYSTICK_2);
-		joysticks[3] = new Joystick(config.JOYSTICK_3);
-		elevatorUp = new JoystickButton(joystick3, config.ELEVATOR_UP_BUTTON);
-		elevatorDown = new JoystickButton(joystick3, config.ELEVATOR_DOWN_BUTTON);
-		elavatorArmToggle = new JoystickButton(joystick3, config.ELEVATOR_ARMS_TOGGLE_BUTTON);
-		
-		
+		joysticks[0] = new Joystick(config.JOYSTICK_1);
+		joysticks[1] = new Joystick(config.JOYSTICK_2);
+		joysticks[2] = new Joystick(config.JOYSTICK_3);
+		joysticks[3] = new Joystick(config.JOYSTICK_4);
+		elevatorUp = new JoystickButton(joysticks[3], config.ELEVATOR_UP_BUTTON);
+		elevatorDown = new JoystickButton(joysticks[3], config.ELEVATOR_DOWN_BUTTON);
+		elevatorArmToggle = new JoystickButton(joysticks[3], config.ELEVATOR_ARMS_TOGGLE_BUTTON);
+
 	}
 	
 	/**
