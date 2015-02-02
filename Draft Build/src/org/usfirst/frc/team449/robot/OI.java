@@ -49,14 +49,14 @@ public class OI {
 	
 	public OI(RobotMap config)
 	{
-		joysticks[0] = new Joystick(config.JOYSTICK_1);
-		joysticks[1] = new Joystick(config.JOYSTICK_2);
-		joysticks[2] = new Joystick(config.JOYSTICK_3);
-		joysticks[3] = new Joystick(config.JOYSTICK_4);
+		joysticks[0] = new Joystick(config.JOYSTICK_0);
+		joysticks[1] = new Joystick(config.JOYSTICK_1);
+		joysticks[2] = new Joystick(config.JOYSTICK_2);
+		joysticks[3] = new Joystick(config.JOYSTICK_3);
 		elevatorUp = new JoystickButton(joysticks[3], config.ELEVATOR_UP_BUTTON);
 		elevatorDown = new JoystickButton(joysticks[3], config.ELEVATOR_DOWN_BUTTON);
 		elevatorArmToggle = new JoystickButton(joysticks[3], config.ELEVATOR_ARMS_TOGGLE_BUTTON);
-
+		driveManualToggle = new JoystickButton(joysticks[config.DRIVE_MANUAL_TOGGLE_JOYSTICK],config.DRIVE_MANUAL_TOGGLE_BUTTON);
 	}
 	
 	/**
