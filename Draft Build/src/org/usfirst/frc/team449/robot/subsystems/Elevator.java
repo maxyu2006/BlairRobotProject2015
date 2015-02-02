@@ -290,4 +290,17 @@ public class Elevator extends Subsystem {
     public double getUltrasonicDist(){
     	return this.ultra_scale_factor*this.ultraSonic.getVoltage();
     }
+    
+    /***
+     * checks if the underlying PIDMotor controller has reached it's desired setpoint
+     * @author hazheng
+     * started 2/2/15
+     */
+    public boolean isAtSetpoint(){
+    	if(isPIDEnabled()==false)// I'm arbitrarily deciding to return false if PID is disabled
+    	{
+    		return false;
+    	}
+    	return this.motors.onTarget();//default PIDSubsystem code that determines if the setPoint has been reached
+    }
 }
