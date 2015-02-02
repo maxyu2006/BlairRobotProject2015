@@ -63,9 +63,6 @@ public final class RobotMap {
 	public final boolean DRIVE_DEFAULT_MODE; //default mode for drive control true = PID, false = Manual
 	
 	//===========================Intake Constants==========================
-	public final int INTAKE_LEFT_LIMIT;
-	public final int INTAKE_RIGHT_LIMIT;
-	
 	public final int INTAKE_LEFT_MOTOR;
 	public final int INTAKE_RIGHT_MOTOR;
 	
@@ -95,61 +92,73 @@ public final class RobotMap {
 	 */
 	public RobotMap(String configFile)
 	{
-		this.ENCODER_PPR = 512;
-		
-		this.JOYSTICK_0 = 1;
-		this.JOYSTICK_1 = 2;
-		this.JOYSTICK_2 = 3;
-		this.JOYSTICK_3 = 4;
-		
+		//motors
 		this.DRIVE_L1 = 0;
 		this.DRIVE_L2 = 1;
-		
 		this.DRIVE_R1 = 2;
 		this.DRIVE_R2 = 3;
 		
-		this.ELEVATOR_TOP_LIMIT = 0;
-		this.ELEVATOR_BOTTOM_LIMIT = 1;
-		this.ELEVATOR_LEFT_LIMIT = 2;
-		this.ELEVATOR_RIGHT_LIMIT = 3;
+		this.ELEVATOR_LEFT_MOTOR = 4;
+		this.ELEVATOR_RIGHT_MOTOR = 5;
 		
+		this.INTAKE_LEFT_MOTOR =6;
+		this.INTAKE_RIGHT_MOTOR =7;
+		
+		//solenoids
 		this.ELEVATOR_ARM_SOLENOID_FWD = 0;
 		this.ELEVATOR_ARM_SOLENOID_REV = 1;
 		this.ELEVATOR_BRAKE_SOLENOID_FWD = 2;
 		this.ELEVATOR_BRAKE_SOLENOID_REV = 3;
+		this.INTAKE_LSOLENOID_FORWARD =4;
+		this.INTAKE_LSOLENOID_REVERSE =5;
+		this.INTAKE_RSOLENOID_FORWARD =6;
+		this.INTAKE_RSOLENOID_REVERSE =7;
 		
-		this.ELEVATOR_ENCODER_CHANNEL_A = 0;
-		this.ELEVATOR_ENCODER_CHANNEL_B = 1;
-		
-		this.ELEVATOR_P = 0.05;
-		this.ELEVATOR_I = 0;
-		this.ELEVATOR_D = 0;
-
-		this.ELEVATOR_LEFT_MOTOR = 0;
-		this.ELEVATOR_RIGHT_MOTOR = 1;
-		
-		this.ELEVATOR_PID_TOLERANCE_RANGE = 0.001;
-		
-		this.ELEVATOR_UP_BUTTON = 3;
-		this.ELEVATOR_DOWN_BUTTON = 2;
-		
-		this.ELEVATOR_ARMS_TOGGLE_BUTTON = 1;
+		//digital inputs 
+		this.ENCODER_PPR = 512;
 		
 		this.DRIVE_ENCODER_RA = 0;
 		this.DRIVE_ENCODER_RB = 1;
 		this.DRIVE_ENCODER_LA = 2;
 		this.DRIVE_ENCODER_LB = 3;
+		this.ELEVATOR_ENCODER_CHANNEL_A = 5;
+		this.ELEVATOR_ENCODER_CHANNEL_B = 6;
 		
+		this.ELEVATOR_LEFT_LIMIT = 7;
+		this.ELEVATOR_RIGHT_LIMIT = 8;
+		this.ELEVATOR_TOP_LIMIT = 9;
+		this.ELEVATOR_BOTTOM_LIMIT = 10;
+		
+		//subsystem configs 
 		this.DRIVE_MAX_RATE = 512;
+		this.DRIVE_DEFAULT_MODE = Drive.MANUAL;
 		
 		this.DRIVE_P = 0.05;
 		this.DRIVE_I = 0;
 		this.DRIVE_D = 0;
 		this.DRIVE_F = 0.05;
+		
+		this.ELEVATOR_P = 0.05;
+		this.ELEVATOR_I = 0;
+		this.ELEVATOR_D = 0;
+		
+		this.ELEVATOR_PID_TOLERANCE_RANGE = 0.001;
+		
+		//Controlls
+		this.JOYSTICK_0 = 1;
+		this.JOYSTICK_1 = 2;
+		this.JOYSTICK_2 = 3;
+		this.JOYSTICK_3 = 4;
+		
+		this.ELEVATOR_UP_BUTTON = 3;
+		this.ELEVATOR_DOWN_BUTTON = 2;
+		this.ELEVATOR_ARMS_TOGGLE_BUTTON = 1;
 
 		this.DRIVE_MANUAL_TOGGLE_JOYSTICK 	= 1;
 		this.DRIVE_MANUAL_TOGGLE_BUTTON 	= 1;
 		
-		this.DRIVE_DEFAULT_MODE = Drive.MANUAL;
+		
+		
+		
 	}//end RobotMap()
 }//end class
