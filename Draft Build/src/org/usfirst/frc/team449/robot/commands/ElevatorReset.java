@@ -13,11 +13,11 @@ import edu.wpi.first.wpilibj.command.Command;
  * When the command finishes, the encoder will be reset back to 0.
  * @author eyob-- AliAnwar7477 1/31/15
  */
-public class ResetElevator extends Command {
+public class ElevatorReset extends Command {
 	
 	private Timer t;	// timer to keep track of how long the command has been running
 
-    public ResetElevator() {
+    public ElevatorReset() {
         requires(Robot.elevator);
         t = new Timer();
     }

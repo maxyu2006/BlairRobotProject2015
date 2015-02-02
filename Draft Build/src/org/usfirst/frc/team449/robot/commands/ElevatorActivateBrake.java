@@ -5,19 +5,19 @@ import org.usfirst.frc.team449.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Just releases the brake, isFinished is set to return true.
+ * Just activates the brake, isFinished is set to return true.
  * Note: This assumes that the brakes work; if the brakes can receive a message to move,
  * but nothing physically happens, it will still end as if it did work.
  * @author eyob-- 2/1/15
  */
-public class ReleaseBrake extends Command {
+public class ElevatorActivateBrake extends Command {
 
-    public ReleaseBrake() {
+    public ElevatorActivateBrake() {
         requires(Robot.elevator);
     }
 
     protected void initialize() {
-    	Robot.elevator.releaseBrake();
+    	Robot.elevator.activateBrake();
     }
 
     protected void execute() {
