@@ -61,6 +61,19 @@ public final class RobotMap {
 	
 	public final int DRIVE_MAX_RATE; //Hard limit for Drive speed under PID control in Rotations per second
 	public final boolean DRIVE_DEFAULT_MODE; //default mode for drive control true = PID, false = Manual
+	
+	//===========================Intake Constants==========================
+	public final int INTAKE_LEFT_LIMIT;
+	public final int INTAKE_RIGHT_LIMIT;
+	
+	public final int INTAKE_LEFT_MOTOR;
+	public final int INTAKE_RIGHT_MOTOR;
+	
+	public final int INTAKE_LSOLENOID_FORWARD;
+	public final int INTAKE_LSOLENOID_REVERSE;
+	public final int INTAKE_RSOLENOID_FORWARD;
+	public final int INTAKE_RSOLENOID_REVERSE;
+	
 	//===========================Controller Ports/Scheme======================
 
 	public final int JOYSTICK_0; //Joystick usb port for Joystick 0
@@ -74,6 +87,8 @@ public final class RobotMap {
 	public final int ELEVATOR_UP_BUTTON;//Button for moving elevator up.
 	public final int ELEVATOR_DOWN_BUTTON; //Button for moving elevator down.
 	public final int ELEVATOR_ARMS_TOGGLE_BUTTON; //Button to toggle the elevator arms
+
+	
 	/**
 	 * 
 	 * @param configFile

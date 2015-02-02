@@ -59,8 +59,8 @@ public class Elevator extends Subsystem {
 		
 		
 		//initialize temporary variables to pass into the PID motor
-		TalonSRX 	leftMotor   = new TalonSRX(config.INTAKE_LEFT_MOTOR);
-		TalonSRX 	rightMotor  = new TalonSRX(config.INTAKE_RIGHT_MOTOR);
+		TalonSRX 	leftMotor   = new TalonSRX(config.ELEVATOR_LEFT_MOTOR);
+		TalonSRX 	rightMotor  = new TalonSRX(config.ELEVATOR_RIGHT_MOTOR);
 		Encoder encoder 	= new Encoder(config.ELEVATOR_ENCODER_CHANNEL_A, config.ELEVATOR_ENCODER_CHANNEL_B, false, EncodingType.k4X);
 		
 		//this PIDMotor should be operating in Position based control mode for elevator position
