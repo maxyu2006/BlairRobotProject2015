@@ -55,7 +55,6 @@ public final class RobotMap {
 	public final int ELEVATOR_BRAKE_SOLENOID_REV;
 	
 	
-
 	/**
 	 * Channel A for the elevator's encoder.
 	 */

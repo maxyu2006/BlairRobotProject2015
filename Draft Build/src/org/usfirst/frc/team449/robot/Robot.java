@@ -1,7 +1,6 @@
 
 package org.usfirst.frc.team449.robot;
 
-import org.usfirst.frc.team449.robot.commands.DriveRobot;
 import org.usfirst.frc.team449.robot.subsystems.Drive;
 import org.usfirst.frc.team449.robot.subsystems.Elevator;
 import org.usfirst.frc.team449.robot.subsystems.Intake;
@@ -29,7 +28,6 @@ public class Robot extends IterativeRobot {
 	public static final Drive		drive		= new Drive(Robot.robotMap);
 	
 	Command autonomousCommand;
-	private DriveRobot driver;
 
     /**
      * This function is run when the robot is first started up and should be
