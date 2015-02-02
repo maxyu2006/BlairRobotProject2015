@@ -129,8 +129,9 @@ public final class RobotMap {
 	
 	public final double DRIVE_D;
 	
+	public final double DRIVE_F;
 	public final int DRIVE_MAX_RATE;
-	
+	public final boolean DRIVE_DEFAULT_MODE;
 	
 	//===========================Intake constants========================
 	/**
@@ -180,7 +181,7 @@ public final class RobotMap {
 	/**
 	 * Joystick port for Joystick 4
 	 */
-	public final int JOYSTICK_4;
+	public final int JOYSTICK_0;
 	
 	/**
 	 * Button for moving elevator up.
@@ -196,6 +197,9 @@ public final class RobotMap {
 	 * Button to toggle the elevator arms
 	 */
 	public final int ELEVATOR_ARMS_TOGGLE_BUTTON;
+	
+	public final int DRIVE_MANUAL_TOGGLE_JOYSTICK;
+	public final int DRIVE_MANUAL_TOGGLE_BUTTON;
 	/**
 	 * 
 	 * @param configFile
@@ -204,10 +208,10 @@ public final class RobotMap {
 	{
 		this.ENCODER_PPR = 512;
 		
-		this.JOYSTICK_1 = 1;
-		this.JOYSTICK_2 = 2;
-		this.JOYSTICK_3 = 3;
-		this.JOYSTICK_4 = 4;
+		this.JOYSTICK_0 = 1;
+		this.JOYSTICK_1 = 2;
+		this.JOYSTICK_2 = 3;
+		this.JOYSTICK_3 = 4;
 		
 		this.DRIVE_L1 = 0;
 		this.DRIVE_L2 = 1;
@@ -242,16 +246,21 @@ public final class RobotMap {
 		
 		this.ELEVATOR_ARMS_TOGGLE_BUTTON = 1;
 		
+		this.DRIVE_MANUAL_TOGGLE_JOYSTICK =1;
+		this.DRIVE_MANUAL_TOGGLE_BUTTON =1;
+		
 		this.DRIVE_ENCODER_RA = 0;
 		this.DRIVE_ENCODER_RB = 1;
 		this.DRIVE_ENCODER_LA = 2;
 		this.DRIVE_ENCODER_LB = 3;
 		
 		this.DRIVE_MAX_RATE = 512;
+		this.DRIVE_DEFAULT_MODE = false;
 		
 		this.DRIVE_P = 0.05;
 		this.DRIVE_I = 0;
 		this.DRIVE_D = 0;
+		this.DRIVE_F = 0;
 		
 		this.INTAKE_LEFT_LIMIT = 0;
 		this.INTAKE_RIGHT_LIMIT = 1;
