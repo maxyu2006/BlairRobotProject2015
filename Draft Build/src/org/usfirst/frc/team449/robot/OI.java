@@ -1,5 +1,7 @@
 package org.usfirst.frc.team449.robot;
 
+import org.usfirst.frc.team449.robot.commands.DriveToggleMode;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -40,7 +42,7 @@ public class OI {
 	public final Joystick[] joysticks = new Joystick[4];
 	
 	/**
-	 * the button
+	 * this 
 	 */
 	public final JoystickButton driveManualToggle;
 	public final JoystickButton elevatorUp;
@@ -57,6 +59,8 @@ public class OI {
 		elevatorDown = new JoystickButton(joysticks[3], config.ELEVATOR_DOWN_BUTTON);
 		elevatorArmToggle = new JoystickButton(joysticks[3], config.ELEVATOR_ARMS_TOGGLE_BUTTON);
 		driveManualToggle = new JoystickButton(joysticks[config.DRIVE_MANUAL_TOGGLE_JOYSTICK],config.DRIVE_MANUAL_TOGGLE_BUTTON);
+		
+		driveManualToggle.whenPressed(new DriveToggleMode());
 	}
 	
 	/**

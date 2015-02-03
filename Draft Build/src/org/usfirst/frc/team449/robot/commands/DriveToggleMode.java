@@ -1,32 +1,34 @@
 package org.usfirst.frc.team449.robot.commands;
 
 import org.usfirst.frc.team449.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class DriveRobot extends Command {
+public class DriveToggleMode extends Command {
 
-    public DriveRobot() {
+    public DriveToggleMode() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drive);
-    	
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.drive.setThrottle(Robot.OI.getDriveAxis1(), Robot.OI.getDriveAxis2());
+		Robot.drive.toggleControlMode();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    		Robot.drive.setThrottle(Robot.OI.getDriveAxis1(), Robot.OI.getDriveAxis2());
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
