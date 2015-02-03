@@ -41,12 +41,12 @@ public class Drive extends Subsystem {
 	
 	/**
 	 * Initialize the Drive subsystem
-	 * @param config the RobotMap containint all constants
+	 * @param config the RobotMap containing all constants
 	 */
 	public Drive(RobotMap config){
 
 		//initialize motor clusters and add slaves
-		this.leftMotors = new MotorCluster(new VictorSP(config.DRIVE_L1)); 	//first motor
+		this.leftMotors = new MotorCluster(new VictorSP(config.DRIVE_L1)); 		//first motor
 		this.leftMotors.addSlave(new VictorSP(config.DRIVE_L2));				//attach second motor
 		
 		this.rightMotors = new MotorCluster(new VictorSP(config.DRIVE_R1)); 	//first motor

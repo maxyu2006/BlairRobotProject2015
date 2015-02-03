@@ -2,7 +2,7 @@
 package org.usfirst.frc.team449.robot;
 
 
-import org.usfirst.frc.team449.robot.commands.ElevatorMoveDirect;
+import org.usfirst.frc.team449.robot.commands.ElevatorMoveDefault;
 
 import org.usfirst.frc.team449.robot.commands.DriveRobot;
 import org.usfirst.frc.team449.robot.commands.ElevatorMoveDefault;

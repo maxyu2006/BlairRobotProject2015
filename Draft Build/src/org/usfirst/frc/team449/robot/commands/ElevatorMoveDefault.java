@@ -29,7 +29,6 @@ public class ElevatorMoveDefault extends Command {
     }
 
     protected void execute() {
-    	//if()
     	if(Robot.elevator.isPIDEnabled()) return;
     	joystick_val = joystick_scale*Robot.OI.getJoystickAxisY(Robot.OI.joysticks[2]);// arbitrary assignment
     	override = Robot.OI.joysticks[2].getTrigger();
