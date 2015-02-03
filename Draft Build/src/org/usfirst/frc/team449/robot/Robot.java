@@ -1,7 +1,6 @@
 
 package org.usfirst.frc.team449.robot;
 
-import org.usfirst.frc.team449.robot.subsystems.Drive;
 import org.usfirst.frc.team449.robot.subsystems.Elevator;
 import org.usfirst.frc.team449.robot.subsystems.Intake;
 
@@ -26,7 +25,6 @@ public class Robot extends IterativeRobot {
 	public static final OI 			OI 			= new OI(Robot.robotMap);
 	public static final Intake		intake		= new Intake(Robot.robotMap);
 	public static final Elevator	elevator	= new Elevator(Robot.robotMap);
-	public static final Drive		drive		= new Drive(Robot.robotMap);
 	
 	Command autonomousCommand;
 
