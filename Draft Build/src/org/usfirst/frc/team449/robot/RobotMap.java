@@ -149,6 +149,11 @@ public final class RobotMap {
 	
 	public final int INTAKE_RSOLENOID_REVERSE;
 	
+	/**
+	 * Analog port of the ultrasonic sensor
+	 */
+	public final int INTAKE_ULTRASONIC;
+	
 	//===========================Controller Ports======================
 	/**
 	 * Joystick port for Joystick 1
@@ -228,11 +233,10 @@ public final class RobotMap {
 		this.INTAKE_RIGHT_MOTOR = 3;
 		
 		this.INTAKE_LSOLENOID_FORWARD=0;
-		
 		this.INTAKE_LSOLENOID_REVERSE=1;
-		
 		this.INTAKE_RSOLENOID_FORWARD=2;
-		
 		this.INTAKE_RSOLENOID_REVERSE=3;
+		
+		this.INTAKE_ULTRASONIC = 0;
 	}//end RobotMap()
 }//end class

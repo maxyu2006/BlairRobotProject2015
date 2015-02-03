@@ -2,6 +2,7 @@ package org.usfirst.frc.team449.robot.subsystems;
 
 import org.usfirst.frc.team449.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -16,6 +17,8 @@ public class Intake extends Subsystem {
 	// Intake member variables
 	private final DigitalInput leftLimSwitch;
 	private final DigitalInput rightLimSwitch;
+	
+    private final AnalogInput ultrasonic;
 	
     private final DoubleSolenoid intakeLeftSol;
     private final DoubleSolenoid intakeRightSol;
@@ -36,6 +39,8 @@ public class Intake extends Subsystem {
 	public Intake(RobotMap config) {
     	leftLimSwitch 	= new DigitalInput(config.INTAKE_LEFT_LIMIT);
     	rightLimSwitch 	= new DigitalInput(config.INTAKE_RIGHT_LIMIT);
+    	
+    	ultrasonic = new AnalogInput(config.INTAKE_ULTRASONIC);
     	
     	leftArmMotor 	= new Victor(config.INTAKE_LEFT_MOTOR);
     	rightArmMotor 	= new Victor(config.INTAKE_RIGHT_MOTOR);
