@@ -1,10 +1,10 @@
 
 package org.usfirst.frc.team449.robot;
 
-import org.usfirst.frc.team449.robot.commands.DriveRobot;
 import org.usfirst.frc.team449.robot.commands.ElevatorMoveDirect;
 import org.usfirst.frc.team449.robot.subsystems.Drive;
 import org.usfirst.frc.team449.robot.subsystems.Elevator;
+import org.usfirst.frc.team449.robot.subsystems.Arms;
 import org.usfirst.frc.team449.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.Compressor;
@@ -29,7 +29,7 @@ public class Robot extends IterativeRobot {
 	public static final Intake		intake		= new Intake(Robot.robotMap);
 	public static final Elevator	elevator	= new Elevator(Robot.robotMap);
 	public static final Drive		drive		= new Drive(Robot.robotMap);
-	
+	public static final Arms		grabber		= new Arms(Robot.robotMap);
 	public static final Compressor c = new Compressor();
 	
 	Command autonomousCommand;

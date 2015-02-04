@@ -23,7 +23,7 @@ public class Elevator extends Subsystem {
 	private final DigitalInput rightArmLimit;
 	private final AnalogInput ultraSonic;
 	
-	private final DoubleSolenoid armController; //one solenoid connected to both arms
+	
 	private final DoubleSolenoid brakeController;
 	
 	private final PIDMotor motors;
@@ -31,7 +31,6 @@ public class Elevator extends Subsystem {
 	// Elevator conceptual fields
 	private double setPoint;
 	private double position;
-	private boolean isArmOpen;
 	private ControlState controlState;
 	
 	public static final boolean UP = true;
@@ -56,7 +55,6 @@ public class Elevator extends Subsystem {
 		leftArmLimit 	= new DigitalInput(config.ELEVATOR_LEFT_LIMIT);
 		rightArmLimit 	= new DigitalInput(config.ELEVATOR_RIGHT_LIMIT);
 		
-		armController  = new DoubleSolenoid(config.ELEVATOR_ARM_SOLENOID_FWD,config.ELEVATOR_ARM_SOLENOID_REV);
 		
 		brakeController = new DoubleSolenoid(config.ELEVATOR_BRAKE_SOLENOID_FWD, config.ELEVATOR_BRAKE_SOLENOID_REV);
 		
@@ -74,7 +72,6 @@ public class Elevator extends Subsystem {
 		
 		
 		setPoint = 0;
-		isArmOpen = true;
 		position = ELEVATOR_FIRST_POSITION;
 	}//end Elevator();
 
@@ -83,35 +80,6 @@ public class Elevator extends Subsystem {
     public void initDefaultCommand() {
     }
     
-    /**
-     * @deprecated
-     * Toggles the open/closed state of the arms.
-     */
-    public void toggleArms(){
-    	if(isArmOpen){
-    		armController.set(Value.kReverse);
-    	}
-    	else{
-    		armController.set(Value.kForward);
-    	}
-    	isArmOpen=!isArmOpen;
-    }
-    
-    /**
-     * Opens the arms on the grabber
-     */
-    public void openArms(){
-    	armController.set(Value.kForward);
-    	isArmOpen = true;
-    }
-    
-    /**
-     * Closes the arms on the grabber
-     */
-    public void closeArms(){
-		armController.set(Value.kReverse);
-		isArmOpen = false;
-    }
     
     /**
      * Releases the brakes on the elevator
@@ -201,13 +169,7 @@ public class Elevator extends Subsystem {
 		return position;
     }
     
-    /**
-     * Returns true if arms are open, false otherwise.
-     * @return isArmOpen - whether the arms are open
-     */
-    public boolean getArmState(){
-    	return isArmOpen;
-    }
+    
     
     /**
      * Returns whether the limit switch at the top of the elevator is being pressed
