@@ -1,7 +1,12 @@
 
 package org.usfirst.frc.team449.robot;
 
+
 import org.usfirst.frc.team449.robot.commands.ElevatorMoveDirect;
+
+import org.usfirst.frc.team449.robot.commands.DriveRobot;
+import org.usfirst.frc.team449.robot.commands.ElevatorMoveDefault;
+
 import org.usfirst.frc.team449.robot.subsystems.Drive;
 import org.usfirst.frc.team449.robot.subsystems.Elevator;
 import org.usfirst.frc.team449.robot.subsystems.Arms;
@@ -46,7 +51,7 @@ public class Robot extends IterativeRobot {
         c.start();
         
 //        this.driveCommand = new DriveRobot();
-        this.elevatorCommand = new ElevatorMoveDirect();
+        this.elevatorCommand = new ElevatorMoveDefault();
     }
 	
 	public void disabledPeriodic() {
