@@ -64,10 +64,4 @@ public class ElevatorMoveAuto extends Command {
 
     protected void interrupted() {
     }
-    
-    
-    public boolean isInterruptible()
-    {
-    	
-    }
 }

@@ -7,30 +7,33 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team449.robot.RobotMap;
 
 /**
- *
+ * The arms are attached to the elevator 
  */
 public class Arms extends Subsystem {
 	private final DoubleSolenoid armController; //one solenoid connected to both arms
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-	private boolean isArmOpen;
+	//
+	private boolean armState;
+	public static final boolean ARM_OPEN = true;
+	public static final boolean ARM_CLOSED = false;
+	
 	public Arms(RobotMap config){
 
 		armController  = new DoubleSolenoid(config.ELEVATOR_ARM_SOLENOID_FWD,config.ELEVATOR_ARM_SOLENOID_REV);
-		isArmOpen = true;
+		armState = ARM_OPEN;
 	}
 	
 	 /**
-	  * 
+	  *Toggles the arm state
+	  *if the arms are closed they open, if they are open they close 
 	  */
     public void toggleArms(){
-    	if(isArmOpen){
+    	if(armState == ARM_OPEN){
     		armController.set(Value.kReverse);
     	}
     	else{
     		armController.set(Value.kForward);
     	}
-    	isArmOpen=!isArmOpen;
+    	armState=!armState;
     }
     
 	
@@ -39,7 +42,7 @@ public class Arms extends Subsystem {
      */
     public void openArms(){
     	armController.set(Value.kForward);
-    	isArmOpen = true;
+    	armState = ARM_OPEN;
     }
     
     /**
@@ -47,7 +50,7 @@ public class Arms extends Subsystem {
      */
     public void closeArms(){
 		armController.set(Value.kReverse);
-		isArmOpen = false;
+		armState = ARM_CLOSED;
     }
     
     /**
@@ -55,7 +58,7 @@ public class Arms extends Subsystem {
      * @return isArmOpen - whether the arms are open
      */
     public boolean getArmState(){
-    	return isArmOpen;
+    	return armState;
     }
     
 	

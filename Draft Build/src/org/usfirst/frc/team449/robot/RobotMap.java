@@ -135,7 +135,7 @@ public final class RobotMap {
 	public final double DRIVE_D;
 	
 	public final double DRIVE_F;
-	public final int DRIVE_MAX_RATE;
+	public final double DRIVE_MAX_RATE;
 	public final boolean DRIVE_DEFAULT_MODE;
 	
 	//===========================Intake constants========================
@@ -159,12 +159,24 @@ public final class RobotMap {
 	 */
 	public final int INTAKE_RIGHT_MOTOR;
 	
+	/**
+	 * left intake forward solenoid channel
+	 */
 	public final int INTAKE_LSOLENOID_FORWARD;
 	
+	/**
+	 * left intake reverse solenoid channel
+	 */
 	public final int INTAKE_LSOLENOID_REVERSE;
 	
+	/**
+	 * right intake forward solenoid channel
+	 */
 	public final int INTAKE_RSOLENOID_FORWARD;
 	
+	/**
+	 * right intake reverse solenoid channel
+	 */
 	public final int INTAKE_RSOLENOID_REVERSE;
 	
 	//===========================Controller Ports======================

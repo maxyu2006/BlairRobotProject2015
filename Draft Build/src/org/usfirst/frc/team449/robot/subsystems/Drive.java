@@ -25,7 +25,7 @@ public class Drive extends Subsystem {
 	private final PIDController leftController;
 	private final PIDController rightController;
 	
-	private final int maxRate;
+	private final double maxRate;
 	
 	private boolean currentMode;
 	

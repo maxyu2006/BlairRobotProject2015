@@ -16,6 +16,7 @@ public class ElevatorSetGrabber extends Command {
 	public static final int CLOSED = 1;
 	public static final int TOGGLE = 2;
 	
+	
     public ElevatorSetGrabber(int setOpen) {
         requires(Robot.grabber);
         this.armState = setOpen;
