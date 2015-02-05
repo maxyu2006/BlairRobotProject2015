@@ -46,6 +46,7 @@ public class ElevatorMoveAuto extends Command {
     		Robot.elevator.lowerPosition();
     	}
     	Robot.elevator.enablePID();
+    	
     }
 
     protected void execute() {
@@ -58,8 +59,15 @@ public class ElevatorMoveAuto extends Command {
 
     protected void end() {
     	Robot.elevator.disablePID();
+    	Robot.elevator.activateBrake();
     }
 
     protected void interrupted() {
+    }
+    
+    
+    public boolean isInterruptible()
+    {
+    	
     }
 }
