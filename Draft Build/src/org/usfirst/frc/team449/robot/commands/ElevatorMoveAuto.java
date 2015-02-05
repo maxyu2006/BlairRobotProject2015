@@ -14,17 +14,32 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ElevatorMoveAuto extends Command {
 	
-	private boolean goingUp;
+	/**
+	 * UP for the state in which the elevator is going up
+	 */
+	public static final boolean UP = true;
+	
+	/**
+	 * DOWN for the state in which the elevator is going down
+	 */
+	public static final boolean DOWN = false;
+	
+	private boolean state;
 	private double tolerance;
-
+	
+	/**
+	 * ElevatorMoveAuto constructor
+	 * @param config is an instance of RobotMap
+	 * @param upOrDown is the state of going up or down. Use the public static final booleans
+	 */
     public ElevatorMoveAuto(RobotMap config, boolean upOrDown) {	//hehehe
         requires(Robot.elevator);
-        goingUp = upOrDown;
+        state = upOrDown;
         tolerance = config.ELEVATOR_PID_TOLERANCE_RANGE;
     }
 
     protected void initialize() {
-    	if (goingUp) {
+    	if (state) {
     		Robot.elevator.raisePosition();
     	}
     	else {
