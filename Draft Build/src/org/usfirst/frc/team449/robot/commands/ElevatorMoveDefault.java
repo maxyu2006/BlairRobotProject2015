@@ -29,9 +29,13 @@ public class ElevatorMoveDefault extends Command {
     }
 
     protected void execute() {
-    	if(Robot.elevator.isPIDEnabled()) return;
+    	if(Robot.elevator.isPIDEnabled()) 
+    		return;
+    	
     	joystick_val = joystick_scale*Robot.OI.getJoystickAxisY(Robot.OI.joysticks[2]);// arbitrary assignment
+    	
     	override = Robot.OI.joysticks[2].getTrigger();
+    	
     	if(Math.abs(joystick_val) < deadband && override==false)//if input is under deadband and no override 
     	{
     		Robot.elevator.setMotorManual(0);

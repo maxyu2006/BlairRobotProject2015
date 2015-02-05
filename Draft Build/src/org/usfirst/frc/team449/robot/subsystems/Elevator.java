@@ -1,6 +1,7 @@
 package org.usfirst.frc.team449.robot.subsystems;
 
 import org.usfirst.frc.team449.robot.RobotMap;
+import org.usfirst.frc.team449.robot.commands.ElevatorMoveDefault;
 
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -72,6 +73,8 @@ public class Elevator extends Subsystem {
 	//============================Elevator Primary Methods=======================
 
     public void initDefaultCommand() {
+    	
+    	this.setDefaultCommand(new ElevatorMoveDefault());
     }
     
     /**

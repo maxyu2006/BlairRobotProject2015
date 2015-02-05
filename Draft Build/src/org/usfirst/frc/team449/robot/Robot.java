@@ -1,16 +1,8 @@
-
 package org.usfirst.frc.team449.robot;
 
-
 import org.usfirst.frc.team449.robot.commands.ElevatorMoveDefault;
-
-import org.usfirst.frc.team449.robot.commands.DriveRobot;
-import org.usfirst.frc.team449.robot.commands.ElevatorMoveDefault;
-
-import org.usfirst.frc.team449.robot.subsystems.Drive;
-import org.usfirst.frc.team449.robot.subsystems.Elevator;
 import org.usfirst.frc.team449.robot.subsystems.Arms;
-import org.usfirst.frc.team449.robot.subsystems.Intake;
+import org.usfirst.frc.team449.robot.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -31,16 +23,14 @@ public class Robot extends IterativeRobot {
 	public static final RobotMap robotMap = new RobotMap("config.txt");
 
 	public static final OI 			OI 			= new OI(Robot.robotMap);
-	public static final Intake		intake		= new Intake(Robot.robotMap);
 	public static final Elevator	elevator	= new Elevator(Robot.robotMap);
-	public static final Drive		drive		= new Drive(Robot.robotMap);
 	public static final Arms		grabber		= new Arms(Robot.robotMap);
+	
 	public static final Compressor c = new Compressor();
 	
 	Command autonomousCommand;
 	//initial teleop commands
-	Command driveCommand;
-	Command elevatorCommand;
+	
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -51,7 +41,6 @@ public class Robot extends IterativeRobot {
         c.start();
         
 //        this.driveCommand = new DriveRobot();
-        this.elevatorCommand = new ElevatorMoveDefault();
     }
 	
 	public void disabledPeriodic() {
@@ -78,7 +67,6 @@ public class Robot extends IterativeRobot {
         if (autonomousCommand != null) autonomousCommand.cancel();
         
 //        this.driveCommand.start();
-        this.elevatorCommand.start();
     }
 
     /**
