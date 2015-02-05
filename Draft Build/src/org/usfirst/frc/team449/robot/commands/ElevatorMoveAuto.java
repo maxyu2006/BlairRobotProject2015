@@ -54,7 +54,7 @@ public class ElevatorMoveAuto extends Command {
 
     protected boolean isFinished() {
 //        return Math.abs(Robot.elevator.getActualPosition() - Robot.elevator.getSetPoint()) < tolerance;
-    	return Robot.elevator.isAtSetpoint();
+    	return Robot.elevator.isAtSetPoint();
     }
 
     protected void end() {

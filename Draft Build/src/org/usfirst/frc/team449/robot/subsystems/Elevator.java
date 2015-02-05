@@ -147,6 +147,10 @@ public class Elevator extends Subsystem {
     	motors.setSetpoint(setPoint);
     }
     
+    public boolean isAtSetPoint(){
+    	return (getActualPosition()==setPoint);
+    }
+    
     /**
      * Returns the actual position of the elevator as specified by the encoder.
      * @return the "position" of the elevator as a double from 0 to 1, 0 being the bottom of the elevator.
