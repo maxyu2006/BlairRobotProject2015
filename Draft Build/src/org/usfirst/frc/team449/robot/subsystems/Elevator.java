@@ -2,7 +2,6 @@ package org.usfirst.frc.team449.robot.subsystems;
 
 import org.usfirst.frc.team449.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -21,9 +20,8 @@ public class Elevator extends Subsystem {
 	private final DigitalInput bottomLimit;
 	private final DigitalInput leftArmLimit;
 	private final DigitalInput rightArmLimit;
-	private final AnalogInput ultraSonic;
 	
-	
+	private final DoubleSolenoid armController; //one solenoid connected to both arms
 	private final DoubleSolenoid brakeController;
 	
 	private final PIDMotor motors;
@@ -31,7 +29,8 @@ public class Elevator extends Subsystem {
 	// Elevator conceptual fields
 	private double setPoint;
 	private double position;
-	private ControlState controlState;
+	private boolean isArmOpen;
+	private boolean isManual;
 	
 	public static final boolean UP = true;
 	public static final boolean DOWN = false;
@@ -40,10 +39,8 @@ public class Elevator extends Subsystem {
 	public static final double ELEVATOR_SECOND_POSITION = 0.5;
 	public static final double ELEVATOR_THIRD_POSITION = 1;
 	
-	public static final double ultra_scale_factor = 1.0;// scale ultrasnoic readings from volts to inches
-	public enum ControlState {
-		MANUAL, PID;
-	}
+	public static final boolean MANUAL = true;
+	public static final boolean PID = false;
 	
 	/**
 	 * Elevator constructor
@@ -55,10 +52,11 @@ public class Elevator extends Subsystem {
 		leftArmLimit 	= new DigitalInput(config.ELEVATOR_LEFT_LIMIT);
 		rightArmLimit 	= new DigitalInput(config.ELEVATOR_RIGHT_LIMIT);
 		
+		armController  = new DoubleSolenoid(config.ELEVATOR_ARM_SOLENOID_FWD,config.ELEVATOR_ARM_SOLENOID_REV);
 		
 		brakeController = new DoubleSolenoid(config.ELEVATOR_BRAKE_SOLENOID_FWD, config.ELEVATOR_BRAKE_SOLENOID_REV);
 		
-		ultraSonic = new AnalogInput(config.ELEVATOR_ULTRASONIC);
+		
 		//initialize temporary variables to pass into the PID motor
 		TalonSRX 	leftMotor   = new TalonSRX(config.ELEVATOR_LEFT_MOTOR);
 		TalonSRX 	rightMotor  = new TalonSRX(config.ELEVATOR_RIGHT_MOTOR);
@@ -68,10 +66,9 @@ public class Elevator extends Subsystem {
 		motors = new PIDMotor(config, config.ELEVATOR_P, config.ELEVATOR_I, config.ELEVATOR_D, 0, leftMotor, encoder, PIDMotor.POSITION_BASE);
 		motors.addSlave(rightMotor,true);
 		
-		motors.setAbsoluteTolerance(config.ELEVATOR_PID_TOLERANCE_RANGE);
-		
 		
 		setPoint = 0;
+		isArmOpen = true;
 		position = ELEVATOR_FIRST_POSITION;
 	}//end Elevator();
 
@@ -80,6 +77,35 @@ public class Elevator extends Subsystem {
     public void initDefaultCommand() {
     }
     
+    /**
+     * @deprecated
+     * Toggles the open/closed state of the arms.
+     */
+    public void toggleArms(){
+    	if(isArmOpen){
+    		armController.set(Value.kReverse);
+    	}
+    	else{
+    		armController.set(Value.kForward);
+    	}
+    	isArmOpen=!isArmOpen;
+    }
+    
+    /**
+     * Opens the arms on the grabber
+     */
+    public void openArms(){
+    	armController.set(Value.kForward);
+    	isArmOpen = true;
+    }
+    
+    /**
+     * Closes the arms on the grabber
+     */
+    public void closeArms(){
+		armController.set(Value.kReverse);
+		isArmOpen = false;
+    }
     
     /**
      * Releases the brakes on the elevator
@@ -169,7 +195,13 @@ public class Elevator extends Subsystem {
 		return position;
     }
     
-    
+    /**
+     * Returns true if arms are open, false otherwise.
+     * @return isArmOpen - whether the arms are open
+     */
+    public boolean getArmState(){
+    	return isArmOpen;
+    }
     
     /**
      * Returns whether the limit switch at the top of the elevator is being pressed
@@ -235,36 +267,5 @@ public class Elevator extends Subsystem {
     public void setMotorManual(double throttle){
     	if (controlState.equals(ControlState.MANUAL))
     		this.motors.setMotorVoltage(throttle);
-    }
-    
-    /**
-     * returns raw voltage from the Ultrasonic sensor
-     * @author hazheng
-     * started: 2/2/15
-     */
-    public double getUltrasonicRaw(){
-    	return this.ultraSonic.getVoltage();
-    }
-    
-    /**
-     * returns scaled ultrasonic value which should be the distance in inches
-     *  @author hazheng
-     * started: 2/2/15
-     */
-    public double getUltrasonicDist(){
-    	return this.ultra_scale_factor*this.ultraSonic.getVoltage();
-    }
-    
-    /***
-     * checks if the underlying PIDMotor controller has reached it's desired setpoint
-     * @author hazheng
-     * started 2/2/15
-     */
-    public boolean isAtSetpoint(){
-    	if(isPIDEnabled()==false)// I'm arbitrarily deciding to return false if PID is disabled
-    	{
-    		return false;
-    	}
-    	return this.motors.onTarget();//default PIDSubsystem code that determines if the setPoint has been reached
     }
 }
