@@ -147,6 +147,9 @@ public class Elevator extends Subsystem {
     	motors.setSetpoint(setPoint);
     }
     
+    /**
+     * @return true if elevator is at its set point
+     */
     public boolean isAtSetPoint(){
     	return (getActualPosition()==setPoint);
     }
