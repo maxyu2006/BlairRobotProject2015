@@ -265,4 +265,12 @@ public class Elevator extends Subsystem {
     	if (isManual)
     		this.motors.setMotorVoltage(throttle);
     }
+
+    /**
+     * @return true if the error is within the percentage of the total input range, determined by setTolerance in the elevator's motors.
+     */
+	public boolean isAtSetPoint() {
+		return this.motors.onTarget();
+	}
 }
+
