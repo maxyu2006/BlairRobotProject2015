@@ -39,9 +39,6 @@ public class Elevator extends Subsystem {
 	public static final double ELEVATOR_SECOND_POSITION = 0.5;
 	public static final double ELEVATOR_THIRD_POSITION = 1;
 	
-	public static final boolean MANUAL = true;
-	public static final boolean PID = false;
-	
 	/**
 	 * Elevator constructor
 	 */
@@ -240,7 +237,7 @@ public class Elevator extends Subsystem {
      * @return true if control state is PID, false otherwise 
      */
     public boolean isPIDEnabled() {
-    	return controlState.equals(ControlState.PID);
+    	return isManual = false;
     }
     
     /**
@@ -248,7 +245,7 @@ public class Elevator extends Subsystem {
      */
     public void enablePID() {
     	motors.enable();
-    	controlState = ControlState.PID;
+    	isManual = false;
     }
     
     /**
@@ -256,7 +253,7 @@ public class Elevator extends Subsystem {
      */
     public void disablePID() {
     	motors.disable(); // doesn't actually disable motor, only disables PID control
-    	controlState = ControlState.MANUAL;
+    	isManual = true;
     }
     
     /**
@@ -265,7 +262,7 @@ public class Elevator extends Subsystem {
      * @param throttle
      */
     public void setMotorManual(double throttle){
-    	if (controlState.equals(ControlState.MANUAL))
+    	if (isManual)
     		this.motors.setMotorVoltage(throttle);
     }
 }
