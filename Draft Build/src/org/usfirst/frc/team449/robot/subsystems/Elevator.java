@@ -22,7 +22,6 @@ public class Elevator extends Subsystem {
 	private final DigitalInput leftArmLimit;
 	private final DigitalInput rightArmLimit;
 	
-	private final DoubleSolenoid armController; //one solenoid connected to both arms
 	private final DoubleSolenoid brakeController;
 	
 	private final PIDMotor motors;
@@ -30,8 +29,10 @@ public class Elevator extends Subsystem {
 	// Elevator conceptual fields
 	private double setPoint;
 	private double position;
-	private boolean isArmOpen;
-	private boolean isManual;
+	private boolean controlState;
+	
+	public static final boolean MANUAL  = true;
+	public static final boolean PID		= false;
 	
 	public static final boolean UP = true;
 	public static final boolean DOWN = false;
@@ -50,8 +51,6 @@ public class Elevator extends Subsystem {
 		leftArmLimit 	= new DigitalInput(config.ELEVATOR_LEFT_LIMIT);
 		rightArmLimit 	= new DigitalInput(config.ELEVATOR_RIGHT_LIMIT);
 		
-		armController  = new DoubleSolenoid(config.ELEVATOR_ARM_SOLENOID_FWD,config.ELEVATOR_ARM_SOLENOID_REV);
-		
 		brakeController = new DoubleSolenoid(config.ELEVATOR_BRAKE_SOLENOID_FWD, config.ELEVATOR_BRAKE_SOLENOID_REV);
 		
 		
@@ -64,9 +63,9 @@ public class Elevator extends Subsystem {
 		motors = new PIDMotor(config, config.ELEVATOR_P, config.ELEVATOR_I, config.ELEVATOR_D, 0, leftMotor, encoder, PIDMotor.POSITION_BASE);
 		motors.addSlave(rightMotor,true);
 		
+		this.controlState = PID;
 		
 		setPoint = 0;
-		isArmOpen = true;
 		position = ELEVATOR_FIRST_POSITION;
 	}//end Elevator();
 
@@ -75,36 +74,6 @@ public class Elevator extends Subsystem {
     public void initDefaultCommand() {
     	
     	this.setDefaultCommand(new ElevatorMoveDefault());
-    }
-    
-    /**
-     * @deprecated
-     * Toggles the open/closed state of the arms.
-     */
-    public void toggleArms(){
-    	if(isArmOpen){
-    		armController.set(Value.kReverse);
-    	}
-    	else{
-    		armController.set(Value.kForward);
-    	}
-    	isArmOpen=!isArmOpen;
-    }
-    
-    /**
-     * Opens the arms on the grabber
-     */
-    public void openArms(){
-    	armController.set(Value.kForward);
-    	isArmOpen = true;
-    }
-    
-    /**
-     * Closes the arms on the grabber
-     */
-    public void closeArms(){
-		armController.set(Value.kReverse);
-		isArmOpen = false;
     }
     
     /**
@@ -196,14 +165,6 @@ public class Elevator extends Subsystem {
     }
     
     /**
-     * Returns true if arms are open, false otherwise.
-     * @return isArmOpen - whether the arms are open
-     */
-    public boolean getArmState(){
-    	return isArmOpen;
-    }
-    
-    /**
      * Returns whether the limit switch at the top of the elevator is being pressed
      * @return see description
      */
@@ -240,7 +201,7 @@ public class Elevator extends Subsystem {
      * @return true if control state is PID, false otherwise 
      */
     public boolean isPIDEnabled() {
-    	return isManual = false;
+    	return controlState == PID;
     }
     
     /**
@@ -248,7 +209,7 @@ public class Elevator extends Subsystem {
      */
     public void enablePID() {
     	motors.enable();
-    	isManual = false;
+    	controlState = PID;
     }
     
     /**
@@ -256,7 +217,7 @@ public class Elevator extends Subsystem {
      */
     public void disablePID() {
     	motors.disable(); // doesn't actually disable motor, only disables PID control
-    	isManual = true;
+    	controlState = MANUAL;
     }
     
     /**
@@ -265,7 +226,7 @@ public class Elevator extends Subsystem {
      * @param throttle
      */
     public void setMotorManual(double throttle){
-    	if (isManual)
+    	if (controlState)
     		this.motors.setMotorVoltage(throttle);
     }
 

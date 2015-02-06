@@ -1,5 +1,6 @@
 package org.usfirst.frc.team449.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -11,14 +12,22 @@ import org.usfirst.frc.team449.robot.RobotMap;
  */
 public class Arms extends Subsystem {
 	private final DoubleSolenoid armController; //one solenoid connected to both arms
+	
+	//limit switches
+	private final DigitalInput leftArmLimit;
+	private final DigitalInput rightArmLimit;
+	
 	//
 	private boolean armState;
 	public static final boolean ARM_OPEN = true;
 	public static final boolean ARM_CLOSED = false;
 	
 	public Arms(RobotMap config){
-
+		leftArmLimit 	= new DigitalInput(config.ELEVATOR_LEFT_LIMIT);
+		rightArmLimit 	= new DigitalInput(config.ELEVATOR_RIGHT_LIMIT);
+		
 		armController  = new DoubleSolenoid(config.ELEVATOR_ARM_SOLENOID_FWD,config.ELEVATOR_ARM_SOLENOID_REV);
+		
 		armState = ARM_OPEN;
 	}
 	
@@ -61,6 +70,21 @@ public class Arms extends Subsystem {
     	return armState;
     }
     
+    /**
+     * Returns whether the limit switch on the left arm is being pressed
+     * @return see description
+     */
+    public boolean isTouchingLeftArm() {
+    	return leftArmLimit.get();
+    }
+    
+    /**
+     * Returns whether the limit switch on the right arm is being pressed
+     * @return see description
+     */
+    public boolean isTouchingRightArm() {
+    	return rightArmLimit.get();
+    }
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

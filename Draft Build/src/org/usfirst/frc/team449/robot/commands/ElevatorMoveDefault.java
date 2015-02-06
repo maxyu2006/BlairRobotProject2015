@@ -49,7 +49,7 @@ public class ElevatorMoveDefault extends Command {
     }
 
     protected boolean isFinished() {
-        return false; // will terminate once it is interrupted
+        return false;
     }
 
     protected void end() {
