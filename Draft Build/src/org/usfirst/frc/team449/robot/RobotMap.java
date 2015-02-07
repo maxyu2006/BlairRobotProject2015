@@ -16,7 +16,7 @@ public final class RobotMap {
 	 * Channel for the elevator's top limit switch.
 	 */
 	public final int ELEVATOR_TOP_LIMIT;
-	
+
 	/**
 	 * Channel for the elevator's bottom limit switch.
 	 */
@@ -47,8 +47,6 @@ public final class RobotMap {
 	 */
 	public final int ELEVATOR_ARM_SOLENOID_REV;
 	
-	
-	
 	/**
 	 * Channels for the elevator's brake solenoid forward thing.
 	 */
@@ -58,8 +56,6 @@ public final class RobotMap {
 	 * Channels for the elevator's brake solenoid reverse thing.
 	 */
 	public final int ELEVATOR_BRAKE_SOLENOID_REV;
-	
-	
 
 	/**
 	 * Channel A for the elevator's encoder.
@@ -104,7 +100,7 @@ public final class RobotMap {
 	public final int DRIVE_R1;
 
 	/**
-	 * motor controller channel for the right 1 drive motor
+	 * motor controller channel for the right 2 drive motor
 	 */
 	public final int DRIVE_R2;
 	
@@ -128,14 +124,34 @@ public final class RobotMap {
 	 */
 	public final int DRIVE_ENCODER_LB;
 
+	/**
+	 * Drive PID P term
+	 */
 	public final double DRIVE_P;
 	
+	/**
+	 * Drive PID I term
+	 */
 	public final double DRIVE_I;
 	
+	/**
+	 * Drive PID D term
+	 */
 	public final double DRIVE_D;
 	
+	/**
+	 * Drive PID F term for speed control
+	 */
 	public final double DRIVE_F;
-	public final double DRIVE_MAX_RATE;
+
+	/**
+	 * Hard limit for Drive speed under PID control in Rotations per second
+	 */
+	public final int DRIVE_MAX_RATE;
+	
+	/**
+	 * default mode for drive control true = PID, false = Manual
+	 */
 	public final boolean DRIVE_DEFAULT_MODE;
 	
 	//===========================Intake constants========================
@@ -179,26 +195,37 @@ public final class RobotMap {
 	 */
 	public final int INTAKE_RSOLENOID_REVERSE;
 	
-	//===========================Controller Ports======================
+	//===========================Controller Ports/Scheme======================
 	/**
-	 * Joystick port for Joystick 1
+	 * Joystick usb port for Joystick 0
+	 */
+	public final int JOYSTICK_0;
+	
+	/**
+	 * Joystick usb port for Joystick 1
 	 */
 	public final int JOYSTICK_1;
 	
 	/**
-	 * Joystick port for Joystick 2
+	 * Joystick usb port for Joystick 2
 	 */
 	public final int JOYSTICK_2;
 	
 	/**
-	 * Joystick port for Joystick 3
+	 * Joystick usb port for Joystick 3
 	 */
 	public final int JOYSTICK_3;
 	
 	/**
-	 * Joystick port for Joystick 4
+	 * the joystick with the button to toggle manual mode for the drive system
 	 */
-	public final int JOYSTICK_0;
+	public final int DRIVE_MANUAL_TOGGLE_JOYSTICK;
+	
+
+	/**
+	 * the button number on DRIVE_MANUAL_TOGGLE_JOYSTICK that toggles manual mode for the drive system
+	 */
+	public final int DRIVE_MANUAL_TOGGLE_BUTTON;
 	
 	/**
 	 * Button for moving elevator up.
@@ -214,89 +241,13 @@ public final class RobotMap {
 	 * Button to toggle the elevator arms
 	 */
 	public final int ELEVATOR_ARMS_TOGGLE_BUTTON;
-	
-	public final int DRIVE_MANUAL_TOGGLE_JOYSTICK;
-	public final int DRIVE_MANUAL_TOGGLE_BUTTON;
+
 	/**
 	 * 
 	 * @param configFile
 	 */
 	public RobotMap(String configFile)
 	{
-		//Joystick Mappings
-		this.JOYSTICK_0 = 1;
-		this.JOYSTICK_1 = 2;
-		this.JOYSTICK_2 = 3;
-		this.JOYSTICK_3 = 4;
-		
-		this.DRIVE_MANUAL_TOGGLE_JOYSTICK =1;
-		this.DRIVE_MANUAL_TOGGLE_BUTTON =1;
-		
-		//motor mappings
-		this.DRIVE_L1 = 0;
-		this.DRIVE_L2 = 1;
-		this.DRIVE_R1 = 2;
-		this.DRIVE_R2 = 3;		
-		
-		this.INTAKE_LEFT_MOTOR = 6;
-		this.INTAKE_RIGHT_MOTOR =7;
-		//digital input mappings
-		this.ENCODER_PPR = 512;
-		
-		this.DRIVE_ENCODER_RA = 0;
-		this.DRIVE_ENCODER_RB = 1;
-		this.DRIVE_ENCODER_LA = 2;
-		this.DRIVE_ENCODER_LB = 3;
-		
-		this.ELEVATOR_ENCODER_CHANNEL_A = 4;
-		this.ELEVATOR_ENCODER_CHANNEL_B = 5;
-		
-		this.ELEVATOR_TOP_LIMIT = 9;
-		this.ELEVATOR_BOTTOM_LIMIT = 8;
-		//at this point we're on MXP ports
-		this.ELEVATOR_LEFT_LIMIT = 7; 
-		this.ELEVATOR_RIGHT_LIMIT = 6;
-		
-		this.ELEVATOR_LEFT_MOTOR = 2;
-		this.ELEVATOR_RIGHT_MOTOR = 3;
-		
-		//analog mapping
-		this.ELEVATOR_ULTRASONIC =1;
-		this.ELEVATOR_ARMS_TOGGLE_BUTTON = 1;
-		
-		//assorted PID and button assignments
-		this.ELEVATOR_P = 0.05;
-		this.ELEVATOR_I = 0;
-		this.ELEVATOR_D = 0;
-		
-		this.ELEVATOR_PID_TOLERANCE_RANGE = 0.001;
-		
-		this.ELEVATOR_UP_BUTTON = 3;
-		this.ELEVATOR_DOWN_BUTTON = 2;
-		
-		//Solenoid Mappings
-		this.ELEVATOR_ARM_SOLENOID_FWD = 2;
-		this.ELEVATOR_ARM_SOLENOID_REV = 3;
-		this.ELEVATOR_BRAKE_SOLENOID_FWD = 1;
-		this.ELEVATOR_BRAKE_SOLENOID_REV = 0;
-		
-		this.INTAKE_LSOLENOID_FORWARD=4;
-		this.INTAKE_LSOLENOID_REVERSE=5;
-		this.INTAKE_RSOLENOID_FORWARD=6;
-		this.INTAKE_RSOLENOID_REVERSE=7;
-		
-		this.INTAKE_LEFT_LIMIT = 15;
-		this.INTAKE_RIGHT_LIMIT = 17;
-				
-		
-		this.DRIVE_MAX_RATE = 512;
-		this.DRIVE_DEFAULT_MODE = false;
-		
-		this.DRIVE_P = 0.05;
-		this.DRIVE_I = 0;
-		this.DRIVE_D = 0;
-		this.DRIVE_F = 0;
-		
-		System.out.println("RobotMap loaded");
+
 	}//end RobotMap()
 }//end class

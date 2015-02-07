@@ -1,7 +1,7 @@
 package org.usfirst.frc.team449.robot;
 
-import org.usfirst.frc.team449.robot.commands.ElevatorMoveDefault;
 import org.usfirst.frc.team449.robot.subsystems.Arms;
+import org.usfirst.frc.team449.robot.subsystems.Drive;
 import org.usfirst.frc.team449.robot.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.Compressor;
@@ -25,15 +25,15 @@ public class Robot extends IterativeRobot {
 	
 	public static final Elevator	elevator	= new Elevator(Robot.robotMap);
 	public static final Arms		elevatorArm	= new Arms(Robot.robotMap);
+	public static final Drive		drive		= new Drive(Robot.robotMap);
 	
 	public static final OI 			OI 			= new OI(Robot.robotMap);
 	
 	public static final Compressor c = new Compressor();
 	
 	Command autonomousCommand;
-	//initial teleop commands
 	
-    /**
+	/**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
@@ -41,8 +41,6 @@ public class Robot extends IterativeRobot {
 		// instantiate the command used for the autonomous period
         autonomousCommand = null;
         c.start();
-        
-//        this.driveCommand = new DriveRobot();
     }
 	
 	public void disabledPeriodic() {
@@ -67,8 +65,7 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
-        
-//        this.driveCommand.start();
+
     }
 
     /**
@@ -88,6 +85,9 @@ public class Robot extends IterativeRobot {
 
         SmartDashboard.putBoolean("TopLimit", Robot.elevator.isTouchingTop());
         SmartDashboard.putBoolean("BottomLimit", Robot.elevator.isTouchingBottom());
+    
+        SmartDashboard.putNumber("Left drive encoder", Robot.drive.getLeftVel());
+        SmartDashboard.putNumber("Right drive encoder", Robot.drive.getRightVel());
     }
     
     /**
