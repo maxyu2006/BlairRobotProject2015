@@ -41,13 +41,14 @@ public class Arms extends Subsystem {
 	  *if the arms are closed they open, if they are open they close 
 	  */
     public void toggleArms(){
-    	if(armState == ARM_OPEN){
+    	
+    	if(armState == ARM_OPEN)
     		armController.set(Value.kReverse);
-    	}
-    	else{
+    	else
     		armController.set(Value.kForward);
-    	}
-    	armState=!armState;
+    	
+    	
+    	this.armState = !armState;
     }
     
 	

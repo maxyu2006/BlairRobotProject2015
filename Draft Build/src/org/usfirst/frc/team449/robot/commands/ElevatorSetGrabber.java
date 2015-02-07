@@ -11,25 +11,34 @@ import edu.wpi.first.wpilibj.command.Command;
  * @author eyob-- 2/1/15
  */
 public class ElevatorSetGrabber extends Command {
-	public int armState; 
+	private int armState; 
 	public static final int OPEN = 0;
-	public static final int CLOSED = 1;
+	public static final int CLOSE = 1;
 	public static final int TOGGLE = 2;
 	
 	
     public ElevatorSetGrabber(int setOpen) {
-        requires(Robot.grabber);
+        requires(Robot.elevatorArm);
         this.armState = setOpen;
+        System.out.println("initialized setGrabberCommand");
     }
 
     protected void initialize() {
-    	if (armState == OPEN)
-    		Robot.grabber.openArms();
-    	else if(armState == CLOSED)
-    		Robot.grabber.closeArms();
-    	else
-    		Robot.grabber.toggleArms();
-    }
+    	switch(this.armState)
+    	{
+    	case OPEN:
+    		Robot.elevatorArm.openArms();
+    		break;
+    	case CLOSE:
+    		Robot.elevatorArm.closeArms();
+    		break;
+    	case TOGGLE:
+    		Robot.elevatorArm.toggleArms();
+    		break;
+    	default:
+    		System.out.println("You done fucked up");
+    	}//end switch
+    }//end initialize
 
     protected void execute() {
     }

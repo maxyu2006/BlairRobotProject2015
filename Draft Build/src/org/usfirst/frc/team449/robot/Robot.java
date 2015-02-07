@@ -22,10 +22,11 @@ public class Robot extends IterativeRobot {
 
 	//sometime should check if these could be made private
 	public static final RobotMap robotMap = new RobotMap("config.txt");
-
-	public static final OI 			OI 			= new OI(Robot.robotMap);
+	
 	public static final Elevator	elevator	= new Elevator(Robot.robotMap);
-	public static final Arms		grabber		= new Arms(Robot.robotMap);
+	public static final Arms		elevatorArm	= new Arms(Robot.robotMap);
+	
+	public static final OI 			OI 			= new OI(Robot.robotMap);
 	
 	public static final Compressor c = new Compressor();
 	
@@ -83,7 +84,12 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         
-        
+        SmartDashboard.putNumber("JoystickValue", Robot.OI.getJoystickAxisY(Robot.OI.joysticks[0]));
+		SmartDashboard.putBoolean("NotIsTouchingTop", !(Robot.elevator.isTouchingTop()));
+		SmartDashboard.putBoolean("NotIsTouchingBottom", !(Robot.elevator.isTouchingBottom()));
+
+        SmartDashboard.putBoolean("TopLimit", Robot.elevator.isTouchingTop());
+        SmartDashboard.putBoolean("BottomLimit", Robot.elevator.isTouchingBottom());
     }
     
     /**

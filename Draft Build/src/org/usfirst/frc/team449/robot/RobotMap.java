@@ -229,22 +229,14 @@ public final class RobotMap {
 		this.JOYSTICK_2 = 3;
 		this.JOYSTICK_3 = 4;
 		
-		this.ELEVATOR_ARMS_TOGGLE_BUTTON = 1;
-		
 		this.DRIVE_MANUAL_TOGGLE_JOYSTICK =1;
 		this.DRIVE_MANUAL_TOGGLE_BUTTON =1;
-		
-		//analog mapping
-		this.ELEVATOR_ULTRASONIC =1;
 		
 		//motor mappings
 		this.DRIVE_L1 = 0;
 		this.DRIVE_L2 = 1;
 		this.DRIVE_R1 = 2;
-		this.DRIVE_R2 = 3;
-		
-		this.ELEVATOR_LEFT_MOTOR = 2;
-		this.ELEVATOR_RIGHT_MOTOR = 3;
+		this.DRIVE_R2 = 3;		
 		
 		this.INTAKE_LEFT_MOTOR = 6;
 		this.INTAKE_RIGHT_MOTOR =7;
@@ -265,17 +257,12 @@ public final class RobotMap {
 		this.ELEVATOR_LEFT_LIMIT = 7; 
 		this.ELEVATOR_RIGHT_LIMIT = 6;
 		
-		this.INTAKE_LEFT_LIMIT = 15;
-		this.INTAKE_RIGHT_LIMIT = 17;
-		//Solenoid Mappings
-		this.ELEVATOR_ARM_SOLENOID_FWD = 2;
-		this.ELEVATOR_ARM_SOLENOID_REV = 3;
-		this.ELEVATOR_BRAKE_SOLENOID_FWD = 0;
-		this.ELEVATOR_BRAKE_SOLENOID_REV = 1;
-		this.INTAKE_LSOLENOID_FORWARD=4;
-		this.INTAKE_LSOLENOID_REVERSE=5;
-		this.INTAKE_RSOLENOID_FORWARD=6;
-		this.INTAKE_RSOLENOID_REVERSE=7;
+		this.ELEVATOR_LEFT_MOTOR = 2;
+		this.ELEVATOR_RIGHT_MOTOR = 3;
+		
+		//analog mapping
+		this.ELEVATOR_ULTRASONIC =1;
+		this.ELEVATOR_ARMS_TOGGLE_BUTTON = 1;
 		
 		//assorted PID and button assignments
 		this.ELEVATOR_P = 0.05;
@@ -287,6 +274,21 @@ public final class RobotMap {
 		this.ELEVATOR_UP_BUTTON = 3;
 		this.ELEVATOR_DOWN_BUTTON = 2;
 		
+		//Solenoid Mappings
+		this.ELEVATOR_ARM_SOLENOID_FWD = 2;
+		this.ELEVATOR_ARM_SOLENOID_REV = 3;
+		this.ELEVATOR_BRAKE_SOLENOID_FWD = 1;
+		this.ELEVATOR_BRAKE_SOLENOID_REV = 0;
+		
+		this.INTAKE_LSOLENOID_FORWARD=4;
+		this.INTAKE_LSOLENOID_REVERSE=5;
+		this.INTAKE_RSOLENOID_FORWARD=6;
+		this.INTAKE_RSOLENOID_REVERSE=7;
+		
+		this.INTAKE_LEFT_LIMIT = 15;
+		this.INTAKE_RIGHT_LIMIT = 17;
+				
+		
 		this.DRIVE_MAX_RATE = 512;
 		this.DRIVE_DEFAULT_MODE = false;
 		
@@ -294,5 +296,7 @@ public final class RobotMap {
 		this.DRIVE_I = 0;
 		this.DRIVE_D = 0;
 		this.DRIVE_F = 0;
+		
+		System.out.println("RobotMap loaded");
 	}//end RobotMap()
 }//end class

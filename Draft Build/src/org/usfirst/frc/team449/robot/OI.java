@@ -1,5 +1,7 @@
 package org.usfirst.frc.team449.robot;
 
+import org.usfirst.frc.team449.robot.commands.ElevatorSetGrabber;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -49,13 +51,22 @@ public class OI {
 	
 	public OI(RobotMap config)
 	{
+		System.out.println("OI started");
 		joysticks[0] = new Joystick(config.JOYSTICK_0);
 		joysticks[1] = new Joystick(config.JOYSTICK_1);
 		joysticks[2] = new Joystick(config.JOYSTICK_2);
 		joysticks[3] = new Joystick(config.JOYSTICK_3);
+		System.out.println("Joysticks loaded");
+		
 		elevatorUp = new JoystickButton(joysticks[0], config.ELEVATOR_UP_BUTTON);
 		elevatorDown = new JoystickButton(joysticks[0], config.ELEVATOR_DOWN_BUTTON);
+		System.out.println("Elevator buttons done");
+		
 		elevatorArmToggle = new JoystickButton(joysticks[0], config.ELEVATOR_ARMS_TOGGLE_BUTTON);
+		System.out.println("Button assigned");
+		elevatorArmToggle.whenPressed(new ElevatorSetGrabber(ElevatorSetGrabber.TOGGLE));
+		System.out.println("Elevator arm done");
+		
 		driveManualToggle = new JoystickButton(joysticks[config.DRIVE_MANUAL_TOGGLE_JOYSTICK],config.DRIVE_MANUAL_TOGGLE_BUTTON);
 		System.out.println("OI Initialized");
 	}
