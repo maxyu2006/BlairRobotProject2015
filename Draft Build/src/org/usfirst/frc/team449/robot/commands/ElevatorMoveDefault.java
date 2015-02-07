@@ -3,6 +3,7 @@ package org.usfirst.frc.team449.robot.commands;
 import org.usfirst.frc.team449.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * MoveDirect: Manual control for the elevator
@@ -16,8 +17,8 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ElevatorMoveDefault extends Command {
 	
 	private final double deadband = .1; //deadband for joystick response
-	private final double joystickScale =1; //assumes joystick vals are -1 to 1;
-	private double joystickVal; //scaled joystick value
+	private final double joystick_scale =1; //assumes joystick vals are -1 to 1;
+	private double joystick_val; //scaled joystick value
 	private boolean override; // brake override flag
 	
     public ElevatorMoveDefault() {
@@ -33,20 +34,35 @@ public class ElevatorMoveDefault extends Command {
     	if(Robot.elevator.isPIDEnabled()) 
     		return;
     	
-    	joystickVal = joystickScale*Robot.OI.getJoystickAxisY(Robot.OI.joysticks[2]);// arbitrary assignment
+    	joystick_val = joystick_scale*Robot.OI.getJoystickAxisY(Robot.OI.joysticks[0]);// arbitrary assignment
+
+    	override = Robot.OI.joysticks[0].getTrigger();
     	
-    	override = Robot.OI.joysticks[2].getTrigger();
-    	
-    	if(Math.abs(joystickVal) < deadband && override==false)//if input is under deadband and no override 
+    	if(Math.abs(joystick_val) < deadband && override==false)//if input is under deadband and no override 
     	{
     		Robot.elevator.setMotorManual(0);
     		Robot.elevator.activateBrake();
     	}
     	else // otherwise joystick is above deadband or there is an override
     	{
-    		Robot.elevator.releaseBrake();
-    		Robot.elevator.setMotorManual(joystickVal);
-    	}
+    		SmartDashboard.putBoolean("NotIsTouchingTop", !(Robot.elevator.isTouchingTop()));
+    		SmartDashboard.putBoolean("NotIsTouchingBottom", !(Robot.elevator.isTouchingBottom()));
+
+            SmartDashboard.putBoolean("TopLimit", Robot.elevator.isTouchingTop());
+            SmartDashboard.putBoolean("BottomLimit", Robot.elevator.isTouchingBottom());
+            
+    		if(joystick_val < 0 && !(Robot.elevator.isTouchingTop()) || joystick_val > 0 && !(Robot.elevator.isTouchingBottom()))
+    		{
+    			SmartDashboard.putString("motion", "is moving up");
+        		Robot.elevator.releaseBrake();
+    			Robot.elevator.setMotorManual(joystick_val);	
+    		}//endif
+    		else
+    		{
+        		Robot.elevator.setMotorManual(0);
+        		Robot.elevator.activateBrake();
+    		}//endif
+    	}//endif
     }
 
     protected boolean isFinished() {

@@ -19,8 +19,6 @@ public class Elevator extends Subsystem {
 	// Elevator hardware fields
 	private final DigitalInput topLimit;
 	private final DigitalInput bottomLimit;
-	private final DigitalInput leftArmLimit;
-	private final DigitalInput rightArmLimit;
 	
 	private final DoubleSolenoid brakeController;
 	
@@ -48,9 +46,6 @@ public class Elevator extends Subsystem {
 		topLimit 		= new DigitalInput(config.ELEVATOR_TOP_LIMIT);
 		bottomLimit 	= new DigitalInput(config.ELEVATOR_BOTTOM_LIMIT);
 		
-		leftArmLimit 	= new DigitalInput(config.ELEVATOR_LEFT_LIMIT);
-		rightArmLimit 	= new DigitalInput(config.ELEVATOR_RIGHT_LIMIT);
-		
 		brakeController = new DoubleSolenoid(config.ELEVATOR_BRAKE_SOLENOID_FWD, config.ELEVATOR_BRAKE_SOLENOID_REV);
 		
 		
@@ -63,10 +58,12 @@ public class Elevator extends Subsystem {
 		motors = new PIDMotor(config, config.ELEVATOR_P, config.ELEVATOR_I, config.ELEVATOR_D, 0, leftMotor, encoder, PIDMotor.POSITION_BASE);
 		motors.addSlave(rightMotor,true);
 		
-		this.controlState = PID;
+		this.controlState = MANUAL;
 		
 		setPoint = 0;
 		position = ELEVATOR_FIRST_POSITION;
+		
+		System.out.println("Elevator Initialized");
 	}//end Elevator();
 
 	//============================Elevator Primary Methods=======================
@@ -169,7 +166,7 @@ public class Elevator extends Subsystem {
      * @return see description
      */
     public boolean isTouchingTop() {
-    	return topLimit.get();
+    	return !topLimit.get();			//wiring is reversed
     }
     
     /**
@@ -177,24 +174,9 @@ public class Elevator extends Subsystem {
      * @return see description
      */
     public boolean isTouchingBottom() {
-    	return bottomLimit.get();
+    	return !bottomLimit.get();			//wiring is reversed
     }
-    
-    /**
-     * Returns whether the limit switch on the left arm is being pressed
-     * @return see description
-     */
-    public boolean isTouchingLeftArm() {
-    	return leftArmLimit.get();
-    }
-    
-    /**
-     * Returns whether the limit switch on the right arm is being pressed
-     * @return see description
-     */
-    public boolean isTouchingRightArm() {
-    	return rightArmLimit.get();
-    }
+
     
     /**
      * Returns whether elevator control state is in PID mode
