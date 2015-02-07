@@ -33,6 +33,8 @@ public class Arms extends Subsystem {
 		
 		System.out.println("Solenoids Initialized");
 		armState = ARM_OPEN;
+		armController.set(Value.kForward);
+		
 		System.out.println("Arms Initialized");
 	}
 	

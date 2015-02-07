@@ -84,9 +84,7 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         
-        SmartDashboard.putNumber("JoystickValue", Robot.OI.getJoystickAxisY(Robot.OI.joysticks[0]));
-		SmartDashboard.putBoolean("NotIsTouchingTop", !(Robot.elevator.isTouchingTop()));
-		SmartDashboard.putBoolean("NotIsTouchingBottom", !(Robot.elevator.isTouchingBottom()));
+        SmartDashboard.putNumber("Encoder position", Robot.elevator.getEncoderReading());
 
         SmartDashboard.putBoolean("TopLimit", Robot.elevator.isTouchingTop());
         SmartDashboard.putBoolean("BottomLimit", Robot.elevator.isTouchingBottom());

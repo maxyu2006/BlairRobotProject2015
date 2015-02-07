@@ -272,13 +272,12 @@ public class PIDMotor extends PIDSubsystem {
     public double getMotorVal() {
     	return motor.get();
     }
-
-	public Encoder getEncoder() {
-		return encoder;
-	}
-	
-	public double getRate()
-	{
-		return this.encoder.getRate();
-	}
+    
+    /**
+     * @return the count on the encoder
+     */
+    public double getEncoderCount()
+    {
+    	return this.encoder.get();
+    }
 }//end class

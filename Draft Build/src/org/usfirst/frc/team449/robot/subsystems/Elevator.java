@@ -63,7 +63,9 @@ public class Elevator extends Subsystem {
 		setPoint = 0;
 		position = ELEVATOR_FIRST_POSITION;
 		
+		encoder.reset();
 		System.out.println("Elevator Initialized");
+		
 	}//end Elevator();
 
 	//============================Elevator Primary Methods=======================
@@ -92,7 +94,7 @@ public class Elevator extends Subsystem {
      * Resets the encoder value to 0.
      */
     public void resetEncoder(){
-    	motors.getEncoder().reset();
+    	motors.resetEncoder();
     }
     
     //============================Elevator Field Getters and Setters=======================
@@ -218,4 +220,12 @@ public class Elevator extends Subsystem {
 	public boolean isAtSetPoint() {
 		return this.motors.onTarget();
 	}
-}
+	
+	/**
+	 * @return the encoder count
+	 */
+	public double getEncoderReading()
+	{
+		return this.motors.getEncoderCount();
+	}
+}//end class
