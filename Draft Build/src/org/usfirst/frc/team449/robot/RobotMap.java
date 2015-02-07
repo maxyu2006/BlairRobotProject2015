@@ -219,12 +219,29 @@ public final class RobotMap {
 	 */
 	public RobotMap(String configFile)
 	{
+		//digital inputs 
+		this.ENCODER_PPR = 512;
+				
 		//motors
-		this.DRIVE_L1 = 0;
-		this.DRIVE_L2 = 1;
-		this.DRIVE_R1 = 2;
-		this.DRIVE_R2 = 3;
+		this.DRIVE_L1 = 6;
+		this.DRIVE_L2 = 7;
+		this.DRIVE_R1 = 4;
+		this.DRIVE_R2 = 5;
 		
+		this.DRIVE_ENCODER_RA = 0;
+		this.DRIVE_ENCODER_RB = 1;
+		this.DRIVE_ENCODER_LA = 2;
+		this.DRIVE_ENCODER_LB = 3;
+		
+		//subsystem configs 
+		this.DRIVE_MAX_RATE = 512;
+		this.DRIVE_DEFAULT_MODE = Drive.MANUAL;
+		
+		this.DRIVE_P = 0.05;
+		this.DRIVE_I = 0;
+		this.DRIVE_D = 0;
+		this.DRIVE_F = 0.05;
+				
 		this.ELEVATOR_LEFT_MOTOR = 4;
 		this.ELEVATOR_RIGHT_MOTOR = 5;
 		
@@ -241,13 +258,7 @@ public final class RobotMap {
 		this.INTAKE_RSOLENOID_FORWARD =6;
 		this.INTAKE_RSOLENOID_REVERSE =7;
 		
-		//digital inputs 
-		this.ENCODER_PPR = 512;
 		
-		this.DRIVE_ENCODER_RA = 0;
-		this.DRIVE_ENCODER_RB = 1;
-		this.DRIVE_ENCODER_LA = 2;
-		this.DRIVE_ENCODER_LB = 3;
 		this.ELEVATOR_ENCODER_CHANNEL_A = 5;
 		this.ELEVATOR_ENCODER_CHANNEL_B = 6;
 		
@@ -256,14 +267,6 @@ public final class RobotMap {
 		this.ELEVATOR_TOP_LIMIT = 9;
 		this.ELEVATOR_BOTTOM_LIMIT = 10;
 		
-		//subsystem configs 
-		this.DRIVE_MAX_RATE = 512;
-		this.DRIVE_DEFAULT_MODE = Drive.MANUAL;
-		
-		this.DRIVE_P = 0.05;
-		this.DRIVE_I = 0;
-		this.DRIVE_D = 0;
-		this.DRIVE_F = 0.05;
 		
 		this.ELEVATOR_P = 0.05;
 		this.ELEVATOR_I = 0;
@@ -283,9 +286,5 @@ public final class RobotMap {
 
 		this.DRIVE_MANUAL_TOGGLE_JOYSTICK 	= 1;
 		this.DRIVE_MANUAL_TOGGLE_BUTTON 	= 1;
-		
-		
-		
-		
 	}//end RobotMap()
 }//end class

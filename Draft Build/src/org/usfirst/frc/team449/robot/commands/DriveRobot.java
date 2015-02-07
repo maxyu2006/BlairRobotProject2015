@@ -21,7 +21,8 @@ public class DriveRobot extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    		Robot.drive.setThrottle(Robot.OI.getDriveAxis1(), Robot.OI.getDriveAxis2());
+    	//pushing forward on the stick gives -1 so it is negated
+    	Robot.drive.setThrottle(-Robot.OI.getDriveAxis1(), -Robot.OI.getDriveAxis2());
     }
 
     // Make this return true when this Command no longer needs to run execute()
