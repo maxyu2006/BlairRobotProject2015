@@ -17,33 +17,35 @@ public class ElevatorMoveAuto extends Command {
 	/**
 	 * UP for the state in which the elevator is going up
 	 */
-	public static final boolean UP = true;
+	public static final int UP = 0;
 	
 	/**
 	 * DOWN for the state in which the elevator is going down
 	 */
-	public static final boolean DOWN = false;
+	public static final int DOWN = 1;
 	
-	private boolean state;
+	private int state;
 	private double tolerance;
 	
 	/**
 	 * ElevatorMoveAuto constructor
 	 * @param config is an instance of RobotMap
-	 * @param upOrDown is the state of going up or down. Use the public static final booleans
+	 * @param upOrDown is the state of going up or down. Use the public static final ints
 	 */
-    public ElevatorMoveAuto(RobotMap config, boolean upOrDown) {	//hehehe
-        requires(Robot.elevator);
-        state = upOrDown;
+    public ElevatorMoveAuto(RobotMap config, int direction) {	
+    	requires(Robot.elevator);
+        state = direction;
         tolerance = config.ELEVATOR_PID_TOLERANCE_RANGE;
     }
 
     protected void initialize() {
-    	if (state) {
+    	switch (state) {
+    	case UP:
     		Robot.elevator.raisePosition();
-    	}
-    	else {
+    		break;
+    	case DOWN:
     		Robot.elevator.lowerPosition();
+    		break;
     	}
     	Robot.elevator.enablePID();
     	
