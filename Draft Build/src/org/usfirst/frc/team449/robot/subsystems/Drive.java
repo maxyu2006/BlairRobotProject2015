@@ -55,8 +55,8 @@ public class Drive extends Subsystem {
 		this.leftEncoder 	= new Encoder(config.DRIVE_ENCODER_LA,config.DRIVE_ENCODER_LB);
 		this.rightEncoder	= new Encoder(config.DRIVE_ENCODER_RA,config.DRIVE_ENCODER_RB);
 		
-		this.leftEncoder.setDistancePerPulse(config.ENCODER_PPR);
-		this.rightEncoder.setDistancePerPulse(config.ENCODER_PPR);
+		this.leftEncoder.setDistancePerPulse(-1.0/config.ENCODER_PPR);
+		this.rightEncoder.setDistancePerPulse(-1.0/config.ENCODER_PPR);	//negated because mirrored
 		
 		
 		this.leftEncoder.setPIDSourceParameter(PIDSourceParameter.kRate);
@@ -84,13 +84,13 @@ public class Drive extends Subsystem {
 		if(this.getControlMode() == MANUAL)
 		{
 			this.leftMotors.set(leftPower);
-			this.rightMotors.set(-rightPower);
+			this.rightMotors.set(rightPower);
 		}
 		
 		if(this.getControlMode() == PID)
 		{
 			this.leftController.setSetpoint(this.maxRate * leftPower);
-			this.rightController.setSetpoint(this.maxRate * -rightPower);
+			this.rightController.setSetpoint(this.maxRate * rightPower);
 		}
 	}//end move()
 
