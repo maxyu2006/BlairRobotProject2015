@@ -1,4 +1,7 @@
 package org.usfirst.frc.team449.robot;
+
+import org.usfirst.frc.team449.robot.subsystems.Drive;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -249,5 +252,85 @@ public final class RobotMap {
 	public RobotMap(String configFile)
 	{
 
+		this.ENCODER_PPR = 512;
+		
+		//==================================================Elevator Constants ==================================================
+		
+		this.ELEVATOR_TOP_LIMIT = 0;
+		this.ELEVATOR_BOTTOM_LIMIT = 0;
+		
+		this.ELEVATOR_LEFT_LIMIT = 0;
+		this.ELEVATOR_RIGHT_LIMIT = 0;
+		
+		this.ELEVATOR_ULTRASONIC = 0;
+		
+		this.ELEVATOR_ARM_SOLENOID_FWD = 0;
+		this.ELEVATOR_ARM_SOLENOID_REV = 0;
+		
+		this.ELEVATOR_BRAKE_SOLENOID_FWD = 0;
+		this.ELEVATOR_BRAKE_SOLENOID_REV = 0;
+		
+		this.ELEVATOR_ENCODER_CHANNEL_A = 0;
+		this.ELEVATOR_ENCODER_CHANNEL_B = 0;
+		
+		this.ELEVATOR_P = 0.005;
+		this.ELEVATOR_I = 0;
+		this.ELEVATOR_D = 0;
+		
+		this.ELEVATOR_LEFT_MOTOR = 0;
+		this.ELEVATOR_RIGHT_MOTOR = 0;
+		
+		this.ELEVATOR_PID_TOLERANCE_RANGE = 0.05;
+		
+		//==================================================Drive Constants ==================================================
+		
+		this.DRIVE_L1 = 0;
+		this.DRIVE_L2 = 0;
+		
+		this.DRIVE_R1 = 0;
+		this.DRIVE_R2 = 0;
+		
+		this.DRIVE_ENCODER_LA = 0;
+		this.DRIVE_ENCODER_LB = 0;
+		
+		this.DRIVE_ENCODER_RA = 0;
+		this.DRIVE_ENCODER_RB = 0;
+		
+		this.DRIVE_P = 0.005;
+		this.DRIVE_I = 0;
+		this.DRIVE_D = 0;
+		this.DRIVE_F = 0;
+		
+		this.DRIVE_MAX_RATE = 4;
+		this.DRIVE_DEFAULT_MODE = Drive.MANUAL;
+		
+		//==================================================Intake Constants ==================================================
+		
+		this.INTAKE_LEFT_LIMIT = 0;
+		this.INTAKE_RIGHT_LIMIT = 0;
+		
+		this.INTAKE_LEFT_MOTOR = 0;
+		this.INTAKE_RIGHT_MOTOR = 0;
+		
+		this.INTAKE_LSOLENOID_FORWARD = 0;
+		this.INTAKE_LSOLENOID_REVERSE = 0;
+		
+		this.INTAKE_RSOLENOID_FORWARD = 0;
+		this.INTAKE_RSOLENOID_REVERSE = 0;
+		
+		//==================================================Control Constants ==================================================
+		
+		this.JOYSTICK_0 = 1;
+		this.JOYSTICK_1 = 2;
+		this.JOYSTICK_2 = 3;
+		this.JOYSTICK_3 = 4;
+		
+		this.DRIVE_MANUAL_TOGGLE_JOYSTICK 	= 0;
+		this.DRIVE_MANUAL_TOGGLE_BUTTON		= 1;
+		
+		this.ELEVATOR_UP_BUTTON = 2;
+		this.ELEVATOR_DOWN_BUTTON = 3;
+		
+		this.ELEVATOR_ARMS_TOGGLE_BUTTON = 1;
 	}//end RobotMap()
 }//end class
