@@ -247,6 +247,15 @@ public final class RobotMap {
 
 	/**
 	 * 
+	 */
+	public final int ELEVATOR_MOVE_JOYSTICK;
+	
+	public final int DRIVE_LEFT_JOYSTICK;
+	
+	public final int DRIVE_RIGHT_JOYSTICK;
+	
+	/**
+	 * 
 	 * @param configFile
 	 */
 	public RobotMap(String configFile)
@@ -256,45 +265,45 @@ public final class RobotMap {
 		
 		//==================================================Elevator Constants ==================================================
 		
-		this.ELEVATOR_TOP_LIMIT = 0;
-		this.ELEVATOR_BOTTOM_LIMIT = 0;
+		this.ELEVATOR_TOP_LIMIT 	= 9;
+		this.ELEVATOR_BOTTOM_LIMIT 	= 8;
 		
-		this.ELEVATOR_LEFT_LIMIT = 0;
-		this.ELEVATOR_RIGHT_LIMIT = 0;
+		this.ELEVATOR_LEFT_LIMIT 	= 7;
+		this.ELEVATOR_RIGHT_LIMIT 	= 6;
 		
 		this.ELEVATOR_ULTRASONIC = 0;
 		
-		this.ELEVATOR_ARM_SOLENOID_FWD = 0;
-		this.ELEVATOR_ARM_SOLENOID_REV = 0;
+		this.ELEVATOR_ARM_SOLENOID_FWD = 2;
+		this.ELEVATOR_ARM_SOLENOID_REV = 3;
 		
-		this.ELEVATOR_BRAKE_SOLENOID_FWD = 0;
+		this.ELEVATOR_BRAKE_SOLENOID_FWD = 1;
 		this.ELEVATOR_BRAKE_SOLENOID_REV = 0;
 		
-		this.ELEVATOR_ENCODER_CHANNEL_A = 0;
-		this.ELEVATOR_ENCODER_CHANNEL_B = 0;
+		this.ELEVATOR_ENCODER_CHANNEL_A = 4;
+		this.ELEVATOR_ENCODER_CHANNEL_B = 5;
 		
 		this.ELEVATOR_P = 0.005;
 		this.ELEVATOR_I = 0;
 		this.ELEVATOR_D = 0;
 		
-		this.ELEVATOR_LEFT_MOTOR = 0;
-		this.ELEVATOR_RIGHT_MOTOR = 0;
+		this.ELEVATOR_LEFT_MOTOR = 2;
+		this.ELEVATOR_RIGHT_MOTOR = 3;
 		
 		this.ELEVATOR_PID_TOLERANCE_RANGE = 0.05;
 		
 		//==================================================Drive Constants ==================================================
 		
-		this.DRIVE_L1 = 0;
-		this.DRIVE_L2 = 0;
+		this.DRIVE_L1 = 6;
+		this.DRIVE_L2 = 7;
 		
-		this.DRIVE_R1 = 0;
-		this.DRIVE_R2 = 0;
+		this.DRIVE_R1 = 4;
+		this.DRIVE_R2 = 5;
 		
-		this.DRIVE_ENCODER_LA = 0;
-		this.DRIVE_ENCODER_LB = 0;
+		this.DRIVE_ENCODER_LA = 2;
+		this.DRIVE_ENCODER_LB = 3;
 		
 		this.DRIVE_ENCODER_RA = 0;
-		this.DRIVE_ENCODER_RB = 0;
+		this.DRIVE_ENCODER_RB = 1;
 		
 		this.DRIVE_P = 0.005;
 		this.DRIVE_I = 0;
@@ -320,10 +329,10 @@ public final class RobotMap {
 		
 		//==================================================Control Constants ==================================================
 		
-		this.JOYSTICK_0 = 1;
-		this.JOYSTICK_1 = 2;
-		this.JOYSTICK_2 = 3;
-		this.JOYSTICK_3 = 4;
+		this.JOYSTICK_0 = 0;
+		this.JOYSTICK_1 = 1;
+		this.JOYSTICK_2 = 2;
+		this.JOYSTICK_3 = 3;
 		
 		this.DRIVE_MANUAL_TOGGLE_JOYSTICK 	= 0;
 		this.DRIVE_MANUAL_TOGGLE_BUTTON		= 1;
@@ -332,5 +341,9 @@ public final class RobotMap {
 		this.ELEVATOR_DOWN_BUTTON = 3;
 		
 		this.ELEVATOR_ARMS_TOGGLE_BUTTON = 1;
+		
+		this.ELEVATOR_MOVE_JOYSTICK = 2;
+		this.DRIVE_LEFT_JOYSTICK 	= 0;
+		this.DRIVE_RIGHT_JOYSTICK 	= 1;
 	}//end RobotMap()
 }//end class

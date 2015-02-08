@@ -28,7 +28,8 @@ public class Arms extends Subsystem {
 		leftArmLimit 	= new DigitalInput(config.ELEVATOR_LEFT_LIMIT);
 		rightArmLimit 	= new DigitalInput(config.ELEVATOR_RIGHT_LIMIT);
 		
-		System.out.println("Lim switches initialized");
+		System.out.println("Left and right limits initialized");
+		
 		armController  = new DoubleSolenoid(config.ELEVATOR_ARM_SOLENOID_FWD,config.ELEVATOR_ARM_SOLENOID_REV);
 		
 		System.out.println("Solenoids Initialized");

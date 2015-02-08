@@ -32,7 +32,7 @@ public class ElevatorMoveDefault extends Command {
     	if(Robot.elevator.isPIDEnabled()) 
     		return;
     	
-    	joystick_val = joystick_scale*Robot.OI.getJoystickAxisY(Robot.OI.joysticks[0]);// arbitrary assignment
+    	joystick_val = joystick_scale*Robot.OI.getElevatorJoystickAxisY();// arbitrary assignment
 
     	
     	if(Math.abs(joystick_val) > deadband)//if input is over deadband and no override 
@@ -48,7 +48,6 @@ public class ElevatorMoveDefault extends Command {
     		}else
     		{
     			SmartDashboard.putString("motion", "is stopping");
-    			System.out.println("Setting 0");
         		Robot.elevator.setMotorManual(0);
         		Robot.elevator.activateBrake();
     		}//endif
@@ -57,7 +56,6 @@ public class ElevatorMoveDefault extends Command {
     	else
 		{
 			SmartDashboard.putString("motion", "is stopping");
-			System.out.println("Setting 0");
     		Robot.elevator.setMotorManual(0);
     		Robot.elevator.activateBrake();
 		}//endif

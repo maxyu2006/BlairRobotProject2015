@@ -1,5 +1,6 @@
 package org.usfirst.frc.team449.robot;
 
+import org.usfirst.frc.team449.robot.commands.ElevatorReset;
 import org.usfirst.frc.team449.robot.commands.ElevatorSetGrabber;
 import org.usfirst.frc.team449.robot.commands.DriveToggleMode;
 
@@ -42,6 +43,10 @@ public class OI {
 	
 	public final Joystick[] joysticks = new Joystick[4];
 	
+	private final int Elevator_Move_Joystick;
+	private final int Drive_Left_Joystick;
+	private final int Drive_Right_Joystick;
+	
 	/**
 	 * this 
 	 */
@@ -49,6 +54,7 @@ public class OI {
 	public final JoystickButton elevatorUp;
 	public final JoystickButton elevatorDown;
 	public final JoystickButton elevatorArmToggle;
+	public final JoystickButton elevatorResetButton;
 	
 	public OI(RobotMap config)
 	{
@@ -57,12 +63,19 @@ public class OI {
 		joysticks[1] = new Joystick(config.JOYSTICK_1);
 		joysticks[2] = new Joystick(config.JOYSTICK_2);
 		joysticks[3] = new Joystick(config.JOYSTICK_3);
-
-		elevatorUp = new JoystickButton(joysticks[0], config.ELEVATOR_UP_BUTTON);
-		elevatorDown = new JoystickButton(joysticks[0], config.ELEVATOR_DOWN_BUTTON);
 		
-		elevatorArmToggle = new JoystickButton(joysticks[0], config.ELEVATOR_ARMS_TOGGLE_BUTTON);
+		this.Drive_Left_Joystick 	= config.DRIVE_LEFT_JOYSTICK;
+		this.Drive_Right_Joystick 	= config.DRIVE_RIGHT_JOYSTICK;
+		
+		this.Elevator_Move_Joystick = config.ELEVATOR_MOVE_JOYSTICK;
+
+		elevatorUp = new JoystickButton(joysticks[this.Elevator_Move_Joystick], config.ELEVATOR_UP_BUTTON);
+		elevatorDown = new JoystickButton(joysticks[this.Elevator_Move_Joystick], config.ELEVATOR_DOWN_BUTTON);
+		
+		elevatorArmToggle = new JoystickButton(joysticks[this.Elevator_Move_Joystick], config.ELEVATOR_ARMS_TOGGLE_BUTTON);
 		elevatorArmToggle.whenPressed(new ElevatorSetGrabber(ElevatorSetGrabber.TOGGLE));
+		elevatorResetButton = new JoystickButton(joysticks[this.Elevator_Move_Joystick], 8);
+		elevatorResetButton.whenPressed(new ElevatorReset());
 		
 		driveManualToggle = new JoystickButton(joysticks[config.DRIVE_MANUAL_TOGGLE_JOYSTICK],config.DRIVE_MANUAL_TOGGLE_BUTTON);
 	}
@@ -71,18 +84,18 @@ public class OI {
 	 * get the axis assigned to the left side of the drive
 	 * @return a double between -1 and 1
 	 */
-	public double getDriveAxis1()
+	public double getDriveAxisLeft()
 	{
-		return this.joysticks[0].getAxis(Joystick.AxisType.kY);
+		return 0.5*this.joysticks[this.Drive_Left_Joystick].getAxis(Joystick.AxisType.kY);
 	}
 	
 	/**
 	 * get the axis assigned to the right side of the drive
 	 * @return a double between -1 and 1
 	 */
-	public double getDriveAxis2()
+	public double getDriveAxisRight()
 	{
-		return this.joysticks[1].getAxis(Joystick.AxisType.kY);
+		return 0.5*this.joysticks[this.Drive_Right_Joystick].getAxis(Joystick.AxisType.kY);
 	}
 	
 	/**
@@ -103,6 +116,11 @@ public class OI {
 	public double getJoystickAxisThrottle(Joystick joystick)
 	{
 		return joystick.getAxis(Joystick.AxisType.kThrottle);
+	}
+
+	public double getElevatorJoystickAxisY() {
+		// TODO Auto-generated method stub
+		return joysticks[this.Elevator_Move_Joystick].getAxis(Joystick.AxisType.kY);
 	}
 	
 	

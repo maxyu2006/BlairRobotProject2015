@@ -44,6 +44,7 @@ public class Drive extends Subsystem {
 	 * @param config the RobotMap containint all constants
 	 */
 	public Drive(RobotMap config){
+		System.out.println("Drive init started");
 
 		//initialize motor clusters and add slaves
 		this.leftMotors = new MotorCluster(new VictorSP(config.DRIVE_L1)); 	//first motor
@@ -52,8 +53,8 @@ public class Drive extends Subsystem {
 		this.rightMotors = new MotorCluster(new VictorSP(config.DRIVE_R1)); 	//first motor
 		this.rightMotors.addSlave(new VictorSP(config.DRIVE_R2));				//attach second motor
 		
-		this.leftEncoder 	= new Encoder(config.DRIVE_ENCODER_LA,config.DRIVE_ENCODER_LB);
-		this.rightEncoder	= new Encoder(config.DRIVE_ENCODER_RA,config.DRIVE_ENCODER_RB);
+		this.leftEncoder 	= new Encoder(config.DRIVE_ENCODER_LA,config.DRIVE_ENCODER_LB, false);
+		this.rightEncoder	= new Encoder(config.DRIVE_ENCODER_RA,config.DRIVE_ENCODER_RB, false);
 		
 		this.leftEncoder.setDistancePerPulse(-1.0/config.ENCODER_PPR);
 		this.rightEncoder.setDistancePerPulse(-1.0/config.ENCODER_PPR);	//negated because mirrored

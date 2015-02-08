@@ -160,10 +160,8 @@ public class PIDMotor extends PIDSubsystem {
         {
         	System.err.println("invert flags don't match with slaves");
         	for(int i=0; i < slaves.size(); i++)
-        	{
-        		System.out.println("setting throttle " + throttle);
         		slaves.get(i).set(throttle);
-        	}
+        	
         	
         	return false;
         }
@@ -171,7 +169,6 @@ public class PIDMotor extends PIDSubsystem {
         {
         	for(int i=0; i < slaves.size(); i++)
         	{
-        		System.out.println("setting throttle " + throttle);
         		if(slave_invert_flags.get(i)) // if invert flag, invert slave motor output
         		{
         			slaves.get(i).set(-throttle);

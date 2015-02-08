@@ -43,6 +43,8 @@ public class Elevator extends Subsystem {
 	 * Elevator constructor
 	 */
 	public Elevator(RobotMap config) {
+		System.out.println("Elevator init started");
+		
 		topLimit 		= new DigitalInput(config.ELEVATOR_TOP_LIMIT);
 		bottomLimit 	= new DigitalInput(config.ELEVATOR_BOTTOM_LIMIT);
 		
