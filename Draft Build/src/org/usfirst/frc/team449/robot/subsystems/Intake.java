@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -19,12 +20,13 @@ public class Intake extends Subsystem {
 	private final DigitalInput rightLimSwitch;
 	
     private final AnalogInput ultrasonic;
+	private final double ultraScale;
 	
     private final DoubleSolenoid intakeLeftSol;
     private final DoubleSolenoid intakeRightSol;
     
-    private final Victor leftArmMotor;
-    private final Victor rightArmMotor;
+    private final VictorSP leftArmMotor;
+    private final VictorSP rightArmMotor;
     
     private boolean areArmsOpen;
     private boolean isMotorOn;
@@ -42,8 +44,8 @@ public class Intake extends Subsystem {
     	
     	ultrasonic = new AnalogInput(config.INTAKE_ULTRASONIC);
     	
-    	leftArmMotor 	= new Victor(config.INTAKE_LEFT_MOTOR);
-    	rightArmMotor 	= new Victor(config.INTAKE_RIGHT_MOTOR);
+    	leftArmMotor 	= new VictorSP(config.INTAKE_LEFT_MOTOR);
+    	rightArmMotor 	= new VictorSP(config.INTAKE_RIGHT_MOTOR);
     	
     	intakeLeftSol  = new DoubleSolenoid(config.INTAKE_LSOLENOID_FORWARD, config.INTAKE_LSOLENOID_REVERSE);
     	intakeRightSol = new DoubleSolenoid(config.INTAKE_RSOLENOID_FORWARD, config.INTAKE_RSOLENOID_REVERSE);
@@ -52,7 +54,9 @@ public class Intake extends Subsystem {
     	isMotorOn = false;
     	isMotorForward = true;
     	
+    	ultraScale = 1; //TODO: actually add the correct calibration
     	//motorSpeed = config.INTAKE_MOTOR_SPEED;
+    	this.openArms();
 	}
 	
 	/**
@@ -63,28 +67,19 @@ public class Intake extends Subsystem {
 	}
 	
 	/**
-	 * Toggles the on/off state of the motors.
+	 * sets the left motor output
+	 * @param throttle
 	 */
-	public void toggleMotor() {
-		if(isMotorOn){
-			leftArmMotor.set(0);
-			rightArmMotor.set(0);
-		}else{
-			int times = 1;
-			if(!isMotorForward) times = -1;
-			leftArmMotor.set(motorSpeed * times);
-			rightArmMotor.set(motorSpeed * times);
-		}
-		isMotorOn = !isMotorOn;
+	public void setLMotor(double throttle){
+		this.leftArmMotor.set(throttle);
 	}
 	
 	/**
-	 * Toggles the direction of the motors.
+	 * sets right motor output
+	 * @param throttle
 	 */
-	public void toggleMotorSpinDirection() {
-		leftArmMotor.set(-leftArmMotor.get());
-		rightArmMotor.set(-rightArmMotor.get());
-		isMotorForward = !isMotorForward;
+	public void setRMotor(double throttle){
+		this.rightArmMotor.set(throttle);
 	}
 	
 	/**
@@ -129,7 +124,23 @@ public class Intake extends Subsystem {
 	public boolean getRightSwitchState() {
 		return rightLimSwitch.get();
 	}
-
+	
+	/***
+	 * returns the raw voltage from the ultrasonic sensor
+	 * @return
+	 */
+	public double getUltraRawVoltage(){
+		return this.ultrasonic.getVoltage();
+	}
+	
+	/**
+	 * gets the distance in inches of a target from the ultrasonic sensor
+	 * @return
+	 */
+	public double getUltraDistance(){
+		return this.ultrasonic.getVoltage()*ultraScale;
+	}
+	
     public void initDefaultCommand() {	
     }
 }
