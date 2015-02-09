@@ -28,11 +28,8 @@ public class Intake extends Subsystem {
     private final VictorSP leftArmMotor;
     private final VictorSP rightArmMotor;
     
-    private boolean areArmsOpen;
-    private boolean isMotorOn;
-    private boolean isMotorForward;
-    
-    private double motorSpeed;
+    private boolean isLeftOpen;
+    private boolean isRightOpen;
     
     /**
      * 
@@ -50,21 +47,15 @@ public class Intake extends Subsystem {
     	intakeLeftSol  = new DoubleSolenoid(config.INTAKE_LSOLENOID_FORWARD, config.INTAKE_LSOLENOID_REVERSE);
     	intakeRightSol = new DoubleSolenoid(config.INTAKE_RSOLENOID_FORWARD, config.INTAKE_RSOLENOID_REVERSE);
     	
-    	areArmsOpen = true;
-    	isMotorOn = false;
-    	isMotorForward = true;
+    	isRightOpen = true;
+    	isLeftOpen = true;
     	
     	ultraScale = 1; //TODO: actually add the correct calibration
     	//motorSpeed = config.INTAKE_MOTOR_SPEED;
-    	this.openArms();
+    	this.openLeft();
+    	this.openRight();
 	}
 	
-	/**
-	 * Set the motor state 
-	 */
-	public void setMotorState(boolean newState) {
-		isMotorOn = newState;
-	}
 	
 	/**
 	 * sets the left motor output
@@ -82,33 +73,32 @@ public class Intake extends Subsystem {
 		this.rightArmMotor.set(throttle);
 	}
 	
-	/**
-	 * Opens the intake arms.
-	 */
-	public void openArms(){
-		intakeLeftSol.set(Value.kReverse);
-		intakeRightSol.set(Value.kReverse);
-		
-		areArmsOpen = true;
+	public void openRight(){
+		this.intakeRightSol.set(Value.kForward);
+		this.isRightOpen = true;
 	}
 	
-	/**
-	 * Closes the intake arms.
-	 */
-	public void closeArms(){
-		intakeLeftSol.set(Value.kForward);
-		intakeRightSol.set(Value.kForward);
-		
-		areArmsOpen = false;
+	public void openLeft(){
+		this.intakeLeftSol.set(Value.kForward);
+		this.isLeftOpen = true;
 	}
 	
-	/**
-	 * Returns true if the arms are open, false otherwise.
-	 * @return isArmOpen - A boolean that is true if the arms are open, false otherwise.
-	 */
-	public boolean areArmsOpen() {
-		
-		return areArmsOpen;
+	public void closeRight(){
+		this.intakeRightSol.set(Value.kReverse);
+		this.isRightOpen = false;
+	}
+	
+	public void closeLeft(){
+		this.intakeLeftSol.set(Value.kForward);
+		this.isLeftOpen = true;
+	}
+	
+	public boolean isLeftOpen(){
+		return this.isLeftOpen;
+	}
+	
+	public boolean isRightOpen(){
+		return this.isRightOpen;
 	}
 
 	/**
