@@ -3,6 +3,7 @@ package org.usfirst.frc.team449.robot;
 import org.usfirst.frc.team449.robot.subsystems.Arms;
 import org.usfirst.frc.team449.robot.subsystems.Drive;
 import org.usfirst.frc.team449.robot.subsystems.Elevator;
+import org.usfirst.frc.team449.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -26,6 +27,7 @@ public class Robot extends IterativeRobot {
 	public static final Elevator	elevator	= new Elevator(Robot.robotMap);
 	public static final Arms		elevatorArm	= new Arms(Robot.robotMap);
 	public static final Drive		drive		= new Drive(Robot.robotMap);
+	public static final Intake 		intake		= new Intake(Robot.robotMap);
 	
 	public static final OI 			OI 			= new OI(Robot.robotMap);
 	

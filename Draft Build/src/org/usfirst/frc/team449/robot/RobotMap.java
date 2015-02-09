@@ -197,7 +197,9 @@ public final class RobotMap {
 	 * right intake reverse solenoid channel
 	 */
 	public final int INTAKE_RSOLENOID_REVERSE;
-	
+
+	public final int INTAKE_ULTRASONIC;
+	public final int INTAKE_JOYSTICK;
 	//===========================Controller Ports/Scheme======================
 	/**
 	 * Joystick usb port for Joystick 0
@@ -327,6 +329,8 @@ public final class RobotMap {
 		this.INTAKE_RSOLENOID_FORWARD = 0;
 		this.INTAKE_RSOLENOID_REVERSE = 0;
 		
+		this.INTAKE_ULTRASONIC=0;
+		this.INTAKE_JOYSTICK =0;
 		//==================================================Control Constants ==================================================
 		
 		this.JOYSTICK_0 = 0;

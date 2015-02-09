@@ -1,6 +1,7 @@
 package org.usfirst.frc.team449.robot.subsystems;
 
 import org.usfirst.frc.team449.robot.RobotMap;
+import org.usfirst.frc.team449.robot.commands.IntakeRunMotors;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -132,6 +133,7 @@ public class Intake extends Subsystem {
 	}
 	
     public void initDefaultCommand() {	
+    	this.setDefaultCommand(new IntakeRunMotors());
     }
 }
 
