@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class ElevatorMoveDefault extends Command {
 	
 	private final double deadband = .1; //deadband for joystick response
-	private final double joystick_scale =0.5; //assumes joystick vals are -1 to 1;
+	private final double joystick_scale =1; //assumes joystick vals are -1 to 1;
 	
 	private double joystick_val; //scaled joystick value
 	
@@ -32,14 +32,15 @@ public class ElevatorMoveDefault extends Command {
     	if(Robot.elevator.isPIDEnabled()) 
     		return;
     	
-    	joystick_val = joystick_scale*Robot.OI.getElevatorJoystickAxisY();// arbitrary assignment
-
+    	joystick_val = -joystick_scale*Robot.OI.getElevatorJoystickAxisY();// arbitrary assignment
+    	System.out.println(joystick_val);
+    	System.out.println(Robot.elevator.isTouchingBottom());
     	
     	if(Math.abs(joystick_val) > deadband)//if input is over deadband and no override 
     	{
     		//System.out.println("greater than deadband");
             //if limit switches aren't triggered in direction to move in
-    		if(joystick_val < 0 && !(Robot.elevator.isTouchingTop()) || joystick_val > 0 && !(Robot.elevator.isTouchingBottom()))
+    		if(joystick_val > 0 && !(Robot.elevator.isTouchingTop()) || joystick_val < 0 && !(Robot.elevator.isTouchingBottom()))
     		{
     			SmartDashboard.putString("motion", "is moving");
         		Robot.elevator.releaseBrake();

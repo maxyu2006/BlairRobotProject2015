@@ -317,20 +317,20 @@ public final class RobotMap {
 		
 		//==================================================Intake Constants ==================================================
 		
-		this.INTAKE_LEFT_LIMIT = 0;
-		this.INTAKE_RIGHT_LIMIT = 0;
+		this.INTAKE_LEFT_LIMIT = 9;
+		this.INTAKE_RIGHT_LIMIT = 10;
 		
-		this.INTAKE_LEFT_MOTOR = 0;
-		this.INTAKE_RIGHT_MOTOR = 0;
+		this.INTAKE_LEFT_MOTOR = 8;
+		this.INTAKE_RIGHT_MOTOR = 9;
 		
-		this.INTAKE_LSOLENOID_FORWARD = 0;
-		this.INTAKE_LSOLENOID_REVERSE = 0;
+		this.INTAKE_LSOLENOID_FORWARD = 4;
+		this.INTAKE_LSOLENOID_REVERSE = 5;
 		
-		this.INTAKE_RSOLENOID_FORWARD = 0;
-		this.INTAKE_RSOLENOID_REVERSE = 0;
+		this.INTAKE_RSOLENOID_FORWARD = 6;
+		this.INTAKE_RSOLENOID_REVERSE = 7;
 		
 		this.INTAKE_ULTRASONIC=0;
-		this.INTAKE_JOYSTICK =0;
+		this.INTAKE_JOYSTICK =4;
 		//==================================================Control Constants ==================================================
 		
 		this.JOYSTICK_0 = 0;

@@ -27,7 +27,7 @@ public class Robot extends IterativeRobot {
 	public static final Elevator	elevator	= new Elevator(Robot.robotMap);
 	public static final Arms		elevatorArm	= new Arms(Robot.robotMap);
 	public static final Drive		drive		= new Drive(Robot.robotMap);
-	public static final Intake 		intake		= new Intake(Robot.robotMap);
+	public static final Intake 		intake		= null;
 	
 	public static final OI 			OI 			= new OI(Robot.robotMap);
 	
