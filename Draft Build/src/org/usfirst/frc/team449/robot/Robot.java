@@ -5,6 +5,7 @@ import org.usfirst.frc.team449.robot.subsystems.Drive;
 import org.usfirst.frc.team449.robot.subsystems.Elevator;
 import org.usfirst.frc.team449.robot.subsystems.Intake;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -33,6 +34,8 @@ public class Robot extends IterativeRobot {
 	
 	public static final Compressor c = new Compressor();
 	
+	public static CameraServer camera;
+	
 	Command autonomousCommand;
 	
 	/**
@@ -43,6 +46,10 @@ public class Robot extends IterativeRobot {
 		// instantiate the command used for the autonomous period
         autonomousCommand = null;
         c.start();
+        
+        camera = CameraServer.getInstance();
+        camera.setQuality(50);
+        camera.startAutomaticCapture("cam0");
     }
 	
 	public void disabledPeriodic() {
@@ -90,6 +97,8 @@ public class Robot extends IterativeRobot {
     
         SmartDashboard.putNumber("Left drive encoder", Robot.drive.getLeftVel());
         SmartDashboard.putNumber("Right drive encoder", Robot.drive.getRightVel());
+    
+        
     }
     
     /**
