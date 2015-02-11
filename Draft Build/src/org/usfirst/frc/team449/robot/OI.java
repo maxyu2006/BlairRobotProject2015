@@ -47,6 +47,8 @@ public class OI {
 	private final int Drive_Left_Joystick;
 	private final int Drive_Right_Joystick;
 	
+	private final double Drive_Sensitivity;
+	
 	/**
 	 * this 
 	 */
@@ -69,6 +71,8 @@ public class OI {
 		
 		this.Elevator_Move_Joystick = config.ELEVATOR_MOVE_JOYSTICK;
 
+		this.Drive_Sensitivity = config.DRIVE_CONTROL_SENSITIVITY;
+		
 		elevatorUp = new JoystickButton(joysticks[this.Elevator_Move_Joystick], config.ELEVATOR_UP_BUTTON);
 		elevatorDown = new JoystickButton(joysticks[this.Elevator_Move_Joystick], config.ELEVATOR_DOWN_BUTTON);
 		
@@ -86,7 +90,8 @@ public class OI {
 	 */
 	public double getDriveAxisLeft()
 	{
-		return 0.5*this.joysticks[this.Drive_Left_Joystick].getAxis(Joystick.AxisType.kY);
+		//inverted due to joystick direction
+		return -this.Drive_Sensitivity*this.joysticks[this.Drive_Left_Joystick].getAxis(Joystick.AxisType.kY);
 	}
 	
 	/**
@@ -95,7 +100,8 @@ public class OI {
 	 */
 	public double getDriveAxisRight()
 	{
-		return 0.5*this.joysticks[this.Drive_Right_Joystick].getAxis(Joystick.AxisType.kY);
+		//inverted due to joystick direction
+		return -this.Drive_Sensitivity*this.joysticks[this.Drive_Right_Joystick].getAxis(Joystick.AxisType.kY);
 	}
 	
 	/**

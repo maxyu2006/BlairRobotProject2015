@@ -22,7 +22,7 @@ public class DriveRobot extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	//pushing forward on the stick gives -1 so it is negated
-    	Robot.drive.setThrottle(-Robot.OI.getDriveAxisLeft(), -Robot.OI.getDriveAxisRight());
+    	Robot.drive.setThrottle(Robot.OI.getDriveAxisLeft(), Robot.OI.getDriveAxisRight());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -37,6 +37,6 @@ public class DriveRobot extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.drive.setThrottle(-Robot.OI.getDriveAxisLeft(), -Robot.OI.getDriveAxisRight());
+    	Robot.drive.setThrottle(Robot.OI.getDriveAxisLeft(), Robot.OI.getDriveAxisRight());
     }
 }

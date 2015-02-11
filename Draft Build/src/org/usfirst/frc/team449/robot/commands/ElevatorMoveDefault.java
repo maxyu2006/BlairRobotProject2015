@@ -32,34 +32,25 @@ public class ElevatorMoveDefault extends Command {
     	if(Robot.elevator.isPIDEnabled()) 
     		return;
     	
-    	joystick_val = -joystick_scale*Robot.OI.getElevatorJoystickAxisY();// arbitrary assignment
-    	System.out.println(joystick_val);
-    	System.out.println(Robot.elevator.isTouchingBottom());
+    	joystick_val = joystick_scale*Robot.OI.getElevatorJoystickAxisY();// arbitrary assignment
+    	
+    	double motorSetValue = 0;
     	
     	if(Math.abs(joystick_val) > deadband)//if input is over deadband and no override 
     	{
-    		//System.out.println("greater than deadband");
             //if limit switches aren't triggered in direction to move in
-    		if(joystick_val > 0 && !(Robot.elevator.isTouchingTop()) || joystick_val < 0 && !(Robot.elevator.isTouchingBottom()))
-    		{
-    			SmartDashboard.putString("motion", "is moving");
-        		Robot.elevator.releaseBrake();
-    			Robot.elevator.setMotorManual(joystick_val);	
+    		if(joystick_val < 0 && !(Robot.elevator.isTouchingTop()) || joystick_val > 0 && !(Robot.elevator.isTouchingBottom()))
+    			motorSetValue = joystick_val;
+    	}//endif
     	
-    		}else
-    		{
-    			SmartDashboard.putString("motion", "is stopping");
-        		Robot.elevator.setMotorManual(0);
-        		Robot.elevator.activateBrake();
-    		}//endif
-  
-    	}
-    	else
-		{
-			SmartDashboard.putString("motion", "is stopping");
-    		Robot.elevator.setMotorManual(0);
+    	//activate if motor isn't supposed to move
+    	if(motorSetValue == 0)
     		Robot.elevator.activateBrake();
-		}//endif
+    	else
+    		Robot.elevator.releaseBrake();
+    	
+    	Robot.elevator.setMotorManual(motorSetValue);
+    	
     }
 
     protected boolean isFinished() {

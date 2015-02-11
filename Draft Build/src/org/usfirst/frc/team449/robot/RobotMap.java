@@ -256,6 +256,8 @@ public final class RobotMap {
 	
 	public final int DRIVE_RIGHT_JOYSTICK;
 	
+	public final double DRIVE_CONTROL_SENSITIVITY;
+	
 	/**
 	 * 
 	 * @param configFile
@@ -349,5 +351,7 @@ public final class RobotMap {
 		this.ELEVATOR_MOVE_JOYSTICK = 2;
 		this.DRIVE_LEFT_JOYSTICK 	= 0;
 		this.DRIVE_RIGHT_JOYSTICK 	= 1;
+		
+		this.DRIVE_CONTROL_SENSITIVITY = 0.5;
 	}//end RobotMap()
 }//end class

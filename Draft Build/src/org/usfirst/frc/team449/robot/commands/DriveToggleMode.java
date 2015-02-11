@@ -17,7 +17,7 @@ public class DriveToggleMode extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.drive.setThrottle(-Robot.OI.getDriveAxisLeft(), -Robot.OI.getDriveAxisRight());
+    	Robot.drive.setThrottle(Robot.OI.getDriveAxisLeft(), Robot.OI.getDriveAxisRight());
 		Robot.drive.toggleControlMode();
     }
 
@@ -38,6 +38,6 @@ public class DriveToggleMode extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.drive.setThrottle(-Robot.OI.getDriveAxisLeft(), Robot.OI.getDriveAxisRight());
+    	Robot.drive.setThrottle(Robot.OI.getDriveAxisLeft(), Robot.OI.getDriveAxisRight());
     }
 }
