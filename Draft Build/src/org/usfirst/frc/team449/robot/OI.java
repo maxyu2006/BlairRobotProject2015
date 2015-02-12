@@ -3,6 +3,7 @@ package org.usfirst.frc.team449.robot;
 import org.usfirst.frc.team449.robot.commands.ElevatorReset;
 import org.usfirst.frc.team449.robot.commands.ElevatorSetGrabber;
 import org.usfirst.frc.team449.robot.commands.DriveToggleMode;
+import org.usfirst.frc.team449.robot.commands.IntakeSetArms;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -43,11 +44,11 @@ public class OI {
 	
 	public final Joystick[] joysticks = new Joystick[4];
 	
-	private final int Elevator_Move_Joystick;
-	private final int Drive_Left_Joystick;
-	private final int Drive_Right_Joystick;
+	private final int ELEVATOR_MOVE_JOYSTICK;
+	private final int DRIVE_LEFT_JOYSTICK;
+	private final int DRIVE_RIGHT_JOYSTICK;
 	
-	private final double Drive_Sensitivity;
+	private final double DRIVE_SENSITIVITY;
 	
 	/**
 	 * this 
@@ -57,6 +58,8 @@ public class OI {
 	public final JoystickButton elevatorDown;
 	public final JoystickButton elevatorArmToggle;
 	public final JoystickButton elevatorResetButton;
+	public final JoystickButton intakeArmsClose;
+	public final JoystickButton intakeArmsOpen;
 	
 	public OI(RobotMap config)
 	{
@@ -66,22 +69,27 @@ public class OI {
 		joysticks[2] = new Joystick(config.JOYSTICK_2);
 		joysticks[3] = new Joystick(config.JOYSTICK_3);
 		
-		this.Drive_Left_Joystick 	= config.DRIVE_LEFT_JOYSTICK;
-		this.Drive_Right_Joystick 	= config.DRIVE_RIGHT_JOYSTICK;
+		this.DRIVE_LEFT_JOYSTICK 	= config.DRIVE_LEFT_JOYSTICK;
+		this.DRIVE_RIGHT_JOYSTICK 	= config.DRIVE_RIGHT_JOYSTICK;
 		
-		this.Elevator_Move_Joystick = config.ELEVATOR_MOVE_JOYSTICK;
+		this.ELEVATOR_MOVE_JOYSTICK = config.ELEVATOR_MOVE_JOYSTICK;
 
-		this.Drive_Sensitivity = config.DRIVE_CONTROL_SENSITIVITY;
+		this.DRIVE_SENSITIVITY = config.DRIVE_CONTROL_SENSITIVITY;
 		
-		elevatorUp = new JoystickButton(joysticks[this.Elevator_Move_Joystick], config.ELEVATOR_UP_BUTTON);
-		elevatorDown = new JoystickButton(joysticks[this.Elevator_Move_Joystick], config.ELEVATOR_DOWN_BUTTON);
+		elevatorUp = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], config.ELEVATOR_UP_BUTTON);
+		elevatorDown = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], config.ELEVATOR_DOWN_BUTTON);
 		
-		elevatorArmToggle = new JoystickButton(joysticks[this.Elevator_Move_Joystick], config.ELEVATOR_ARMS_TOGGLE_BUTTON);
+		elevatorArmToggle = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], config.ELEVATOR_ARMS_TOGGLE_BUTTON);
 		elevatorArmToggle.whenPressed(new ElevatorSetGrabber(ElevatorSetGrabber.TOGGLE));
-		elevatorResetButton = new JoystickButton(joysticks[this.Elevator_Move_Joystick], 8);
+		elevatorResetButton = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], 8);
 		elevatorResetButton.whenPressed(new ElevatorReset());
 		
 		driveManualToggle = new JoystickButton(joysticks[config.DRIVE_MANUAL_TOGGLE_JOYSTICK],config.DRIVE_MANUAL_TOGGLE_BUTTON);
+		
+		intakeArmsClose = new JoystickButton(joysticks[config.INTAKE_JOYSTICK], config.INTAKE_ARMS_CLOSE);
+		intakeArmsClose.whenPressed(new IntakeSetArms(IntakeSetArms.CLOSE));
+		intakeArmsOpen = new JoystickButton(joysticks[config.INTAKE_JOYSTICK], config.INTAKE_ARMS_OPEN);
+		intakeArmsOpen.whenPressed(new IntakeSetArms(IntakeSetArms.CLOSE));
 	}
 	
 	/**
@@ -91,7 +99,7 @@ public class OI {
 	public double getDriveAxisLeft()
 	{
 		//inverted due to joystick direction
-		return -this.Drive_Sensitivity*this.joysticks[this.Drive_Left_Joystick].getAxis(Joystick.AxisType.kY);
+		return -this.DRIVE_SENSITIVITY*this.joysticks[this.DRIVE_LEFT_JOYSTICK].getAxis(Joystick.AxisType.kY);
 	}
 	
 	/**
@@ -101,7 +109,7 @@ public class OI {
 	public double getDriveAxisRight()
 	{
 		//inverted due to joystick direction
-		return -this.Drive_Sensitivity*this.joysticks[this.Drive_Right_Joystick].getAxis(Joystick.AxisType.kY);
+		return -this.DRIVE_SENSITIVITY*this.joysticks[this.DRIVE_RIGHT_JOYSTICK].getAxis(Joystick.AxisType.kY);
 	}
 	
 	/**
@@ -126,7 +134,7 @@ public class OI {
 
 	public double getElevatorJoystickAxisY() {
 		// TODO Auto-generated method stub
-		return joysticks[this.Elevator_Move_Joystick].getAxis(Joystick.AxisType.kY);
+		return joysticks[this.ELEVATOR_MOVE_JOYSTICK].getAxis(Joystick.AxisType.kY);
 	}
 	
 	

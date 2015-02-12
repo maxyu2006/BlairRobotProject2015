@@ -53,8 +53,7 @@ public class Intake extends Subsystem {
     	
     	ultraScale = 1; //TODO: actually add the correct calibration
     	//motorSpeed = config.INTAKE_MOTOR_SPEED;
-    	this.openLeft();
-    	this.openRight();
+    	this.openArms();
 	}
 	
 	
@@ -74,22 +73,41 @@ public class Intake extends Subsystem {
 		this.rightArmMotor.set(throttle);
 	}
 	
-	public void openRight(){
+	public void toggleArms() {
+		if(this.isLeftOpen && this.isRightOpen) 
+			this.closeArms();
+		else if(!this.isLeftOpen && !this.isRightOpen)
+			this.openArms();
+		else
+			System.out.println("How the fuck did you manage that?");
+	}
+	
+	public void openArms() {
+		this.openRight();
+		this.openLeft();
+	}
+	
+	public void closeArms() {
+		this.closeRight();
+		this.closeLeft();
+	}
+	
+	private void openRight(){
 		this.intakeRightSol.set(Value.kForward);
 		this.isRightOpen = true;
 	}
 	
-	public void openLeft(){
+	private void openLeft(){
 		this.intakeLeftSol.set(Value.kForward);
 		this.isLeftOpen = true;
 	}
 	
-	public void closeRight(){
+	private void closeRight(){
 		this.intakeRightSol.set(Value.kReverse);
 		this.isRightOpen = false;
 	}
 	
-	public void closeLeft(){
+	private void closeLeft(){
 		this.intakeLeftSol.set(Value.kForward);
 		this.isLeftOpen = true;
 	}

@@ -258,6 +258,9 @@ public final class RobotMap {
 	
 	public final double DRIVE_CONTROL_SENSITIVITY;
 	
+	public final int INTAKE_ARMS_OPEN;
+	public final int INTAKE_ARMS_CLOSE;
+	
 	/**
 	 * 
 	 * @param configFile
@@ -353,5 +356,8 @@ public final class RobotMap {
 		this.DRIVE_RIGHT_JOYSTICK 	= 1;
 		
 		this.DRIVE_CONTROL_SENSITIVITY = 0.5;
+		
+		this.INTAKE_ARMS_CLOSE = 1;
+		this.INTAKE_ARMS_OPEN = 3;
 	}//end RobotMap()
 }//end class
