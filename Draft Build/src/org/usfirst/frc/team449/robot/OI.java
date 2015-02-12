@@ -86,10 +86,13 @@ public class OI {
 		
 		driveManualToggle = new JoystickButton(joysticks[config.DRIVE_MANUAL_TOGGLE_JOYSTICK],config.DRIVE_MANUAL_TOGGLE_BUTTON);
 		
+		System.out.println("3");
 		intakeArmsClose = new JoystickButton(joysticks[config.INTAKE_JOYSTICK], config.INTAKE_ARMS_CLOSE);
 		intakeArmsClose.whenPressed(new IntakeSetArms(IntakeSetArms.CLOSE));
 		intakeArmsOpen = new JoystickButton(joysticks[config.INTAKE_JOYSTICK], config.INTAKE_ARMS_OPEN);
-		intakeArmsOpen.whenPressed(new IntakeSetArms(IntakeSetArms.CLOSE));
+		intakeArmsOpen.whenPressed(new IntakeSetArms(IntakeSetArms.OPEN));
+		
+		System.out.println("OI ended");
 	}
 	
 	/**

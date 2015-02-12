@@ -28,13 +28,13 @@ public class Robot extends IterativeRobot {
 	public static final Elevator	elevator	= new Elevator(Robot.robotMap);
 	public static final Arms		elevatorArm	= new Arms(Robot.robotMap);
 	public static final Drive		drive		= new Drive(Robot.robotMap);
-	public static final Intake 		intake		= null;
+	public static final Intake 		intake		= new Intake(Robot.robotMap);
 	
 	public static final OI 			OI 			= new OI(Robot.robotMap);
 	
 	public static final Compressor c = new Compressor();
 	
-	public static CameraServer camera;
+//	public static CameraServer camera;
 	
 	Command autonomousCommand;
 	
@@ -43,13 +43,15 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+    	System.out.println("Robot Init Started");
 		// instantiate the command used for the autonomous period
         autonomousCommand = null;
         c.start();
         
-        camera = CameraServer.getInstance();
-        camera.setQuality(50);
-        camera.startAutomaticCapture("cam0");
+//        camera = CameraServer.getInstance();
+//        camera.setQuality(50);
+//        camera.startAutomaticCapture("cam0");
+        System.out.println("Robot Init Done");
     }
 	
 	public void disabledPeriodic() {

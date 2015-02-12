@@ -36,6 +36,7 @@ public class ElevatorMoveAuto extends Command {
     	requires(Robot.elevator);
         state = direction;
         tolerance = config.ELEVATOR_PID_TOLERANCE_RANGE;
+        System.out.println("Elevator Move Bueno");
     }
 
     protected void initialize() {

@@ -18,7 +18,7 @@ public class Intake extends Subsystem {
     
 	// Intake member variables
 	private final DigitalInput leftLimSwitch;
-	private final DigitalInput rightLimSwitch;
+	//private final DigitalInput rightLimSwitch;
 	
     private final AnalogInput ultrasonic;
 	private final double ultraScale;
@@ -37,9 +37,8 @@ public class Intake extends Subsystem {
      * @param config
      */
 	public Intake(RobotMap config) {
-    	leftLimSwitch 	= new DigitalInput(config.INTAKE_LEFT_LIMIT);
-    	rightLimSwitch 	= new DigitalInput(config.INTAKE_RIGHT_LIMIT);
-    	
+		leftLimSwitch 	= new DigitalInput(config.INTAKE_LEFT_LIMIT);
+    	//rightLimSwitch 	= new DigitalInput(config.INTAKE_RIGHT_LIMIT);
     	ultrasonic = new AnalogInput(config.INTAKE_ULTRASONIC);
     	
     	leftArmMotor 	= new VictorSP(config.INTAKE_LEFT_MOTOR);
@@ -54,6 +53,7 @@ public class Intake extends Subsystem {
     	ultraScale = 1; //TODO: actually add the correct calibration
     	//motorSpeed = config.INTAKE_MOTOR_SPEED;
     	this.openArms();
+    	System.out.println("Finished IO init");
 	}
 	
 	
@@ -109,7 +109,7 @@ public class Intake extends Subsystem {
 	
 	private void closeLeft(){
 		this.intakeLeftSol.set(Value.kForward);
-		this.isLeftOpen = true;
+		this.isLeftOpen = false;
 	}
 	
 	public boolean isLeftOpen(){
@@ -130,9 +130,9 @@ public class Intake extends Subsystem {
 	/**
 	 * @return right limit switch's state
 	 */
-	public boolean getRightSwitchState() {
-		return rightLimSwitch.get();
-	}
+	//public boolean getRightSwitchState() {
+	//	return rightLimSwitch.get();
+	//}
 	
 	/***
 	 * returns the raw voltage from the ultrasonic sensor

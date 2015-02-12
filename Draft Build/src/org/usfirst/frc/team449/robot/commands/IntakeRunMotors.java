@@ -16,8 +16,10 @@ public class IntakeRunMotors extends Command {
     public IntakeRunMotors() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	System.out.println("Set Motor Started");
     	requires(Robot.intake);
     	intakeJoystick= Robot.OI.joysticks[3];
+    	System.out.println("Set motor Done");
     }
 
     // Called just before this Command runs the first time
@@ -26,8 +28,8 @@ public class IntakeRunMotors extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.intake.setLMotor(Robot.OI.getJoystickAxisThrottle(intakeJoystick));
-    	Robot.intake.setRMotor(Robot.OI.getJoystickAxisThrottle(intakeJoystick));
+    	Robot.intake.setLMotor(Robot.OI.getJoystickAxisY(intakeJoystick));
+    	Robot.intake.setRMotor(-Robot.OI.getJoystickAxisY(intakeJoystick));
     }
 
     // Make this return true when this Command no longer needs to run execute()

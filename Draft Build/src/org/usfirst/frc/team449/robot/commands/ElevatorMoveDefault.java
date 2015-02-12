@@ -23,6 +23,7 @@ public class ElevatorMoveDefault extends Command {
 	
     public ElevatorMoveDefault() {
     	requires(Robot.elevator);
+    	System.out.println("Elevator Move  Default Initialized");
     }
 
     protected void initialize() {
@@ -39,7 +40,7 @@ public class ElevatorMoveDefault extends Command {
     	if(Math.abs(joystick_val) > deadband)//if input is over deadband and no override 
     	{
             //if limit switches aren't triggered in direction to move in
-    		if(joystick_val < 0 && !(Robot.elevator.isTouchingTop()) || joystick_val > 0 && !(Robot.elevator.isTouchingBottom()))
+    		if(joystick_val > 0 && !(Robot.elevator.isTouchingTop()) || joystick_val < 0 && !(Robot.elevator.isTouchingBottom()))
     			motorSetValue = joystick_val;
     	}//endif
     	
