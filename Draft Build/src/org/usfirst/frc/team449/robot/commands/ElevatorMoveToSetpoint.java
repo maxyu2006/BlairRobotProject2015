@@ -18,9 +18,12 @@ public class ElevatorMoveToSetpoint extends Command {
 	
 	private double setpoint; // desired elevator setpoint
 	private boolean finalposition;
+	private boolean isLimitReached; // flag to detect if limit swith has been hit
+	
     public ElevatorMoveToSetpoint(double position) {	
     	requires(Robot.elevator);
     	setpoint = position;
+    	isLimitReached = false;
     }
 
     protected void initialize() {
@@ -33,13 +36,21 @@ public class ElevatorMoveToSetpoint extends Command {
     }
 
     protected void execute() {
+    	// if elevator is at a limit, set flag to true
+    	isLimitReached = (Robot.elevator.isTouchingBottom()||Robot.elevator.isTouchingTop()); 
     }
 
     protected boolean isFinished() {
-    	return Robot.elevator.isAtSetPoint();
+    	//end if the elevator is at the setpoint, or if a limit is reached
+    	return (Robot.elevator.isAtSetPoint()||isLimitReached);
     }
 
     protected void end() {
+    	if(isLimitReached)//if a limit was reached, set to manual mode to prevent possible future damage
+    	{
+    		Robot.elevator.disablePID();
+    		System.err.println("PID elevator control exceeded elevator limits");
+    	}
     	Robot.elevator.activateBrake();
     }
 

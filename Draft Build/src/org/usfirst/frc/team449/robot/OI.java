@@ -1,7 +1,7 @@
 package org.usfirst.frc.team449.robot;
 
 import org.usfirst.frc.team449.robot.commands.ElevatorReset;
-import org.usfirst.frc.team449.robot.commands.ElevatorSetGrabber;
+import org.usfirst.frc.team449.robot.commands.ArmSetGrabber;
 import org.usfirst.frc.team449.robot.commands.DriveToggleMode;
 import org.usfirst.frc.team449.robot.commands.IntakeSetArms;
 
@@ -80,7 +80,7 @@ public class OI {
 		elevatorDown = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], config.ELEVATOR_DOWN_BUTTON);
 		
 		elevatorArmToggle = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], config.ELEVATOR_ARMS_TOGGLE_BUTTON);
-		elevatorArmToggle.whenPressed(new ElevatorSetGrabber(ElevatorSetGrabber.TOGGLE));
+		elevatorArmToggle.whenPressed(new ArmSetGrabber(ArmSetGrabber.TOGGLE));
 		elevatorResetButton = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], 8);
 		elevatorResetButton.whenPressed(new ElevatorReset());
 		
