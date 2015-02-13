@@ -66,7 +66,7 @@ public class Elevator extends Subsystem {
 		position = ELEVATOR_FIRST_POSITION;
 		
 		encoder.reset();
-		System.out.println("Elevator Initialized");
+		System.out.println("Elevator init finished");
 		
 	}//end Elevator();
 

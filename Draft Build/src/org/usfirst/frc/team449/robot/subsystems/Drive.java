@@ -70,7 +70,7 @@ public class Drive extends Subsystem {
 		this.maxRate = config.DRIVE_MAX_RATE;
 
 		this.setControlMode(config.DRIVE_DEFAULT_MODE);
-		System.out.println("Drive done initialized");
+		System.out.println("Drive init finished");
 	}//end drive
 	
 	/**

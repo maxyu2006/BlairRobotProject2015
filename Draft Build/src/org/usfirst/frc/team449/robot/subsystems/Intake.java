@@ -37,6 +37,7 @@ public class Intake extends Subsystem {
      * @param config
      */
 	public Intake(RobotMap config) {
+		System.out.println("Intake init started");
 		leftLimSwitch 	= new DigitalInput(config.INTAKE_LEFT_LIMIT);
     	//rightLimSwitch 	= new DigitalInput(config.INTAKE_RIGHT_LIMIT);
     	ultrasonic = new AnalogInput(config.INTAKE_ULTRASONIC);
@@ -53,7 +54,7 @@ public class Intake extends Subsystem {
     	ultraScale = 1; //TODO: actually add the correct calibration
     	//motorSpeed = config.INTAKE_MOTOR_SPEED;
     	this.openArms();
-    	System.out.println("Finished IO init");
+    	System.out.println("Intake init finished");
 	}
 	
 	

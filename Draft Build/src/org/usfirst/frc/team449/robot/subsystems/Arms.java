@@ -36,7 +36,7 @@ public class Arms extends Subsystem {
 		armState = ARM_OPEN;
 		armController.set(Value.kForward);
 		
-		System.out.println("Arms Initialized");
+		System.out.println("Arms init finished");
 	}
 	
 	 /**

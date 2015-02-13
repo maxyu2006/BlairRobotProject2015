@@ -63,7 +63,7 @@ public class OI {
 	
 	public OI(RobotMap config)
 	{
-		System.out.println("OI started");
+		System.out.println("OI init started");
 		joysticks[0] = new Joystick(config.JOYSTICK_0);
 		joysticks[1] = new Joystick(config.JOYSTICK_1);
 		joysticks[2] = new Joystick(config.JOYSTICK_2);
@@ -86,13 +86,12 @@ public class OI {
 		
 		driveManualToggle = new JoystickButton(joysticks[config.DRIVE_MANUAL_TOGGLE_JOYSTICK],config.DRIVE_MANUAL_TOGGLE_BUTTON);
 		
-		System.out.println("3");
 		intakeArmsClose = new JoystickButton(joysticks[config.INTAKE_JOYSTICK], config.INTAKE_ARMS_CLOSE);
 		intakeArmsClose.whenPressed(new IntakeSetArms(IntakeSetArms.CLOSE));
 		intakeArmsOpen = new JoystickButton(joysticks[config.INTAKE_JOYSTICK], config.INTAKE_ARMS_OPEN);
 		intakeArmsOpen.whenPressed(new IntakeSetArms(IntakeSetArms.OPEN));
 		
-		System.out.println("OI ended");
+		System.out.println("OI init ended");
 	}
 	
 	/**
@@ -136,8 +135,8 @@ public class OI {
 	}
 
 	public double getElevatorJoystickAxisY() {
-		// TODO Auto-generated method stub
-		return joysticks[this.ELEVATOR_MOVE_JOYSTICK].getAxis(Joystick.AxisType.kY);
+		// negated because pushing the joystick forward should lower the elevator
+		return -joysticks[this.ELEVATOR_MOVE_JOYSTICK].getAxis(Joystick.AxisType.kY);
 	}
 	
 	
