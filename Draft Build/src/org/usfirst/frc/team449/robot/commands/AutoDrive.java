@@ -3,23 +3,25 @@ package org.usfirst.frc.team449.robot.commands;
 import org.usfirst.frc.team449.robot.Robot;
 import org.usfirst.frc.team449.robot.subsystems.Drive;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * Autonomouse drive command
  * Drive requested distance using bang bang control
- * TODO: Implement a time limit as well. 
+ * Also will terminate once a specified time limit is exceeded 
  */
 public class AutoDrive extends Command {
 	
 	private double setpoint; // desired distance to be traveled
 	private double throttle;
-	private double t_limit; // time limit 
+	private double t_lim; // time limit, should be specified in seconds 
+	private final double throttle_limit = .25; // Arbitrary throttle limit
 	
 	private boolean isFoward; //is the distance positive or negative
 	
-	private final double throttle_limit = .25; // Arbitrary throttle limit
-    public AutoDrive(double distance) {
+	private Timer t;// timer for time checking
+    public AutoDrive(double distance, double time) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drive);
@@ -38,10 +40,13 @@ public class AutoDrive extends Command {
     		isFoward = false;
     	}
     	
+    	t_lim = time;
+    	t = new Timer();
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	t.start();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -53,6 +58,9 @@ public class AutoDrive extends Command {
      * returns true once you hit your desired setpoint
      */
     protected boolean isFinished() {
+    	//check if time limit has been exceeded
+    	if(t.get()>t_lim)
+    		return true; 
     	if(isFoward)
     	{
     		if(this.avgEnc()>this.setpoint)
@@ -68,6 +76,7 @@ public class AutoDrive extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	t.stop();
     	Robot.drive.setThrottle(0, 0);
     }
 
