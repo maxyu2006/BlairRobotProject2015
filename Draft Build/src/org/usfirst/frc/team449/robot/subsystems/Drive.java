@@ -25,6 +25,8 @@ public class Drive extends Subsystem {
 	private final PIDController leftController;
 	private final PIDController rightController;
 	
+	private final double wheelDiameter;
+	
 	private final int maxRate;
 	
 	private boolean currentMode;
@@ -56,8 +58,9 @@ public class Drive extends Subsystem {
 		this.leftEncoder 	= new Encoder(config.DRIVE_ENCODER_LA,config.DRIVE_ENCODER_LB, false);
 		this.rightEncoder	= new Encoder(config.DRIVE_ENCODER_RA,config.DRIVE_ENCODER_RB, false);
 		
-		this.leftEncoder.setDistancePerPulse(-1.0/config.ENCODER_PPR);
-		this.rightEncoder.setDistancePerPulse(-1.0/config.ENCODER_PPR);	//negated because mirrored
+		this.wheelDiameter = 4*Math.PI;
+		this.leftEncoder.setDistancePerPulse(wheelDiameter/config.DRIVE_ENCODER_CPR);
+		this.rightEncoder.setDistancePerPulse(-wheelDiameter/config.DRIVE_ENCODER_CPR);	//negated because mirrored
 		
 		
 		this.leftEncoder.setPIDSourceParameter(PIDSourceParameter.kRate);
@@ -66,10 +69,10 @@ public class Drive extends Subsystem {
 		this.leftController = new PIDController(config.DRIVE_P, config.DRIVE_I, config.DRIVE_D, config.DRIVE_F, leftEncoder, this.leftMotors);
 		this.rightController = new PIDController(config.DRIVE_P, config.DRIVE_I, config.DRIVE_D, config.DRIVE_F, rightEncoder, this.rightMotors);
 		
-		
 		this.maxRate = config.DRIVE_MAX_RATE;
 
 		this.setControlMode(config.DRIVE_DEFAULT_MODE);
+		System.out.println("Drive init finished");
 	}//end drive
 	
 	/**
@@ -109,6 +112,21 @@ public class Drive extends Subsystem {
 		return this.rightEncoder.getRate();
 	}
 	
+	/**
+	 * 
+	 * @return the current displacement of the left wheels
+	 */
+	public double getLeftDis(){
+		return this.leftEncoder.getDistance();
+	}
+	
+	/**
+	 * 
+	 * @return the current displacement of the right wheels
+	 */
+	public double getRightDis(){
+		return this.rightEncoder.getDistance();
+	}
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

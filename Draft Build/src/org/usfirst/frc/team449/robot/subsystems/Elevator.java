@@ -57,7 +57,7 @@ public class Elevator extends Subsystem {
 		Encoder encoder 	= new Encoder(config.ELEVATOR_ENCODER_CHANNEL_A, config.ELEVATOR_ENCODER_CHANNEL_B, false, EncodingType.k4X);
 		
 		//this PIDMotor should be operating in Position based control mode for elevator position
-		motors = new PIDMotor(config, config.ELEVATOR_P, config.ELEVATOR_I, config.ELEVATOR_D, 0, leftMotor, encoder, PIDMotor.POSITION_BASE);
+		motors = new PIDMotor(config, config.ELEVATOR_P, config.ELEVATOR_I, config.ELEVATOR_D, 0, config.ELEVATOR_PID_TOLERANCE_RANGE, leftMotor, encoder, PIDMotor.POSITION_BASE);
 		motors.addSlave(rightMotor,true);
 		
 		this.controlState = MANUAL;
@@ -65,8 +65,9 @@ public class Elevator extends Subsystem {
 		setPoint = 0;
 		position = ELEVATOR_FIRST_POSITION;
 		
+		encoder.setDistancePerPulse(1/config.ELEVATOR_ENCODER_CPR);
 		encoder.reset();
-		System.out.println("Elevator Initialized");
+		System.out.println("Elevator init finished");
 		
 	}//end Elevator();
 

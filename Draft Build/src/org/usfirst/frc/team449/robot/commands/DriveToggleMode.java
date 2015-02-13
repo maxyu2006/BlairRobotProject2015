@@ -12,6 +12,7 @@ public class DriveToggleMode extends Command {
     public DriveToggleMode() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	System.out.println("Drive Toggle Started");
     	requires(Robot.drive);
     }
 

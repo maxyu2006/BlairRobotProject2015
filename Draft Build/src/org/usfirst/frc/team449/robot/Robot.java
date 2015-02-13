@@ -30,16 +30,16 @@ public class Robot extends IterativeRobot {
 	//sometime should check if these could be made private
 	public static final RobotMap robotMap = new RobotMap("config.txt");
 	
-	public static final Elevator	elevator	= null;//new Elevator(Robot.robotMap);
-	public static final Arms		elevatorArm	= null;//new Arms(Robot.robotMap);
-	public static final Drive		drive		= null;//new Drive(Robot.robotMap);
-	public static final Intake 		intake		= null;
+	public static final Elevator	elevator	= new Elevator(Robot.robotMap);
+	public static final Arms		elevatorArm	= new Arms(Robot.robotMap);
+	public static final Drive		drive		= new Drive(Robot.robotMap);
+	public static final Intake 		intake		= new Intake(Robot.robotMap);
 	
 	public static final OI 			OI 			= null;//new OI(Robot.robotMap);
 	
 	public static final Compressor c = new Compressor();
 	
-	public static CameraServer camera;
+//	public static CameraServer camera;
 	
 	Command autonomousCommand;
 	
@@ -51,19 +51,17 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+    	System.out.println("Robot Init Started");
 		// instantiate the command used for the autonomous period
         autonomousCommand = null;
         c.start();
-        
-        System.out.println("Initialized");
-        
+                
         frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
 
         // the camera name (ex "cam0") can be found through the roborio web interface
         session = NIVision.IMAQdxOpenCamera("cam0",
                 NIVision.IMAQdxCameraControlMode.CameraControlModeController);
         NIVision.IMAQdxConfigureGrab(session);
-
     }
 	
 	public void disabledPeriodic() {

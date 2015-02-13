@@ -12,7 +12,8 @@ public final class RobotMap {
 
 	//======================Universal constants====================
 	
-	public final int ENCODER_PPR;
+	public final int DRIVE_ENCODER_CPR;
+	public final int ELEVATOR_ENCODER_CPR;
 	
 	//======================Elevator Constants=====================
 	/**
@@ -258,6 +259,9 @@ public final class RobotMap {
 	
 	public final double DRIVE_CONTROL_SENSITIVITY;
 	
+	public final int INTAKE_ARMS_OPEN;
+	public final int INTAKE_ARMS_CLOSE;
+	
 	/**
 	 * 
 	 * @param configFile
@@ -265,14 +269,15 @@ public final class RobotMap {
 	public RobotMap(String configFile)
 	{
 
-		this.ENCODER_PPR = 512;
+		this.DRIVE_ENCODER_CPR = 256;
+		this.ELEVATOR_ENCODER_CPR = 512;
 		
 		//==================================================Elevator Constants ==================================================
 		
 		this.ELEVATOR_TOP_LIMIT 	= 9;
 		this.ELEVATOR_BOTTOM_LIMIT 	= 8;
 		
-		this.ELEVATOR_LEFT_LIMIT 	= 7;
+		this.ELEVATOR_LEFT_LIMIT 	= 10;
 		this.ELEVATOR_RIGHT_LIMIT 	= 6;
 		
 		this.ELEVATOR_ULTRASONIC = 0;
@@ -319,20 +324,20 @@ public final class RobotMap {
 		
 		//==================================================Intake Constants ==================================================
 		
-		this.INTAKE_LEFT_LIMIT = 9;
-		this.INTAKE_RIGHT_LIMIT = 10;
+		this.INTAKE_LEFT_LIMIT = 7;
+		this.INTAKE_RIGHT_LIMIT = 7;
 		
-		this.INTAKE_LEFT_MOTOR = 8;
-		this.INTAKE_RIGHT_MOTOR = 9;
+		this.INTAKE_LEFT_MOTOR = 9;
+		this.INTAKE_RIGHT_MOTOR = 8;
 		
 		this.INTAKE_LSOLENOID_FORWARD = 4;
 		this.INTAKE_LSOLENOID_REVERSE = 5;
 		
-		this.INTAKE_RSOLENOID_FORWARD = 6;
-		this.INTAKE_RSOLENOID_REVERSE = 7;
+		this.INTAKE_RSOLENOID_FORWARD = 7;
+		this.INTAKE_RSOLENOID_REVERSE = 6;
 		
 		this.INTAKE_ULTRASONIC=0;
-		this.INTAKE_JOYSTICK =4;
+		this.INTAKE_JOYSTICK = 3;
 		//==================================================Control Constants ==================================================
 		
 		this.JOYSTICK_0 = 0;
@@ -353,5 +358,8 @@ public final class RobotMap {
 		this.DRIVE_RIGHT_JOYSTICK 	= 1;
 		
 		this.DRIVE_CONTROL_SENSITIVITY = 0.5;
+		
+		this.INTAKE_ARMS_CLOSE = 1;
+		this.INTAKE_ARMS_OPEN = 2;
 	}//end RobotMap()
 }//end class
