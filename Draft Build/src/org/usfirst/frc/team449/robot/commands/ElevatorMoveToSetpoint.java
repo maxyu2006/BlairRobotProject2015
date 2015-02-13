@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Command;
  * @author eyob-- AliAnwar7477 1/31/15
  * 
  */
-public class ElevatorMoveAuto extends Command {
+public class ElevatorMoveToSetpoint extends Command {
 	
 	/**
 	 * UP for the state in which the elevator is going up
@@ -33,7 +33,7 @@ public class ElevatorMoveAuto extends Command {
 	 * @param config is an instance of RobotMap
 	 * @param upOrDown is the state of going up or down. Use the public static final ints
 	 */
-    public ElevatorMoveAuto(int direction) {	
+    public ElevatorMoveToSetpoint(int direction) {	
     	requires(Robot.elevator);
         state = direction;
     }
