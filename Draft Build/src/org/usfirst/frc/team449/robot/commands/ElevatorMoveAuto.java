@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
  * It will successfully stop if the carriage is within tolerance range of the set point (specified by RobotMap).
  * Note: PID mode is enabled at the initialization of this command and disabled at once the command is finished.
  * @author eyob-- AliAnwar7477 1/31/15
+ * 
  */
 public class ElevatorMoveAuto extends Command {
 	
@@ -32,11 +33,9 @@ public class ElevatorMoveAuto extends Command {
 	 * @param config is an instance of RobotMap
 	 * @param upOrDown is the state of going up or down. Use the public static final ints
 	 */
-    public ElevatorMoveAuto(RobotMap config, int direction) {	
+    public ElevatorMoveAuto(int direction) {	
     	requires(Robot.elevator);
         state = direction;
-        tolerance = config.ELEVATOR_PID_TOLERANCE_RANGE;
-        System.out.println("Elevator Move Bueno");
     }
 
     protected void initialize() {
@@ -56,7 +55,6 @@ public class ElevatorMoveAuto extends Command {
     }
 
     protected boolean isFinished() {
-//        return Math.abs(Robot.elevator.getActualPosition() - Robot.elevator.getSetPoint()) < tolerance;
     	return Robot.elevator.isAtSetPoint();
     }
 

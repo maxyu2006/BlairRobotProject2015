@@ -42,11 +42,12 @@ public class PIDMotor extends PIDSubsystem {
      * @param i		the integral term
      * @param d		the derivative term
      * @param initSet 	the initial setpoint
+     * @param tolerance the error tolerance for PID control
      * @param Motor		the motor to control
      * @param encoder	the encoder that is providing feedback 
      * @param mode		the mode at which the encoder will operate
      */
-    public PIDMotor(RobotMap config, double p, double i, double d, double initSet, SpeedController motor, Encoder encoder, int mode) {
+    public PIDMotor(RobotMap config, double p, double i, double d, double initSet, double tolerance, SpeedController motor, Encoder encoder, int mode) {
         super(p, i, d);
         
         //initialize the variables
@@ -57,6 +58,9 @@ public class PIDMotor extends PIDSubsystem {
         this.motor 		= motor;
         this.encoder 	= encoder;
         this.mode		= mode;
+        
+        //sets PID tolerance
+        this.setAbsoluteTolerance(tolerance);
         
         //set the encoder DPP and reset the encoder
         encoder.setDistancePerPulse(1.0/config.ENCODER_PPR);
