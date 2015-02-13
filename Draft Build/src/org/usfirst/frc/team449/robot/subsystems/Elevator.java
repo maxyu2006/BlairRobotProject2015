@@ -65,6 +65,7 @@ public class Elevator extends Subsystem {
 		setPoint = 0;
 		position = ELEVATOR_FIRST_POSITION;
 		
+		encoder.setDistancePerPulse(1/config.ELEVATOR_ENCODER_CPR);
 		encoder.reset();
 		System.out.println("Elevator init finished");
 		

@@ -12,7 +12,8 @@ public final class RobotMap {
 
 	//======================Universal constants====================
 	
-	public final int ENCODER_PPR;
+	public final int DRIVE_ENCODER_CPR;
+	public final int ELEVATOR_ENCODER_CPR;
 	
 	//======================Elevator Constants=====================
 	/**
@@ -268,7 +269,8 @@ public final class RobotMap {
 	public RobotMap(String configFile)
 	{
 
-		this.ENCODER_PPR = 512;
+		this.DRIVE_ENCODER_CPR = 256;
+		this.ELEVATOR_ENCODER_CPR = 512;
 		
 		//==================================================Elevator Constants ==================================================
 		

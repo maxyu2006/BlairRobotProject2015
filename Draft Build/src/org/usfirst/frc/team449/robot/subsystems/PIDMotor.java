@@ -62,8 +62,6 @@ public class PIDMotor extends PIDSubsystem {
         //sets PID tolerance
         this.setAbsoluteTolerance(tolerance);
         
-        //set the encoder DPP and reset the encoder
-        encoder.setDistancePerPulse(1.0/config.ENCODER_PPR);
         encoder.reset();
         
         //set PIDController constraints

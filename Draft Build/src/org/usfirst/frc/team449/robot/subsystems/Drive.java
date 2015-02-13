@@ -56,8 +56,8 @@ public class Drive extends Subsystem {
 		this.leftEncoder 	= new Encoder(config.DRIVE_ENCODER_LA,config.DRIVE_ENCODER_LB, false);
 		this.rightEncoder	= new Encoder(config.DRIVE_ENCODER_RA,config.DRIVE_ENCODER_RB, false);
 		
-		this.leftEncoder.setDistancePerPulse(-1.0/config.ENCODER_PPR);
-		this.rightEncoder.setDistancePerPulse(-1.0/config.ENCODER_PPR);	//negated because mirrored
+		this.leftEncoder.setDistancePerPulse(-1.0/config.DRIVE_ENCODER_CPR);
+		this.rightEncoder.setDistancePerPulse(-1.0/config.DRIVE_ENCODER_CPR);	//negated because mirrored
 		
 		
 		this.leftEncoder.setPIDSourceParameter(PIDSourceParameter.kRate);
@@ -110,6 +110,21 @@ public class Drive extends Subsystem {
 		return this.rightEncoder.getRate();
 	}
 	
+	/**
+	 * 
+	 * @return the current displacement of the left wheels
+	 */
+	public double getLeftDis(){
+		return this.leftEncoder.getDistance();
+	}
+	
+	/**
+	 * 
+	 * @return the current displacement of the right wheels
+	 */
+	public double getRightDis(){
+		return this.rightEncoder.getDistance();
+	}
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
