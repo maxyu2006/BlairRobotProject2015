@@ -25,7 +25,7 @@ public class ElevatorReset extends Command {
     protected void initialize() {
     	Robot.elevator.releaseBrake();
     	Robot.elevator.disablePID();			// switch to manual mode (turn PID off)
-    	Robot.elevator.setMotorManual(1);	// drive back at a constant 15%
+    	Robot.elevator.setMotorManual(0.2);	// drive back at a constant 15%
     	t.start();								// start the runtime timer
     }
 
@@ -38,14 +38,19 @@ public class ElevatorReset extends Command {
     }
 
     protected void end() {
-    	Robot.elevator.resetPosition();
-    	Robot.elevator.disablePID();	// just make sure PID is disabled at the end.
-    	Robot.elevator.resetEncoder();
-    	Robot.elevator.activateBrake();
     	Robot.elevator.setMotorManual(0);
+    	Robot.elevator.disablePID();	// just make sure PID is disabled at the end.
+    	Robot.elevator.activateBrake();
+    	Robot.elevator.resetEncoder();
+    	Robot.elevator.setBottomPosition(Robot.elevator.getEncoderPosition());
     	System.out.println("Elevator Reset");
     }
 
     protected void interrupted() {
+    }
+    
+    public boolean isInterruptible()
+    {
+    	return true;//false;
     }
 }

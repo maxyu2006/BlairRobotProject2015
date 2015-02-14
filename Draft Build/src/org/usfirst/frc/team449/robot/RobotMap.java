@@ -87,6 +87,13 @@ public final class RobotMap {
 	
 	public final double ELEVATOR_PID_TOLERANCE_RANGE;
 	
+	/**
+	 * initial encoder top count
+	 */
+	public final double ELEVATOR_INITIAL_TOP_COUNT;
+	
+	public final double ELEVATOR_SPROCKET_CIRCUMFERENCE;
+	
 	//============================Drive Constants=======================
 	/**
 	 * motor controller channel for the left 1 drive motor
@@ -268,7 +275,7 @@ public final class RobotMap {
 	 */
 	public RobotMap(String configFile)
 	{
-
+		System.out.println("RobotMap");
 		this.DRIVE_ENCODER_CPR = 256;
 		this.ELEVATOR_ENCODER_CPR = 512;
 		
@@ -298,7 +305,10 @@ public final class RobotMap {
 		this.ELEVATOR_LEFT_MOTOR = 2;
 		this.ELEVATOR_RIGHT_MOTOR = 3;
 		
-		this.ELEVATOR_PID_TOLERANCE_RANGE = 0.05;
+		this.ELEVATOR_PID_TOLERANCE_RANGE = 0.15;
+		
+		this.ELEVATOR_INITIAL_TOP_COUNT = 2000;
+		this.ELEVATOR_SPROCKET_CIRCUMFERENCE = 3*Math.PI;
 		
 		//==================================================Drive Constants ==================================================
 		
@@ -336,8 +346,7 @@ public final class RobotMap {
 		this.INTAKE_RSOLENOID_FORWARD = 7;
 		this.INTAKE_RSOLENOID_REVERSE = 6;
 		
-		this.INTAKE_ULTRASONIC=0;
-		this.INTAKE_JOYSTICK = 3;
+		this.INTAKE_ULTRASONIC = 0;
 		//==================================================Control Constants ==================================================
 		
 		this.JOYSTICK_0 = 0;
@@ -354,11 +363,13 @@ public final class RobotMap {
 		this.ELEVATOR_ARMS_TOGGLE_BUTTON = 1;
 		
 		this.ELEVATOR_MOVE_JOYSTICK = 2;
+		
 		this.DRIVE_LEFT_JOYSTICK 	= 0;
 		this.DRIVE_RIGHT_JOYSTICK 	= 1;
 		
 		this.DRIVE_CONTROL_SENSITIVITY = 0.5;
 		
+		this.INTAKE_JOYSTICK = 3;
 		this.INTAKE_ARMS_CLOSE = 1;
 		this.INTAKE_ARMS_OPEN = 2;
 	}//end RobotMap()

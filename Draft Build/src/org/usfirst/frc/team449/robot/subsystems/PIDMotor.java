@@ -24,6 +24,7 @@ public class PIDMotor extends PIDSubsystem {
     private double 	Kd 		= 0.0;
     private int		mode;
     
+    private double distancePerPulse = 1;
     
     private final SpeedController 	motor;
     private final Encoder 			encoder;
@@ -89,7 +90,7 @@ public class PIDMotor extends PIDSubsystem {
     }
     
     protected double returnPIDInput() {
-        System.out.println("Trying to return pidInput");
+        //System.out.println("Trying to return pidInput");
         // Return your input value for the PID loop
         // e.g. a sensor, like a potentiometer:
         // yourPot.getAverageVoltage() / kYourMaxVoltage;
@@ -100,7 +101,7 @@ public class PIDMotor extends PIDSubsystem {
 		case SPEED_BASE:
         	return encoder.getRate();
 		case POSITION_BASE:
-			return encoder.get();
+			return encoder.get()*this.distancePerPulse;
 		default:
         	System.err.println("you fucked up again. I warned that you didn't set mode correctly.");
         	return 0;
@@ -121,7 +122,7 @@ public class PIDMotor extends PIDSubsystem {
         	System.err.println("invert flags don't match with slaves");
         	for(int i=0; i < slaves.size(); i++)
         	{
-        		System.out.println("PID setting throttle " + output);
+        		//System.out.println("PID setting throttle " + output);
         		slaves.get(i).set(output);
         	}
         	
@@ -131,7 +132,7 @@ public class PIDMotor extends PIDSubsystem {
         {
         	for(int i=0; i < slaves.size(); i++)
         	{
-        		System.out.println("setting throttle " + output);
+        		//System.out.println("setting throttle " + output);
         		if(slave_invert_flags.get(i)) // if invert flag, invert slave motor output
         		{
         			slaves.get(i).set(-output);
@@ -142,6 +143,20 @@ public class PIDMotor extends PIDSubsystem {
         		}
         	}
         }
+    }
+    
+    /**
+     * sets the distance per pulse for the encoder reading
+     * @param dpp the distance per pulse
+     */
+    public void setDistancePerPulse(double dpp)
+    {
+    	this.distancePerPulse = dpp;
+    }
+    
+    public double getDistancePerPulse()
+    {
+    	return this.distancePerPulse;
     }
     
     /**
@@ -278,5 +293,13 @@ public class PIDMotor extends PIDSubsystem {
     public double getEncoderCount()
     {
     	return this.encoder.get();
+    }
+    
+    /**
+     * @return the encoder position with distance per pulse factor
+     */
+    public double getEncoderPosition()
+    {
+    	return this.encoder.get() * this.distancePerPulse;
     }
 }//end class

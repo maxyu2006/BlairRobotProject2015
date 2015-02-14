@@ -35,7 +35,7 @@ public class Robot extends IterativeRobot {
 	public static final Drive		drive		= new Drive(Robot.robotMap);
 	public static final Intake 		intake		= new Intake(Robot.robotMap);
 	
-	public static final OI 			OI 			= null;//new OI(Robot.robotMap);
+	public static final OI 			OI 			= new OI(Robot.robotMap);
 	
 	public static final Compressor c = new Compressor();
 	
@@ -56,12 +56,12 @@ public class Robot extends IterativeRobot {
         autonomousCommand = null;
         c.start();
                 
-        frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
+        //frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
 
         // the camera name (ex "cam0") can be found through the roborio web interface
-        session = NIVision.IMAQdxOpenCamera("cam0",
-                NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-        NIVision.IMAQdxConfigureGrab(session);
+        //session = NIVision.IMAQdxOpenCamera("cam0",
+        //        NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+        //NIVision.IMAQdxConfigureGrab(session);
     }
 	
 	public void disabledPeriodic() {
@@ -103,19 +103,20 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         
-       // SmartDashboard.putNumber("Encoder position", Robot.elevator.getEncoderReading());
+        SmartDashboard.putNumber("Encoder position", Robot.elevator.getEncoderPosition());
 
-        //SmartDashboard.putBoolean("TopLimit", Robot.elevator.isTouchingTop());
-        //SmartDashboard.putBoolean("BottomLimit", Robot.elevator.isTouchingBottom());
+        SmartDashboard.putBoolean("TopLimit", Robot.elevator.isTouchingTop());
+        SmartDashboard.putBoolean("BottomLimit", Robot.elevator.isTouchingBottom());
     
+        SmartDashboard.putBoolean("LeftLimit", Robot.intake.getSwitchState());
         //SmartDashboard.putNumber("Left drive encoder", Robot.drive.getLeftVel());
         //SmartDashboard.putNumber("Right drive encoder", Robot.drive.getRightVel());
 
-        NIVision.IMAQdxStartAcquisition(session);
-        NIVision.IMAQdxGrab(session, frame, 1);
+        //NIVision.IMAQdxStartAcquisition(session);
+        //NIVision.IMAQdxGrab(session, frame, 1);
         
-        CameraServer.getInstance().setImage(frame);
-        NIVision.IMAQdxStopAcquisition(session);
+        //CameraServer.getInstance().setImage(frame);
+        //NIVision.IMAQdxStopAcquisition(session);
     }
     
     /**

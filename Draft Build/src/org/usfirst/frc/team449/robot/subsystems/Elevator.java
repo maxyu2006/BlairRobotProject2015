@@ -26,7 +26,10 @@ public class Elevator extends Subsystem {
 	
 	// Elevator conceptual fields
 	private double setPoint;
-	private double position;
+	
+	private double bottomPosition;
+	private double topPosition;
+	
 	private boolean controlState;
 	
 	public static final boolean MANUAL  = true;
@@ -34,10 +37,6 @@ public class Elevator extends Subsystem {
 	
 	public static final boolean UP = true;
 	public static final boolean DOWN = false;
-	
-	public static final double ELEVATOR_FIRST_POSITION = 0;
-	public static final double ELEVATOR_SECOND_POSITION = 0.5;
-	public static final double ELEVATOR_THIRD_POSITION = 1;
 	
 	/**
 	 * Elevator constructor
@@ -54,20 +53,23 @@ public class Elevator extends Subsystem {
 		//initialize temporary variables to pass into the PID motor
 		TalonSRX 	leftMotor   = new TalonSRX(config.ELEVATOR_LEFT_MOTOR);
 		TalonSRX 	rightMotor  = new TalonSRX(config.ELEVATOR_RIGHT_MOTOR);
-		Encoder encoder 	= new Encoder(config.ELEVATOR_ENCODER_CHANNEL_A, config.ELEVATOR_ENCODER_CHANNEL_B, false, EncodingType.k4X);
+		Encoder encoder 	= new Encoder(config.ELEVATOR_ENCODER_CHANNEL_A, config.ELEVATOR_ENCODER_CHANNEL_B, true, EncodingType.k4X);
+		
+		encoder.setDistancePerPulse(config.ELEVATOR_SPROCKET_CIRCUMFERENCE/config.ELEVATOR_ENCODER_CPR);
 		
 		//this PIDMotor should be operating in Position based control mode for elevator position
 		motors = new PIDMotor(config, config.ELEVATOR_P, config.ELEVATOR_I, config.ELEVATOR_D, 0, config.ELEVATOR_PID_TOLERANCE_RANGE, leftMotor, encoder, PIDMotor.POSITION_BASE);
 		motors.addSlave(rightMotor,true);
+		motors.setDistancePerPulse(config.ELEVATOR_SPROCKET_CIRCUMFERENCE/config.ELEVATOR_ENCODER_CPR);
 		
 		this.controlState = MANUAL;
 		
 		setPoint = 0;
-		position = ELEVATOR_FIRST_POSITION;
 		
-		encoder.setDistancePerPulse(1/config.ELEVATOR_ENCODER_CPR);
 		encoder.reset();
+		topPosition = config.ELEVATOR_INITIAL_TOP_COUNT;
 		System.out.println("Elevator init finished");
+		
 		
 	}//end Elevator();
 
@@ -104,7 +106,7 @@ public class Elevator extends Subsystem {
     
     /**
      * Returns the setPoint of the elevator, regardless of whether PID mode is enabled.
-     * @return setPoint - a double ranging from 0 to 1, 0 being the bottom of the elevator.
+     * @return setPoint - a double representing the position of the elevator in inches
      */
     public double getSetPoint(){
     	setPoint = motors.getSetpoint();
@@ -114,7 +116,7 @@ public class Elevator extends Subsystem {
     /**
      * Sets the position for the elevator to move to via PID. If PID is disabled, this will not physically do
      * anything, but the set point will be kept for when the PID is re-enabled. 
-     * @param setPoint - a double from 0 to 1, where 0 represents the bottom of the elevator.
+     * @param setPoint - a double representing the position of the elevator in inches
      */
     public void setSetPoint(double setPoint){
     	this.setPoint = setPoint;
@@ -122,48 +124,11 @@ public class Elevator extends Subsystem {
     }
     
     /**
-     * Returns the actual position of the elevator as specified by the encoder.
+     * Returns the normalized position of the elevator as specified by the encoder.
      * @return the "position" of the elevator as a double from 0 to 1, 0 being the bottom of the elevator.
      */
-    public double getActualPosition(){
-    	return motors.getPosition();
-    }
-    
-    /**
-     * Sets the conceptual position of the elevator to the bottom. Only to be used in the ResetElevator
-     * command after the carriage is manually driven back to the bottom of the elevator.
-     */
-    public void resetPosition() {
-    	position = ELEVATOR_FIRST_POSITION;
-    }
-    
-    /**
-     * Sets the set point of the elevator to be the position directly above where the carriage is currently.
-     */
-    public void raisePosition() {
-    	if (position < ELEVATOR_THIRD_POSITION) {
-    		position += 0.5;
-    		setSetPoint(position);
-    	}
-    }
-    
-    /**
-     * Sets the set point of the elevator to be the position directly below where the carriage is currently.
-     */
-    public void lowerPosition() {
-    	if (position > ELEVATOR_FIRST_POSITION) {
-    		position -= 0.5;
-    		setSetPoint(position);
-    	}
-    }
-    
-    /**   
-     * Get the conceptual position of the elevator
-     * @return position - one of the elevator constants ELEVATOR_FIRST/SECOND/THIRD_POSITION,
-     *  first being bottom
-     */
-    public double getPosition(){
-		return position;
+    public double getNormalizedPosition(){
+    	return (motors.getEncoderPosition()-bottomPosition)/(topPosition-bottomPosition);
     }
     
     /**
@@ -215,6 +180,8 @@ public class Elevator extends Subsystem {
     public void setMotorManual(double throttle){
     	if (controlState)
     		this.motors.setMotorVoltage(throttle);
+    	
+    	//System.out.println("setting motorThrottle");
     }
 
     /**
@@ -230,6 +197,36 @@ public class Elevator extends Subsystem {
 	public double getEncoderReading()
 	{
 		return this.motors.getEncoderCount();
+	}
+
+	/**
+	 * @return the encoder position with units
+	 */
+	public double getEncoderPosition()
+	{
+		return this.motors.getEncoderPosition();
+	}
+	
+	/**
+	 * @return the value of the encoder when it hits the bottom
+	 */
+	public double getBottomPosition() {
+		return bottomPosition;
+	}
+
+	/**
+	 * @param bottomCount set the position of the encoder when it hits the bottom
+	 */
+	public void setBottomPosition(double bottomPosition) {
+		this.bottomPosition = bottomPosition;
+	}
+
+	public double getTopPosition() {
+		return topPosition;
+	}
+
+	public void setTopPosition(double topPosition) {
+		this.topPosition = topPosition;
 	}
 }//end class
 

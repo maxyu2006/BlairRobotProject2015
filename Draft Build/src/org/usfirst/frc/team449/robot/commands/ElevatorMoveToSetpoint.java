@@ -4,6 +4,7 @@ import org.usfirst.frc.team449.robot.Robot;
 import org.usfirst.frc.team449.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Sets the setpoint for the PID position control for the elevator
@@ -11,24 +12,23 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ElevatorMoveToSetpoint extends Command {
 	
-	/**
-	 * ElevatorMoveAuto constructor
-	 * @param position: The elevator desired position. Units are normalized length (0 to 1)
-	 */
-	
 	private double setpoint; // desired elevator setpoint
-	private boolean finalposition;
-	private boolean isLimitReached; // flag to detect if limit swith has been hit
 	
+	/**
+	 * @param position the desired position in inches
+	 */
     public ElevatorMoveToSetpoint(double position) {	
     	requires(Robot.elevator);
     	setpoint = position;
-    	isLimitReached = false;
     }
 
     protected void initialize() {
+    	
+    	double calculatedSetpoint = setpoint - Robot.elevator.getBottomPosition();
+    	SmartDashboard.putNumber("calculatedSetpoint", calculatedSetpoint);
+    	
     	if(Robot.elevator.isPIDEnabled()){
-    		Robot.elevator.setSetPoint(setpoint);
+    		Robot.elevator.setSetPoint(calculatedSetpoint);
     	}
     	else{
     		System.err.println("PID elevator control attempted while under manual mode");
@@ -37,16 +37,30 @@ public class ElevatorMoveToSetpoint extends Command {
 
     protected void execute() {
     	// if elevator is at a limit, set flag to true
-    	isLimitReached = (Robot.elevator.isTouchingBottom()||Robot.elevator.isTouchingTop()); 
+    	 
     }
 
     protected boolean isFinished() {
-    	//end if the elevator is at the setpoint, or if a limit is reached
-    	return (Robot.elevator.isAtSetPoint()||isLimitReached);
+    	if(Robot.elevator.isAtSetPoint())
+    		return true;
+    	
+    	if(Robot.elevator.isTouchingBottom())
+    	{
+    		Robot.elevator.setBottomPosition(Robot.elevator.getEncoderPosition());
+    		return true;
+    	}
+    	
+    	if(Robot.elevator.isTouchingTop())
+    	{
+    		Robot.elevator.setTopPosition(Robot.elevator.getEncoderPosition());
+    		return true;
+    	}
+    		//end if the elevator is at the setpoint, or if a limit is reached
+    	return false;
     }
 
     protected void end() {
-    	if(isLimitReached)//if a limit was reached, set to manual mode to prevent possible future damage
+    	if(Robot.elevator.isTouchingBottom() || Robot.elevator.isTouchingTop())//if a limit was reached, set to manual mode to prevent possible future damage
     	{
     		Robot.elevator.disablePID();
     		System.err.println("PID elevator control exceeded elevator limits");
@@ -55,5 +69,10 @@ public class ElevatorMoveToSetpoint extends Command {
     }
 
     protected void interrupted() {
+    }
+    
+    public boolean isInterruptible()
+    {
+    	return false;
     }
 }

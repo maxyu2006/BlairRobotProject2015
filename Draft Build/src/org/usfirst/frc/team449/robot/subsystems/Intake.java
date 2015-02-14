@@ -124,7 +124,7 @@ public class Intake extends Subsystem {
 	/**
 	 * @return left limit switch's state
 	 */
-	public boolean getLeftSwitchState() {
+	public boolean getSwitchState() {
 		return leftLimSwitch.get();
 	}
 
