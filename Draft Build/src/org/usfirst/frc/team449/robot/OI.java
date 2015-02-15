@@ -140,6 +140,14 @@ public class OI {
 	}
 	
 	/**
+	 * sees if the drivers are requesting drive staright mode
+	 * @return
+	 */
+	public boolean isDriveStraightMode()
+	{
+		return (this.joysticks[this.DRIVE_RIGHT_JOYSTICK].getTrigger()||this.joysticks[this.DRIVE_LEFT_JOYSTICK].getTrigger());
+	}
+	/**
 	 * 
 	 * @param joystick
 	 * @return

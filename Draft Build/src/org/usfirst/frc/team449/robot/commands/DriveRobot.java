@@ -21,8 +21,18 @@ public class DriveRobot extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	double leftThrottle =0;
+    	double rightThrottle = 0;
+    	
+    	leftThrottle = Robot.OI.getDriveAxisLeft();
+    	rightThrottle = Robot.OI.getDriveAxisRight();
+    	
+    	if(Robot.OI.isDriveStraightMode())
+    	{
+    		leftThrottle = rightThrottle;
+    	}
     	//pushing forward on the stick gives -1 so it is negated
-    	Robot.drive.setThrottle(Robot.OI.getDriveAxisLeft(), Robot.OI.getDriveAxisRight());
+    	Robot.drive.setThrottle(leftThrottle, rightThrottle);
     }
 
     // Make this return true when this Command no longer needs to run execute()

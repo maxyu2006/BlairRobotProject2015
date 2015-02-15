@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.VictorSP;
  * Rescales raw ultrasonic voltage and outputs it to the pwm.
  */
 public class IntakeSetPWMVoltage extends Command {
-	
-	public double currentVoltage;
+
+	private final double v_scale = 2/5;
 	private VictorSP pwm = new VictorSP(9);
 
     public IntakeSetPWMVoltage() {
@@ -23,11 +23,11 @@ public class IntakeSetPWMVoltage extends Command {
     
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	currentVoltage = Robot.intake.getUltraRawVoltage();
+    	double output = 0;
     	
-    	currentVoltage = ((2/5) * currentVoltage) + -1;
+    	output = (v_scale * Robot.intake.getUltraRawVoltage()) + -1;
     	
-    	pwm.set(currentVoltage);
+    	pwm.set(output);
     }
 
     // Make this return true when this Command no longer needs to run execute()

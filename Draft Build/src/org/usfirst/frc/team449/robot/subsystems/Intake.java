@@ -27,7 +27,7 @@ public class Intake extends Subsystem {
     private final DoubleSolenoid intakeRightSol;
     
     private final VictorSP leftArmMotor;
-    private final VictorSP rightArmMotor;
+//    private final VictorSP rightArmMotor;
     
     private boolean isLeftOpen;
     private boolean isRightOpen;
@@ -43,7 +43,7 @@ public class Intake extends Subsystem {
     	ultrasonic = new AnalogInput(config.INTAKE_ULTRASONIC);
     	
     	leftArmMotor 	= new VictorSP(config.INTAKE_LEFT_MOTOR);
-    	rightArmMotor 	= new VictorSP(config.INTAKE_RIGHT_MOTOR);
+//    	rightArmMotor 	= new VictorSP(config.INTAKE_RIGHT_MOTOR);
     	
     	intakeLeftSol  = new DoubleSolenoid(config.INTAKE_LSOLENOID_FORWARD, config.INTAKE_LSOLENOID_REVERSE);
     	intakeRightSol = new DoubleSolenoid(config.INTAKE_RSOLENOID_FORWARD, config.INTAKE_RSOLENOID_REVERSE);
@@ -71,7 +71,7 @@ public class Intake extends Subsystem {
 	 * @param throttle
 	 */
 	public void setRMotor(double throttle){
-		this.rightArmMotor.set(throttle);
+//		this.rightArmMotor.set(throttle);
 	}
 	
 	public void toggleArms() {

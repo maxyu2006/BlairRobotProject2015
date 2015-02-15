@@ -186,6 +186,8 @@ public final class RobotMap {
 	 */
 	public final int INTAKE_RIGHT_MOTOR;
 	
+	public final int INTAKE_LED_PORT;
+	
 	/**
 	 * left intake forward solenoid channel
 	 */
@@ -337,8 +339,9 @@ public final class RobotMap {
 		this.INTAKE_LEFT_LIMIT = 7;
 		this.INTAKE_RIGHT_LIMIT = 7;
 		
-		this.INTAKE_LEFT_MOTOR = 9;
+		this.INTAKE_LEFT_MOTOR = 8;
 		this.INTAKE_RIGHT_MOTOR = 8;
+		this.INTAKE_LED_PORT =9;
 		
 		this.INTAKE_LSOLENOID_FORWARD = 4;
 		this.INTAKE_LSOLENOID_REVERSE = 5;
