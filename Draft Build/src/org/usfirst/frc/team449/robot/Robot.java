@@ -99,15 +99,18 @@ public class Robot extends IterativeRobot {
         //SmartDashboard.putNumber("Right drive encoder", Robot.drive.getRightVel());
         
         // Update Grabber status
-        SmartDashboard.putString("grabber status", elevatorArm.getArmState() ? "Grabber Open" : "Grabber Closed");
+        SmartDashboard.putBoolean("grabberStatus", elevatorArm.getArmState());
         
         // Update Elevator position
-        SmartDashboard.putBoolean("at top position", elevator.getPosition() == Elevator.ELEVATOR_THIRD_POSITION);
-        SmartDashboard.putBoolean("at middle position", elevator.getPosition() == Elevator.ELEVATOR_SECOND_POSITION);
-        SmartDashboard.putBoolean("at bottom position", elevator.getPosition() == Elevator.ELEVATOR_THIRD_POSITION);
+        SmartDashboard.putBoolean("isAtTopPosition", elevator.getPosition() == Elevator.ELEVATOR_THIRD_POSITION);
+        SmartDashboard.putBoolean("isAtMiddlePosition", elevator.getPosition() == Elevator.ELEVATOR_SECOND_POSITION);
+        SmartDashboard.putBoolean("isAtBottomPosition", elevator.getPosition() == Elevator.ELEVATOR_THIRD_POSITION);
         
         // Update Drive mode
-        SmartDashboard.putString("drive mode", drive.getControlMode() == Drive.PID ? "PID Drive" : "Manual Drive");
+        SmartDashboard.putBoolean("driveMode", drive.getControlMode() == Drive.PID);
+        
+        // Update Drive mode
+        SmartDashboard.putBoolean("driveMode", drive.getControlMode() == Drive.PID);
     }
     
     /**
