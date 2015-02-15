@@ -37,8 +37,6 @@ public class IntakeSetPWMVoltage extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println(Robot.elevator.getEncoderReading());
-    	Robot.elevator.setSetPoint(Robot.elevator.getEncoderReading());
     }
 
     // Called when another command which requires one or more of the same
