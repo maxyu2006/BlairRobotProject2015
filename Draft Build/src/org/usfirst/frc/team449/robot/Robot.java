@@ -34,7 +34,7 @@ public class Robot extends IterativeRobot {
 	
 	public static final Compressor c = new Compressor();
 	
-	public static CameraServer camera;
+	//public static CameraServer camera;
 	
 	Command autonomousCommand;
 	
@@ -47,9 +47,9 @@ public class Robot extends IterativeRobot {
         autonomousCommand = null;
         c.start();
         
-        camera = CameraServer.getInstance();
-        camera.setQuality(50);
-        camera.startAutomaticCapture("cam0");
+        //camera = CameraServer.getInstance();
+        //camera.setQuality(50);
+        //camera.startAutomaticCapture("cam0");
     }
 	
 	public void disabledPeriodic() {
