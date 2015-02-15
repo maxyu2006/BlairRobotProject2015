@@ -90,15 +90,24 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         
-        SmartDashboard.putNumber("Encoder position", Robot.elevator.getEncoderReading());
+        //SmartDashboard.putNumber("Encoder position", Robot.elevator.getEncoderReading());
 
-        SmartDashboard.putBoolean("TopLimit", Robot.elevator.isTouchingTop());
-        SmartDashboard.putBoolean("BottomLimit", Robot.elevator.isTouchingBottom());
+        //SmartDashboard.putBoolean("TopLimit", Robot.elevator.isTouchingTop());
+        //SmartDashboard.putBoolean("BottomLimit", Robot.elevator.isTouchingBottom());
     
-        SmartDashboard.putNumber("Left drive encoder", Robot.drive.getLeftVel());
-        SmartDashboard.putNumber("Right drive encoder", Robot.drive.getRightVel());
-    
+        //SmartDashboard.putNumber("Left drive encoder", Robot.drive.getLeftVel());
+        //SmartDashboard.putNumber("Right drive encoder", Robot.drive.getRightVel());
         
+        // Update Grabber status
+        SmartDashboard.putString("grabber status", elevatorArm.getArmState() ? "Grabber Open" : "Grabber Closed");
+        
+        // Update Elevator position
+        SmartDashboard.putBoolean("at top position", elevator.getPosition() == Elevator.ELEVATOR_THIRD_POSITION);
+        SmartDashboard.putBoolean("at middle position", elevator.getPosition() == Elevator.ELEVATOR_SECOND_POSITION);
+        SmartDashboard.putBoolean("at bottom position", elevator.getPosition() == Elevator.ELEVATOR_THIRD_POSITION);
+        
+        // Update Drive mode
+        SmartDashboard.putString("drive mode", drive.getControlMode() == Drive.PID ? "PID Drive" : "Manual Drive");
     }
     
     /**
