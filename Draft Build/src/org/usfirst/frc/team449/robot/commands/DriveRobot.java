@@ -12,7 +12,7 @@ public class DriveRobot extends Command {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drive);
-    	
+    	System.out.println("Drive Robot bueno");
     }
 
     // Called just before this Command runs the first time

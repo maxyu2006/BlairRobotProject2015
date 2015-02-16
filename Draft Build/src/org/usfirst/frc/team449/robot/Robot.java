@@ -5,6 +5,10 @@ import org.usfirst.frc.team449.robot.subsystems.Drive;
 import org.usfirst.frc.team449.robot.subsystems.Elevator;
 import org.usfirst.frc.team449.robot.subsystems.Intake;
 
+import com.ni.vision.NIVision;
+import com.ni.vision.NIVision.IMAQdxBufferNumberMode;
+import com.ni.vision.NIVision.Image;
+
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -12,6 +16,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.vision.USBCamera;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,7 +33,7 @@ public class Robot extends IterativeRobot {
 	public static final Elevator	elevator	= new Elevator(Robot.robotMap);
 	public static final Arms		elevatorArm	= new Arms(Robot.robotMap);
 	public static final Drive		drive		= new Drive(Robot.robotMap);
-	public static final Intake 		intake		= null;
+	public static final Intake 		intake		= new Intake(Robot.robotMap);
 	
 	public static final OI 			OI 			= new OI(Robot.robotMap);
 	
@@ -38,11 +43,15 @@ public class Robot extends IterativeRobot {
 	
 	Command autonomousCommand;
 	
+    int session;
+    Image frame;
+
 	/**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
+    	System.out.println("Robot Init Started");
 		// instantiate the command used for the autonomous period
         autonomousCommand = null;
         c.start();
@@ -50,6 +59,13 @@ public class Robot extends IterativeRobot {
         //camera = CameraServer.getInstance();
         //camera.setQuality(50);
         //camera.startAutomaticCapture("cam0");
+                
+        //frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
+
+        // the camera name (ex "cam0") can be found through the roborio web interface
+        //session = NIVision.IMAQdxOpenCamera("cam0",
+        //        NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+        //NIVision.IMAQdxConfigureGrab(session);
     }
 	
 	public void disabledPeriodic() {
@@ -74,6 +90,7 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+
 
     }
 
@@ -108,6 +125,20 @@ public class Robot extends IterativeRobot {
         
         // Update Drive mode
         SmartDashboard.putBoolean("driveMode", drive.getControlMode() == Drive.PID);
+        SmartDashboard.putNumber("Encoder position", Robot.elevator.getEncoderPosition());
+
+        SmartDashboard.putBoolean("TopLimit", Robot.elevator.isTouchingTop());
+        SmartDashboard.putBoolean("BottomLimit", Robot.elevator.isTouchingBottom());
+    
+        SmartDashboard.putBoolean("LeftLimit", Robot.intake.getSwitchState());
+        //SmartDashboard.putNumber("Left drive encoder", Robot.drive.getLeftVel());
+        //SmartDashboard.putNumber("Right drive encoder", Robot.drive.getRightVel());
+
+        //NIVision.IMAQdxStartAcquisition(session);
+        //NIVision.IMAQdxGrab(session, frame, 1);
+        
+        //CameraServer.getInstance().setImage(frame);
+        //NIVision.IMAQdxStopAcquisition(session);
     }
     
     /**

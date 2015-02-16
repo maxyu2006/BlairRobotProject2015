@@ -10,14 +10,14 @@ import edu.wpi.first.wpilibj.command.Command;
  * anything, the command will still exit since isFinished is set to always return true.
  * @author eyob-- 2/1/15
  */
-public class ElevatorSetGrabber extends Command {
+public class ArmSetGrabber extends Command {
 	private int armState; 
 	public static final int OPEN = 0;
 	public static final int CLOSE = 1;
 	public static final int TOGGLE = 2;
 	
 	
-    public ElevatorSetGrabber(int setOpen) {
+    public ArmSetGrabber(int setOpen) {
         requires(Robot.elevatorArm);
         this.armState = setOpen;
         System.out.println("initialized setGrabberCommand");

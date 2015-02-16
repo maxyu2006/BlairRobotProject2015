@@ -1,35 +1,33 @@
 package org.usfirst.frc.team449.robot.commands;
 
 import org.usfirst.frc.team449.robot.Robot;
-import org.usfirst.frc.team449.robot.RobotMap;
-import org.usfirst.frc.team449.robot.subsystems.Intake;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.VictorSP;
 
 /**
- *
+ * Rescales raw ultrasonic voltage and outputs it to the pwm.
  */
-public class IntakeRunMotors extends Command {
-	Joystick intakeJoystick;
+public class IntakeSetPWMVoltage extends Command {
+	
+	public double currentVoltage;
+	private VictorSP pwm = new VictorSP(9);
 
-    public IntakeRunMotors() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	System.out.println("Set Motor Started");
+    public IntakeSetPWMVoltage() {
     	requires(Robot.intake);
-    	intakeJoystick= Robot.OI.joysticks[3];
-    	System.out.println("Set motor Done");
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     }
-
+    
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.intake.setLMotor(Robot.OI.getJoystickAxisY(intakeJoystick));
-    	Robot.intake.setRMotor(-Robot.OI.getJoystickAxisY(intakeJoystick));
+    	currentVoltage = Robot.intake.getUltraRawVoltage();
+    	
+    	currentVoltage = ((2/5) * currentVoltage) + -1;
+    	
+    	pwm.set(currentVoltage);
     }
 
     // Make this return true when this Command no longer needs to run execute()
