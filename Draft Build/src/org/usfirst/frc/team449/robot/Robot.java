@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.vision.USBCamera;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -119,18 +118,11 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putBoolean("grabberStatus", elevatorArm.getArmState());
         
         // Update Elevator position
-        SmartDashboard.putBoolean("isAtTopPosition", elevator.getPosition() == Elevator.ELEVATOR_THIRD_POSITION);
-        SmartDashboard.putBoolean("isAtMiddlePosition", elevator.getPosition() == Elevator.ELEVATOR_SECOND_POSITION);
-        SmartDashboard.putBoolean("isAtBottomPosition", elevator.getPosition() == Elevator.ELEVATOR_THIRD_POSITION);
+        SmartDashboard.putString("elevatorPosition", (int)(elevator.getNormalizedPosition()*100)+"%");
         
         // Update Drive mode
         SmartDashboard.putBoolean("driveMode", drive.getControlMode() == Drive.PID);
-        SmartDashboard.putNumber("Encoder position", Robot.elevator.getEncoderPosition());
-
-        SmartDashboard.putBoolean("TopLimit", Robot.elevator.isTouchingTop());
-        SmartDashboard.putBoolean("BottomLimit", Robot.elevator.isTouchingBottom());
-    
-        SmartDashboard.putBoolean("LeftLimit", Robot.intake.getSwitchState());
+        
         //SmartDashboard.putNumber("Left drive encoder", Robot.drive.getLeftVel());
         //SmartDashboard.putNumber("Right drive encoder", Robot.drive.getRightVel());
 
