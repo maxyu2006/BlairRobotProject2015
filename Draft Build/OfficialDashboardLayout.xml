@@ -1,0 +1,11 @@
+<xml version="1.0">
+<dashboard>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.VideoStreamViewerExtension">
+		<location x="182" y="11"/>
+		<width>209</width>
+		<height>175</height>
+	</static-widget>
+</dashboard>
+<live-window>
+</live-window>
+</xml>

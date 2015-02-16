@@ -108,9 +108,6 @@ public class Robot extends IterativeRobot {
         
         // Update Drive mode
         SmartDashboard.putBoolean("driveMode", drive.getControlMode() == Drive.PID);
-        
-        // Update Drive mode
-        SmartDashboard.putBoolean("driveMode", drive.getControlMode() == Drive.PID);
     }
     
     /**
