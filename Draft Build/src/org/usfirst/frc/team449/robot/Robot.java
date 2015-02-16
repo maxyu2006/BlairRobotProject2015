@@ -39,7 +39,6 @@ public class Robot extends IterativeRobot {
 	
 	public static final Compressor c = new Compressor();
 	
-//	public static CameraServer camera;
 	
 	Command autonomousCommand;
 	
@@ -55,13 +54,6 @@ public class Robot extends IterativeRobot {
 		// instantiate the command used for the autonomous period
         autonomousCommand = null;
         c.start();
-                
-        //frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
-
-        // the camera name (ex "cam0") can be found through the roborio web interface
-        //session = NIVision.IMAQdxOpenCamera("cam0",
-        //        NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-        //NIVision.IMAQdxConfigureGrab(session);
     }
 	
 	public void disabledPeriodic() {
@@ -109,14 +101,8 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putBoolean("BottomLimit", Robot.elevator.isTouchingBottom());
     
         SmartDashboard.putBoolean("LeftLimit", Robot.intake.getSwitchState());
-        //SmartDashboard.putNumber("Left drive encoder", Robot.drive.getLeftVel());
-        //SmartDashboard.putNumber("Right drive encoder", Robot.drive.getRightVel());
-
-        //NIVision.IMAQdxStartAcquisition(session);
-        //NIVision.IMAQdxGrab(session, frame, 1);
-        
-        //CameraServer.getInstance().setImage(frame);
-        //NIVision.IMAQdxStopAcquisition(session);
+        SmartDashboard.putNumber("Left drive encoder", Robot.drive.getLeftDis());
+        SmartDashboard.putNumber("Right drive encoder", Robot.drive.getRightDis());
     }
     
     /**

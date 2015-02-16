@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.VictorSP;
 public class IntakeSetPWMVoltage extends Command {
 
 	private final double v_scale = 2/5;
-	private VictorSP pwm = new VictorSP(9);
 
     public IntakeSetPWMVoltage() {
     	requires(Robot.intake);
@@ -27,7 +26,7 @@ public class IntakeSetPWMVoltage extends Command {
     	
     	output = (v_scale * Robot.intake.getUltraRawVoltage()) + -1;
     	
-    	pwm.set(output);
+    	Robot.intake.setLED(output);
     }
 
     // Make this return true when this Command no longer needs to run execute()

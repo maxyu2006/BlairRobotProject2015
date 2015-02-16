@@ -90,10 +90,6 @@ public class PIDMotor extends PIDSubsystem {
     }
     
     protected double returnPIDInput() {
-        //System.out.println("Trying to return pidInput");
-        // Return your input value for the PID loop
-        // e.g. a sensor, like a potentiometer:
-        // yourPot.getAverageVoltage() / kYourMaxVoltage;
         switch(this.mode)
         {
         case DISTANCE_BASE:
@@ -113,8 +109,6 @@ public class PIDMotor extends PIDSubsystem {
      * added: ability to output slaves and also invert slave outputs
      */
     protected void usePIDOutput(double output) {
-        // Use output to drive your system, like a motor
-        // e.g. yourMotor.set(output);
         motor.set(output);
         
         if(slaves.size() != slave_invert_flags.size()) // if for some reason the invert flag array got screwed up, ignore it

@@ -31,9 +31,6 @@ public class IntakeSetArms extends Command {
     	case CLOSE:
     		Robot.intake.closeArms();
     		break;
-    	case TOGGLE:
-    		Robot.intake.toggleArms();
-    		break;
     	default:
     		System.out.println("You done fucked up");
     	}
@@ -50,7 +47,7 @@ public class IntakeSetArms extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	new IntakeRunMotors();
+    	new IntakeSetPWMVoltage();
     }
 
     // Called when another command which requires one or more of the same

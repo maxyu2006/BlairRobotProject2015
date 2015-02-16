@@ -30,10 +30,10 @@ public class Elevator extends Subsystem {
 	private double bottomPosition;
 	private double topPosition;
 	
-	private boolean controlState;
+	private int controlState;
 	
-	public static final boolean MANUAL  = true;
-	public static final boolean PID		= false;
+	public static final int MANUAL  	= 0;
+	public static final int PID			= 1;
 	
 	public static final boolean UP = true;
 	public static final boolean DOWN = false;
@@ -123,6 +123,10 @@ public class Elevator extends Subsystem {
     	motors.setSetpoint(setPoint);
     }
     
+    public void setBBSetpoint(double setPoint) {
+    	this.setPoint = setPoint;
+    }
+    
     /**
      * Returns the normalized position of the elevator as specified by the encoder.
      * @return the "position" of the elevator as a double from 0 to 1, 0 being the bottom of the elevator.
@@ -178,7 +182,7 @@ public class Elevator extends Subsystem {
      * @param throttle
      */
     public void setMotorManual(double throttle){
-    	if (controlState)
+    	if (controlState == MANUAL)
     		this.motors.setMotorVoltage(throttle);
     	
     	//System.out.println("setting motorThrottle");

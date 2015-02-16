@@ -251,11 +251,16 @@ public final class RobotMap {
 	 * Button for moving elevator down.
 	 */
 	public final int ELEVATOR_DOWN_BUTTON;
-	
+
 	/**
-	 * Button to toggle the elevator arms
+	 * Button to open the elevator arms
 	 */
-	public final int ELEVATOR_ARMS_TOGGLE_BUTTON;
+	public final int ELEVATOR_ARMS_OPEN_BUTTON;
+
+	/**
+	 * Button to close the elevator arms
+	 */
+	public final int ELEVATOR_ARMS_CLOSE_BUTTON;
 
 	/**
 	 * 
@@ -363,7 +368,8 @@ public final class RobotMap {
 		this.ELEVATOR_UP_BUTTON = 2;
 		this.ELEVATOR_DOWN_BUTTON = 3;
 		
-		this.ELEVATOR_ARMS_TOGGLE_BUTTON = 1;
+		this.ELEVATOR_ARMS_OPEN_BUTTON = 1;
+		this.ELEVATOR_ARMS_CLOSE_BUTTON = 2;
 		
 		this.ELEVATOR_MOVE_JOYSTICK = 2;
 		

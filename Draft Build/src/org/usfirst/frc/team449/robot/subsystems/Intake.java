@@ -1,7 +1,8 @@
 package org.usfirst.frc.team449.robot.subsystems;
 
+import org.usfirst.frc.team449.robot.Robot;
 import org.usfirst.frc.team449.robot.RobotMap;
-import org.usfirst.frc.team449.robot.commands.IntakeRunMotors;
+import org.usfirst.frc.team449.robot.commands.IntakeSetPWMVoltage;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -17,20 +18,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Intake extends Subsystem {
     
 	// Intake member variables
-	private final DigitalInput leftLimSwitch;
-	//private final DigitalInput rightLimSwitch;
+	private final DigitalInput intakeLimSwitch;
 	
     private final AnalogInput ultrasonic;
 	private final double ultraScale;
+	private final VictorSP ledPWM;
 	
-    private final DoubleSolenoid intakeLeftSol;
-    private final DoubleSolenoid intakeRightSol;
+    private final DoubleSolenoid intakeSol;
     
-    private final VictorSP leftArmMotor;
-//    private final VictorSP rightArmMotor;
-    
-    private boolean isLeftOpen;
-    private boolean isRightOpen;
+    private boolean isOpen;
     
     /**
      * 
@@ -38,18 +34,14 @@ public class Intake extends Subsystem {
      */
 	public Intake(RobotMap config) {
 		System.out.println("Intake init started");
-		leftLimSwitch 	= new DigitalInput(config.INTAKE_LEFT_LIMIT);
-    	//rightLimSwitch 	= new DigitalInput(config.INTAKE_RIGHT_LIMIT);
+		intakeLimSwitch 	= new DigitalInput(config.INTAKE_LEFT_LIMIT);
     	ultrasonic = new AnalogInput(config.INTAKE_ULTRASONIC);
     	
-    	leftArmMotor 	= new VictorSP(config.INTAKE_LEFT_MOTOR);
-//    	rightArmMotor 	= new VictorSP(config.INTAKE_RIGHT_MOTOR);
+    	this.ledPWM = new VictorSP(Robot.robotMap.INTAKE_LED_PORT);
     	
-    	intakeLeftSol  = new DoubleSolenoid(config.INTAKE_LSOLENOID_FORWARD, config.INTAKE_LSOLENOID_REVERSE);
-    	intakeRightSol = new DoubleSolenoid(config.INTAKE_RSOLENOID_FORWARD, config.INTAKE_RSOLENOID_REVERSE);
+    	intakeSol  = new DoubleSolenoid(config.INTAKE_LSOLENOID_FORWARD, config.INTAKE_LSOLENOID_REVERSE);
     	
-    	isRightOpen = true;
-    	isLeftOpen = true;
+    	isOpen = true;
     	
     	ultraScale = 1; //TODO: actually add the correct calibration
     	//motorSpeed = config.INTAKE_MOTOR_SPEED;
@@ -62,79 +54,32 @@ public class Intake extends Subsystem {
 	 * sets the left motor output
 	 * @param throttle
 	 */
-	public void setLMotor(double throttle){
-		this.leftArmMotor.set(throttle);
-	}
-	
-	/**
-	 * sets right motor output
-	 * @param throttle
-	 */
-	public void setRMotor(double throttle){
-//		this.rightArmMotor.set(throttle);
-	}
-	
-	public void toggleArms() {
-		if(this.isLeftOpen && this.isRightOpen) 
-			this.closeArms();
-		else if(!this.isLeftOpen && !this.isRightOpen)
-			this.openArms();
-		else
-			System.out.println("How the fuck did you manage that?");
+	public void setLED(double throttle){
+		this.ledPWM.set(throttle);
 	}
 	
 	public void openArms() {
-		this.openRight();
-		this.openLeft();
+		this.intakeSol.set(Value.kForward);
+		this.isOpen = true;
+
 	}
 	
 	public void closeArms() {
-		this.closeRight();
-		this.closeLeft();
+		this.intakeSol.set(Value.kForward);
+		this.isOpen = false;
+	}
+		
+	public boolean isOpen(){
+		return this.isOpen;
 	}
 	
-	private void openRight(){
-		this.intakeRightSol.set(Value.kForward);
-		this.isRightOpen = true;
-	}
-	
-	private void openLeft(){
-		this.intakeLeftSol.set(Value.kForward);
-		this.isLeftOpen = true;
-	}
-	
-	private void closeRight(){
-		this.intakeRightSol.set(Value.kReverse);
-		this.isRightOpen = false;
-	}
-	
-	private void closeLeft(){
-		this.intakeLeftSol.set(Value.kForward);
-		this.isLeftOpen = false;
-	}
-	
-	public boolean isLeftOpen(){
-		return this.isLeftOpen;
-	}
-	
-	public boolean isRightOpen(){
-		return this.isRightOpen;
-	}
-
 	/**
 	 * @return left limit switch's state
 	 */
 	public boolean getSwitchState() {
-		return leftLimSwitch.get();
+		return intakeLimSwitch.get();
 	}
 
-	/**
-	 * @return right limit switch's state
-	 */
-	//public boolean getRightSwitchState() {
-	//	return rightLimSwitch.get();
-	//}
-	
 	/***
 	 * returns the raw voltage from the ultrasonic sensor
 	 * @return
@@ -152,7 +97,7 @@ public class Intake extends Subsystem {
 	}
 	
     public void initDefaultCommand() {	
-    	this.setDefaultCommand(new IntakeRunMotors());
+    	this.setDefaultCommand(new IntakeSetPWMVoltage());
     }
 }
 

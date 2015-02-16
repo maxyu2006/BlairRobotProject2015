@@ -22,9 +22,7 @@ public class AutoDrive extends Command {
 	
 	private Timer t;// timer for time checking
     public AutoDrive(double distance, double time) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	requires(Robot.drive);
+        requires(Robot.drive);
     	
     	Robot.drive.setControlMode(Drive.MANUAL);
     	
@@ -44,12 +42,10 @@ public class AutoDrive extends Command {
     	t = new Timer();
     }
 
-    // Called just before this Command runs the first time
     protected void initialize() {
     	t.start();
     }
 
-    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.drive.setThrottle(throttle, throttle);
     }
@@ -74,14 +70,11 @@ public class AutoDrive extends Command {
         return false;
     }
 
-    // Called once after isFinished returns true
     protected void end() {
     	t.stop();
     	Robot.drive.setThrottle(0, 0);
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
     protected void interrupted() {
     }
     
