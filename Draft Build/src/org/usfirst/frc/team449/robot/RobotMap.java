@@ -369,7 +369,7 @@ public final class RobotMap {
 		this.ELEVATOR_DOWN_BUTTON = 3;
 		
 		this.ELEVATOR_ARMS_OPEN_BUTTON = 1;
-		this.ELEVATOR_ARMS_CLOSE_BUTTON = 2;
+		this.ELEVATOR_ARMS_CLOSE_BUTTON = 3;
 		
 		this.ELEVATOR_MOVE_JOYSTICK = 2;
 		

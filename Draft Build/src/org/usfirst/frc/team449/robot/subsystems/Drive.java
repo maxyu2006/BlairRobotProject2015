@@ -102,7 +102,7 @@ public class Drive extends Subsystem {
 	 * @return the current rate of the left side wheels in RPS
 	 */
 	public double getLeftVel(){
-		return this.leftEncoder.getRate();
+		return -this.leftEncoder.getRate();
 	}
 
 	/**
@@ -117,7 +117,7 @@ public class Drive extends Subsystem {
 	 * @return the current displacement of the left wheels
 	 */
 	public double getLeftDis(){
-		return this.leftEncoder.getDistance();
+		return -this.leftEncoder.getDistance();
 	}
 	
 	/**

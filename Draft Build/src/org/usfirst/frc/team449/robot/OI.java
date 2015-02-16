@@ -1,5 +1,6 @@
 package org.usfirst.frc.team449.robot;
 
+import org.usfirst.frc.team449.robot.commands.ElevatorMoveBangBang;
 import org.usfirst.frc.team449.robot.commands.ElevatorMoveToSetpoint;
 import org.usfirst.frc.team449.robot.commands.ElevatorReset;
 import org.usfirst.frc.team449.robot.commands.ArmSetGrabber;
@@ -62,16 +63,16 @@ public class OI {
 		
 		// temporary
 		elevatorPos1 = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], 2);
-		elevatorPos1.whenPressed(new ElevatorMoveToSetpoint(0.25));
+		elevatorPos1.whenPressed(new ElevatorMoveBangBang(0.25*40));
 		
-		elevatorPos2 = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], 3);
-		elevatorPos2.whenPressed(new ElevatorMoveToSetpoint(0.5));
+		elevatorPos2 = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], 4);
+		elevatorPos2.whenPressed(new ElevatorMoveBangBang(0.5*40));
 		
-		elevatorPos3 = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], 4);
-		elevatorPos3.whenPressed(new ElevatorMoveToSetpoint(0.75));
+		elevatorPos3 = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], 5);
+		elevatorPos3.whenPressed(new ElevatorMoveBangBang(0.75*40));
 		
-		elevatorPos4 = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], 5);
-		elevatorPos4.whenPressed(new ElevatorMoveToSetpoint(1));
+		elevatorPos4 = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], 6);
+		elevatorPos4.whenPressed(new ElevatorMoveBangBang(1*40));
 		
 		
 		System.out.println("OI init ended");
