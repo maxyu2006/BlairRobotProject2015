@@ -25,7 +25,7 @@ public class ElevatorReset extends Command {
     protected void initialize() {
     	Robot.elevator.releaseBrake();
     	Robot.elevator.disablePID();			// switch to manual mode (turn PID off)
-    	Robot.elevator.setMotorManual(0.2);	// drive back at a constant 15%
+    	Robot.elevator.setMotorManual(0.3);	// drive back at a constant 15%
     	t.start();								// start the runtime timer
     }
 
@@ -33,8 +33,8 @@ public class ElevatorReset extends Command {
     }
 
     protected boolean isFinished() {
-    	// stop if you hit the limit switch or it has taken longer than 2 seconds
-        return Robot.elevator.isTouchingBottom() || t.get() > 2;
+    	// stop if you hit the limit switch or it has taken longer than 3 seconds
+        return Robot.elevator.isTouchingBottom() || t.get() > 5;
     }
 
     protected void end() {

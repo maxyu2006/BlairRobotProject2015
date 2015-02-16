@@ -1,5 +1,6 @@
 package org.usfirst.frc.team449.robot;
 
+import org.usfirst.frc.team449.robot.commands.Auto;
 import org.usfirst.frc.team449.robot.subsystems.Arms;
 import org.usfirst.frc.team449.robot.subsystems.Drive;
 import org.usfirst.frc.team449.robot.subsystems.Elevator;
@@ -52,7 +53,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     	System.out.println("Robot Init Started");
 		// instantiate the command used for the autonomous period
-        autonomousCommand = null;
+        autonomousCommand = new Auto();
         c.start();
     }
 	

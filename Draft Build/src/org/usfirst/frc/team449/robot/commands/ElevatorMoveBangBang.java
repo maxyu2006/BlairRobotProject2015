@@ -12,41 +12,39 @@ public class ElevatorMoveBangBang extends Command {
 
 	private double setpoint;
 	private double throttle;
-	private final double throttle_lim = .3;
+	private final double throttle_lim = .75;
 	private final double tolerance = .25;
-	private boolean lim_flag;
 	/**
 	 * @param position the desired position in inches
 	 */
     public ElevatorMoveBangBang(double position) {
         requires(Robot.elevator);
         setpoint = position;
-        throttle = Math.copySign(throttle_lim, (setpoint-Robot.elevator.getEncoderPosition()));
-        lim_flag = false;
-        
-        Robot.elevator.disablePID();
         
         System.out.println("Elevator Move Bang Bang Initialized");
 
     }
 
     protected void initialize() {
+        Robot.elevator.releaseBrake();
+        throttle = Math.copySign(throttle_lim, (Robot.elevator.getEncoderPosition()-setpoint));
+        Robot.elevator.disablePID();
     }
 
     protected void execute() {
     	Robot.elevator.setMotorManual(throttle);
-    	lim_flag = (Robot.elevator.isTouchingBottom()||Robot.elevator.isTouchingTop());
+//    	System.out.println("Set throttle to " + throttle + " at " + Robot.elevator.getEncoderPosition());
     }
 
     protected boolean isFinished() {
-    	if(lim_flag)
+    	if((throttle<0 && Robot.elevator.isTouchingTop()) || (throttle>0 && Robot.elevator.isTouchingBottom()))
     	{
     		System.out.println("Bang Bang: Elevator Limit Reached");
     		return true;
     	}
-    	if(Math.abs(Robot.elevator.getEncoderPosition()-setpoint)<tolerance)
+    	if((throttle<0 && Robot.elevator.getEncoderPosition()>setpoint) || (throttle>0 && Robot.elevator.getEncoderPosition()<setpoint))
     	{
-    		System.out.println("Bang Bang: Setpoint Reached \t"+Robot.elevator.getEncoderPosition());
+    		System.out.println("Bang Bang: Setpoint Reached \t"+Robot.elevator.getEncoderPosition()+" "+setpoint);
     		return true;
     	}
     	return false;

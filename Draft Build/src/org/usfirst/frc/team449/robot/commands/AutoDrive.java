@@ -12,80 +12,84 @@ import edu.wpi.first.wpilibj.command.Command;
  * Also will terminate once a specified time limit is exceeded 
  */
 public class AutoDrive extends Command {
-	
+
+	private double initDist;
+	private double initTim;
 	private double setpoint; // desired distance to be traveled
 	private double throttle;
-	private double t_lim; // time limit, should be specified in seconds 
-	private final double throttle_limit = .25; // Arbitrary throttle limit
-	
+	private double time_lim; // time limit, should be specified in seconds 
+	private final double throttle_limit = .5; // Arbitrary throttle limit
+
 	private boolean isFoward; //is the distance positive or negative
-	
+
 	private Timer t;// timer for time checking
-    public AutoDrive(double distance, double time) {
-        requires(Robot.drive);
-    	
-    	Robot.drive.setControlMode(Drive.MANUAL);
-    	
-    	setpoint = this.avgEnc()+distance;
-    	if(distance>0)
-    	{
-    		throttle = this.throttle_limit;
-    		isFoward = true;
-    	}
-    	else // if negative distance, have neagtive throttle
-    	{
-    		throttle = -this.throttle_limit;
-    		isFoward = false;
-    	}
-    	
-    	t_lim = time;
-    	t = new Timer();
-    }
+	public AutoDrive(double distance, double time) {
+		requires(Robot.drive);
+		this.initDist = distance;
+		this.initTim = time;
+		Robot.drive.setControlMode(Drive.MANUAL);
+	}
 
-    protected void initialize() {
-    	t.start();
-    }
+	protected void initialize() {
+		setpoint = this.avgEnc()+initDist;
+		if(initDist>0)
+		{
+			throttle = this.throttle_limit;
+			isFoward = true;
+		}
+		else // if negative distance, have neagtive throttle
+		{
+			throttle = -this.throttle_limit;
+			isFoward = false;
+		}
 
-    protected void execute() {
-    	Robot.drive.setThrottle(throttle, throttle);
-    }
+		time_lim = initTim;
+		t = new Timer();
+		t.reset();
+		t.start();
+	}
 
-    /**
-     * returns true once you hit your desired setpoint
-     */
-    protected boolean isFinished() {
-    	//check if time limit has been exceeded
-    	if(t.get()>t_lim)
-    		return true; 
-    	if(isFoward)
-    	{
-    		if(this.avgEnc()>this.setpoint)
-    			return true;
-    	}
-    	else // aka if you're going backwards
-    	{
-    		if(this.avgEnc()<this.setpoint)
-    			return true;
-    	}
-        return false;
-    }
+	protected void execute() {
+		Robot.drive.setThrottle(throttle, throttle);
+		System.out.println(Robot.drive.getLeftDis() +" "+Robot.drive.getRightDis());
+	}
 
-    protected void end() {
-    	t.stop();
-    	Robot.drive.setThrottle(0, 0);
-    }
+	/**
+	 * returns true once you hit your desired setpoint
+	 */
+	protected boolean isFinished() {
+		//check if time limit has been exceeded
+		if(t.get()>time_lim)
+			return true; 
+		if(isFoward)
+		{
+			if(this.avgEnc()>this.setpoint)
+				return true;
+		}
+		else // aka if you're going backwards
+		{
+			if(this.avgEnc()<this.setpoint)
+				return true;
+		}
+		return false;
+	}
 
-    protected void interrupted() {
-    }
-    
-    /**
-     * averages the drive encoder values
-     */
-    private double avgEnc(){
-    	double left_d;
-    	double right_d;
-    	left_d = Robot.drive.getLeftDis();
-    	right_d = Robot.drive.getRightDis();
-    	return (left_d+right_d)/2;
-    }
+	protected void end() {
+		t.stop();
+		Robot.drive.setThrottle(0, 0);
+	}
+
+	protected void interrupted() {
+	}
+
+	/**
+	 * averages the drive encoder values
+	 */
+	private double avgEnc(){
+		double left_d;
+		double right_d;
+		left_d = Robot.drive.getLeftDis();
+		right_d = Robot.drive.getRightDis();
+		return (left_d+right_d)/2;
+	}
 }
