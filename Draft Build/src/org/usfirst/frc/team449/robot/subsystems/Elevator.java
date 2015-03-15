@@ -129,6 +129,7 @@ public class Elevator extends Subsystem {
     
     /**
      * Returns the normalized position of the elevator as specified by the encoder.
+     * accounts for non-zero reading at the bottom of the elevator
      * @return the "position" of the elevator as a double from 0 to 1, 0 being the bottom of the elevator.
      */
     public double getNormalizedPosition(){
@@ -204,11 +205,11 @@ public class Elevator extends Subsystem {
 	}
 
 	/**
-	 * @return the encoder position with units
+	 * @return the encoder position with units (accounts for non-zero reading at the bottom of the elevator)
 	 */
 	public double getEncoderPosition()
 	{
-		return this.motors.getEncoderPosition();
+		return this.motors.getEncoderPosition() - bottomPosition;
 	}
 	
 	/**
