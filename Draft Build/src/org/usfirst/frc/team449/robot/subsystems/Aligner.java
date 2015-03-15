@@ -2,7 +2,7 @@ package org.usfirst.frc.team449.robot.subsystems;
 
 import org.usfirst.frc.team449.robot.Robot;
 import org.usfirst.frc.team449.robot.RobotMap;
-import org.usfirst.frc.team449.robot.commands.IntakeSetPWMVoltage;
+import org.usfirst.frc.team449.robot.commands.AlignerSetPWMVoltage;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -13,18 +13,18 @@ import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * The Intake subsystem.
+ * The Aligner subsystem.
  */
-public class Intake extends Subsystem {
+public class Aligner extends Subsystem {
     
-	// Intake member variables
-	private final DigitalInput intakeLimSwitch;
+	// Aligner member variables
+	private final DigitalInput alignerLimSwitch;
 	
     private final AnalogInput ultrasonic;
 	private final double ultraScale;
 	private final VictorSP ledPWM;
 	
-    private final DoubleSolenoid intakeSol;
+    private final DoubleSolenoid alingerSol;
     
     private boolean isOpen;
     
@@ -32,21 +32,21 @@ public class Intake extends Subsystem {
      * 
      * @param config
      */
-	public Intake(RobotMap config) {
-		System.out.println("Intake init started");
-		intakeLimSwitch 	= new DigitalInput(config.INTAKE_LEFT_LIMIT);
-    	ultrasonic = new AnalogInput(config.INTAKE_ULTRASONIC);
+	public Aligner(RobotMap config) {
+		System.out.println("Aligner init started");
+		alignerLimSwitch 	= new DigitalInput(config.ALIGNER_LEFT_LIMIT);
+    	ultrasonic = new AnalogInput(config.ALIGNER_ULTRASONIC);
     	
-    	this.ledPWM = new VictorSP(Robot.robotMap.INTAKE_LED_PORT);
+    	this.ledPWM = new VictorSP(Robot.robotMap.ALIGNER_LED_PORT);
     	
-    	intakeSol  = new DoubleSolenoid(config.INTAKE_LSOLENOID_FORWARD, config.INTAKE_LSOLENOID_REVERSE);
+    	alingerSol  = new DoubleSolenoid(config.ALIGNER_LSOLENOID_FORWARD, config.ALIGNER_LSOLENOID_REVERSE);
     	
     	isOpen = true;
     	
     	ultraScale = 1; //TODO: actually add the correct calibration
-    	//motorSpeed = config.INTAKE_MOTOR_SPEED;
+    	//motorSpeed = config.ALIGNER_MOTOR_SPEED;
     	this.openArms();
-    	System.out.println("Intake init finished");
+    	System.out.println("Aligner init finished");
 	}
 	
 	
@@ -59,13 +59,13 @@ public class Intake extends Subsystem {
 	}
 	
 	public void openArms() {
-		this.intakeSol.set(Value.kForward);
+		this.alingerSol.set(Value.kForward);
 		this.isOpen = true;
 
 	}
 	
 	public void closeArms() {
-		this.intakeSol.set(Value.kForward);
+		this.alingerSol.set(Value.kForward);
 		this.isOpen = false;
 	}
 		
@@ -77,7 +77,7 @@ public class Intake extends Subsystem {
 	 * @return left limit switch's state
 	 */
 	public boolean getSwitchState() {
-		return intakeLimSwitch.get();
+		return alignerLimSwitch.get();
 	}
 
 	/***
@@ -97,7 +97,7 @@ public class Intake extends Subsystem {
 	}
 	
     public void initDefaultCommand() {	
-    	this.setDefaultCommand(new IntakeSetPWMVoltage());
+    	this.setDefaultCommand(new AlignerSetPWMVoltage());
     }
 }
 

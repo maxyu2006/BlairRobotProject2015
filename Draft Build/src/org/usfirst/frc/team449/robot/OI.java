@@ -6,7 +6,7 @@ import org.usfirst.frc.team449.robot.commands.ElevatorReset;
 import org.usfirst.frc.team449.robot.commands.ArmSetGrabber;
 import org.usfirst.frc.team449.robot.commands.DriveToggleMode;
 import org.usfirst.frc.team449.robot.commands.ElevatorTogglePID;
-import org.usfirst.frc.team449.robot.commands.IntakeSetArms;
+import org.usfirst.frc.team449.robot.commands.AlignerSetArms;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -29,8 +29,8 @@ public class OI {
 	public final JoystickButton elevatorArmOpen;
 	public final JoystickButton elevatorArmClose;
 	public final JoystickButton elevatorResetButton;
-	public final JoystickButton intakeArmsClose;
-	public final JoystickButton intakeArmsOpen;
+	public final JoystickButton alignerArmsClose;
+	public final JoystickButton alignerArmsOpen;
 	public final JoystickButton elevatorPos1;
 	public final JoystickButton elevatorPos2;
 	public final JoystickButton elevatorPos3;
@@ -56,10 +56,10 @@ public class OI {
 		elevatorResetButton = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], 8);
 		elevatorResetButton.whenPressed(new ElevatorReset());
 		
-		intakeArmsClose = new JoystickButton(joysticks[config.INTAKE_JOYSTICK], config.INTAKE_ARMS_CLOSE);
-		intakeArmsClose.whenPressed(new IntakeSetArms(IntakeSetArms.CLOSE));
-		intakeArmsOpen = new JoystickButton(joysticks[config.INTAKE_JOYSTICK], config.INTAKE_ARMS_OPEN);
-		intakeArmsOpen.whenPressed(new IntakeSetArms(IntakeSetArms.OPEN));
+		alignerArmsClose = new JoystickButton(joysticks[config.ALIGNER_JOYSTICK], config.ALIGNER_ARMS_CLOSE);
+		alignerArmsClose.whenPressed(new AlignerSetArms(AlignerSetArms.CLOSE));
+		alignerArmsOpen = new JoystickButton(joysticks[config.ALIGNER_JOYSTICK], config.ALIGNER_ARMS_OPEN);
+		alignerArmsOpen.whenPressed(new AlignerSetArms(AlignerSetArms.OPEN));
 		
 		// temporary
 		elevatorPos1 = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], 2);

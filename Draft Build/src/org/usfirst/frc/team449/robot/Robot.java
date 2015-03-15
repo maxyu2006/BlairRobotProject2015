@@ -4,7 +4,7 @@ import org.usfirst.frc.team449.robot.commands.Auto;
 import org.usfirst.frc.team449.robot.subsystems.Arms;
 import org.usfirst.frc.team449.robot.subsystems.Drive;
 import org.usfirst.frc.team449.robot.subsystems.Elevator;
-import org.usfirst.frc.team449.robot.subsystems.Intake;
+import org.usfirst.frc.team449.robot.subsystems.Aligner;
 
 import com.ni.vision.NIVision;
 import com.ni.vision.NIVision.IMAQdxBufferNumberMode;
@@ -34,7 +34,7 @@ public class Robot extends IterativeRobot {
 	public static final Elevator	elevator	= new Elevator(Robot.robotMap);
 	public static final Arms		elevatorArm	= new Arms(Robot.robotMap);
 	public static final Drive		drive		= new Drive(Robot.robotMap);
-	public static final Intake 		intake		= new Intake(Robot.robotMap);
+	public static final Aligner 		aligner		= new Aligner(Robot.robotMap);
 	
 	public static final OI 			OI 			= new OI(Robot.robotMap);
 	
@@ -101,7 +101,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putBoolean("TopLimit", Robot.elevator.isTouchingTop());
         SmartDashboard.putBoolean("BottomLimit", Robot.elevator.isTouchingBottom());
     
-        SmartDashboard.putBoolean("LeftLimit", Robot.intake.getSwitchState());
+        SmartDashboard.putBoolean("LeftLimit", Robot.aligner.getSwitchState());
         SmartDashboard.putNumber("Left drive encoder", Robot.drive.getLeftDis());
         SmartDashboard.putNumber("Right drive encoder", Robot.drive.getRightDis());
     }

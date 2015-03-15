@@ -3,51 +3,39 @@ package org.usfirst.frc.team449.robot.commands;
 import org.usfirst.frc.team449.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.VictorSP;
 
 /**
- *
+ * Rescales raw ultrasonic voltage and outputs it to the pwm.
  */
-public class IntakeSetArms extends Command {
-	private int armState; 
-	public static final int OPEN = 0;
-	public static final int CLOSE = 1;
-	public static final int TOGGLE = 2;
+public class AlignerSetPWMVoltage extends Command {
 
-    public IntakeSetArms(int setState) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	requires(Robot.intake);
-    	armState = setState;
-        System.out.println("initialized setArmsCommand");
+	private final double v_scale = 2/5;
+
+    public AlignerSetPWMVoltage() {
+    	requires(Robot.aligner);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	switch(this.armState)
-    	{
-    	case OPEN:
-    		Robot.intake.openArms();
-    		break;
-    	case CLOSE:
-    		Robot.intake.closeArms();
-    		break;
-    	default:
-    		System.out.println("You done fucked up");
-    	}
     }
-
+    
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	double output = 0;
+    	
+    	output = (v_scale * Robot.aligner.getUltraRawVoltage()) + -1;
+    	
+    	Robot.aligner.setLED(output);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	new IntakeSetPWMVoltage();
     }
 
     // Called when another command which requires one or more of the same

@@ -165,51 +165,51 @@ public final class RobotMap {
 	 */
 	public final boolean DRIVE_DEFAULT_MODE;
 	
-	//===========================Intake constants========================
+	//===========================Aligner constants========================
 	/**
-	 * Channel for the intake's left limit switch.
+	 * Channel for the aligner's left limit switch.
 	 */
-	public final int INTAKE_LEFT_LIMIT;
+	public final int ALIGNER_LEFT_LIMIT;
 	
 	/**
-	 * Channel for the intake's right limit switch.
+	 * Channel for the aligner's right limit switch.
 	 */
-	public final int INTAKE_RIGHT_LIMIT;
+	public final int ALIGNER_RIGHT_LIMIT;
 	
 	/**
-	 * Channel for the intake's left motor.
+	 * Channel for the aligner's left motor.
 	 */
-	public final int INTAKE_LEFT_MOTOR;
+	public final int ALIGNER_LEFT_MOTOR;
 	
 	/**
-	 * Channel for the intake's right motor.
+	 * Channel for the aligner's right motor.
 	 */
-	public final int INTAKE_RIGHT_MOTOR;
+	public final int ALIGNER_RIGHT_MOTOR;
 	
-	public final int INTAKE_LED_PORT;
-	
-	/**
-	 * left intake forward solenoid channel
-	 */
-	public final int INTAKE_LSOLENOID_FORWARD;
+	public final int ALIGNER_LED_PORT;
 	
 	/**
-	 * left intake reverse solenoid channel
+	 * left aligner forward solenoid channel
 	 */
-	public final int INTAKE_LSOLENOID_REVERSE;
+	public final int ALIGNER_LSOLENOID_FORWARD;
 	
 	/**
-	 * right intake forward solenoid channel
+	 * left aligner reverse solenoid channel
 	 */
-	public final int INTAKE_RSOLENOID_FORWARD;
+	public final int ALIGNER_LSOLENOID_REVERSE;
 	
 	/**
-	 * right intake reverse solenoid channel
+	 * right aligner forward solenoid channel
 	 */
-	public final int INTAKE_RSOLENOID_REVERSE;
+	public final int ALIGNER_RSOLENOID_FORWARD;
+	
+	/**
+	 * right aligner reverse solenoid channel
+	 */
+	public final int ALIGNER_RSOLENOID_REVERSE;
 
-	public final int INTAKE_ULTRASONIC;
-	public final int INTAKE_JOYSTICK;
+	public final int ALIGNER_ULTRASONIC;
+	public final int ALIGNER_JOYSTICK;
 	//===========================Controller Ports/Scheme======================
 	/**
 	 * Joystick usb port for Joystick 0
@@ -273,8 +273,8 @@ public final class RobotMap {
 	
 	public final double DRIVE_CONTROL_SENSITIVITY;
 	
-	public final int INTAKE_ARMS_OPEN;
-	public final int INTAKE_ARMS_CLOSE;
+	public final int ALIGNER_ARMS_OPEN;
+	public final int ALIGNER_ARMS_CLOSE;
 	
 	/**
 	 * 
@@ -339,22 +339,22 @@ public final class RobotMap {
 		this.DRIVE_MAX_RATE = 4;
 		this.DRIVE_DEFAULT_MODE = Drive.MANUAL;
 		
-		//==================================================Intake Constants ==================================================
+		//==================================================Aligner Constants ==================================================
 		
-		this.INTAKE_LEFT_LIMIT = 7;
-		this.INTAKE_RIGHT_LIMIT = 7;
+		this.ALIGNER_LEFT_LIMIT = 7;
+		this.ALIGNER_RIGHT_LIMIT = 7;
 		
-		this.INTAKE_LEFT_MOTOR = 8;
-		this.INTAKE_RIGHT_MOTOR = 8;
-		this.INTAKE_LED_PORT =9;
+		this.ALIGNER_LEFT_MOTOR = 8;
+		this.ALIGNER_RIGHT_MOTOR = 8;
+		this.ALIGNER_LED_PORT =9;
 		
-		this.INTAKE_LSOLENOID_FORWARD = 4;
-		this.INTAKE_LSOLENOID_REVERSE = 5;
+		this.ALIGNER_LSOLENOID_FORWARD = 4;
+		this.ALIGNER_LSOLENOID_REVERSE = 5;
 		
-		this.INTAKE_RSOLENOID_FORWARD = 7;
-		this.INTAKE_RSOLENOID_REVERSE = 6;
+		this.ALIGNER_RSOLENOID_FORWARD = 7;
+		this.ALIGNER_RSOLENOID_REVERSE = 6;
 		
-		this.INTAKE_ULTRASONIC = 0;
+		this.ALIGNER_ULTRASONIC = 0;
 		//==================================================Control Constants ==================================================
 		
 		this.JOYSTICK_0 = 0;
@@ -378,8 +378,8 @@ public final class RobotMap {
 		
 		this.DRIVE_CONTROL_SENSITIVITY = 0.5;
 		
-		this.INTAKE_JOYSTICK = 3;
-		this.INTAKE_ARMS_CLOSE = 1;
-		this.INTAKE_ARMS_OPEN = 2;
+		this.ALIGNER_JOYSTICK = 3;
+		this.ALIGNER_ARMS_CLOSE = 1;
+		this.ALIGNER_ARMS_OPEN = 2;
 	}//end RobotMap()
 }//end class
