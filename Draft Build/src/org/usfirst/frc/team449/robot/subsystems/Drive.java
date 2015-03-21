@@ -128,6 +128,22 @@ public class Drive extends Subsystem {
 		return this.rightEncoder.getDistance();
 	}
 	
+	/**
+	 * 
+	 * @return the left side of the drive train
+	 */
+	public MotorCluster getLeftCluster() {
+		return leftMotors;
+	}
+	
+	/**
+	 * 
+	 * @return the right side of the drive train
+	 */
+	public MotorCluster getRightCluster() {
+		return rightMotors;
+	}
+	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());

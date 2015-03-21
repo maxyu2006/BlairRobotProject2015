@@ -36,7 +36,7 @@ public class Robot extends IterativeRobot {
 	public static final Drive		drive		= new Drive(Robot.robotMap);
 	public static final Aligner 		aligner		= new Aligner(Robot.robotMap);
 	
-	public static final OI 			OI 			= new OI(Robot.robotMap);
+	public static final OI 			oi 			= new OI(Robot.robotMap);
 	
 	public static final Compressor c = new Compressor();
 	
@@ -96,14 +96,21 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         
-        SmartDashboard.putNumber("Encoder position", Robot.elevator.getEncoderPosition());
-
-        SmartDashboard.putBoolean("TopLimit", Robot.elevator.isTouchingTop());
-        SmartDashboard.putBoolean("BottomLimit", Robot.elevator.isTouchingBottom());
-    
-        SmartDashboard.putBoolean("LeftLimit", Robot.aligner.getSwitchState());
-        SmartDashboard.putNumber("Left drive encoder", Robot.drive.getLeftDis());
-        SmartDashboard.putNumber("Right drive encoder", Robot.drive.getRightDis());
+        SmartDashboard.putBoolean("elevator arm", elevatorArm.getArmState());
+        
+        SmartDashboard.putBoolean("stationary arm", aligner.isOpen());
+        
+        SmartDashboard.putBoolean("Drive straight", oi.isDriveStraightMode());
+        
+        SmartDashboard.putBoolean("2 totes", false);
+        SmartDashboard.putBoolean("1 tote", false);
+        SmartDashboard.putBoolean("scoring platform", false);
+        SmartDashboard.putBoolean("bottom", elevator.isTouchingBottom());
+        
+        SmartDashboard.putBoolean("motor 00", false);
+        SmartDashboard.putBoolean("motor 01", false);
+        SmartDashboard.putBoolean("motor 10", false);
+        SmartDashboard.putBoolean("motor 11", false);
     }
     
     /**

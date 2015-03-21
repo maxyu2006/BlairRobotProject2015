@@ -15,7 +15,7 @@ public class DriveToggleMode extends Command {
     }
 
     protected void initialize() {
-    	Robot.drive.setThrottle(Robot.OI.getDriveAxisLeft(), Robot.OI.getDriveAxisRight());
+    	Robot.drive.setThrottle(Robot.oi.getDriveAxisLeft(), Robot.oi.getDriveAxisRight());
 		Robot.drive.toggleControlMode();
     }
 
@@ -31,6 +31,6 @@ public class DriveToggleMode extends Command {
     }
 
     protected void interrupted() {
-    	Robot.drive.setThrottle(Robot.OI.getDriveAxisLeft(), Robot.OI.getDriveAxisRight());
+    	Robot.drive.setThrottle(Robot.oi.getDriveAxisLeft(), Robot.oi.getDriveAxisRight());
     }
 }

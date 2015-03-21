@@ -20,10 +20,10 @@ public class DriveRobot extends Command {
     	double leftThrottle =0;
     	double rightThrottle = 0;
     	
-    	leftThrottle = Robot.OI.getDriveAxisLeft();
-    	rightThrottle = Robot.OI.getDriveAxisRight();
+    	leftThrottle = Robot.oi.getDriveAxisLeft();
+    	rightThrottle = Robot.oi.getDriveAxisRight();
     	
-    	if(Robot.OI.isDriveStraightMode())
+    	if(Robot.oi.isDriveStraightMode())
     	{
     		leftThrottle = rightThrottle;
     	}
@@ -39,6 +39,6 @@ public class DriveRobot extends Command {
     }
 
     protected void interrupted() {
-    	Robot.drive.setThrottle(Robot.OI.getDriveAxisLeft(), Robot.OI.getDriveAxisRight());
+    	Robot.drive.setThrottle(Robot.oi.getDriveAxisLeft(), Robot.oi.getDriveAxisRight());
     }
 }

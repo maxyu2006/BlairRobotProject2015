@@ -32,7 +32,7 @@ public class ElevatorMoveDefault extends Command {
     	if(Robot.elevator.isPIDEnabled()) 
     		return;
     	
-    	double joystickValue = joystick_scale*Robot.OI.getElevatorJoystickAxisY();// arbitrary assignment
+    	double joystickValue = joystick_scale*Robot.oi.getElevatorJoystickAxisY();// arbitrary assignment
     	
     	double motorSetValue = 0;
     	

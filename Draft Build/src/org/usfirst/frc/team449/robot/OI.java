@@ -20,11 +20,11 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
     public final Joystick[] joysticks = new Joystick[4];
 	
-	private final int ELEVATOR_MOVE_JOYSTICK;
-	private final int DRIVE_LEFT_JOYSTICK;
-	private final int DRIVE_RIGHT_JOYSTICK;
+	public final int ELEVATOR_MOVE_JOYSTICK;
+	public final int DRIVE_LEFT_JOYSTICK;
+	public final int DRIVE_RIGHT_JOYSTICK;
 	
-	private final double DRIVE_SENSITIVITY;
+	public final double DRIVE_SENSITIVITY;
 	
 	public final JoystickButton elevatorArmOpen;
 	public final JoystickButton elevatorArmClose;
