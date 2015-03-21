@@ -28,6 +28,19 @@ public class MotorCluster extends Subsystem implements SpeedController {
 	}
 	
 	/**
+	 * Returns an array (parallel to the controller list) where each boolean represents
+	 * whether the controller is working or not.
+	 * @return boolean[] with length equal to that of the controller list
+	 */
+	public boolean[] getFunctioning() {
+		boolean[] working = new boolean[controllerList.size()];
+		for (int i = 0; i < working.length; i++) {
+			working[i] = controllerList.get(i).get() == lastSet;
+		}
+		return working;
+	}
+	
+	/**
 	 * add a motor that will be considered a part of the cluster
 	 * @param controller the motorController
 	 */

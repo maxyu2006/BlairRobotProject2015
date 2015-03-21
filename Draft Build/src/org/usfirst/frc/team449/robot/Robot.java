@@ -107,10 +107,10 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putBoolean("scoring platform", false);
         SmartDashboard.putBoolean("bottom", elevator.isTouchingBottom());
         
-        SmartDashboard.putBoolean("motor 00", false);
-        SmartDashboard.putBoolean("motor 01", false);
-        SmartDashboard.putBoolean("motor 10", false);
-        SmartDashboard.putBoolean("motor 11", false);
+        SmartDashboard.putBoolean("motor 00", drive.getLeftCluster().getFunctioning()[0]);
+        SmartDashboard.putBoolean("motor 01", drive.getLeftCluster().getFunctioning()[1]);
+        SmartDashboard.putBoolean("motor 10", drive.getRightCluster().getFunctioning()[0]);
+        SmartDashboard.putBoolean("motor 11", drive.getRightCluster().getFunctioning()[1]);
     }
     
     /**

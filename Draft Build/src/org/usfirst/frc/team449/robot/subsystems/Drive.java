@@ -43,7 +43,7 @@ public class Drive extends Subsystem {
 	
 	/**
 	 * Initialize the Drive subsystem
-	 * @param config the RobotMap containint all constants
+	 * @param config the RobotMap containing all constants
 	 */
 	public Drive(RobotMap config){
 		System.out.println("Drive init started");
