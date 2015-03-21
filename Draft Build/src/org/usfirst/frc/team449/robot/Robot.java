@@ -1,23 +1,19 @@
 package org.usfirst.frc.team449.robot;
 
 import org.usfirst.frc.team449.robot.commands.Auto;
+import org.usfirst.frc.team449.robot.subsystems.Aligner;
 import org.usfirst.frc.team449.robot.subsystems.Arms;
 import org.usfirst.frc.team449.robot.subsystems.Drive;
 import org.usfirst.frc.team449.robot.subsystems.Elevator;
-import org.usfirst.frc.team449.robot.subsystems.Aligner;
 
-import com.ni.vision.NIVision;
-import com.ni.vision.NIVision.IMAQdxBufferNumberMode;
 import com.ni.vision.NIVision.Image;
 
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.vision.USBCamera;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -102,10 +98,11 @@ public class Robot extends IterativeRobot {
         
         SmartDashboard.putBoolean("Drive straight", oi.isDriveStraightMode());
         
-        SmartDashboard.putBoolean("2 totes", false);
-        SmartDashboard.putBoolean("1 tote", false);
-        SmartDashboard.putBoolean("scoring platform", false);
-        SmartDashboard.putBoolean("bottom", elevator.isTouchingBottom());
+        SmartDashboard.putBoolean("coopertition platform", elevator.getHeight() == elevator.COOPERTITION_HEIGHT);
+        SmartDashboard.putBoolean("2 totes", elevator.getHeight() == elevator.TWO_TOTE_HEIGHT);
+        SmartDashboard.putBoolean("1 tote", elevator.getHeight() == elevator.ONE_TOTE_HEIGHT);
+        SmartDashboard.putBoolean("scoring platform", elevator.getHeight() == elevator.PLATFORM_HEIGHT);
+        SmartDashboard.putBoolean("bottom", elevator.getHeight() == elevator.BOTTOM_HEIGHT);
         
         SmartDashboard.putBoolean("motor 00", drive.getLeftCluster().getFunctioning()[0]);
         SmartDashboard.putBoolean("motor 01", drive.getLeftCluster().getFunctioning()[1]);

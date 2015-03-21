@@ -32,11 +32,19 @@ public class Elevator extends Subsystem {
 	
 	private int controlState;
 	
+	private double height;
+	
 	public static final int MANUAL  	= 0;
 	public static final int PID			= 1;
 	
 	public static final boolean UP = true;
 	public static final boolean DOWN = false;
+	
+	public final double BOTTOM_HEIGHT;
+	public final double ONE_TOTE_HEIGHT;
+	public final double TWO_TOTE_HEIGHT;
+	public final double PLATFORM_HEIGHT;
+	public final double COOPERTITION_HEIGHT;
 	
 	/**
 	 * Elevator constructor
@@ -68,6 +76,15 @@ public class Elevator extends Subsystem {
 		
 		encoder.reset();
 		topPosition = config.ELEVATOR_INITIAL_TOP_COUNT;
+		
+		BOTTOM_HEIGHT = 0;
+		ONE_TOTE_HEIGHT = config.TOTE_GRAB_HEIGHT - config.ELEVATOR_BOTTOM_HEIGHT;
+		TWO_TOTE_HEIGHT = config.TOTE_GRAB_HEIGHT + config.TOTE_HEIGHT - config.ELEVATOR_BOTTOM_HEIGHT;
+		PLATFORM_HEIGHT = config.PLATFORM_HEIGHT + config.TOTE_GRAB_HEIGHT - config.ELEVATOR_BOTTOM_HEIGHT;
+		COOPERTITION_HEIGHT = config.COOPERTITION_HEIGHT + config.TOTE_GRAB_HEIGHT - config.ELEVATOR_BOTTOM_HEIGHT;
+		
+		height = BOTTOM_HEIGHT;
+		
 		System.out.println("Elevator init finished");
 		
 		
@@ -103,6 +120,22 @@ public class Elevator extends Subsystem {
     }
     
     //============================Elevator Field Getters and Setters=======================
+    
+    /**
+     * Gets the height as to be used by the dashboard
+     * @return height - a double equivalent to one of the elevator height constants
+     */
+    public double getHeight() {
+    	return height;
+    }
+    
+    /**
+     * Sets the height as to be used by the dashboard
+     * @param height - one of the height constants in this class
+     */
+    public void setHeight(double height) {
+    	this.height = height;
+    }
     
     /**
      * Returns the setPoint of the elevator, regardless of whether PID mode is enabled.
@@ -205,7 +238,7 @@ public class Elevator extends Subsystem {
 	}
 
 	/**
-	 * @return the encoder position with units (accounts for non-zero reading at the bottom of the elevator)
+	 * @return the encoder position in inches (accounts for non-zero reading at the bottom of the elevator)
 	 */
 	public double getEncoderPosition()
 	{

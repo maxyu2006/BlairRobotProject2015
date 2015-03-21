@@ -1,15 +1,11 @@
 package org.usfirst.frc.team449.robot;
 
-import org.usfirst.frc.team449.robot.commands.ElevatorMoveBangBang;
-import org.usfirst.frc.team449.robot.commands.ElevatorMoveToSetpoint;
-import org.usfirst.frc.team449.robot.commands.ElevatorReset;
-import org.usfirst.frc.team449.robot.commands.ArmSetGrabber;
-import org.usfirst.frc.team449.robot.commands.DriveToggleMode;
-import org.usfirst.frc.team449.robot.commands.ElevatorTogglePID;
 import org.usfirst.frc.team449.robot.commands.AlignerSetArms;
+import org.usfirst.frc.team449.robot.commands.ArmSetGrabber;
+import org.usfirst.frc.team449.robot.commands.ElevatorMoveBangBang;
+import org.usfirst.frc.team449.robot.commands.ElevatorReset;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 
@@ -35,6 +31,7 @@ public class OI {
 	public final JoystickButton elevatorPos2;
 	public final JoystickButton elevatorPos3;
 	public final JoystickButton elevatorPos4;
+	public final JoystickButton elevatorPos5;
 	
 	public OI(RobotMap config)
 	{
@@ -61,18 +58,21 @@ public class OI {
 		alignerArmsOpen = new JoystickButton(joysticks[config.ALIGNER_JOYSTICK], config.ALIGNER_ARMS_OPEN);
 		alignerArmsOpen.whenPressed(new AlignerSetArms(AlignerSetArms.OPEN));
 		
-		// temporary
-		elevatorPos1 = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], 2);
-		elevatorPos1.whenPressed(new ElevatorMoveBangBang(0.25*40));
+		// TEST THESE
+		elevatorPos1 = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], 9);
+		elevatorPos1.whenPressed(new ElevatorMoveBangBang(Robot.elevator.BOTTOM_HEIGHT));
 		
 		elevatorPos2 = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], 4);
-		elevatorPos2.whenPressed(new ElevatorMoveBangBang(0.5*40));
+		elevatorPos2.whenPressed(new ElevatorMoveBangBang(Robot.elevator.PLATFORM_HEIGHT));
 		
-		elevatorPos3 = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], 5);
-		elevatorPos3.whenPressed(new ElevatorMoveBangBang(0.75*40));
+		elevatorPos3 = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], 3);
+		elevatorPos3.whenPressed(new ElevatorMoveBangBang(Robot.elevator.ONE_TOTE_HEIGHT));
 		
-		elevatorPos4 = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], 6);
-		elevatorPos4.whenPressed(new ElevatorMoveBangBang(1*40));
+		elevatorPos4 = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], 2);
+		elevatorPos4.whenPressed(new ElevatorMoveBangBang(Robot.elevator.TWO_TOTE_HEIGHT));
+		
+		elevatorPos5 = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], 1);
+		elevatorPos5.whenPressed(new ElevatorMoveBangBang(Robot.elevator.COOPERTITION_HEIGHT));
 		
 		
 		System.out.println("OI init ended");

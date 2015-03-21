@@ -3,7 +3,6 @@ package org.usfirst.frc.team449.robot.commands;
 import org.usfirst.frc.team449.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *Bang bang control of the elevator
@@ -13,7 +12,7 @@ public class ElevatorMoveBangBang extends Command {
 	private double setpoint;
 	private double throttle;
 	private final double throttle_lim = .75;
-	private final double tolerance = .25;
+	//private final double tolerance = .25;
 	/**
 	 * @param position the desired position in inches
 	 */
@@ -54,6 +53,7 @@ public class ElevatorMoveBangBang extends Command {
     	Robot.elevator.setMotorManual(0);
     	Robot.elevator.activateBrake();
     	new ElevatorMoveDefault();
+    	Robot.elevator.setHeight(setpoint);
     }
 
     protected void interrupted() {

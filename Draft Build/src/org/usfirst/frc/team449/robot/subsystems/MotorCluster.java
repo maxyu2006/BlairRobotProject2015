@@ -2,7 +2,6 @@ package org.usfirst.frc.team449.robot.subsystems;
 
 import java.util.ArrayList;
 
-import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 

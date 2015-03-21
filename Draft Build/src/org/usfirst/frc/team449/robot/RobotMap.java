@@ -9,6 +9,14 @@ import org.usfirst.frc.team449.robot.subsystems.Drive;
  * floating around.
  */
 public final class RobotMap {
+	
+	//===================Physical Height Constants=================
+	
+	public final double TOTE_HEIGHT;
+	public final double TOTE_GRAB_HEIGHT;
+	public final double PLATFORM_HEIGHT;
+	public final double COOPERTITION_HEIGHT;
+	public final double ELEVATOR_BOTTOM_HEIGHT;
 
 	//======================Universal constants====================
 	
@@ -193,7 +201,7 @@ public final class RobotMap {
 	 */
 	public final int ALIGNER_LSOLENOID_FORWARD;
 	
-	/**
+ 	/**
 	 * left aligner reverse solenoid channel
 	 */
 	public final int ALIGNER_LSOLENOID_REVERSE;
@@ -282,6 +290,16 @@ public final class RobotMap {
 	 */
 	public RobotMap(String configFile)
 	{
+		//===================Physical Height Constants=================
+		
+		this.TOTE_HEIGHT = 11.5;
+		this.TOTE_GRAB_HEIGHT = 10;
+		this.PLATFORM_HEIGHT = 7.125 * Math.sin(Math.toRadians(16));
+		this.COOPERTITION_HEIGHT = 6.25;
+		this.ELEVATOR_BOTTOM_HEIGHT = 0;
+
+		//======================Universal constants====================
+		
 		System.out.println("RobotMap");
 		this.DRIVE_ENCODER_CPR = 256;
 		this.ELEVATOR_ENCODER_CPR = 512;
