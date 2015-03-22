@@ -46,11 +46,11 @@ public class OI {
 		this.ELEVATOR_MOVE_JOYSTICK = config.ELEVATOR_MOVE_JOYSTICK;
 		this.DRIVE_SENSITIVITY		= config.DRIVE_CONTROL_SENSITIVITY;
 		
-		elevatorArmOpen = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], config.ELEVATOR_ARMS_OPEN_BUTTON);
+		elevatorArmOpen = new JoystickButton(joysticks[config.ALIGNER_JOYSTICK], config.ELEVATOR_ARMS_OPEN_BUTTON);
 		elevatorArmOpen.whenPressed(new ArmSetGrabber(ArmSetGrabber.OPEN));
-		elevatorArmClose = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], config.ELEVATOR_ARMS_CLOSE_BUTTON);
+		elevatorArmClose = new JoystickButton(joysticks[config.ALIGNER_JOYSTICK], config.ELEVATOR_ARMS_CLOSE_BUTTON);
 		elevatorArmClose.whenPressed(new ArmSetGrabber(ArmSetGrabber.CLOSE));
-		elevatorResetButton = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], 8);
+		elevatorResetButton = new JoystickButton(joysticks[config.ALIGNER_JOYSTICK], 8);
 		elevatorResetButton.whenPressed(new ElevatorReset());
 		
 		alignerArmsClose = new JoystickButton(joysticks[config.ALIGNER_JOYSTICK], config.ALIGNER_ARMS_CLOSE);
@@ -63,13 +63,13 @@ public class OI {
 		elevatorPos1.whenPressed(new ElevatorMoveBangBang(Robot.elevator.BOTTOM_HEIGHT));
 		
 		elevatorPos2 = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], 4);
-		elevatorPos2.whenPressed(new ElevatorMoveBangBang(Robot.elevator.PLATFORM_HEIGHT));
+		elevatorPos2.whenPressed(new ElevatorMoveBangBang(Robot.elevator.ONE_TOTE_HEIGHT));
 		
 		elevatorPos3 = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], 3);
-		elevatorPos3.whenPressed(new ElevatorMoveBangBang(Robot.elevator.ONE_TOTE_HEIGHT));
+		elevatorPos3.whenPressed(new ElevatorMoveBangBang(Robot.elevator.TWO_TOTE_HEIGHT));
 		
 		elevatorPos4 = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], 2);
-		elevatorPos4.whenPressed(new ElevatorMoveBangBang(Robot.elevator.TWO_TOTE_HEIGHT));
+		elevatorPos4.whenPressed(new ElevatorMoveBangBang(Robot.elevator.PLATFORM_HEIGHT));
 		
 		elevatorPos5 = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], 1);
 		elevatorPos5.whenPressed(new ElevatorMoveBangBang(Robot.elevator.COOPERTITION_HEIGHT));

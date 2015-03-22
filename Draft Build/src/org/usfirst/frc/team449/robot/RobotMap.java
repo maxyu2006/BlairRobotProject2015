@@ -397,7 +397,7 @@ public final class RobotMap {
 		this.DRIVE_CONTROL_SENSITIVITY = 0.5;
 		
 		this.ALIGNER_JOYSTICK = 3;
-		this.ALIGNER_ARMS_CLOSE = 1;
+		this.ALIGNER_ARMS_CLOSE = 4;
 		this.ALIGNER_ARMS_OPEN = 2;
 	}//end RobotMap()
 }//end class
