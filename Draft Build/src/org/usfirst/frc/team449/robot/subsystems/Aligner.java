@@ -73,7 +73,7 @@ public class Aligner extends Subsystem {
 	}
 	
 	/**
-	 * @return left limit switch's state
+	 * @return the state of the limit switch on the front of the robot
 	 */
 	public boolean getSwitchState() {
 		return alignerLimSwitch.get();

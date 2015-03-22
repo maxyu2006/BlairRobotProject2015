@@ -1,13 +1,15 @@
-package org.usfirst.frc.team449.robot.commands;
+package org.usfirst.frc.team449.robot.commands.auto;
+
+import org.usfirst.frc.team449.robot.commands.ElevatorReset;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class Auto extends CommandGroup {
+public class AutoMinimal extends CommandGroup {
     
-    public  Auto() {
+    public  AutoMinimal() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
