@@ -23,7 +23,7 @@ public class Aligner extends Subsystem {
 	private final double ultraScale;
 	private final VictorSP ledPWM;
 	
-    private final DoubleSolenoid alingerSol;
+    private final DoubleSolenoid alignerSol;
     
     private boolean isOpen;
     
@@ -38,7 +38,7 @@ public class Aligner extends Subsystem {
     	
     	this.ledPWM = new VictorSP(Robot.robotMap.ALIGNER_LED_PORT);
     	
-    	alingerSol  = new DoubleSolenoid(config.ALIGNER_LSOLENOID_FORWARD, config.ALIGNER_LSOLENOID_REVERSE);
+    	alignerSol  = new DoubleSolenoid(config.ALIGNER_SOLENOID_FORWARD, config.ALIGNER_SOLENOID_REVERSE);
     	
     	isOpen = true;
     	
@@ -58,13 +58,13 @@ public class Aligner extends Subsystem {
 	}
 	
 	public void openArms() {
-		this.alingerSol.set(Value.kForward);
+		this.alignerSol.set(Value.kForward);
 		this.isOpen = true;
 
 	}
 	
 	public void closeArms() {
-		this.alingerSol.set(Value.kForward);
+		this.alignerSol.set(Value.kReverse);
 		this.isOpen = false;
 	}
 		
@@ -76,7 +76,7 @@ public class Aligner extends Subsystem {
 	 * @return the state of the limit switch on the front of the robot
 	 */
 	public boolean getSwitchState() {
-		return alignerLimSwitch.get();
+		return !alignerLimSwitch.get();
 	}
 
 	/***

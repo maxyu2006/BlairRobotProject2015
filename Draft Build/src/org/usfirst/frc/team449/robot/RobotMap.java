@@ -199,25 +199,15 @@ public final class RobotMap {
 	/**
 	 * left aligner forward solenoid channel
 	 */
-	public final int ALIGNER_LSOLENOID_FORWARD;
+	public final int ALIGNER_SOLENOID_FORWARD;
 	
  	/**
 	 * left aligner reverse solenoid channel
 	 */
-	public final int ALIGNER_LSOLENOID_REVERSE;
+	public final int ALIGNER_SOLENOID_REVERSE;
 	
-	/**
-	 * right aligner forward solenoid channel
-	 */
-	public final int ALIGNER_RSOLENOID_FORWARD;
-	
-	/**
-	 * right aligner reverse solenoid channel
-	 */
-	public final int ALIGNER_RSOLENOID_REVERSE;
-
 	public final int ALIGNER_ULTRASONIC;
-	public final int ALIGNER_JOYSTICK;
+	public final int OPERATOR_JOYSTICK;
 	//===========================Controller Ports/Scheme======================
 	/**
 	 * Joystick usb port for Joystick 0
@@ -273,7 +263,7 @@ public final class RobotMap {
 	/**
 	 * 
 	 */
-	public final int ELEVATOR_MOVE_JOYSTICK;
+	public final int CUSTOM_CONTROL;
 	
 	public final int DRIVE_LEFT_JOYSTICK;
 	
@@ -366,11 +356,8 @@ public final class RobotMap {
 		this.ALIGNER_RIGHT_MOTOR = 8;
 		this.ALIGNER_LED_PORT =9;
 		
-		this.ALIGNER_LSOLENOID_FORWARD = 4;
-		this.ALIGNER_LSOLENOID_REVERSE = 5;
-		
-		this.ALIGNER_RSOLENOID_FORWARD = 7;
-		this.ALIGNER_RSOLENOID_REVERSE = 6;
+		this.ALIGNER_SOLENOID_FORWARD = 7;
+		this.ALIGNER_SOLENOID_REVERSE = 6;
 		
 		this.ALIGNER_ULTRASONIC = 0;
 		//==================================================Control Constants ==================================================
@@ -389,14 +376,14 @@ public final class RobotMap {
 		this.ELEVATOR_ARMS_OPEN_BUTTON = 1;
 		this.ELEVATOR_ARMS_CLOSE_BUTTON = 3;
 		
-		this.ELEVATOR_MOVE_JOYSTICK = 2;
+		this.CUSTOM_CONTROL = 2;
 		
 		this.DRIVE_LEFT_JOYSTICK 	= 0;
 		this.DRIVE_RIGHT_JOYSTICK 	= 1;
 		
 		this.DRIVE_CONTROL_SENSITIVITY = 0.5;
 		
-		this.ALIGNER_JOYSTICK = 3;
+		this.OPERATOR_JOYSTICK = 3;
 		this.ALIGNER_ARMS_CLOSE = 4;
 		this.ALIGNER_ARMS_OPEN = 2;
 	}//end RobotMap()

@@ -59,7 +59,7 @@ public class Robot extends IterativeRobot {
 
     public void autonomousInit() {
         // schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
+        if (autonomousCommand != null); //autonomousCommand.start();
     }
 
     /**
@@ -94,7 +94,7 @@ public class Robot extends IterativeRobot {
         
         SmartDashboard.putBoolean("elevator arm", elevatorArm.getArmState());
         
-        SmartDashboard.putBoolean("stationary arm", aligner.isOpen());
+        SmartDashboard.putBoolean("stationary arm", aligner.getSwitchState());
         
         SmartDashboard.putBoolean("Drive straight", oi.isDriveStraightMode());
         
@@ -103,6 +103,12 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putBoolean("1 tote", elevator.getHeight() == elevator.ONE_TOTE_HEIGHT);
         SmartDashboard.putBoolean("scoring platform", elevator.getHeight() == elevator.PLATFORM_HEIGHT);
         SmartDashboard.putBoolean("bottom", elevator.getHeight() == elevator.BOTTOM_HEIGHT);
+        
+        SmartDashboard.putBoolean("bottom limit", elevator.isTouchingBottom());
+        SmartDashboard.putBoolean("top limit", elevator.isTouchingTop());
+        
+        SmartDashboard.putNumber("elev encoder", elevator.getEncoderPosition());
+        SmartDashboard.putNumber("elev count", elevator.getEncoderReading());
         
         SmartDashboard.putBoolean("motor 00", drive.getLeftCluster().getFunctioning()[0]);
         SmartDashboard.putBoolean("motor 01", drive.getLeftCluster().getFunctioning()[1]);

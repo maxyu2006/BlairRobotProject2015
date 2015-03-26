@@ -23,6 +23,7 @@ public class AlignerSetArms extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	System.out.println("eyyy lmao");
     	switch(this.armState)
     	{
     	case OPEN:

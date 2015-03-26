@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
     public final Joystick[] joysticks = new Joystick[4];
 	
-	public final int ELEVATOR_MOVE_JOYSTICK;
+	public final int OPERATOR_JOYSTICK;
 	public final int DRIVE_LEFT_JOYSTICK;
 	public final int DRIVE_RIGHT_JOYSTICK;
 	
@@ -43,35 +43,35 @@ public class OI {
 		
 		this.DRIVE_LEFT_JOYSTICK 	= config.DRIVE_LEFT_JOYSTICK;
 		this.DRIVE_RIGHT_JOYSTICK 	= config.DRIVE_RIGHT_JOYSTICK;
-		this.ELEVATOR_MOVE_JOYSTICK = config.ELEVATOR_MOVE_JOYSTICK;
+		this.OPERATOR_JOYSTICK		= config.OPERATOR_JOYSTICK;
 		this.DRIVE_SENSITIVITY		= config.DRIVE_CONTROL_SENSITIVITY;
 		
-		elevatorArmOpen = new JoystickButton(joysticks[config.ALIGNER_JOYSTICK], config.ELEVATOR_ARMS_OPEN_BUTTON);
+		elevatorArmOpen = new JoystickButton(joysticks[config.OPERATOR_JOYSTICK], 1);
 		elevatorArmOpen.whenPressed(new ArmSetGrabber(ArmSetGrabber.OPEN));
-		elevatorArmClose = new JoystickButton(joysticks[config.ALIGNER_JOYSTICK], config.ELEVATOR_ARMS_CLOSE_BUTTON);
+		elevatorArmClose = new JoystickButton(joysticks[config.OPERATOR_JOYSTICK], 3);
 		elevatorArmClose.whenPressed(new ArmSetGrabber(ArmSetGrabber.CLOSE));
-		elevatorResetButton = new JoystickButton(joysticks[config.ALIGNER_JOYSTICK], 8);
+		elevatorResetButton = new JoystickButton(joysticks[config.OPERATOR_JOYSTICK], 8);
 		elevatorResetButton.whenPressed(new ElevatorReset());
 		
-		alignerArmsClose = new JoystickButton(joysticks[config.ALIGNER_JOYSTICK], config.ALIGNER_ARMS_CLOSE);
+		alignerArmsClose = new JoystickButton(joysticks[config.OPERATOR_JOYSTICK], 4);
 		alignerArmsClose.whenPressed(new AlignerSetArms(AlignerSetArms.CLOSE));
-		alignerArmsOpen = new JoystickButton(joysticks[config.ALIGNER_JOYSTICK], config.ALIGNER_ARMS_OPEN);
+		alignerArmsOpen = new JoystickButton(joysticks[config.OPERATOR_JOYSTICK], 2);
 		alignerArmsOpen.whenPressed(new AlignerSetArms(AlignerSetArms.OPEN));
 		
 		// TEST THESE
-		elevatorPos1 = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], 9);
+		elevatorPos1 = new JoystickButton(joysticks[config.CUSTOM_CONTROL], 9);
 		elevatorPos1.whenPressed(new ElevatorMoveBangBang(Robot.elevator.BOTTOM_HEIGHT));
 		
-		elevatorPos2 = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], 4);
+		elevatorPos2 = new JoystickButton(joysticks[config.CUSTOM_CONTROL], 4);
 		elevatorPos2.whenPressed(new ElevatorMoveBangBang(Robot.elevator.ONE_TOTE_HEIGHT));
 		
-		elevatorPos3 = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], 3);
+		elevatorPos3 = new JoystickButton(joysticks[config.CUSTOM_CONTROL], 3);
 		elevatorPos3.whenPressed(new ElevatorMoveBangBang(Robot.elevator.TWO_TOTE_HEIGHT));
 		
-		elevatorPos4 = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], 2);
+		elevatorPos4 = new JoystickButton(joysticks[config.CUSTOM_CONTROL], 2);
 		elevatorPos4.whenPressed(new ElevatorMoveBangBang(Robot.elevator.PLATFORM_HEIGHT));
 		
-		elevatorPos5 = new JoystickButton(joysticks[this.ELEVATOR_MOVE_JOYSTICK], 1);
+		elevatorPos5 = new JoystickButton(joysticks[config.CUSTOM_CONTROL], 1);
 		elevatorPos5.whenPressed(new ElevatorMoveBangBang(Robot.elevator.COOPERTITION_HEIGHT));
 		
 		
@@ -128,7 +128,7 @@ public class OI {
 
 	public double getElevatorJoystickAxisY() {
 		// negated because pushing the joystick forward should lower the elevator
-		return -joysticks[this.ELEVATOR_MOVE_JOYSTICK].getAxis(Joystick.AxisType.kY);
+		return -joysticks[this.OPERATOR_JOYSTICK].getAxis(Joystick.AxisType.kY);
 	}
 	
 	
