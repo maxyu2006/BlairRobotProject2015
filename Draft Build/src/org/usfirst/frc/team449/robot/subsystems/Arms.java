@@ -33,7 +33,9 @@ public class Arms extends Subsystem {
 		armController  = new DoubleSolenoid(config.ELEVATOR_ARM_SOLENOID_FWD,config.ELEVATOR_ARM_SOLENOID_REV);
 		
 		System.out.println("Solenoids Initialized");
-		armState = ARM_OPEN;
+
+		
+		armState = ARM_CLOSED;
 		armController.set(Value.kForward);
 		
 		System.out.println("Arms init finished");
@@ -46,9 +48,9 @@ public class Arms extends Subsystem {
     public void toggleArms(){
     	
     	if(armState == ARM_OPEN)
-    		armController.set(Value.kReverse);
-    	else
     		armController.set(Value.kForward);
+    	else
+    		armController.set(Value.kReverse);
     	
     	
     	this.armState = !armState;
@@ -59,7 +61,7 @@ public class Arms extends Subsystem {
      * Opens the arms on the grabber
      */
     public void openArms(){
-    	armController.set(Value.kForward);
+    	armController.set(Value.kReverse);
     	armState = ARM_OPEN;
     }
     
@@ -67,7 +69,7 @@ public class Arms extends Subsystem {
      * Closes the arms on the grabber
      */
     public void closeArms(){
-		armController.set(Value.kReverse);
+		armController.set(Value.kForward);
 		armState = ARM_CLOSED;
     }
     
