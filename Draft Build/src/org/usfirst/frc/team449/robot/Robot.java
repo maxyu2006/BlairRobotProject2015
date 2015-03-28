@@ -1,6 +1,7 @@
 package org.usfirst.frc.team449.robot;
 
 import org.usfirst.frc.team449.robot.commands.auto.AutoMinimal;
+import org.usfirst.frc.team449.robot.commands.auto.AutoPickUpOne;
 import org.usfirst.frc.team449.robot.subsystems.Aligner;
 import org.usfirst.frc.team449.robot.subsystems.Arms;
 import org.usfirst.frc.team449.robot.subsystems.Drive;
@@ -8,11 +9,13 @@ import org.usfirst.frc.team449.robot.subsystems.Elevator;
 
 import com.ni.vision.NIVision.Image;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -36,6 +39,7 @@ public class Robot extends IterativeRobot {
 	
 	public static final Compressor c = new Compressor();
 	
+	SendableChooser autoChooser;
 	
 	Command autonomousCommand;
 	
@@ -48,8 +52,20 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
     	System.out.println("Robot Init Started");
+    	
+    	CameraServer.getInstance().setQuality(50);
+    	CameraServer.getInstance().startAutomaticCapture("cam0");
+    	
+    	System.out.println("Camera init");
+    	
 		// instantiate the command used for the autonomous period
-        autonomousCommand = new AutoMinimal();
+//    	autoChooser = new SendableChooser();
+//    	autoChooser.addDefault("Just drive", new AutoMinimal());
+//    	autoChooser.addObject("Pick up bin", new AutoPickUpOne());
+//    	autonomousCommand = new AutoMinimal(); 
+    	autonomousCommand = new AutoPickUpOne();
+//    	SmartDashboard.putData("Auto chooser", autoChooser);
+    	
         c.start();
     }
 	
@@ -58,8 +74,10 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
+    	System.out.println("auto");
         // schedule the autonomous command (example)
-        if (autonomousCommand != null); //autonomousCommand.start();
+//    	autonomousCommand = (Command) autoChooser.getSelected();
+        if (autonomousCommand != null); autonomousCommand.start();
     }
 
     /**
