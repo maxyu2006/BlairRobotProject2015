@@ -16,7 +16,7 @@ public class AutoMinimal extends CommandGroup {
         // these will run in order.
     	
     	addParallel(new ElevatorReset());
-    	addSequential(new AutoDrive(120,5));
+    	addSequential(new AutoDrive(48,5));
     	
         // To run multiple commands at the same time,
         // use addParallel()

@@ -14,14 +14,25 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoPickUpOne extends CommandGroup {
 
     public AutoPickUpOne() {
-        addSequential(new ElevatorReset());		// elevator to bottom
-        addSequential(new DriveUntilContact());	// drive till we hit a tote
-        addSequential(new AlignerSetArms(AlignerSetArms.CLOSE));	// close aligner arms
-        addSequential(new ArmSetGrabber(ArmSetGrabber.CLOSE));		// close elevator arms
-        addSequential(new AlignerSetArms(AlignerSetArms.OPEN));		// open aligner arms
-        addSequential(new ElevatorMoveBangBang(Robot.elevator.ONE_TOTE_HEIGHT));	// pick up the tote a bit
-        addSequential(new AutoTurn(90, 3));	// turn 90 deg clockwise (3 second timeout)
-        addSequential(new AutoDrive(120, 5));	// go 10 feet forward (5 second timeout)
+        addParallel(new ArmSetGrabber(ArmSetGrabber.OPEN));
+        addParallel(new AlignerSetArms(AlignerSetArms.OPEN));
+    	addSequential(new ElevatorReset());		// elevator to bottom
+    	
+    	addSequential(new AutoDelay(1));
+        
+    	//addSequential(new DriveUntilContact());	// drive till we hit a tote
+        //addSequential(new AlignerSetArms(AlignerSetArms.CLOSE));	// close aligner arms
+        
+    	addSequential(new ArmSetGrabber(ArmSetGrabber.CLOSE));		// close elevator arms
+        //addSequential(new AlignerSetArms(AlignerSetArms.OPEN));		// open aligner arms
+        addSequential(new AutoDelay(1));
+        
+    	addSequential(new ElevatorMoveBangBang(2));	// pick up the bin a bit
+    	addSequential(new AutoDelay(.5));
+    	addSequential(new AutoDrive(-38,5)); // drive foward
+//    	addSequential(new AutoDrive(54,5)); // drive foward to get over scoring platform
+    	
+
     }
 
 }
