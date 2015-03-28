@@ -286,7 +286,7 @@ public final class RobotMap {
 		this.TOTE_GRAB_HEIGHT = 10;
 		this.PLATFORM_HEIGHT = 7.125 * Math.sin(Math.toRadians(16));
 		this.COOPERTITION_HEIGHT = 6.25;
-		this.ELEVATOR_BOTTOM_HEIGHT = 0;
+		this.ELEVATOR_BOTTOM_HEIGHT = 9.5;
 
 		//======================Universal constants====================
 		
