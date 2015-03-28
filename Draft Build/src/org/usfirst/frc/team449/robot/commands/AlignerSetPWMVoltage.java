@@ -23,7 +23,7 @@ public class AlignerSetPWMVoltage extends Command {
     protected void execute() {
     	double output = 0;
     	
-    	output = (v_scale * Robot.aligner.getUltraRawVoltage()) + -1;
+    	//output = (v_scale * Robot.aligner.getUltraRawVoltage()) + -1;
     	
     	Robot.aligner.setLED(output);
     }
