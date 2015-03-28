@@ -19,7 +19,7 @@ public class Aligner extends Subsystem {
 	// Aligner member variables
 	private final DigitalInput alignerLimSwitch;
 	
-    private final AnalogInput ultrasonic;
+    //private final AnalogInput ultrasonic;
 	private final double ultraScale;
 	private final VictorSP ledPWM;
 	
@@ -34,7 +34,7 @@ public class Aligner extends Subsystem {
 	public Aligner(RobotMap config) {
 		System.out.println("Aligner init started");
 		alignerLimSwitch 	= new DigitalInput(config.ALIGNER_LEFT_LIMIT);
-    	ultrasonic = new AnalogInput(config.ALIGNER_ULTRASONIC);
+    	//ultrasonic = new AnalogInput(config.ALIGNER_ULTRASONIC);
     	
     	this.ledPWM = new VictorSP(Robot.robotMap.ALIGNER_LED_PORT);
     	
@@ -83,17 +83,17 @@ public class Aligner extends Subsystem {
 	 * returns the raw voltage from the ultrasonic sensor
 	 * @return
 	 */
-	public double getUltraRawVoltage(){
+	/*public double getUltraRawVoltage(){
 		return this.ultrasonic.getVoltage();
-	}
+	}*/
 	
 	/**
 	 * gets the distance in inches of a target from the ultrasonic sensor
 	 * @return
 	 */
-	public double getUltraDistance(){
+	/*public double getUltraDistance(){
 		return this.ultrasonic.getVoltage()*ultraScale;
-	}
+	}*/
 	
     public void initDefaultCommand() {	
     	this.setDefaultCommand(new AlignerSetPWMVoltage());
