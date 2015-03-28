@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ElevatorMoveDefault extends Command {
 	
 	private final double deadband = .1; //deadband for joystick response
-	private final double joystick_scale =1; //assumes joystick vals are -1 to 1;
+	private double joystick_scale =1; //assumes joystick vals are -1 to 1;
 	
 	
     public ElevatorMoveDefault() {
@@ -30,6 +30,11 @@ public class ElevatorMoveDefault extends Command {
     protected void execute() {
     	if(Robot.elevator.isPIDEnabled()) 
     		return;
+    	
+    	if (Robot.oi.isElevatorThrottleSlow())
+    		joystick_scale = 0.75;
+    	else
+    		joystick_scale = 1;
     	
     	double joystickValue = joystick_scale*Robot.oi.getElevatorJoystickAxisY();// arbitrary assignment
     	

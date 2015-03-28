@@ -25,6 +25,7 @@ public class OI {
 	public final JoystickButton elevatorArmOpen;
 	public final JoystickButton elevatorArmClose;
 	public final JoystickButton elevatorResetButton;
+	public final JoystickButton elevatorSpeedDown;
 	public final JoystickButton alignerArmsClose;
 	public final JoystickButton alignerArmsOpen;
 	public final JoystickButton elevatorPos1;
@@ -46,12 +47,13 @@ public class OI {
 		this.OPERATOR_JOYSTICK		= config.OPERATOR_JOYSTICK;
 		this.DRIVE_SENSITIVITY		= config.DRIVE_CONTROL_SENSITIVITY;
 		
-		elevatorArmOpen = new JoystickButton(joysticks[config.OPERATOR_JOYSTICK], 1);
+		elevatorArmOpen = new JoystickButton(joysticks[config.OPERATOR_JOYSTICK], 3);
 		elevatorArmOpen.whenPressed(new ArmSetGrabber(ArmSetGrabber.OPEN));
-		elevatorArmClose = new JoystickButton(joysticks[config.OPERATOR_JOYSTICK], 3);
+		elevatorArmClose = new JoystickButton(joysticks[config.OPERATOR_JOYSTICK], 1);
 		elevatorArmClose.whenPressed(new ArmSetGrabber(ArmSetGrabber.CLOSE));
 		elevatorResetButton = new JoystickButton(joysticks[config.OPERATOR_JOYSTICK], 8);
 		elevatorResetButton.whenPressed(new ElevatorReset());
+		elevatorSpeedDown = new JoystickButton(joysticks[config.OPERATOR_JOYSTICK], 5);
 		
 		alignerArmsClose = new JoystickButton(joysticks[config.OPERATOR_JOYSTICK], 4);
 		alignerArmsClose.whenPressed(new AlignerSetArms(AlignerSetArms.CLOSE));
@@ -76,6 +78,10 @@ public class OI {
 		
 		
 		System.out.println("OI init ended");
+	}
+	
+	public boolean isElevatorThrottleSlow() {
+		return elevatorSpeedDown.get();
 	}
 	
 	/**
