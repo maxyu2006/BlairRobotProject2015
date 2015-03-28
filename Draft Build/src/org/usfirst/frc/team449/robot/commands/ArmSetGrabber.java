@@ -48,6 +48,7 @@ public class ArmSetGrabber extends Command {
     }
 
     protected void end() {
+    	System.out.println("arm set grabber did: "+armState);
     }
 
     protected void interrupted() {
