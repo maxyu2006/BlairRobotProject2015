@@ -15,34 +15,33 @@ public class AutoTurn extends Command {
 	 * throttle for the left. negate this for the right
 	 */
 	private double throttle;
+	
 	/**
 	 * angle to turn to, in radians
 	 */
 	private double angle;
 	private double setpoint;
-	private double currentAngle;
 	private double initTim;
 	private double timeLim;
 	private boolean isClockwise;
-	private final double throttle_limit = .5; // Arbitrary throttle limit
+	private final double throttle_limit = .3; // Arbitrary throttle limit
 	private Timer t;// timer for time checking
 	private double ltenc;
 	private double rtenc;
 
 	/**
-	 * Diamater of rotation of robot.
+	 * Diamater of rotation of robot in inches
 	 */
 	public static double DIAMATER = 24.5;
 
 
 	/**
 	 * 
-	 * @param angle positive is clockwise, in degrees
+	 * @param angle positive is clockwise, in degrees (only tested for 90 and -90), converted to radians for storing and comparing
 	 */
 	public AutoTurn(double angle, double time) {
 		requires(Robot.drive);
 		this.angle = angle*Math.PI/180;
-		this.currentAngle = 0;
 		this.initTim = time;
 		Robot.drive.setControlMode(Drive.MANUAL);
 	}
@@ -66,11 +65,11 @@ public class AutoTurn extends Command {
 		t = new Timer();
 		t.reset();
 		t.start();
+		Robot.drive.setThrottle(throttle, -throttle);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.drive.setThrottle(throttle, -throttle);
 		System.out.println(Robot.drive.getLeftDis() +" "+Robot.drive.getRightDis());
 	}
 
@@ -108,8 +107,8 @@ public class AutoTurn extends Command {
 	 */
 	private double getAngle() {
 		double lt = Robot.drive.getLeftDis() - ltenc;
-		double rt = Robot.drive.getLeftDis() - rtenc;
+		double rt = -(Robot.drive.getLeftDis() - rtenc); // since rt should be just about -lt... 
 		double radius = DIAMATER/2;
-		return ((lt+rt)/2)/radius;
+		return ((lt+rt)/2)/radius; // average of arc lengths / diameter should be and in radians
 	}
 }
