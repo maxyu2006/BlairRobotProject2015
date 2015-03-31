@@ -20,7 +20,8 @@ public class OI {
 	public final int DRIVE_LEFT_JOYSTICK;
 	public final int DRIVE_RIGHT_JOYSTICK;
 	
-	public final double DRIVE_SENSITIVITY;
+	public double DRIVE_SENSITIVITY_FAST;
+	public double DRIVE_SENSITIVITY_SLOW;
 	
 	public final JoystickButton elevatorArmOpen;
 	public final JoystickButton elevatorArmClose;
@@ -45,7 +46,8 @@ public class OI {
 		this.DRIVE_LEFT_JOYSTICK 	= config.DRIVE_LEFT_JOYSTICK;
 		this.DRIVE_RIGHT_JOYSTICK 	= config.DRIVE_RIGHT_JOYSTICK;
 		this.OPERATOR_JOYSTICK		= config.OPERATOR_JOYSTICK;
-		this.DRIVE_SENSITIVITY		= config.DRIVE_CONTROL_SENSITIVITY;
+		this.DRIVE_SENSITIVITY_FAST	= config.DRIVE_CONTROL_SENSITIVITY_FAST;
+		this.DRIVE_SENSITIVITY_SLOW	= config.DRIVE_CONTROL_SENSITIVITY_SLOW;
 		
 		elevatorArmOpen = new JoystickButton(joysticks[config.OPERATOR_JOYSTICK], 3);
 		elevatorArmOpen.whenPressed(new ArmSetGrabber(ArmSetGrabber.OPEN));
@@ -91,7 +93,9 @@ public class OI {
 	public double getDriveAxisLeft()
 	{
 		//inverted due to joystick direction
-		return -this.DRIVE_SENSITIVITY*this.joysticks[this.DRIVE_LEFT_JOYSTICK].getAxis(Joystick.AxisType.kY);
+		if(this.isDriveSlowMode())
+			return -this.DRIVE_SENSITIVITY_SLOW*this.joysticks[this.DRIVE_LEFT_JOYSTICK].getAxis(Joystick.AxisType.kY);
+		return -this.DRIVE_SENSITIVITY_FAST*this.joysticks[this.DRIVE_LEFT_JOYSTICK].getAxis(Joystick.AxisType.kY);
 	}
 	
 	/**
@@ -101,7 +105,9 @@ public class OI {
 	public double getDriveAxisRight()
 	{
 		//inverted due to joystick direction
-		return -this.DRIVE_SENSITIVITY*this.joysticks[this.DRIVE_RIGHT_JOYSTICK].getAxis(Joystick.AxisType.kY);
+		if(this.isDriveSlowMode())
+			return -this.DRIVE_SENSITIVITY_SLOW*this.joysticks[this.DRIVE_RIGHT_JOYSTICK].getAxis(Joystick.AxisType.kY);
+		return -this.DRIVE_SENSITIVITY_FAST*this.joysticks[this.DRIVE_RIGHT_JOYSTICK].getAxis(Joystick.AxisType.kY);
 	}
 	
 	/**
@@ -112,6 +118,15 @@ public class OI {
 	{
 		return (this.joysticks[this.DRIVE_RIGHT_JOYSTICK].getTrigger()||this.joysticks[this.DRIVE_LEFT_JOYSTICK].getTrigger());
 	}
+	
+	/**
+	 * sees if drives are requesting drive to be slow
+	 * @return
+	 */
+	public boolean isDriveSlowMode() {
+		return (this.joysticks[this.DRIVE_RIGHT_JOYSTICK].getTop()||this.joysticks[this.DRIVE_LEFT_JOYSTICK].getTop());
+	}
+	
 	/**
 	 * 
 	 * @param joystick

@@ -268,8 +268,9 @@ public final class RobotMap {
 	public final int DRIVE_LEFT_JOYSTICK;
 	
 	public final int DRIVE_RIGHT_JOYSTICK;
-	
-	public final double DRIVE_CONTROL_SENSITIVITY;
+
+	public final double DRIVE_CONTROL_SENSITIVITY_FAST;
+	public final double DRIVE_CONTROL_SENSITIVITY_SLOW;
 	
 	public final int ALIGNER_ARMS_OPEN;
 	public final int ALIGNER_ARMS_CLOSE;
@@ -381,7 +382,8 @@ public final class RobotMap {
 		this.DRIVE_LEFT_JOYSTICK 	= 0;
 		this.DRIVE_RIGHT_JOYSTICK 	= 1;
 		
-		this.DRIVE_CONTROL_SENSITIVITY = 0.5;
+		this.DRIVE_CONTROL_SENSITIVITY_FAST = 0.5;
+		this.DRIVE_CONTROL_SENSITIVITY_SLOW = 0.25;
 		
 		this.OPERATOR_JOYSTICK = 3;
 		this.ALIGNER_ARMS_CLOSE = 4;
