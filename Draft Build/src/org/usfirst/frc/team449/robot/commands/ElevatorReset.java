@@ -25,7 +25,7 @@ public class ElevatorReset extends Command {
     protected void initialize() {
     	Robot.elevator.releaseBrake();
     	Robot.elevator.disablePID();			// switch to manual mode (turn PID off)
-    	Robot.elevator.setMotorManual(0.3);	// drive back at a constant 15%
+    	Robot.elevator.setMotorManual(0.5);	// drive back at a constant 15%
     	t.start();								// start the runtime timer
     }
 

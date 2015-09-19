@@ -17,7 +17,7 @@ public class DriveRobot extends Command {
     }
 
     protected void execute() {
-    	double leftThrottle =0;
+    	double leftThrottle = 0;
     	double rightThrottle = 0;
     	
     	leftThrottle = Robot.oi.getDriveAxisLeft();
@@ -27,7 +27,7 @@ public class DriveRobot extends Command {
     	{
     		leftThrottle = rightThrottle;
     	}
-    	//pushing forward on the stick gives -1 so it is negated
+    	//pushing forward on the stick gives -1 so it is negated, or is it?
     	Robot.drive.setThrottle(leftThrottle, rightThrottle);
     }
 

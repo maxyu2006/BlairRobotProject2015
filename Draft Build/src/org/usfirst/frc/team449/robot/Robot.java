@@ -1,5 +1,6 @@
 package org.usfirst.frc.team449.robot;
 
+import org.usfirst.frc.team449.robot.commands.auto.AutoDoNothing;
 import org.usfirst.frc.team449.robot.commands.auto.AutoMinimal;
 import org.usfirst.frc.team449.robot.commands.auto.AutoPickUpOne;
 import org.usfirst.frc.team449.robot.subsystems.Aligner;
@@ -28,14 +29,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
 	//sometime should check if these could be made private
-	public static final RobotMap robotMap = new RobotMap("config.txt");
 	
-	public static final Elevator	elevator	= new Elevator(Robot.robotMap);
-	public static final Arms		elevatorArm	= new Arms(Robot.robotMap);
-	public static final Drive		drive		= new Drive(Robot.robotMap);
-	public static final Aligner 	aligner		= new Aligner(Robot.robotMap);
+	public static final Elevator	elevator	= new Elevator();
+	public static final Arms		elevatorArm	= new Arms();
+	public static final Drive		drive		= new Drive();
+	public static final Aligner 	aligner		= new Aligner();
 	
-	public static final OI 			oi 			= new OI(Robot.robotMap);
+	public static final OI 			oi 			= new OI();
 	
 	public static final Compressor c = new Compressor();
 	
@@ -60,11 +60,15 @@ public class Robot extends IterativeRobot {
     	
 		// instantiate the command used for the autonomous period
 //    	autoChooser = new SendableChooser();
-//    	autoChooser.addDefault("Just drive", new AutoMinimal());
-//    	autoChooser.addObject("Pick up bin", new AutoPickUpOne());
+//    	autoChooser.addDefault("Bin clear path", new AutoPickUpOne(false, false));
+//    	autoChooser.addObject("Bin clear path and drop", new AutoPickUpOne(false, true));
+//    	autoChooser.addObject("Bin over platform", new AutoPickUpOne(true, false));
+//    	autoChooser.addObject("Just drive clear path", new AutoMinimal(false));
+//    	autoChooser.addObject("Just drive over platform", new AutoMinimal(true));
+//    	autoChooser.addObject("Do nothing", new AutoDoNothing());
 //    	autonomousCommand = new AutoMinimal(); 
-    	autonomousCommand = new AutoPickUpOne();
-//    	SmartDashboard.putData("Auto chooser", autoChooser);
+//    	autonomousCommand = new AutoPickUpOne();
+    	SmartDashboard.putData("Auto chooser", autoChooser);
     	
         c.start();
     }
@@ -76,7 +80,7 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
     	System.out.println("auto");
         // schedule the autonomous command (example)
-//    	autonomousCommand = (Command) autoChooser.getSelected();
+    	autonomousCommand = (Command) autoChooser.getSelected();
         if (autonomousCommand != null); autonomousCommand.start();
     }
 

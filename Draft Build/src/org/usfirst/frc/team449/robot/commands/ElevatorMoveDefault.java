@@ -17,7 +17,7 @@ public class ElevatorMoveDefault extends Command {
 	
 	private final double deadband = .1; //deadband for joystick response
 	private double joystick_scale =1; //assumes joystick vals are -1 to 1;
-	
+	private double slow_mode = .5;
 	
     public ElevatorMoveDefault() {
     	requires(Robot.elevator);
@@ -32,7 +32,7 @@ public class ElevatorMoveDefault extends Command {
     		return;
     	
     	if (Robot.oi.isElevatorThrottleSlow())
-    		joystick_scale = 0.75;
+    		joystick_scale = 0.5;
     	else
     		joystick_scale = 1;
     	

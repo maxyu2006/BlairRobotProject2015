@@ -13,10 +13,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class AutoPickUpOne extends CommandGroup {
 
-    public AutoPickUpOne() {
+    public AutoPickUpOne(boolean driveOverPlatform, boolean putDownBin) {
         addParallel(new ArmSetGrabber(ArmSetGrabber.OPEN));
         addParallel(new AlignerSetArms(AlignerSetArms.OPEN));
-    	addSequential(new ElevatorReset());		// elevator to bottom
+    	//addSequential(new ElevatorReset());		// elevator to bottom
     	
     	addSequential(new AutoDelay(1));
         
@@ -27,12 +27,19 @@ public class AutoPickUpOne extends CommandGroup {
         //addSequential(new AlignerSetArms(AlignerSetArms.OPEN));		// open aligner arms
         addSequential(new AutoDelay(1));
         
-    	addSequential(new ElevatorMoveBangBang(2));	// pick up the bin a bit
+    	addSequential(new ElevatorMoveBangBang(5,.5));	// pick up the bin a bit
     	addSequential(new AutoDelay(.5));
-    	addSequential(new AutoDrive(-38,5)); // drive foward
-//    	addSequential(new AutoDrive(54,5)); // drive foward to get over scoring platform
+    	if (driveOverPlatform)
+        	addSequential(new AutoDrive(-54,5)); // drive foward to get over scoring platform
+    	else
+    		addSequential(new AutoDrive(-42,5)); // drive foward
     	
-
+    	if (putDownBin) {
+    		addSequential(new AutoDelay(1));
+    		addSequential(new ElevatorMoveBangBang(0, .5));			// move elevator to "bottom"
+    		addSequential(new AutoDelay(1));
+    		addSequential(new ArmSetGrabber(ArmSetGrabber.OPEN));	// and open the arms
+    	}
     }
 
 }

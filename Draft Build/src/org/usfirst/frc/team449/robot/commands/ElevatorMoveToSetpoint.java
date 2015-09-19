@@ -23,7 +23,7 @@ public class ElevatorMoveToSetpoint extends Command {
 
     protected void initialize() {
     	
-    	double calculatedSetpoint = setpoint - Robot.elevator.getBottomPosition();
+    	double calculatedSetpoint = setpoint + Robot.elevator.getBottomPosition();
     	SmartDashboard.putNumber("calculatedSetpoint", calculatedSetpoint);
     	
     	if(Robot.elevator.isPIDEnabled()){
@@ -62,6 +62,7 @@ public class ElevatorMoveToSetpoint extends Command {
     	if(Robot.elevator.isTouchingBottom() || Robot.elevator.isTouchingTop())//if a limit was reached, set to manual mode to prevent possible future damage
     	{
     		Robot.elevator.disablePID();
+    		Robot.elevator.setMotorManual(0);
     		System.err.println("PID elevator control exceeded elevator limits");
     	}
     	Robot.elevator.activateBrake();

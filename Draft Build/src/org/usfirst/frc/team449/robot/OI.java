@@ -2,7 +2,9 @@ package org.usfirst.frc.team449.robot;
 
 import org.usfirst.frc.team449.robot.commands.AlignerSetArms;
 import org.usfirst.frc.team449.robot.commands.ArmSetGrabber;
-import org.usfirst.frc.team449.robot.commands.ElevatorMoveBangBang;
+import org.usfirst.frc.team449.robot.commands.ElevatorEstop;
+import org.usfirst.frc.team449.robot.commands.ElevatorMoveOne;
+import org.usfirst.frc.team449.robot.commands.ElevatorMoveTwo;
 import org.usfirst.frc.team449.robot.commands.ElevatorReset;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -14,11 +16,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-    public final Joystick[] joysticks = new Joystick[4];
 	
-	public final int OPERATOR_JOYSTICK;
-	public final int DRIVE_LEFT_JOYSTICK;
-	public final int DRIVE_RIGHT_JOYSTICK;
+	public final Joystick operatorJoystick, customControlJoystick, driveLeftJoystick, driveRightJoystick;
 	
 	public double DRIVE_SENSITIVITY_FAST;
 	public double DRIVE_SENSITIVITY_SLOW;
@@ -32,52 +31,49 @@ public class OI {
 	public final JoystickButton elevatorPos1;
 	public final JoystickButton elevatorPos2;
 	public final JoystickButton elevatorPos3;
-	public final JoystickButton elevatorPos4;
-	public final JoystickButton elevatorPos5;
+//	public final JoystickButton elevatorPos4;
+//	public final JoystickButton elevatorPos5;
+	public final JoystickButton elevatorEstop;
 	
-	public OI(RobotMap config)
+	public OI()
 	{
 		System.out.println("OI init started");
-		joysticks[0] = new Joystick(config.JOYSTICK_0);
-		joysticks[1] = new Joystick(config.JOYSTICK_1);
-		joysticks[2] = new Joystick(config.JOYSTICK_2);
-		joysticks[3] = new Joystick(config.JOYSTICK_3);
+		driveLeftJoystick = new Joystick(RobotMap.DRIVE_LEFT_JOYSTICK);
+		driveRightJoystick = new Joystick(RobotMap.DRIVE_RIGHT_JOYSTICK);
+		operatorJoystick = new Joystick(RobotMap.OPERATOR_JOYSTICK);
+		customControlJoystick = new Joystick(RobotMap.CUSTOM_CONTROL);
 		
-		this.DRIVE_LEFT_JOYSTICK 	= config.DRIVE_LEFT_JOYSTICK;
-		this.DRIVE_RIGHT_JOYSTICK 	= config.DRIVE_RIGHT_JOYSTICK;
-		this.OPERATOR_JOYSTICK		= config.OPERATOR_JOYSTICK;
-		this.DRIVE_SENSITIVITY_FAST	= config.DRIVE_CONTROL_SENSITIVITY_FAST;
-		this.DRIVE_SENSITIVITY_SLOW	= config.DRIVE_CONTROL_SENSITIVITY_SLOW;
-		
-		elevatorArmOpen = new JoystickButton(joysticks[config.OPERATOR_JOYSTICK], 3);
+		elevatorArmOpen = new JoystickButton(operatorJoystick, RobotMap.ELEVATOR_ARMS_OPEN_BUTTON);
 		elevatorArmOpen.whenPressed(new ArmSetGrabber(ArmSetGrabber.OPEN));
-		elevatorArmClose = new JoystickButton(joysticks[config.OPERATOR_JOYSTICK], 1);
+		elevatorArmClose = new JoystickButton(operatorJoystick, RobotMap.ELEVATOR_ARMS_CLOSE_BUTTON);
 		elevatorArmClose.whenPressed(new ArmSetGrabber(ArmSetGrabber.CLOSE));
-		elevatorResetButton = new JoystickButton(joysticks[config.OPERATOR_JOYSTICK], 8);
+		elevatorResetButton = new JoystickButton(operatorJoystick, RobotMap.ELEVATOR_RESET_BUTTON);
 		elevatorResetButton.whenPressed(new ElevatorReset());
-		elevatorSpeedDown = new JoystickButton(joysticks[config.OPERATOR_JOYSTICK], 5);
+		elevatorSpeedDown = new JoystickButton(operatorJoystick, RobotMap.ELEVATOR_SLOW_BUTTON);
 		
-		alignerArmsClose = new JoystickButton(joysticks[config.OPERATOR_JOYSTICK], 4);
+		alignerArmsClose = new JoystickButton(operatorJoystick, RobotMap.ALIGNER_ARMS_CLOSE);
 		alignerArmsClose.whenPressed(new AlignerSetArms(AlignerSetArms.CLOSE));
-		alignerArmsOpen = new JoystickButton(joysticks[config.OPERATOR_JOYSTICK], 2);
+		alignerArmsOpen = new JoystickButton(operatorJoystick, RobotMap.ALIGNER_ARMS_OPEN);
 		alignerArmsOpen.whenPressed(new AlignerSetArms(AlignerSetArms.OPEN));
 		
 		// TEST THESE
-		elevatorPos1 = new JoystickButton(joysticks[config.CUSTOM_CONTROL], 9);
-		elevatorPos1.whenPressed(new ElevatorMoveBangBang(Robot.elevator.BOTTOM_HEIGHT));
+		elevatorPos1 = new JoystickButton(customControlJoystick, 9);
+		elevatorPos1.whenPressed(new ElevatorReset());
 		
-		elevatorPos2 = new JoystickButton(joysticks[config.CUSTOM_CONTROL], 4);
-		elevatorPos2.whenPressed(new ElevatorMoveBangBang(Robot.elevator.ONE_TOTE_HEIGHT));
+		elevatorPos2 = new JoystickButton(customControlJoystick, 4);
+		elevatorPos2.whenPressed(new ElevatorMoveOne());
 		
-		elevatorPos3 = new JoystickButton(joysticks[config.CUSTOM_CONTROL], 3);
-		elevatorPos3.whenPressed(new ElevatorMoveBangBang(Robot.elevator.TWO_TOTE_HEIGHT));
+		elevatorPos3 = new JoystickButton(customControlJoystick, 3);
+		elevatorPos3.whenPressed(new ElevatorMoveTwo());
 		
-		elevatorPos4 = new JoystickButton(joysticks[config.CUSTOM_CONTROL], 2);
-		elevatorPos4.whenPressed(new ElevatorMoveBangBang(Robot.elevator.PLATFORM_HEIGHT));
+//		elevatorPos4 = new JoystickButton(customControlJoystick, 2);
+//		elevatorPos4.whenPressed(new ElevatorMoveBangBang(Robot.elevator.PLATFORM_HEIGHT));
+//		
+//		elevatorPos5 = new JoystickButton(customControlJoystick, 1);
+//		elevatorPos5.whenPressed(new ElevatorMoveBangBang(Robot.elevator.COOPERTITION_HEIGHT));
 		
-		elevatorPos5 = new JoystickButton(joysticks[config.CUSTOM_CONTROL], 1);
-		elevatorPos5.whenPressed(new ElevatorMoveBangBang(Robot.elevator.COOPERTITION_HEIGHT));
-		
+		elevatorEstop = new JoystickButton(customControlJoystick, 1);
+		elevatorEstop.whenPressed(new ElevatorEstop());
 		
 		System.out.println("OI init ended");
 	}
@@ -93,9 +89,9 @@ public class OI {
 	public double getDriveAxisLeft()
 	{
 		//inverted due to joystick direction
-		if(this.isDriveSlowMode())
-			return -this.DRIVE_SENSITIVITY_SLOW*this.joysticks[this.DRIVE_LEFT_JOYSTICK].getAxis(Joystick.AxisType.kY);
-		return -this.DRIVE_SENSITIVITY_FAST*this.joysticks[this.DRIVE_LEFT_JOYSTICK].getAxis(Joystick.AxisType.kY);
+		if(isDriveSlowMode())
+			return -DRIVE_SENSITIVITY_SLOW*driveLeftJoystick.getAxis(Joystick.AxisType.kY);
+		return -DRIVE_SENSITIVITY_FAST*driveLeftJoystick.getAxis(Joystick.AxisType.kY);
 	}
 	
 	/**
@@ -105,9 +101,9 @@ public class OI {
 	public double getDriveAxisRight()
 	{
 		//inverted due to joystick direction
-		if(this.isDriveSlowMode())
-			return -this.DRIVE_SENSITIVITY_SLOW*this.joysticks[this.DRIVE_RIGHT_JOYSTICK].getAxis(Joystick.AxisType.kY);
-		return -this.DRIVE_SENSITIVITY_FAST*this.joysticks[this.DRIVE_RIGHT_JOYSTICK].getAxis(Joystick.AxisType.kY);
+		if(isDriveSlowMode())
+			return -DRIVE_SENSITIVITY_SLOW*driveRightJoystick.getAxis(Joystick.AxisType.kY);
+		return -DRIVE_SENSITIVITY_FAST*driveRightJoystick.getAxis(Joystick.AxisType.kY);
 	}
 	
 	/**
@@ -116,15 +112,15 @@ public class OI {
 	 */
 	public boolean isDriveStraightMode()
 	{
-		return (this.joysticks[this.DRIVE_RIGHT_JOYSTICK].getTrigger()||this.joysticks[this.DRIVE_LEFT_JOYSTICK].getTrigger());
+		return (driveRightJoystick.getTrigger());
 	}
 	
 	/**
 	 * sees if drives are requesting drive to be slow
-	 * @return
+	 * @return status of left drive joystick trigger
 	 */
 	public boolean isDriveSlowMode() {
-		return (this.joysticks[this.DRIVE_RIGHT_JOYSTICK].getTop()||this.joysticks[this.DRIVE_LEFT_JOYSTICK].getTop());
+		return (driveLeftJoystick.getTrigger());
 	}
 	
 	/**
@@ -149,7 +145,7 @@ public class OI {
 
 	public double getElevatorJoystickAxisY() {
 		// negated because pushing the joystick forward should lower the elevator
-		return -joysticks[this.OPERATOR_JOYSTICK].getAxis(Joystick.AxisType.kY);
+		return -operatorJoystick.getAxis(Joystick.AxisType.kY);
 	}
 	
 	

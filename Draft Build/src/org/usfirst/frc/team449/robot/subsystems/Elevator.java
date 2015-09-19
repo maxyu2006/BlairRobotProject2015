@@ -49,39 +49,39 @@ public class Elevator extends Subsystem {
 	/**
 	 * Elevator constructor
 	 */
-	public Elevator(RobotMap config) {
+	public Elevator() {
 		System.out.println("Elevator init started");
 		
-		topLimit 		= new DigitalInput(config.ELEVATOR_TOP_LIMIT);
-		bottomLimit 	= new DigitalInput(config.ELEVATOR_BOTTOM_LIMIT);
+		topLimit 		= new DigitalInput(RobotMap.ELEVATOR_TOP_LIMIT);
+		bottomLimit 	= new DigitalInput(RobotMap.ELEVATOR_BOTTOM_LIMIT);
 		
-		brakeController = new DoubleSolenoid(config.ELEVATOR_BRAKE_SOLENOID_FWD, config.ELEVATOR_BRAKE_SOLENOID_REV);
+		brakeController = new DoubleSolenoid(RobotMap.ELEVATOR_BRAKE_SOLENOID_FWD, RobotMap.ELEVATOR_BRAKE_SOLENOID_REV);
 		
 		
 		//initialize temporary variables to pass into the PID motor
-		TalonSRX 	leftMotor   = new TalonSRX(config.ELEVATOR_LEFT_MOTOR);
-		TalonSRX 	rightMotor  = new TalonSRX(config.ELEVATOR_RIGHT_MOTOR);
-		Encoder encoder 	= new Encoder(config.ELEVATOR_ENCODER_CHANNEL_A, config.ELEVATOR_ENCODER_CHANNEL_B, true, EncodingType.k4X);
+		TalonSRX 	leftMotor   = new TalonSRX(RobotMap.ELEVATOR_LEFT_MOTOR);
+		TalonSRX 	rightMotor  = new TalonSRX(RobotMap.ELEVATOR_RIGHT_MOTOR);
+		Encoder encoder 	= new Encoder(RobotMap.ELEVATOR_ENCODER_CHANNEL_A, RobotMap.ELEVATOR_ENCODER_CHANNEL_B, true, EncodingType.k4X);
 		
-		encoder.setDistancePerPulse(config.ELEVATOR_SPROCKET_CIRCUMFERENCE/config.ELEVATOR_ENCODER_CPR);
+		encoder.setDistancePerPulse(RobotMap.ELEVATOR_SPROCKET_CIRCUMFERENCE/RobotMap.ELEVATOR_ENCODER_CPR);
 		
 		//this PIDMotor should be operating in Position based control mode for elevator position
-		motors = new PIDMotor(config, config.ELEVATOR_P, config.ELEVATOR_I, config.ELEVATOR_D, 0, config.ELEVATOR_PID_TOLERANCE_RANGE, leftMotor, encoder, PIDMotor.POSITION_BASE);
+		motors = new PIDMotor(RobotMap.ELEVATOR_P, RobotMap.ELEVATOR_I, RobotMap.ELEVATOR_D, 0, RobotMap.ELEVATOR_PID_TOLERANCE_RANGE, leftMotor, encoder, PIDMotor.POSITION_BASE);
 		motors.addSlave(rightMotor,true);
-		motors.setDistancePerPulse(config.ELEVATOR_SPROCKET_CIRCUMFERENCE/config.ELEVATOR_ENCODER_CPR);
+		motors.setDistancePerPulse(RobotMap.ELEVATOR_SPROCKET_CIRCUMFERENCE/RobotMap.ELEVATOR_ENCODER_CPR);
 		
 		this.controlState = MANUAL;
 		
 		setPoint = 0;
 		
 		encoder.reset();
-		topPosition = config.ELEVATOR_INITIAL_TOP_COUNT;
+		topPosition = RobotMap.ELEVATOR_INITIAL_TOP_COUNT;
 		
 		BOTTOM_HEIGHT = 0;
-		ONE_TOTE_HEIGHT = config.TOTE_GRAB_HEIGHT - config.ELEVATOR_BOTTOM_HEIGHT;
-		TWO_TOTE_HEIGHT = config.TOTE_GRAB_HEIGHT + config.TOTE_HEIGHT - config.ELEVATOR_BOTTOM_HEIGHT;
-		PLATFORM_HEIGHT = config.PLATFORM_HEIGHT + config.TOTE_GRAB_HEIGHT - config.ELEVATOR_BOTTOM_HEIGHT;
-		COOPERTITION_HEIGHT = config.COOPERTITION_HEIGHT + config.TOTE_GRAB_HEIGHT - config.ELEVATOR_BOTTOM_HEIGHT;
+		ONE_TOTE_HEIGHT = .25;
+		TWO_TOTE_HEIGHT = 10.75; // emperically determined
+		PLATFORM_HEIGHT = RobotMap.PLATFORM_HEIGHT + RobotMap.TOTE_GRAB_HEIGHT - RobotMap.ELEVATOR_BOTTOM_HEIGHT;
+		COOPERTITION_HEIGHT = RobotMap.COOPERTITION_HEIGHT + RobotMap.TOTE_GRAB_HEIGHT - RobotMap.ELEVATOR_BOTTOM_HEIGHT;
 		
 		height = BOTTOM_HEIGHT;
 		
@@ -242,7 +242,7 @@ public class Elevator extends Subsystem {
 	 */
 	public double getEncoderPosition()
 	{
-		return this.motors.getEncoderPosition() - bottomPosition;
+		return this.motors.getEncoderPosition();// - bottomPosition;
 	}
 	
 	/**

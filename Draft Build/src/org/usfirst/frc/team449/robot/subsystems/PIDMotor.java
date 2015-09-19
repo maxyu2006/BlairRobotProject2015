@@ -48,7 +48,7 @@ public class PIDMotor extends PIDSubsystem {
      * @param encoder	the encoder that is providing feedback 
      * @param mode		the mode at which the encoder will operate
      */
-    public PIDMotor(RobotMap config, double p, double i, double d, double initSet, double tolerance, SpeedController motor, Encoder encoder, int mode) {
+    public PIDMotor(double p, double i, double d, double initSet, double tolerance, SpeedController motor, Encoder encoder, int mode) {
         super(p, i, d);
         
         //initialize the variables

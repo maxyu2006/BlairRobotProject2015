@@ -11,15 +11,15 @@ public class ElevatorMoveBangBang extends Command {
 
 	private double setpoint;
 	private double throttle;
-	private final double throttle_lim = .75;
+	private double throttle_lim;
 	//private final double tolerance = .25;
 	/**
 	 * @param position the desired position in inches
 	 */
-	public ElevatorMoveBangBang(double position) {
+	public ElevatorMoveBangBang(double position, double throt_lim) {
 		requires(Robot.elevator);
 		setpoint = position;
-
+		throttle_lim = throt_lim;
 		System.out.println("Elevator Move Bang Bang Initialized");
 
 	}
@@ -36,12 +36,17 @@ public class ElevatorMoveBangBang extends Command {
 	}
 
 	protected boolean isFinished() {
+		//if (Robot.oi.isEStopPressed()) {
+		//	System.out.println("Bang Bang: E Stop pressed");
+		//	return true;
+		//}
+		
 		if((throttle<0 && Robot.elevator.isTouchingTop()) || (throttle>0 && Robot.elevator.isTouchingBottom()))
 		{
 			System.out.println("Bang Bang: Elevator Limit Reached");
 			return true;
 		}
-		if((throttle<0 && Robot.elevator.getEncoderPosition()>setpoint) || (throttle>0 && Robot.elevator.getEncoderPosition()<setpoint))
+		if((throttle<0 && Robot.elevator.getEncoderPosition()>=setpoint) || (throttle>0 && Robot.elevator.getEncoderPosition()<=setpoint))
 		{
 			System.out.println("Bang Bang: Setpoint Reached \t"+Robot.elevator.getEncoderPosition()+" "+setpoint);
 			return true;
@@ -55,7 +60,13 @@ public class ElevatorMoveBangBang extends Command {
 		new ElevatorMoveDefault();
 		Robot.elevator.setHeight(setpoint);
 	}
+	
+	@Override
+	public boolean isInterruptible() {
+		return true;
+	}
 
 	protected void interrupted() {
+		end();
 	}
 }

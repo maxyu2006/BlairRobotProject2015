@@ -42,35 +42,35 @@ public class Drive extends Subsystem {
 	
 	/**
 	 * Initialize the Drive subsystem
-	 * @param config the RobotMap containing all constants
+	 * @param RobotMap the RobotMap containing all constants
 	 */
-	public Drive(RobotMap config){
+	public Drive(){
 		System.out.println("Drive init started");
 
 		//initialize motor clusters and add slaves
-		this.leftMotors = new MotorCluster(new VictorSP(config.DRIVE_L1)); 	//first motor
-		this.leftMotors.addSlave(new VictorSP(config.DRIVE_L2));				//attach second motor
+		this.leftMotors = new MotorCluster(new VictorSP(RobotMap.DRIVE_L1)); 	//first motor
+		this.leftMotors.addSlave(new VictorSP(RobotMap.DRIVE_L2));				//attach second motor
 		
-		this.rightMotors = new MotorCluster(new VictorSP(config.DRIVE_R1)); 	//first motor
-		this.rightMotors.addSlave(new VictorSP(config.DRIVE_R2));				//attach second motor
+		this.rightMotors = new MotorCluster(new VictorSP(RobotMap.DRIVE_R1)); 	//first motor
+		this.rightMotors.addSlave(new VictorSP(RobotMap.DRIVE_R2));				//attach second motor
 		
-		this.leftEncoder 	= new Encoder(config.DRIVE_ENCODER_LA,config.DRIVE_ENCODER_LB, false);
-		this.rightEncoder	= new Encoder(config.DRIVE_ENCODER_RA,config.DRIVE_ENCODER_RB, false);
+		this.leftEncoder 	= new Encoder(RobotMap.DRIVE_ENCODER_LA,RobotMap.DRIVE_ENCODER_LB, false);
+		this.rightEncoder	= new Encoder(RobotMap.DRIVE_ENCODER_RA,RobotMap.DRIVE_ENCODER_RB, false);
 		
 		this.wheelDiameter = 4*Math.PI;
-		this.leftEncoder.setDistancePerPulse(wheelDiameter/config.DRIVE_ENCODER_CPR);
-		this.rightEncoder.setDistancePerPulse(-wheelDiameter/config.DRIVE_ENCODER_CPR);	//negated because mirrored
+		this.leftEncoder.setDistancePerPulse(wheelDiameter/RobotMap.DRIVE_ENCODER_CPR);
+		this.rightEncoder.setDistancePerPulse(-wheelDiameter/RobotMap.DRIVE_ENCODER_CPR);	//negated because mirrored
 		
 		
 		this.leftEncoder.setPIDSourceParameter(PIDSourceParameter.kRate);
 		this.rightEncoder.setPIDSourceParameter(PIDSourceParameter.kRate);
 
-		this.leftController = new PIDController(config.DRIVE_P, config.DRIVE_I, config.DRIVE_D, config.DRIVE_F, leftEncoder, this.leftMotors);
-		this.rightController = new PIDController(config.DRIVE_P, config.DRIVE_I, config.DRIVE_D, config.DRIVE_F, rightEncoder, this.rightMotors);
+		this.leftController = new PIDController(RobotMap.DRIVE_P, RobotMap.DRIVE_I, RobotMap.DRIVE_D, RobotMap.DRIVE_F, leftEncoder, this.leftMotors);
+		this.rightController = new PIDController(RobotMap.DRIVE_P, RobotMap.DRIVE_I, RobotMap.DRIVE_D, RobotMap.DRIVE_F, rightEncoder, this.rightMotors);
 		
-		this.maxRate = config.DRIVE_MAX_RATE;
+		this.maxRate = RobotMap.DRIVE_MAX_RATE;
 
-		this.setControlMode(config.DRIVE_DEFAULT_MODE);
+		this.setControlMode(RobotMap.DRIVE_DEFAULT_MODE);
 		System.out.println("Drive init finished");
 	}//end drive
 	

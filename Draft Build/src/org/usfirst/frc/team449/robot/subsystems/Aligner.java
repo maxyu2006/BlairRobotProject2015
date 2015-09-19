@@ -29,21 +29,21 @@ public class Aligner extends Subsystem {
     
     /**
      * 
-     * @param config
+     * @param RobotMap
      */
-	public Aligner(RobotMap config) {
+	public Aligner() {
 		System.out.println("Aligner init started");
-		alignerLimSwitch 	= new DigitalInput(config.ALIGNER_LEFT_LIMIT);
-    	//ultrasonic = new AnalogInput(config.ALIGNER_ULTRASONIC);
+		alignerLimSwitch 	= new DigitalInput(RobotMap.ALIGNER_LEFT_LIMIT);
+    	//ultrasonic = new AnalogInput(RobotMap.ALIGNER_ULTRASONIC);
     	
-    	this.ledPWM = new VictorSP(Robot.robotMap.ALIGNER_LED_PORT);
+    	this.ledPWM = new VictorSP(RobotMap.ALIGNER_LED_PORT);
     	
-    	alignerSol  = new DoubleSolenoid(config.ALIGNER_SOLENOID_FORWARD, config.ALIGNER_SOLENOID_REVERSE);
+    	alignerSol  = new DoubleSolenoid(RobotMap.ALIGNER_SOLENOID_FORWARD, RobotMap.ALIGNER_SOLENOID_REVERSE);
     	
     	isOpen = true;
     	
     	ultraScale = 1; //TODO: actually add the correct calibration
-    	//motorSpeed = config.ALIGNER_MOTOR_SPEED;
+    	//motorSpeed = RobotMap.ALIGNER_MOTOR_SPEED;
     	this.openArms();
     	System.out.println("Aligner init finished");
 	}

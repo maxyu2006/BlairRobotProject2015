@@ -22,21 +22,20 @@ public class Arms extends Subsystem {
 	public static final boolean ARM_OPEN = true;
 	public static final boolean ARM_CLOSED = false;
 	
-	public Arms(RobotMap config){
+	public Arms(){
 		System.out.println("Arm init started");
 		
-		leftArmLimit 	= new DigitalInput(config.ELEVATOR_LEFT_LIMIT);
-		rightArmLimit 	= new DigitalInput(config.ELEVATOR_RIGHT_LIMIT);
+		leftArmLimit 	= new DigitalInput(RobotMap.ELEVATOR_LEFT_LIMIT);
+		rightArmLimit 	= new DigitalInput(RobotMap.ELEVATOR_RIGHT_LIMIT);
 		
 		System.out.println("Left and right limits initialized");
 		
-		armController  = new DoubleSolenoid(config.ELEVATOR_ARM_SOLENOID_FWD,config.ELEVATOR_ARM_SOLENOID_REV);
+		armController  = new DoubleSolenoid(RobotMap.ELEVATOR_ARM_SOLENOID_FWD,RobotMap.ELEVATOR_ARM_SOLENOID_REV);
 		
 		System.out.println("Solenoids Initialized");
 
 		
-		armState = ARM_CLOSED;
-		armController.set(Value.kForward);
+		closeArms();
 		
 		System.out.println("Arms init finished");
 	}
